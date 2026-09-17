@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "promptFile",
+      "type": "promptString",
+      "description": "Prompt text, or a path to a .txt file (e.g. prompts/studio_test.txt)"
+    },
+    {
+      "id": "genCount",
+      "type": "pickString",
+      "description": "How many variations to generate",
+      "options": ["1", "2", "4"],
+      "default": "1"
+    }
+  ],
+  "tasks": [
+    {
+      "label": "Facecard: generate",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": [
+        "facecard.py",
+        "gen",
+        "--prompt", "${input:promptFile}",
+        "--count", "${input:genCount}"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Facecard: check session",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["facecard.py", "check"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Facecard: re-enter cookies",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "vault.py", "gui",
+        "--request", "gemini-cookies-psid:account,gemini-cookies:account",
+        "--hint", "gemini-cookies-psid=Password = value of the __Secure-1PSID cookie (starts with g.a000). Leave Notes as is.",
+        "--hint", "gemini-cookies=Password = value of the __Secure-1PSIDTS cookie (starts with sidts-). Leave Notes as is."
+      ],
+      "options": { "cwd": "C:\\Users\\Admin\\.agents\\skills\\secure-vault" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    }
+  ]
+}
