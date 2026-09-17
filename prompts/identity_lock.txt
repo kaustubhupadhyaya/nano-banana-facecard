@@ -1,0 +1,3 @@
+The attached images all show the same person — use them as the definitive identity reference. Keep this exact person's face unchanged across the output: same face shape, eye shape and color, nose, lips, jawline, skin tone, and hairline. Do not blend, average, or alter their facial structure.
+
+Generate a new photo of this exact person:
