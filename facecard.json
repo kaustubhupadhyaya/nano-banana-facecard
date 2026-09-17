@@ -1,0 +1,24 @@
+{
+  "refs_dir": "C:\\Users\\Admin\\Downloads\\FaceCard_Originals",
+  "refs": [
+    "IMG_0440_Original.jpg",
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_6864.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg",
+    "IMG_6923 Copy.JPG"
+  ],
+  "restore_refs": [
+    "IMG_6858.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg",
+    "IMG_6923 Copy.JPG"
+  ],
+  "out_dir": "outputs",
+  "cache_dir": ".cache/refs",
+  "model": "e6fa609c3fa255c0",
+  "identity_threshold": 0.60
+}
