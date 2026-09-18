@@ -80,6 +80,17 @@ model error, run `facecard.py models` and update the id.
 Prompt files included: `prompts/studio_test.txt` (plain studio portrait) and
 `prompts/mountain_tank_top.txt` (alpine trail scene).
 
+## Face restoration + scoring (optional)
+
+`restore.py` runs generated images through [FaceFusion](https://github.com/facefusion/facefusion)
+(inswapper_128 + gfpgan_1.4) to pull the real face back over Gemini's drifted one, and `scorer.py`
+gives an objective ArcFace identity-match score rather than judging by eye.
+
+**Requires a separate local clone of FaceFusion** — `restore.py` expects it at
+`C:\Users\Admin\GitHub\facefusion` (`FACEFUSION_DIR`, top of the file). This is upstream
+third-party code (`facefusion/facefusion` on GitHub), not bundled in this repo — clone it
+yourself and install its own requirements before using `restore.py`.
+
 ## Notes
 
 - Which underlying image model actually serves the request is decided by Google's app;
