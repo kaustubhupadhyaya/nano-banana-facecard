@@ -1,22 +1,44 @@
 {
-  "refs_dir": "C:\\Users\\Admin\\Downloads\\FaceCard_Originals",
+  "refs_dir": "D:\\Downloads\\FaceCard_Originals",
+  "fallback_refs_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\refs",
   "refs": [
     "IMG_0440_Original.jpg",
     "IMG_6858.jpg",
     "IMG_6859.jpg",
+    "IMG_6861.jpg",
     "IMG_6862.jpg",
+    "IMG_6862_mirrored.jpg",
     "IMG_6863.jpg",
     "IMG_6864.jpg",
+    "IMG_6868.jpg",
+    "IMG_6869.jpg",
     "IMG_6873.jpg",
     "IMG_6875.jpg",
     "IMG_6923 Copy.JPG"
   ],
-  "restore_refs": [
-    "IMG_6858.jpg",
-    "IMG_6873.jpg",
-    "IMG_6875.jpg",
-    "IMG_6923 Copy.JPG"
-  ],
+  "pose_bins": {
+    "frontal": [
+      "IMG_6858.jpg",
+      "IMG_6859.jpg",
+      "IMG_6873.jpg",
+      "IMG_6875.jpg",
+      "IMG_6923 Copy.JPG"
+    ],
+    "three_quarter_left": [
+      "IMG_6868.jpg"
+    ],
+    "profile_left": [
+      "IMG_6862.jpg",
+      "IMG_6863.jpg"
+    ],
+    "three_quarter_right": [
+      "IMG_6861.jpg",
+      "IMG_6869.jpg"
+    ],
+    "profile_right": [
+      "IMG_6862_mirrored.jpg"
+    ]
+  },
   "out_dir": "outputs",
   "cache_dir": ".cache/refs",
   "model": "e6fa609c3fa255c0",

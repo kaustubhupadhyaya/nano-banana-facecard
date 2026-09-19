@@ -36,8 +36,23 @@ def load_config() -> dict:
     return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
 
+def get_refs_dir(config: dict) -> Path:
+    refs_dir = Path(config.get("refs_dir", ""))
+    if not refs_dir.exists() or not any(refs_dir.glob("*.jpg")):
+        fallback = ROOT / config.get("cache_dir", ".cache/refs")
+        if fallback.exists():
+            return fallback
+    return refs_dir
+
+
 def prepare_ref(src: Path, cache_dir: Path, max_dim: int = 2048) -> Path:
     """EXIF-transpose + downscale a reference image, cached by source mtime."""
+    if not src.exists():
+        fallback = cache_dir / src.name
+        if fallback.exists():
+            src = fallback
+        else:
+            raise FileNotFoundError(f"Reference image not found: {src}")
     cache_dir.mkdir(parents=True, exist_ok=True)
     cached = cache_dir / (src.stem + ".jpg")
     if cached.is_file() and cached.stat().st_mtime >= src.stat().st_mtime:
@@ -69,8 +84,8 @@ def cmd_score(args) -> int:
     import scorer
 
     config = load_config()
-    refs_dir = Path(config["refs_dir"])
-    ref_paths = [refs_dir / name for name in config["refs"]]
+    refs_dir = get_refs_dir(config)
+    ref_paths = [refs_dir / name for name in config["refs"] if (refs_dir / name).exists()]
     scorer.score_images([Path(p) for p in args.images], ref_paths)
     return 0
 
@@ -79,20 +94,20 @@ def cmd_refs_matrix(args) -> int:
     import scorer
 
     config = load_config()
-    refs_dir = Path(config["refs_dir"])
-    ref_paths = [refs_dir / name for name in config["refs"]]
+    refs_dir = get_refs_dir(config)
+    ref_paths = [refs_dir / name for name in config["refs"] if (refs_dir / name).exists()]
     scorer.refs_matrix(ref_paths)
     return 0
 
 
 def cmd_restore(args) -> int:
     from restore import restore_face
-    from scorer import ArcFaceScorer
+    from scorer import ArcFaceScorer, analyze_face
 
     config = load_config()
-    refs_dir = Path(config["refs_dir"])
-    all_refs = [refs_dir / name for name in config["refs"]]
-    restore_refs = [refs_dir / name for name in config.get("restore_refs", ["IMG_6858.jpg", "IMG_6873.jpg", "IMG_6875.jpg", "IMG_6923 Copy.JPG"])]
+    refs_dir = get_refs_dir(config)
+    all_refs = [refs_dir / name for name in config["refs"] if (refs_dir / name).exists()]
+    restore_refs = [refs_dir / name for name in config.get("restore_refs", ["IMG_6858.jpg", "IMG_6873.jpg", "IMG_6875.jpg", "IMG_6923 Copy.jpg"]) if (refs_dir / name).exists()]
     threshold = float(config.get("identity_threshold", 0.60))
 
     arc_scorer = ArcFaceScorer()
@@ -110,6 +125,11 @@ def cmd_restore(args) -> int:
             print(f"Target not found: {target}")
             continue
 
+        face_info = analyze_face(target)
+        raw_sharpness = face_info.get("sharpness", 0.0)
+        is_profile = face_info.get("is_profile", False)
+        yaw_ratio = face_info.get("yaw_ratio", 1.0)
+
         raw_score = None
         try:
             raw_emb = arc_scorer.embed(target)
@@ -117,13 +137,19 @@ def cmd_restore(args) -> int:
         except Exception:
             pass
 
-        print(f"Restoring {target.name} (raw score: {raw_score:.3f if raw_score else 'N/A'})...", flush=True)
-        res = restore_face(target, source_paths=restore_refs)
+        print(f"Restoring {target.name} (raw score: {raw_score:.3f if raw_score else 'N/A'} | yaw={yaw_ratio:.2f} | profile={is_profile})...", flush=True)
+        if is_profile:
+            print("  [Profile Warning] Steep side angle detected. 2D face swapping may distort facial geometry.")
+
+        res = restore_face(target, source_paths=restore_refs, swapper_weight=0.6)
         if not res["success"]:
             print(f"  FAILED: {res.get('error')}")
             continue
 
         restored_path = Path(res["output"])
+        rest_info = analyze_face(restored_path)
+        rest_sharpness = rest_info.get("sharpness", 0.0)
+
         rest_score = None
         try:
             rest_emb = arc_scorer.embed(restored_path)
@@ -133,7 +159,7 @@ def cmd_restore(args) -> int:
 
         status = "ACCEPTED" if (rest_score and rest_score >= threshold) else "REJECTED"
         score_str = f"{rest_score:.3f}" if rest_score else "N/A"
-        print(f"  -> {restored_path.name} in {res['elapsed_sec']}s | score: {score_str} | [{status}]")
+        print(f"  -> {restored_path.name} in {res['elapsed_sec']}s | score: {score_str} | sharp: {rest_sharpness:.1f} (raw: {raw_sharpness:.1f}) | [{status}]")
     return 0
 
 
@@ -171,12 +197,12 @@ async def cmd_models(args) -> int:
 
 async def cmd_gen(args) -> int:
     config = load_config()
-    refs_dir = Path(config["refs_dir"])
+    refs_dir = get_refs_dir(config)
     cache_dir = ROOT / config.get("cache_dir", ".cache/refs")
     out_root = ROOT / config.get("out_dir", "outputs")
     model = args.model or config.get("model")
     threshold = float(config.get("identity_threshold", 0.60))
-    restore_refs = [refs_dir / name for name in config.get("restore_refs", ["IMG_6858.jpg", "IMG_6873.jpg", "IMG_6875.jpg", "IMG_6923 Copy.JPG"])]
+    restore_refs = [refs_dir / name for name in config.get("restore_refs", ["IMG_6858.jpg", "IMG_6873.jpg", "IMG_6875.jpg", "IMG_6923 Copy.jpg"]) if (refs_dir / name).exists() or (cache_dir / name).exists()]
 
     prompt_arg = Path(args.prompt)
     scene_text = prompt_arg.read_text(encoding="utf-8").strip() if prompt_arg.is_file() else args.prompt
@@ -184,7 +210,7 @@ async def cmd_gen(args) -> int:
     if args.scene_image:
         full_prompt += SCENE_REF_NOTE
 
-    ref_paths = [prepare_ref(refs_dir / name, cache_dir) for name in config["refs"]]
+    ref_paths = [prepare_ref(refs_dir / name, cache_dir) for name in config["refs"] if (refs_dir / name).exists() or (cache_dir / name).exists()]
     files = [str(p) for p in ref_paths]
     if args.scene_image:
         files.append(args.scene_image)
@@ -206,7 +232,7 @@ async def cmd_gen(args) -> int:
     }
 
     # Lazy-load scorer
-    from scorer import ArcFaceScorer
+    from scorer import ArcFaceScorer, analyze_face
     arc_scorer = ArcFaceScorer()
     ref_embeds = []
     for r in ref_paths:
@@ -261,6 +287,12 @@ async def cmd_gen(args) -> int:
                         "status": "pending",
                     }
 
+                    # Analyze face pose and sharpness
+                    face_info = analyze_face(saved_path)
+                    is_profile = face_info.get("is_profile", False)
+                    yaw_ratio = face_info.get("yaw_ratio", 1.0)
+                    raw_sharpness = face_info.get("sharpness", 0.0)
+
                     # Score raw image
                     try:
                         raw_emb = arc_scorer.embed(saved_path)
@@ -270,30 +302,50 @@ async def cmd_gen(args) -> int:
 
                     # Restore face unless --no-restore passed
                     final_path = saved_path
-                    if not args.no_restore:
-                        print(f"  Restoring face on {saved_path.name} via FaceFusion...", flush=True)
-                        res = restore_face(saved_path, source_paths=restore_refs)
+                    check_score = cand_eval["raw_score"]
+
+                    if cand_eval["raw_score"] is not None and cand_eval["raw_score"] >= threshold and not is_profile:
+                        cand_eval["restoration_skipped"] = "native_accepted"
+                        cand_eval["status"] = "accepted"
+                        print(f"  [Quality Gate] Native raw identity ({cand_eval['raw_score']:.3f} >= {threshold:.2f}) accepted natively.")
+                    elif not args.no_restore:
+                        print(f"  Restoring face on {saved_path.name} via angle-routed FaceFusion...", flush=True)
+                        res = restore_face(saved_path)
                         if res["success"]:
                             restored_path = Path(res["output"])
-                            cand_eval["restored_file"] = restored_path.name
-                            final_path = restored_path
-                            try:
-                                rest_emb = arc_scorer.embed(restored_path)
-                                cand_eval["restored_score"] = float(max(arc_scorer.similarity(rest_emb, r) for r in ref_embeds))
-                            except Exception:
-                                pass
+                            rest_info = analyze_face(restored_path)
+                            rest_sharpness = rest_info.get("sharpness", 0.0)
+                            pose_desc = f"{res['pose']['bin']} ({res['pose']['direction']}, yaw={res['pose']['yaw_ratio']})"
+                            print(f"  [Router] Pose: {pose_desc} -> Sources: {', '.join(res['sources'])}")
+
+                            # Sharpness gatekeeper: reject blurry / melted artifacts
+                            if raw_sharpness > 0 and rest_sharpness < 0.50 * raw_sharpness:
+                                print(f"  [Sharpness Gate] Restoration lost excessive sharpness ({rest_sharpness:.1f} vs raw {raw_sharpness:.1f}). Discarding restoration.")
+                                cand_eval["restoration_rejected"] = "sharpness_loss"
+                                cand_eval["status"] = "accepted" if (cand_eval["raw_score"] and cand_eval["raw_score"] >= 0.50) else "rejected"
+                            else:
+                                cand_eval["restored_file"] = restored_path.name
+                                final_path = restored_path
+                                try:
+                                    rest_emb = arc_scorer.embed(restored_path)
+                                    cand_eval["restored_score"] = float(max(arc_scorer.similarity(rest_emb, r) for r in ref_embeds))
+                                    check_score = cand_eval["restored_score"]
+                                except Exception:
+                                    pass
+
+                                if check_score is not None and check_score >= threshold:
+                                    cand_eval["status"] = "accepted"
+                                else:
+                                    cand_eval["status"] = "rejected"
                         else:
                             print(f"  Restore failed: {res.get('error')}")
-
-                    check_score = cand_eval["restored_score"] if not args.no_restore else cand_eval["raw_score"]
-                    if check_score is not None and check_score >= threshold:
-                        cand_eval["status"] = "accepted"
+                            cand_eval["status"] = "accepted" if (cand_eval["raw_score"] and cand_eval["raw_score"] >= threshold) else "rejected"
                     else:
-                        cand_eval["status"] = "rejected"
+                        cand_eval["status"] = "accepted" if (cand_eval["raw_score"] and cand_eval["raw_score"] >= threshold) else "rejected"
 
                     raw_s = f"{cand_eval['raw_score']:.3f}" if cand_eval['raw_score'] else "N/A"
                     rest_s = f"{cand_eval['restored_score']:.3f}" if cand_eval['restored_score'] else "N/A"
-                    print(f"  [Score] raw: {raw_s} -> restored: {rest_s} | [{cand_eval['status'].upper()}]")
+                    print(f"  [Score] raw: {raw_s} -> restored: {rest_s} | sharp: {raw_sharpness:.1f} | [{cand_eval['status'].upper()}]")
 
                     entry["evaluations"].append(cand_eval)
                     candidates.append((check_score or -1.0, final_path, cand_eval))
@@ -305,17 +357,20 @@ async def cmd_gen(args) -> int:
     finally:
         # Pick best.jpg
         if candidates:
-            candidates.sort(key=lambda x: x[0], reverse=True)
+            # Sort by accepted status first, then by score
+            candidates.sort(key=lambda x: (1 if x[2].get("status") == "accepted" else 0, x[0]), reverse=True)
             top_score, top_path, top_eval = candidates[0]
-            if top_score >= threshold:
+            is_accepted = top_eval.get("status") == "accepted" or top_score >= threshold
+            if is_accepted:
                 best_file = run_dir / "best.jpg"
                 shutil.copy2(top_path, best_file)
                 run_log["best"] = {
                     "file": "best.jpg",
                     "source": top_path.name,
                     "score": round(top_score, 3),
+                    "status": "accepted",
                 }
-                print(f"\n[BEST] Selected {top_path.name} as best.jpg (identity score={top_score:.3f} >= {threshold:.2f})")
+                print(f"\n[BEST] Selected {top_path.name} as best.jpg (identity score={top_score:.3f} | status=ACCEPTED)")
             else:
                 print(f"\n[REJECTED] All candidates fell below threshold ({threshold:.2f}). Top score was {top_score:.3f}. No best.jpg created.")
 

@@ -35,6 +35,54 @@ class NoFaceError(RuntimeError):
     pass
 
 
+def analyze_face(image_path: str | Path) -> dict:
+    """Analyze face geometry, yaw ratio, and sharpness to identify profiles and blurriness."""
+    img = cv2.imread(str(image_path))
+    if img is None:
+        raise FileNotFoundError(f"Could not read image: {image_path}")
+
+    h, w = img.shape[:2]
+    detector = cv2.FaceDetectorYN.create(str(DETECTOR_PATH), "", (w, h), score_threshold=0.6)
+    detector.setInputSize((w, h))
+    _, faces = detector.detect(img)
+    if faces is None or len(faces) == 0:
+        return {
+            "detected": False,
+            "box": None,
+            "yaw_ratio": 1.0,
+            "is_profile": False,
+            "sharpness": 0.0,
+        }
+
+    areas = faces[:, 2] * faces[:, 3]
+    f = faces[int(np.argmax(areas))]
+    fx, fy, fw, fh = map(int, f[:4])
+    fx, fy = max(0, fx), max(0, fy)
+    fw, fh = min(w - fx, fw), min(h - fy, fh)
+
+    sharpness = 0.0
+    if fw > 4 and fh > 4:
+        face_roi = img[fy:fy + fh, fx:fx + fw]
+        gray_roi = cv2.cvtColor(face_roi, cv2.COLOR_BGR2GRAY)
+        sharpness = float(cv2.Laplacian(gray_roi, cv2.CV_64F).var())
+
+    landmarks = f[4:14].reshape(5, 2)
+    le, re, nose = landmarks[0], landmarks[1], landmarks[2]
+    d_l = float(np.linalg.norm(le - nose))
+    d_r = float(np.linalg.norm(re - nose))
+    yaw_ratio = float(d_l / (d_r + 1e-5))
+    is_profile = yaw_ratio > 1.35 or yaw_ratio < 0.75
+
+    return {
+        "detected": True,
+        "box": (fx, fy, fw, fh),
+        "landmarks": landmarks.tolist(),
+        "yaw_ratio": round(yaw_ratio, 2),
+        "is_profile": is_profile,
+        "sharpness": round(sharpness, 1),
+    }
+
+
 class ArcFaceScorer:
     """Independent embedder/scorer, used only as a fallback when SFace fails calibration."""
 
@@ -169,19 +217,33 @@ def refs_matrix(ref_paths: list[Path]) -> None:
 def score_images(image_paths: list[Path], ref_paths: list[Path]) -> None:
     scorer = ArcFaceScorer()
     ref_embeddings = scorer.embed_many(ref_paths)
-    valid_refs = [e for e in ref_embeddings.values() if e is not None]
+    valid_refs = [(p, e) for p, e in ref_embeddings.items() if e is not None]
     if not valid_refs:
         print("No faces detected in any reference image.")
         return
-    centroid = scorer.centroid(valid_refs)
+    centroid = scorer.centroid([e for _, e in valid_refs])
 
     for img_path in image_paths:
         try:
             emb = scorer.embed(img_path)
+            info = analyze_face(img_path)
         except (NoFaceError, FileNotFoundError) as e:
             print(f"{img_path}: {e}")
             continue
-        per_ref = [scorer.similarity(emb, r) for r in valid_refs]
+
+        per_ref = [(Path(p).name, scorer.similarity(emb, e)) for p, e in valid_refs]
+        per_ref.sort(key=lambda x: x[1], reverse=True)
+        max_sim = per_ref[0][1]
+        mean_sim = float(np.mean([s for _, s in per_ref]))
         centroid_sim = scorer.similarity(emb, centroid)
-        print(f"{img_path}")
-        print(f"  max_ref_sim={max(per_ref):.3f}  mean_ref_sim={np.mean(per_ref):.3f}  centroid_sim={centroid_sim:.3f}")
+
+        profile_tag = "PROFILE" if info.get("is_profile") else "FRONTAL/3/4"
+        yaw_r = info.get("yaw_ratio", 1.0)
+        sharp = info.get("sharpness", 0.0)
+
+        print(f"{img_path.name}:")
+        print(f"  Pose: {profile_tag} (yaw_ratio={yaw_r:.2f}) | Sharpness: {sharp:.1f}")
+        print(f"  max_ref_sim={max_sim:.3f} (top: {per_ref[0][0]}) | mean={mean_sim:.3f} | centroid={centroid_sim:.3f}")
+        if len(per_ref) > 1:
+            top_3 = ", ".join(f"{name}:{sim:.3f}" for name, sim in per_ref[:3])
+            print(f"  top matches: {top_3}")
