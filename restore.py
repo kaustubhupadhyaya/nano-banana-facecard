@@ -12,8 +12,10 @@ import argparse
 import json
 import logging
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -249,21 +251,36 @@ def restore_face(
             "--face-enhancer-weight",
             str(enhancer_weight),
         ])
+    # Two restores that overlap (two agent sessions, say) collide inside FaceFusion twice over:
+    #  - its temp folder is keyed on the target's file stem alone, and every gen run names its
+    #    first image v1_0.jpg, so whichever run finishes first deletes the folder under the other;
+    #  - its job id is the wall-clock second, so two runs started in the same second fight over one
+    #    job file and the loser exits 1 without printing anything.
+    # A private temp root and jobs folder per run remove both. This also stops restores writing job
+    # files into the FaceFusion clone, which nothing here reads.
+    run_temp = Path(tempfile.mkdtemp(prefix="facecard-facefusion-"))
     cmd.extend([
         "--face-mask-types",
         *mask_types,
         "--execution-providers",
         "cpu",
+        "--temp-path",
+        str(run_temp),
+        "--jobs-path",
+        str(run_temp / "jobs"),
     ])
 
     start_time = time.time()
-    res = subprocess.run(
-        cmd,
-        cwd=str(FACEFUSION_DIR),
-        capture_output=True,
-        text=True,
-        timeout=timeout,
-    )
+    try:
+        res = subprocess.run(
+            cmd,
+            cwd=str(FACEFUSION_DIR),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+    finally:
+        shutil.rmtree(run_temp, ignore_errors=True)
     elapsed = round(time.time() - start_time, 2)
 
     if res.returncode != 0:
