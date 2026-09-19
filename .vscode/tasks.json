@@ -46,7 +46,7 @@
         "--hint", "gemini-cookies-psid=Password = value of the __Secure-1PSID cookie (starts with g.a000). Leave Notes as is.",
         "--hint", "gemini-cookies=Password = value of the __Secure-1PSIDTS cookie (starts with sidts-). Leave Notes as is."
       ],
-      "options": { "cwd": "C:\\Users\\Admin\\.agents\\skills\\secure-vault" },
+      "options": { "cwd": "${env:USERPROFILE}\\.agents\\skills\\secure-vault" },
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "dedicated" }
     }

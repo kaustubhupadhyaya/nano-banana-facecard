@@ -18,7 +18,9 @@ import tempfile
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-sys.path.insert(0, r"C:\Users\Admin\.agents\skills\secure-vault")
+import paths
+
+sys.path.insert(0, str(paths.vault_dir()))
 import vault
 
 from gemini_webapi import GeminiClient

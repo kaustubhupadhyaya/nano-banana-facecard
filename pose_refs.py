@@ -29,9 +29,10 @@ def get_pexels_api_key() -> Optional[str]:
     if key:
         return key.strip()
     try:
-        sys.path.insert(0, r"C:\Users\Admin\.agents\skills\secure-vault")
+        import paths
+        sys.path.insert(0, str(paths.vault_dir()))
         import vault
-        if vault.has_secret("pexels-api", "password"):
+        if vault.has_entry("pexels-api", "password"):
             val = vault.get_secret("pexels-api", "password")
             if val:
                 return val.strip()

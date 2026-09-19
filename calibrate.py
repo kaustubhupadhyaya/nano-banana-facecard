@@ -3,10 +3,11 @@ Run once, read the numbers, decide. Not part of the regular CLI."""
 
 from pathlib import Path
 
+import paths
 from scorer import ArcFaceScorer
 
 ROOT = Path(__file__).parent
-REFS_DIR = Path(r"C:\Users\Admin\Downloads\FaceCard_Originals")
+REFS_DIR = paths.refs_dir()
 REFS = ["IMG_6858.jpg", "IMG_6859.jpg", "IMG_6862.jpg", "IMG_6863.jpg",
         "IMG_6864.jpg", "IMG_6873.jpg", "IMG_6875.jpg", "IMG_6923 Copy.JPG"]
 

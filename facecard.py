@@ -171,10 +171,14 @@ def cmd_pose_refs(args) -> int:
 
 
 async def cmd_check(args) -> int:
+    import paths
+
+    paths_status = paths.report()
+    print()
     try:
         async with authenticated_client(verbose=args.verbose) as client:
             print(f"Authenticated. account_status={client.account_status.name}")
-            return 0
+            return paths_status
     except AuthError as e:
         print(str(e))
         return 1
@@ -387,7 +391,7 @@ def main() -> int:
                                      parents=[common])
     sub = parser.add_subparsers(dest="command", required=True)
 
-    sub.add_parser("check", help="Verify authentication", parents=[common])
+    sub.add_parser("check", help="Verify external paths (FaceFusion, reference photos, vault) and authentication", parents=[common])
     sub.add_parser("models", help="List available models for this account", parents=[common])
 
     score = sub.add_parser("score", help="Objective face-identity similarity of images against the pinned refs")

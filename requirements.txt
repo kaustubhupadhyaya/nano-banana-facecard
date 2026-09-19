@@ -1,2 +1,11 @@
-gemini_webapi
-Pillow
+# Exact versions from the working .venv (Python 3.14). The ArcFace threshold of 0.60 was calibrated
+# with these builds of onnxruntime and opencv; changing them can move scores, so re-run calibrate.py
+# after any upgrade.
+#
+# FaceFusion is NOT installed here. It runs from its own clone and its own Python 3.12 venv.
+# See paths.py, or run `python paths.py` to check it.
+gemini_webapi==2.1.1
+Pillow==12.3.0
+numpy==2.5.3
+onnxruntime==1.30.0
+opencv-python==5.0.0.93

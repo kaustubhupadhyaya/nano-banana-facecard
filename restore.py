@@ -21,10 +21,12 @@ from typing import Dict, List, Optional, Tuple
 import cv2
 import numpy as np
 
+import paths
+
 logger = logging.getLogger("facecard.restore")
 
-FACEFUSION_DIR = Path(r"C:\Users\Admin\GitHub\facefusion")
-FACEFUSION_PYTHON = FACEFUSION_DIR / ".venv" / "Scripts" / "python.exe"
+FACEFUSION_DIR = paths.facefusion_dir()
+FACEFUSION_PYTHON = paths.facefusion_python()
 
 DETECTOR_PATH = Path(__file__).parent / "models" / "face_detection_yunet_2023mar.onnx"
 
@@ -39,6 +41,9 @@ DEFAULT_FRONTAL_REFS = [
 
 def load_config(config_path: str = "facecard.json") -> dict:
     p = Path(config_path)
+    # A bare relative name means this repo's config, whatever the caller's working directory.
+    if not p.is_absolute() and not p.exists():
+        p = paths.REPO / p
     if p.exists():
         with open(p, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -109,7 +114,7 @@ def detect_pose(target_path: str | Path) -> dict:
 def get_routed_source_paths(target_path: str | Path, config_path: str = "facecard.json") -> Tuple[List[Path], dict]:
     """Inspect target face angle and return the optimal reference image paths."""
     cfg = load_config(config_path)
-    refs_dir = Path(cfg.get("refs_dir", r"D:\Downloads\FaceCard_Originals"))
+    refs_dir = Path(cfg.get("refs_dir") or paths.refs_dir())
     fallback_dir = Path(__file__).parent / cfg.get("cache_dir", ".cache/refs")
 
     pose_info = detect_pose(target_path)

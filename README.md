@@ -83,13 +83,32 @@ Prompt files included: `prompts/studio_test.txt` (plain studio portrait) and
 ## Face restoration + scoring (optional)
 
 `restore.py` runs generated images through [FaceFusion](https://github.com/facefusion/facefusion)
-(inswapper_128 + gfpgan_1.4) to pull the real face back over Gemini's drifted one, and `scorer.py`
-gives an objective ArcFace identity-match score rather than judging by eye.
+to pull the real face back over Gemini's drifted one, and `scorer.py` gives an objective ArcFace
+identity-match score rather than judging by eye. It swaps with `inswapper_128`, restores expression
+with LivePortrait on frontal poses, and runs no face enhancer by default (enhancers wipe out skin
+texture). Each target's pose is detected first, and reference photos are picked from the matching
+`pose_bins` set in `facecard.json`.
 
-**Requires a separate local clone of FaceFusion** — `restore.py` expects it at
-`C:\Users\Admin\GitHub\facefusion` (`FACEFUSION_DIR`, top of the file). This is upstream
-third-party code (`facefusion/facefusion` on GitHub), not bundled in this repo — clone it
-yourself and install its own requirements before using `restore.py`.
+**Requires a separate local clone of FaceFusion.** It is upstream third-party code
+(`facefusion/facefusion`, OpenRAIL-AS licensed), deliberately not bundled here: bundling would end
+upstream updates and pull its licence over this repo. It also needs its own Python 3.12 venv, which
+cannot share this repo's 3.14 venv because the two pin conflicting OpenCV builds.
+
+Every location outside this repo is resolved in `paths.py`, in this order: an environment
+variable, then a key in `facecard.json`, then a default.
+
+| Location | Env var | `facecard.json` key | Default |
+|---|---|---|---|
+| FaceFusion clone | `FACEFUSION_DIR` | `facefusion_dir` | `../facefusion`, a sibling of this repo |
+| Reference photos | `FACECARD_REFS_DIR` | `refs_dir` | `D:\Downloads\FaceCard_Originals` |
+| secure-vault skill | `SECURE_VAULT_DIR` | `vault_dir` | `~/.agents/skills/secure-vault` |
+
+Check that everything resolves, and get the exact clone command if FaceFusion is missing:
+
+```
+.venv\Scripts\python.exe facecard.py check     # paths, then Gemini authentication
+.venv\Scripts\python.exe paths.py              # paths only, no network
+```
 
 ## Notes
 
