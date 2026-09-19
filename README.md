@@ -131,3 +131,8 @@ Check that everything resolves, and get the exact clone command if FaceFusion is
 - `session.py` redirects `gemini_webapi`'s cookie cache (which it otherwise writes as
   plaintext JSON to `%TEMP%\gemini_webapi\`) to a per-run temp directory that's deleted after
   every command, so no plaintext session file is left on disk.
+
+## License
+
+Licensed under either of [MIT](LICENSE-MIT) or [Apache License, Version 2.0](LICENSE-APACHE) at
+your option.
