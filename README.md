@@ -9,12 +9,21 @@ which authenticates as you using your browser session cookies.
 It's not illegal, but it's unofficial/unsupported — Google could rate-limit or flag
 heavy automated use, and the library can break when Google changes the site.
 
-**Device-wide skills:** the full workflow is documented as two skills any agent on this machine can
-use — update these files, not a copy in this repo, when the workflow changes:
-- `C:\Users\Admin\.agents\skills\gemini-identity-gen\SKILL.md` — vault cookies, troubleshooting,
-  running this tool (junctioned into `~\.claude\skills\gemini-identity-gen`)
-- `C:\Users\Admin\.agents\skills\scene-prompt-writer\SKILL.md` — writing the scene prompt text,
-  including from a reference image (junctioned into `~\.claude\skills\scene-prompt-writer`)
+**Skills:** the full workflow is documented as two skills any agent on this machine can use.
+- `skills/gemini-identity-gen/SKILL.md` — vault cookies, troubleshooting, running this tool. It
+  ships **in this repo**, because it drives this repo's venv, prompts and reference photos. Edit
+  it here. `~\.agents\skills\gemini-identity-gen` and `~\.claude\skills\gemini-identity-gen` are
+  junctions pointing at this folder, so every agent picks up the change.
+- `~\.agents\skills\scene-prompt-writer\SKILL.md` — writing the scene prompt text, including from
+  a reference image. It stays global because it works with any identity-reference pipeline, not
+  only this one (junctioned into `~\.claude\skills\scene-prompt-writer`).
+
+On a new machine, recreate the junctions after cloning:
+
+```
+New-Item -ItemType Junction -Path "$HOME\.agents\skills\gemini-identity-gen" -Target "<repo>\skills\gemini-identity-gen"
+New-Item -ItemType Junction -Path "$HOME\.claude\skills\gemini-identity-gen" -Target "<repo>\skills\gemini-identity-gen"
+```
 
 ## One-time setup: session cookies in the vault
 
