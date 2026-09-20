@@ -72,12 +72,18 @@ ASPECT_TOL = 0.03
 # Light on the face vs the source face. PROVISIONAL: calibrated on two of the user's own judgements (outputs he called
 # fine measure dE 12.2 and 5.5, the one he called worse 16.5), so a candidate above this is retried, not proof of a defect.
 LIGHT_DE_MAX = 14.0
+# Another man's photo (his skin legitimately differs from the user's, so the limit is looser). PROVISIONAL, by the same rule as the own-photo limit:
+# just above the brightest render the user accepted. cand3 (run 165702, "lighting all right") measured dE 18.4; the renders he called pasted or
+# mismatched measured 31 to 35 (run 173847), and 3 of 4 hair-fix attempts (31 to 36) looked the same. Not a proof of a defect: it makes the retries
+# fish for a render as dark and warm as the photo.
+LIGHT_DE_MAX_FOREIGN = 20.0
 ANCHOR_TURN_MAX = 65.0  # when Gemini reads the head as turned this many degrees or more, no frontal anchor references are sent
 SIZE_MIN, SIZE_MAX = 0.85, 1.15   # output head width over source head width (own photos)
 # Foreign photos: the user called a head at size_ratio 1.054 (run 064235) "too big". PROVISIONAL, from that one review; Gemini returns heads
 # anywhere from 0.87 to 1.21 of the source, so this only makes the retries fish for a matching size. A text judge cannot see head size
 # (measured 2026-09-20: it read the too-big head as smaller, 43% vs 45% of shoulder width), so this is a geometric gate.
-SIZE_MIN_FOREIGN, SIZE_MAX_FOREIGN = 0.95, 1.04
+# The floor was 0.95 until cand3 (run 165702), whose size the user approved, measured 0.949 and was rejected by it; the floor has no evidence for "too small".
+SIZE_MIN_FOREIGN, SIZE_MAX_FOREIGN = 0.94, 1.04
 DEFAULT_ATTRACTIVENESS = ("Render him at his best, as he looks in the reference photos: a defined jawline, calm confident eyes, and a relaxed "
                           "closed-lip smile or a calm focused expression. Never tense, awkward, forced, smirking or caught mid-motion.")
 SHIFT_MAX = 0.12                  # how far the head may move, in head widths
@@ -102,7 +108,8 @@ def gate_values(config: dict) -> dict:
     g = config.get("gates") or {}
     return {"light_de_max": float(g.get("light_de_max", LIGHT_DE_MAX)),
             "size_own": tuple(g.get("size_own", (SIZE_MIN, SIZE_MAX))),
-            "size_foreign": tuple(g.get("size_foreign", (SIZE_MIN_FOREIGN, SIZE_MAX_FOREIGN)))}
+            "size_foreign": tuple(g.get("size_foreign", (SIZE_MIN_FOREIGN, SIZE_MAX_FOREIGN))),
+            "light_de_max_foreign": float(g.get("light_de_max_foreign", LIGHT_DE_MAX_FOREIGN))}
 
 
 def thresholds(config: dict) -> dict:
@@ -285,7 +292,8 @@ def scene_block(scene: dict | None, zone: str = "face") -> str:
 
 def expression_rule(expression: str, attractiveness: str, scene: dict | None) -> str:
     if expression == "same":
-        return " Keep exactly the expression he has in the last image."
+        return (" Give him exactly the expression of the man in the last image: the same mouth, eyes and brows at the same strength, but "
+                "natural and relaxed on his face, never tense or forced.")
     if expression not in ("auto", "none"):
         return f" His expression: {expression}."
     return f" {attractiveness.strip()}"
@@ -304,6 +312,11 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
         hair = (" All of his hair is his own, copied from the reference photos over the whole head: the front, the top, the crown, the temples "
                 "and sides, around the ears and the back down to the nape. Use his curl pattern, density, cut and the way it tapers at the "
                 "sides. None of the hair of the man in the last image is kept.")
+    # Another man's photo: the references leaked their exposure into the render (face lightness 57-65 against the photo's 37, measured 2026-09-20; the prompt
+    # used to say "skin tone exactly as in the reference photos"), so they are named as the source of who he is only. His own photo keeps the original wording.
+    ident = ("lips, skin tone and beard exactly as in the reference photos." if zone == "face" else
+             "lips, natural complexion and beard as in the reference photos. Use the reference photos only for who he is: ignore their lighting, "
+             "exposure, colour cast and head angle; those come from the last image.")
     gl = {"same": " If the man in the last image wears glasses, he keeps wearing the same glasses.",
           "yes": " He wears thin metal-framed glasses.", "no": " He is not wearing glasses."}[glasses]
     refl = ""
@@ -315,7 +328,7 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
     retry = (f"\n\nA previous attempt at this edit had these problems, so avoid them: {retry_note}" if retry_note else "")
     return (f"The first {n_refs} images are photos of the same man: the identity reference. The last image is the photo to edit.\n\n"
             f"Edit the last image so that the man in it has this exact man's {what}: his face structure, jawline, nose, eyes, brows, "
-            f"lips, skin tone and beard exactly as in the reference photos.{hair}{gl}{expression_rule(expression, attractiveness, scene)}"
+            f"{ident}{hair}{gl}{expression_rule(expression, attractiveness, scene)}"
             f"{scene_block(scene, zone)}\n\n"
             "Keep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same "
             "size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. "
@@ -523,6 +536,8 @@ def retry_note_from(problems: list[str], judge: dict | None) -> str | None:
         low = p.lower()
         if "head angle" in low:
             bits.append("his head was turned more toward the camera than in the last image; keep it turned exactly as it is there")
+        elif "expression differs" in low:
+            bits.append("his expression did not match the last image; copy that expression exactly, the same mouth, eyes and brows")
         elif "lit differently" in low or "lighting" in low:
             bits.append("the face came out brighter, cleaner and cooler than the rest of the picture; keep it as dark, warm and "
                         "grainy as it is in the last image")
@@ -544,7 +559,7 @@ def retry_note_from(problems: list[str], judge: dict | None) -> str | None:
     return "; ".join(dict.fromkeys(bits)) or None
 
 
-def judge_failures(judge: dict | None) -> tuple[list[str], list[str]]:
+def judge_failures(judge: dict | None, expression_must_match: bool = False) -> tuple[list[str], list[str]]:
     """Split the AI judge's answer into (hard failures, warnings)."""
     if not judge:
         return [], ["the AI judge gave no usable answer, so the visual checks were skipped"]
@@ -567,7 +582,10 @@ def judge_failures(judge: dict | None) -> tuple[list[str], list[str]]:
     if judge.get("reflection_matches") is False:
         soft.append("AI judge: the reflection does not clearly show the same man as his real face")
     if judge.get("same_expression") is False:
-        soft.append("AI judge: expression differs from the source (by design, see the attractiveness policy)")
+        if expression_must_match:
+            hard.append("AI judge: expression differs from the source (it must match under the same-expression policy)")
+        else:
+            soft.append("AI judge: expression differs from the source (by design, see the attractiveness policy)")
     return hard, soft
 
 
@@ -658,6 +676,13 @@ async def run(args) -> int:
         return 0
     log.data.update({"source_kind": source_kind, "zone_mode": zone_mode, "duplicates_excluded": sorted(dups)})
     kind = "face" if zone_mode == "face" else "head"
+    # Expression: the attractiveness policy suits his own photos (approved kayak and rocky). Another man's photo is a reference whose expression
+    # is the target (user, 2026-09-20: cand3's calm closed mouth did not match the reference, which has a subtle smile; the same-expression
+    # run was called closer).
+    expression = args.expression or ("same" if source_kind == "foreign" else "auto")
+    log.data["expression_policy"] = expression
+    log.say(f"expression policy: {expression}" + (" (the reference photo's own; --expression auto forces the attractiveness policy)"
+                                                  if expression == "same" and not args.expression else ""))
 
     # ---- ONE crop: the main head plus any other copy of the face (a window reflection is a real second face). The user
     # judged the single-pass render of both faces (060631) "perfect" and the separate reflection stage (063313) as not
@@ -701,7 +726,7 @@ async def run(args) -> int:
     if not src_eval.get("detected"):
         src_eval = src_res
     attractiveness = config.get("attractiveness_note") or DEFAULT_ATTRACTIVENESS
-    log.data["attractiveness_note"] = attractiveness if args.expression in ("auto", "none") else None
+    log.data["attractiveness_note"] = attractiveness if expression in ("auto", "none") else None
 
     candidates: list[dict] = []
     expr_wins: dict[int, float] = {}
@@ -709,7 +734,7 @@ async def run(args) -> int:
     scene: dict | None = None
     try:
         async with authenticated_client(verbose=args.verbose) as client:
-            if args.expression != "none":
+            if expression != "none":
                 scene = await gemini_text(client, text_models, DESCRIBE_PROMPT, [run_dir / "source_crop.png"], log, "describe")
                 log.say(f"scene as read by Gemini: {json.dumps(scene, ensure_ascii=False) if scene else 'no usable answer (edit prompt has no description)'}")
                 log.data["scene_reading"] = scene
@@ -751,7 +776,7 @@ async def run(args) -> int:
                         log.say(f"  build stage: {meta.get('failed') or ('ecc ' + str(meta['ecc']) + ', ' + meta['aligned_by'])}")
 
                     if not any("failed" in s for s in cand["stages"]):
-                        prompt = edit_prompt(len(head_refs), kind, args.glasses, args.look, scene, args.expression, attractiveness, retry_note,
+                        prompt = edit_prompt(len(head_refs), kind, args.glasses, args.look, scene, expression, attractiveness, retry_note,
                                              reflection=len(head_boxes) > 1)
                         base, z, meta = await edit_stage(client, model, log, run_dir, f"c{i}_head", base, rect, prompt, head_refs, args.verbose)
                         cand["stages"].append(meta)
@@ -819,18 +844,19 @@ async def run(args) -> int:
                         problems.append(f"head size changed (size_ratio {m['size_ratio']}, allowed {lo}-{hi})")
                     if m["face_shift_frac"] > SHIFT_MAX:
                         problems.append(f"head moved (face_shift {m['face_shift_frac']} > {SHIFT_MAX})")
-                    # Light on the face vs the source face. Measured always; a gate only for the user's own photos, because
-                    # a different person's skin legitimately differs from the user's.
+                    # Light on the face vs the source face. The limit is looser for another man's photo, because his skin legitimately
+                    # differs from the user's (14 for his own photos, 20 for another man's).
                     m["light"] = composite.light_delta(src_crop, out_crop, src_eval["box"])
                     lt = m["light"]
-                    if source_kind == "own" and lt["dE"] > gates["light_de_max"]:
-                        problems.append(f"face is lit differently from the source (light dE {lt['dE']} > {gates['light_de_max']}, dL {lt['dL']:+}: "
+                    light_max = gates["light_de_max"] if source_kind == "own" else gates["light_de_max_foreign"]
+                    if lt["dE"] > light_max:
+                        problems.append(f"face is lit differently from the source (light dE {lt['dE']} > {light_max}, dL {lt['dL']:+}: "
                                         "rendered brighter and cleaner than the photo)")
 
                 # ---- the AI judges what code cannot: angle, glasses, seam, lighting, anything else changed
                 judge = await gemini_text(client, text_models, JUDGE_PROMPT, [run_dir / "source_crop.png", run_dir / f"cand{i}_crop.jpg"], log, "judge")
                 cand["judge"] = judge
-                hard, soft = judge_failures(judge)
+                hard, soft = judge_failures(judge, expression_must_match=(expression == "same"))
                 problems += hard
                 warnings += soft
                 cand["problems"], cand["warnings"] = problems, warnings

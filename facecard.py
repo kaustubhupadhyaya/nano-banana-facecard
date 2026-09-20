@@ -544,7 +544,7 @@ def main() -> int:
     rep.add_argument("--source", choices=["auto", "own", "foreign"], default="auto", help="Is the source photo of you? (auto: decided by identity score)")
     rep.add_argument("--glasses", choices=["same", "yes", "no"], default="same", help="same: keep the glasses the source photo shows; yes: thin metal glasses; no: none")
     rep.add_argument("--look", choices=["any", "curly", "short"], default="any", help="Hair when the head is replaced")
-    rep.add_argument("--expression", default="auto", help="auto: describe the source expression from landmarks; none: say nothing; or free text such as 'a broad smile with teeth showing'")
+    rep.add_argument("--expression", default=None, help="default: the same expression as the reference photo when the source is another person's, the attractiveness policy (auto) for your own photos. same: copy the source expression; auto: the attractiveness policy from facecard.json; none: say nothing; or free text such as 'a broad smile with teeth showing'")
     rep.add_argument("--build", choices=["normal", "strong"], default="normal", help="Wording of the physique edit for head+build (strong asks for visibly broader shoulders and arms)")
     rep.add_argument("--count", type=int, default=2, help="How many candidates must PASS every check before stopping (best is kept)")
     rep.add_argument("--max-attempts", type=int, default=6, dest="max_attempts", help="Ceiling on Gemini calls per photo while chasing --count passing candidates")

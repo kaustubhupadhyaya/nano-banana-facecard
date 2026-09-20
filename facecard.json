@@ -66,7 +66,7 @@
   "vision_model": "56fdd199312815e2",
   "attractiveness_note": "Render him at his best, as he looks in the reference photos: a defined jawline, calm confident eyes, and a relaxed closed-lip smile or a calm focused expression. Never tense, awkward, forced, smirking or caught mid-motion.",
   "approved_outputs": {
-    "_note": "Outputs the user reviewed on 2026-09-20. 'perfect' means keep behaving like this; the notes say what each proves. Identity score alone does not capture expression quality.",
+    "_note": "Outputs the user reviewed on 2026-09-20. 'perfect' means keep behaving like this; the notes say what each proves. Identity score alone does not capture expression quality. See FEEDBACK_LOG.md for the full table of reviewed outputs.",
     "perfect": {
       "20260920_034849_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round 2: nearly right",
       "20260920_061004_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round 3: perfect",
@@ -75,7 +75,8 @@
       "20260920_060329_replicate_google-1__IMG_5549/best.jpg": "kayak: perfect face emotion (calm closed-lip smile) but light off (dE 16.5); proves the expression to aim for",
       "20260920_150905_replicate_google-1__IMG_5549/c2_head_raw.jpg": "kayak, round-4 pipeline attempt 2: user said 'this is good'. Pipeline metrics for it: score 0.592, gt_sim 0.746, light dE 4.0, drift SSIM 0.987, AI judge all clear. Its siblings in the same run: attempt 1 (light dE 23, vest redrawn) rejected correctly; attempts 3 and 4 rejected by glasses/light gates",
       "20260920_150905_replicate_google-1__IMG_5549/best.jpg": "kayak, round-4 pipeline pick (attempt 6, 2 wins in the AI expression comparison): the user said perfect on 2026-09-20 when asked to compare it with attempt 2 (c2 above, also good); no preference between the two was stated, so both are kept. Pipeline: identity 0.598, similarity 0.682, light dE 7.7, drift SSIM 0.966",
-      "20260920_153829_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round-4 pipeline pick (attempt 3, 2 wins in the AI expression comparison, a brighter face, light dE 9.9): the user said perfect on 2026-09-20 when asked to compare it with attempt 1 (cand1.png, subtler, dE 1.1); no preference stated, both kept. Pipeline: identity 0.556, similarity 0.507, drift SSIM 0.997"
+      "20260920_153829_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round-4 pipeline pick (attempt 3, 2 wins in the AI expression comparison, a brighter face, light dE 9.9): the user said perfect on 2026-09-20 when asked to compare it with attempt 1 (cand1.png, subtler, dE 1.1); no preference stated, both kept. Pipeline: identity 0.556, similarity 0.507, drift SSIM 0.997",
+      "20260921_000411_replicate_pinterest_target/best.jpg": "Pinterest with the references-as-identity-only prompt, the same-expression policy and the foreign light gate: the user said perfect. Measured: face L 43.3 / neck L 31.3 (source 36.7 / 31.2), head pose within 2 degrees on all three axes, hair outline within 5 px of the source, light dE 14.2, size 0.987, pool identity 0.509 (uncertain band), judge: same angle and same expression, drift SSIM 0.948. One good sample of four attempts"
     },
     "bad": {
       "20260920_064200_replicate_google-1__IMG_5549/best.jpg": "kayak final round 3: light good (dE 7.1) but awkward, tense expression",
@@ -83,7 +84,11 @@
       "20260920_054417_replicate_pinterest_target/best.jpg": "Pinterest round 2: head bad, two faces overlapping",
       "20260920_053307_replicate_google-1__IMG_5549/best.jpg": "kayak round 2: attractive but not him, ghost outlines ('three faces')",
       "20260920_053504_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky round 2: bad",
-      "20260920_063313_replicate_google-4__IMG_5850_Original/c1_copy1_raw.jpg": "separate reflection pass: perfect as a reflection but does not mirror him, different expression"
+      "20260920_063313_replicate_google-4__IMG_5850_Original/c1_copy1_raw.jpg": "separate reflection pass: perfect as a reflection but does not mirror him, different expression",
+      "20260920_173847_replicate_pinterest_target/cand1.png": "Pinterest experiment (expression policy + pose gate, rolled back): expression closer but the head looks cut and pasted, the neck above the collar looks pasted, the head tilt is off and the lighting is mismatched; worse than 165702 cand3. Its measured brightness step: face L 58 / neck L 62 against the photo 37 / 31",
+      "20260921_003409_replicate_mountain/best.png": "mountain, foreign mode: face replication even worse than the source (pool similarity 0.436 against the source 0.623)",
+      "20260921_004110_replicate_car2/best.jpg": "car2, foreign mode: face size and lighting not proportional to the rest of the body and the scene (face L 56.7 against the source 45.0)",
+      "20260921_020055_replicate_car2/best.jpg": "car2, default rerun (own mode): face lighting and size bad again. Measured: face L 57.1 against 44.6, light dE 10.5 (own limit 14 passes it), size 1.04 (limit 0.85-1.15 passes it), face minus neck lightness +17.7 against +4.0 in the source"
     },
     "source_defects_not_generated": {
       "20260920_064633_replicate_google-4__IMG_5850_Original/c1_head_send.png": "user reported a double chin; this file is the crop SENT to Gemini (byte-identical to the source), so the fold is in the original photo, not a generation"
@@ -94,6 +99,18 @@
     "promising": {
       "20260920_165702_replicate_pinterest_target/cand3.png": "Pinterest with the hair fix, attempt 3: the user says face size, lighting and hair are all right, an improvement, but the face position and the expression do not match the reference photo. Measured against the source: head pitch 7.1 degrees more level (source +9.3, output +2.2), yaw +2.5, roll +3.3, and a calm closed mouth where the reference has a subtle smile. Pipeline: 0 of 4 attempts passed the gates; this one missed the foreign size limit by 0.001 (0.949 vs 0.95), identity 0.501, drift SSIM 0.959, face light dE 18.4 (not gated for foreign photos). Only the hair wording of the prompt changed (replicate.py scene_block and edit_prompt, zone head)",
       "20260920_151934_replicate_google-4__IMG_5850_Original/c1_head_raw.jpg": "stained glass, round-4 pipeline attempt 1 (face AND reflection in one crop, one call): user said 'very promising'. Pipeline: verdict UNCERTAIN, identity 0.447 (profile faces score low), similarity to his real face 0.641, face light dE 2.1, drift SSIM 0.972, judge clear except a WARNING that the reflection does not clearly match the re-rendered real face"
+    },
+    "as_is_no_change": {
+      "_note": "The user said the output is the same as the source. All measured with the face similarity to the SOURCE face (gt_sim) at 0.93 or more: the pipeline returned the look-alike unchanged.",
+      "20260921_003247_replicate_nerd/best.png": "nerd, foreign mode: before and after are the same",
+      "20260921_003606_replicate_beach/best.png": "beach, foreign mode: no changes made at all",
+      "20260921_004741_replicate_night out/best.png": "night out, own mode with --force --expression same: stays the same (gt_sim 0.976)",
+      "20260921_015113_replicate_night out/best.png": "night out, default rerun: as it is again (gt_sim 0.947)",
+      "20260921_015354_replicate_nerd/best.png": "nerd, default rerun: as it is again (gt_sim 0.928)",
+      "20260921_015829_replicate_beach/best.png": "beach, default rerun: as it is to the source again (gt_sim 0.99)"
+    },
+    "good_face_rejected_by_gates": {
+      "20260921_002751_replicate_night out/c1_head_raw.jpg": "night out, foreign mode attempt 1, raw return: the user says it has better facial attractiveness and identity match than anything the pipeline accepted (upright frontal portrait, fuller curly hair, defined face, calm slight smile). The gates rejected it: size 1.164, moved 0.263, drift SSIM 0.768, judge angle and background changed. Pool score 0.794, gt_sim to the source 0.828"
     }
   },
   "identity_thresholds": {
@@ -108,9 +125,10 @@
       1.15
     ],
     "size_foreign": [
-      0.95,
+      0.94,
       1.04
-    ]
+    ],
+    "light_de_max_foreign": 20.0
   },
-  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing."
+  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing. On 2026-09-21, with the plan the user approved: size_foreign floor 0.95 to 0.94 (cand3, whose size he approved, measured 0.949) and a new light_de_max_foreign of 20 for another man's photo (cand3, lighting approved, measured dE 18.4; the renders he called pasted or mismatched measured 31 to 35). Both PROVISIONAL, from one review each; re-check them against his next verdict."
 }
