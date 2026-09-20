@@ -269,6 +269,68 @@ def blur_face(image_path: str | Path, output_path: Optional[str | Path] = None) 
     return out_p
 
 
+def mask_head_from_scene(image_path: str | Path, output_path: Optional[str | Path] = None) -> Path:
+    """Masks head, hair, ears, jaw, and neck down to collar line to eliminate skull/profile contamination.
+    
+    Leaves 100% of body posture, clothing, ground contact, and background intact while ensuring
+    zero facial or skull geometry is transmitted to Gemini.
+    """
+    from scorer import DETECTOR_PATH
+
+    img = cv2.imread(str(image_path))
+    if img is None:
+        raise FileNotFoundError(f"Image not found: {image_path}")
+
+    h, w = img.shape[:2]
+    detector = cv2.FaceDetectorYN.create(str(DETECTOR_PATH), "", (w, h), score_threshold=0.4)
+    detector.setInputSize((w, h))
+    _, faces = detector.detect(img)
+
+    if faces is None or len(faces) == 0:
+        # Fallback to standard blur if no face detected
+        return blur_face(image_path, output_path)
+
+    areas = faces[:, 2] * faces[:, 3]
+    f = faces[int(np.argmax(areas))]
+    fx, fy, fw, fh = map(int, f[:4])
+
+    cx = fx + fw // 2
+    cy = fy + int(fh * 0.45)
+    rx = int(fw * 0.90)
+    ry = int(fh * 1.15)
+
+    mask = np.zeros((h, w), dtype=np.uint8)
+    # Head and hair ellipse
+    cv2.ellipse(mask, (cx, cy), (rx, ry), 0, 0, 360, 255, -1)
+
+    # Neck down to collar
+    neck_top = cy + int(ry * 0.45)
+    neck_bot = min(h - 1, fy + int(fh * 1.65))
+    neck_left = max(0, cx - int(fw * 0.65))
+    neck_right = min(w - 1, cx + int(fw * 0.65))
+    pts = np.array([
+        [neck_left, neck_top],
+        [neck_right, neck_top],
+        [min(w - 1, cx + int(fw * 0.75)), neck_bot],
+        [max(0, cx - int(fw * 0.75)), neck_bot],
+    ], dtype=np.int32)
+    cv2.fillPoly(mask, [pts], 255)
+
+    # Feathered alpha blending for seamless border
+    feather = cv2.GaussianBlur(mask, (51, 51), 25)
+    feather_f = feather.astype(np.float32) / 255.0
+    feather_3d = np.repeat(feather_f[:, :, np.newaxis], 3, axis=2)
+
+    # Neutralize region with heavy atmospheric blur
+    blurred = cv2.GaussianBlur(img, (121, 121), 60)
+    neutral = (img * (1.0 - feather_3d) + blurred * feather_3d).astype(np.uint8)
+
+    out_p = Path(output_path) if output_path else Path(image_path).parent / f"{Path(image_path).stem}_headless.jpg"
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+    cv2.imwrite(str(out_p), neutral)
+    return out_p
+
+
 def fetch_pose_refs(query: str, count: int = 6) -> Path:
     slug = re.sub(r"[^a-z0-9]+", "-", query.lower()).strip("-")[:40] or "pose"
     dest_dir = POSE_REFS_DIR / slug

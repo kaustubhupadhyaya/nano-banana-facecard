@@ -123,7 +123,7 @@ def get_routed_source_paths(target_path: str | Path, config_path: str = "facecar
     pose_bin = pose_info.get("bin", "frontal")
     pose_bins = cfg.get("pose_bins", {})
 
-    target_ref_names = pose_bins.get(pose_bin, DEFAULT_FRONTAL_REFS)
+    target_ref_names = pose_bins.get(pose_bin, cfg.get("restore_refs", DEFAULT_FRONTAL_REFS))
     source_paths = []
 
     for name in target_ref_names:
@@ -137,7 +137,7 @@ def get_routed_source_paths(target_path: str | Path, config_path: str = "facecar
 
     # Fallback to frontal if bin had no valid refs
     if not source_paths:
-        for name in DEFAULT_FRONTAL_REFS:
+        for name in cfg.get("restore_refs", DEFAULT_FRONTAL_REFS):
             p = refs_dir / name
             if p.exists():
                 source_paths.append(p)
@@ -154,12 +154,13 @@ def restore_face(
     config_path: str = "facecard.json",
     swapper_model: str = "inswapper_128",
     swapper_weight: Optional[float] = None,
-    pixel_boost: str = "512x512",
+    pixel_boost: str = "256x256",
     enhancer_model: Optional[str] = "none",
     enhancer_weight: float = 0.8,
     expression_factor: Optional[int] = None,
     mask_types: Optional[List[str]] = None,
     timeout: int = 240,
+    protect_profile: bool = True,
 ) -> dict:
     target = Path(target_path).resolve()
     if not target.exists():
@@ -173,6 +174,20 @@ def restore_face(
 
     pose_info = detect_pose(target)
     pose_bin = pose_info.get("bin", "frontal")
+
+    if protect_profile and "profile" in pose_bin:
+        logger.info("Profile angle detected (%s). FaceFusion 2D swapper locked out to prevent facial collapse.", pose_bin)
+        return {
+            "success": False,
+            "skipped": True,
+            "reason": "profile_protection",
+            "target": str(target),
+            "output": str(target),
+            "elapsed_sec": 0.0,
+            "pose": pose_info,
+            "sources": [],
+            "error": f"Profile protection: 2D swapper locked out for {pose_bin} to prevent 2D affine warping collapse",
+        }
 
     if source_paths is None:
         sources, _ = get_routed_source_paths(target, config_path)
