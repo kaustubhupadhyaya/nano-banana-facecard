@@ -269,17 +269,18 @@ async def gemini_text(client, models: list[str | None], prompt: str, files: list
     return None
 
 
-def scene_block(scene: dict | None) -> str:
+def scene_block(scene: dict | None, zone: str = "face") -> str:
     """The AI's own description of the crop for the edit prompt: what must stay. The expression is deliberately NOT here:
     copying it produced 'lips slightly parted' and 'open smile with the teeth showing', both reviewed as bad; the expression
     comes from the attractiveness policy instead."""
     if not scene:
         return ""
     g = lambda k: str(scene.get(k) or "").strip()
+    # zone "head" (another man's photo): his hair replaces the source man's, so the source hair must not be listed as something that stays
     parts = [f"head: {g('head_turn')}", f"chin: {g('head_tilt')}", f"eyes: {g('gaze')}", f"glasses: {g('glasses')}",
-             f"hair: {g('hair')}", f"light on his face: {g('light')}", f"how bright his face is: {g('face_exposure')}"]
+             f"hair: {g('hair')}" if zone == "face" else "", f"light on his face: {g('light')}", f"how bright his face is: {g('face_exposure')}"]
     return "\n\nThis is what the last image shows before the edit. The head angle, gaze, glasses and light must stay exactly as they are:\n" + "\n".join(
-        f"- {p}" for p in parts if not p.endswith(": "))
+        f"- {p}" for p in parts if p and not p.endswith(": "))
 
 
 def expression_rule(expression: str, attractiveness: str, scene: dict | None) -> str:
@@ -300,8 +301,9 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
     elif look == "short":
         hair = " His hair is his own short dark hair, at exactly the same size and volume as the hair in the last image."
     else:
-        hair = (" His hair is his own hair from the reference photos, but its outline, length and volume are exactly those of the hair "
-                "in the last image, never bigger.")
+        hair = (" All of his hair is his own, copied from the reference photos over the whole head: the front, the top, the crown, the temples "
+                "and sides, around the ears and the back down to the nape. Use his curl pattern, density, cut and the way it tapers at the "
+                "sides. None of the hair of the man in the last image is kept.")
     gl = {"same": " If the man in the last image wears glasses, he keeps wearing the same glasses.",
           "yes": " He wears thin metal-framed glasses.", "no": " He is not wearing glasses."}[glasses]
     refl = ""
@@ -314,7 +316,7 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
     return (f"The first {n_refs} images are photos of the same man: the identity reference. The last image is the photo to edit.\n\n"
             f"Edit the last image so that the man in it has this exact man's {what}: his face structure, jawline, nose, eyes, brows, "
             f"lips, skin tone and beard exactly as in the reference photos.{hair}{gl}{expression_rule(expression, attractiveness, scene)}"
-            f"{scene_block(scene)}\n\n"
+            f"{scene_block(scene, zone)}\n\n"
             "Keep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same "
             "size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. "
             "The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it "
