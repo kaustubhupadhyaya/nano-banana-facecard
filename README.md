@@ -68,8 +68,7 @@ Or from VS Code: **Terminal → Run Task** → "Facecard: generate" / "Facecard:
 - `--prompt`: scene text, or a path to a `.txt` file (see `prompts/identity_lock.txt` for the
   identity-lock preamble that's automatically prepended — only write the scene description
   after it, and keep it positive-only: describe pose/outfit/setting/lighting, never the face).
-- `--scene-image`: optional path to a photo/screenshot whose pose, outfit, and framing should
-  be matched (identity still comes from the pinned refs, not this image).
+- `--scene-image`: now runs `replicate` on that photo (the prompt text is ignored).
 - `--count`: how many variations to generate (each is an independent request against the same
   pinned refs — outputs are never fed back in as new references).
 - `--model`: override the model id from `facecard.json` for one run.
@@ -88,6 +87,40 @@ model error, run `facecard.py models` and update the id.
 
 Prompt files included: `prompts/studio_test.txt` (plain studio portrait) and
 `prompts/mountain_tank_top.txt` (alpine trail scene).
+
+## Reproduce a source photo with your face: `replicate`
+
+Use this whenever there is a photo to reproduce (yours, or someone else's from Pinterest). It never redraws the photo.
+The principle: **the AI does all the visual work and all the scene reading; code only copies pixels that must not change,
+measures, and retries.** Nothing Gemini renders is altered by a heuristic.
+
+```
+.venv\Scripts\python.exe facecard.py replicate --scene "C:\path\photo.jpg"                 # auto zone
+.venv\Scripts\python.exe facecard.py replicate --scene photo.jpg --force --count 1         # your own photo (benchmark)
+.venv\Scripts\python.exe facecard.py replicate --scene photo.jpg --zone head+build         # opt-in body edit
+```
+
+What happens: a crop around the head (and any reflection of it) is cut from the full-resolution original; Gemini describes
+the crop (head angle, expression, glasses, light) in a text call; Gemini edits the crop with that description in the
+prompt; the **whole returned crop** is pasted back with a soft border at the crop edge, so face, hair, neck and light stay
+consistent with each other; Gemini then judges source vs output (angle, glasses, seam, lighting, anything else changed).
+Everything outside the crop is asserted identical to the source. The prompt asks for a flattering, relaxed expression rather than a copy of the source's (`attractiveness_note` in `facecard.json`, `--expression same` to copy it), a head the same size as the source's, and a window reflection stays in the same crop and the same call. When several candidates pass, Gemini chooses the better expression pair by pair (each pair in both orders, which matched the user's own verdict 4 of 4 times). A candidate that fails a check is retried, up to
+`--max-attempts` (default 6) image calls, and what went wrong (the judge's own note, plus a sentence per failed check such as
+"the face came out brighter than the photo") is written into the next prompt. Other copies of your face in the frame, such as a
+window reflection, get their own tight crop and their own edit.
+
+Each run writes `cand<N>.png` (lossless), `best.png` / `best.jpg` (or `not_passing_closest.jpg` when nothing passed),
+`compare_head_<N>.jpg` (source | output | difference | crop border), `compare_full_<N>.jpg`, `run.json` and `run.log` to
+`outputs/<timestamp>_replicate_<name>/`. The AI judge's answer is in both logs.
+
+Code: `replicate.py` (the command), `composite.py` (crop paste, alignment check, drift measure), `identity.py` (photo
+pool and scoring), `calibrate.py` (prints the numbers behind the thresholds). `segment.py` and `landmarks.py` remain for
+measurement only; the paste no longer uses them.
+
+Limits measured on 2026-09-20 (full detail in `skills/gemini-identity-gen/SKILL.md`): Gemini re-renders the face, so it
+is close to but not pixel-exact with your real face; the identity score only separates clear matches from clear misses;
+other people's bodies are not reshaped (the silhouette stays within 2 percent); and an earlier design that post-processed
+Gemini's face (relight, grain, blur, mask cut-out) made results worse and was removed.
 
 ## Face restoration + scoring (optional)
 
