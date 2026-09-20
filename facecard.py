@@ -20,6 +20,7 @@ import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 from PIL import Image, ImageOps
 
@@ -29,7 +30,7 @@ from session import AuthError, authenticated_client
 ROOT = Path(__file__).parent
 CONFIG_PATH = ROOT / "facecard.json"
 IDENTITY_LOCK_PATH = ROOT / "prompts" / "identity_lock.txt"
-SCENE_REF_NOTE = "\n\nThe last attached image is a scene/style reference (not the identity reference) — match its pose, outfit, framing, lighting, and setting."
+SCENE_REF_NOTE = "\n\nThe last attached image is a scene/posture reference with the head/neck region neutralized — strictly match its camera perspective, elevation, body posture, limb positioning, ground contact, clothing, and background setting. Do NOT copy any facial or skull geometry from it; the subject's face, skull shape, profile contour, hairline, and facial features must come exclusively from the attached identity reference photos."
 
 
 def load_config() -> dict:
@@ -80,6 +81,82 @@ def slugify(text: str, max_len: int = 40) -> str:
     return (slug[:max_len] or "gen").rstrip("-")
 
 
+def get_generation_refs(
+    config: dict,
+    refs_dir: Path,
+    cache_dir: Path,
+    scene_image_path: Optional[str | Path] = None,
+    prompt_text: str = "",
+) -> list[Path]:
+    """Select angle-targeted identity references for Gemini generation.
+    
+    If scene reference or prompt specifies a profile or 3/4 angle, concentrates Gemini's
+    attention on angle-matched photos (plus 1-2 frontal anchors) to avoid diluting
+    cross-attention with conflicting frontal faces.
+    """
+    from scorer import analyze_face
+
+    pose_bins = config.get("pose_bins", {})
+    all_refs = config.get("refs", [])
+
+    target_bin = "frontal"
+    # Detect target angle from scene image or prompt
+    if scene_image_path and Path(scene_image_path).exists():
+        info = analyze_face(scene_image_path)
+        if info.get("detected"):
+            target_bin = info.get("pose_bin", "frontal")
+
+    if target_bin == "frontal" and prompt_text:
+        low = prompt_text.lower()
+        if "profile" in low or "60 degree" in low or "70 degree" in low or "75 degree" in low:
+            if "left" in low:
+                target_bin = "profile_left"
+            else:
+                target_bin = "profile_right"
+        elif "three-quarter" in low or "3/4" in low or "40 degree" in low or "45 degree" in low:
+            if "left" in low:
+                target_bin = "three_quarter_left"
+            else:
+                target_bin = "three_quarter_right"
+
+    selected_names = []
+    if target_bin in ("profile_right", "three_quarter_right"):
+        # Prioritize right profile & 3/4 right
+        selected_names.extend(pose_bins.get("profile_right", []))
+        selected_names.extend(pose_bins.get("three_quarter_right", []))
+        # Add 2 frontal anchors for skin tone and eye color
+        selected_names.extend(["IMG_6873.jpg", "IMG_6858.jpg"])
+    elif target_bin in ("profile_left", "three_quarter_left"):
+        # Prioritize left profile & 3/4 left
+        selected_names.extend(pose_bins.get("profile_left", []))
+        selected_names.extend(pose_bins.get("three_quarter_left", []))
+        # Add 2 frontal anchors
+        selected_names.extend(["IMG_6873.jpg", "IMG_6858.jpg"])
+    else:
+        # Frontal / default
+        selected_names.extend(pose_bins.get("frontal", []))
+        selected_names.extend(pose_bins.get("three_quarter_right", [])[:1])
+        selected_names.extend(pose_bins.get("three_quarter_left", [])[:1])
+
+    # Deduplicate while preserving order
+    seen = set()
+    deduped = [n for n in selected_names if not (n in seen or seen.add(n))]
+
+    ref_paths = []
+    for name in deduped:
+        p = refs_dir / name
+        if p.exists():
+            ref_paths.append(prepare_ref(p, cache_dir))
+        elif (cache_dir / name).exists():
+            ref_paths.append(prepare_ref(cache_dir / name, cache_dir))
+
+    if not ref_paths:
+        # Fallback to all refs
+        ref_paths = [prepare_ref(refs_dir / name, cache_dir) for name in all_refs if (refs_dir / name).exists() or (cache_dir / name).exists()]
+
+    return ref_paths
+
+
 def cmd_score(args) -> int:
     import scorer
 
@@ -107,7 +184,6 @@ def cmd_restore(args) -> int:
     config = load_config()
     refs_dir = get_refs_dir(config)
     all_refs = [refs_dir / name for name in config["refs"] if (refs_dir / name).exists()]
-    restore_refs = [refs_dir / name for name in config.get("restore_refs", ["IMG_6858.jpg", "IMG_6873.jpg", "IMG_6875.jpg", "IMG_6923 Copy.jpg"]) if (refs_dir / name).exists()]
     threshold = float(config.get("identity_threshold", 0.60))
 
     arc_scorer = ArcFaceScorer()
@@ -129,6 +205,7 @@ def cmd_restore(args) -> int:
         raw_sharpness = face_info.get("sharpness", 0.0)
         is_profile = face_info.get("is_profile", False)
         yaw_ratio = face_info.get("yaw_ratio", 1.0)
+        pose_bin = face_info.get("pose_bin", "frontal")
 
         raw_score = None
         try:
@@ -137,11 +214,13 @@ def cmd_restore(args) -> int:
         except Exception:
             pass
 
-        print(f"Restoring {target.name} (raw score: {raw_score:.3f if raw_score else 'N/A'} | yaw={yaw_ratio:.2f} | profile={is_profile})...", flush=True)
-        if is_profile:
-            print("  [Profile Warning] Steep side angle detected. 2D face swapping may distort facial geometry.")
+        raw_s = f"{raw_score:.3f}" if raw_score is not None else "N/A"
+        print(f"Restoring {target.name} (raw score: {raw_s} | yaw={yaw_ratio:.2f} | {pose_bin} | profile={is_profile})...", flush=True)
+        if is_profile and not getattr(args, "force_profile", False):
+            print("  [Profile Protection] Steep profile angle detected. 2D swapper locked out to prevent facial collapse. Use --force-profile to override.")
+            continue
 
-        res = restore_face(target, source_paths=restore_refs, swapper_weight=0.6)
+        res = restore_face(target, protect_profile=not getattr(args, "force_profile", False))
         if not res["success"]:
             print(f"  FAILED: {res.get('error')}")
             continue
@@ -168,6 +247,12 @@ def cmd_pose_refs(args) -> int:
     sheet = fetch_pose_refs(args.query, count=args.count)
     print(f"Pose references ready in: {sheet.parent if sheet.is_file() else sheet}")
     return 0
+
+
+async def cmd_replicate(args) -> int:
+    import replicate
+
+    return await replicate.run(args)
 
 
 async def cmd_check(args) -> int:
@@ -200,6 +285,20 @@ async def cmd_models(args) -> int:
 
 
 async def cmd_gen(args) -> int:
+    if args.scene_image:
+        # Describing a source photo in words and redrawing it is what made background, clothes and body drift.
+        # With a source photo the right tool is replicate (edit a crop, paste it back into the untouched original).
+        import argparse as _argparse
+
+        import replicate
+
+        print("NOTE: `gen --scene-image` now runs `replicate` (edit-in-place with paste-back). The prompt text is ignored because\n"
+              "the photo itself is the scene. For a from-scratch scene, run `gen` without --scene-image.")
+        ns = _argparse.Namespace(scene=args.scene_image, zone="auto", source="auto", glasses="same", look="any", expression="auto",
+                                 build="normal", count=args.count, max_attempts=max(6, args.count * 3),
+                                 force=False, model=args.model, verbose=args.verbose)
+        return await replicate.run(ns)
+
     config = load_config()
     refs_dir = get_refs_dir(config)
     cache_dir = ROOT / config.get("cache_dir", ".cache/refs")
@@ -211,15 +310,26 @@ async def cmd_gen(args) -> int:
     prompt_arg = Path(args.prompt)
     scene_text = prompt_arg.read_text(encoding="utf-8").strip() if prompt_arg.is_file() else args.prompt
     full_prompt = IDENTITY_LOCK_PATH.read_text(encoding="utf-8").strip() + "\n" + scene_text
+
+    from pose_refs import mask_head_from_scene
+
+    scene_headless = None
     if args.scene_image:
         full_prompt += SCENE_REF_NOTE
+        src_scene = Path(args.scene_image)
+        if "headless" in src_scene.name:
+            scene_headless = src_scene
+        else:
+            cached_headless = cache_dir / f"{src_scene.stem}_headless.jpg"
+            print(f"Processing scene reference to headless neutral: {src_scene.name} -> {cached_headless.name}...")
+            scene_headless = mask_head_from_scene(src_scene, cached_headless)
 
-    ref_paths = [prepare_ref(refs_dir / name, cache_dir) for name in config["refs"] if (refs_dir / name).exists() or (cache_dir / name).exists()]
+    ref_paths = get_generation_refs(config, refs_dir, cache_dir, scene_image_path=args.scene_image, prompt_text=scene_text)
     files = [str(p) for p in ref_paths]
-    if args.scene_image:
-        files.append(args.scene_image)
+    if scene_headless:
+        files.append(str(scene_headless))
 
-    print(f"Refs: {', '.join(p.name for p in ref_paths)}" + (" + scene image" if args.scene_image else ""))
+    print(f"Angle-routed refs ({len(ref_paths)}): {', '.join(p.name for p in ref_paths)}" + (f" + headless scene ({scene_headless.name})" if scene_headless else ""))
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_dir = out_root / f"{timestamp}_{slugify(scene_text)}"
@@ -229,7 +339,7 @@ async def cmd_gen(args) -> int:
         "timestamp": timestamp,
         "prompt": full_prompt,
         "refs": [p.name for p in ref_paths],
-        "scene_image": args.scene_image,
+        "scene_image": str(scene_headless) if scene_headless else args.scene_image,
         "model": model,
         "identity_threshold": threshold,
         "results": [],
@@ -295,6 +405,8 @@ async def cmd_gen(args) -> int:
                     face_info = analyze_face(saved_path)
                     is_profile = face_info.get("is_profile", False)
                     yaw_ratio = face_info.get("yaw_ratio", 1.0)
+                    pose_bin = face_info.get("pose_bin", "frontal")
+                    direction = face_info.get("direction", "Frontal")
                     raw_sharpness = face_info.get("sharpness", 0.0)
 
                     # Score raw image
@@ -308,13 +420,25 @@ async def cmd_gen(args) -> int:
                     final_path = saved_path
                     check_score = cand_eval["raw_score"]
 
-                    if cand_eval["raw_score"] is not None and cand_eval["raw_score"] >= threshold and not is_profile:
+                    if is_profile:
+                        # STRICT PROFILE PROTECTION: 2D frontal template swappers collapse at steep yaw (>45°).
+                        # Native Gemini generation (conditioned on headless scene + angle-matched profile refs)
+                        # preserves authentic skull width, nasal bridge, and curly hairline with zero affine distortion.
+                        cand_eval["restoration_skipped"] = "profile_protection"
+                        profile_thresh = 0.50
+                        if check_score is not None and check_score >= profile_thresh and raw_sharpness >= 200.0:
+                            cand_eval["status"] = "accepted"
+                            print(f"  [Profile Gate] Native profile generation ({pose_bin}, {direction}, yaw={yaw_ratio:.2f}) accepted natively (score={check_score:.3f} >= {profile_thresh:.2f}, sharp={raw_sharpness:.1f}). 2D swapper locked out.")
+                        else:
+                            cand_eval["status"] = "rejected"
+                            print(f"  [Profile Gate] Native profile generation fell below threshold ({check_score if check_score else 'N/A'} vs {profile_thresh:.2f} or low sharpness {raw_sharpness:.1f}).")
+                    elif cand_eval["raw_score"] is not None and cand_eval["raw_score"] >= threshold and raw_sharpness >= 300.0:
                         cand_eval["restoration_skipped"] = "native_accepted"
                         cand_eval["status"] = "accepted"
-                        print(f"  [Quality Gate] Native raw identity ({cand_eval['raw_score']:.3f} >= {threshold:.2f}) accepted natively.")
+                        print(f"  [Quality Gate] Native raw identity ({cand_eval['raw_score']:.3f} >= {threshold:.2f}, sharp={raw_sharpness:.1f}) accepted natively.")
                     elif not args.no_restore:
                         print(f"  Restoring face on {saved_path.name} via angle-routed FaceFusion...", flush=True)
-                        res = restore_face(saved_path)
+                        res = restore_face(saved_path, protect_profile=True)
                         if res["success"]:
                             restored_path = Path(res["output"])
                             rest_info = analyze_face(restored_path)
@@ -342,7 +466,7 @@ async def cmd_gen(args) -> int:
                                 else:
                                     cand_eval["status"] = "rejected"
                         else:
-                            print(f"  Restore failed: {res.get('error')}")
+                            print(f"  Restore skipped/failed: {res.get('error')}")
                             cand_eval["status"] = "accepted" if (cand_eval["raw_score"] and cand_eval["raw_score"] >= threshold) else "rejected"
                     else:
                         cand_eval["status"] = "accepted" if (cand_eval["raw_score"] and cand_eval["raw_score"] >= threshold) else "rejected"
@@ -401,6 +525,7 @@ def main() -> int:
 
     restore_p = sub.add_parser("restore", help="Restore face on target image(s) using FaceFusion + verify")
     restore_p.add_argument("images", nargs="+", help="Image path(s) to restore")
+    restore_p.add_argument("--force-profile", action="store_true", help="Force FaceFusion 2D swapper even on steep profile poses")
 
     pose_p = sub.add_parser("pose-refs", help="Search and download pose/model references + build contact sheet")
     pose_p.add_argument("--query", required=True, help="Search query (e.g. 'man sitting in convertible laughing')")
@@ -413,6 +538,19 @@ def main() -> int:
     gen.add_argument("--model", default=None, help="Model id override (defaults to facecard.json's \"model\")")
     gen.add_argument("--no-restore", action="store_true", help="Skip FaceFusion restoration and keep raw output")
 
+    rep = sub.add_parser("replicate", help="Put your identity into a source photo by editing a crop and pasting it back (nothing outside the zone changes)", parents=[common])
+    rep.add_argument("--scene", required=True, help="Source photo to replicate (full resolution)")
+    rep.add_argument("--zone", choices=["auto", "face", "head", "head+build"], default="auto", help="What to replace (auto: own photo -> face, someone else -> head; head+build is opt-in)")
+    rep.add_argument("--source", choices=["auto", "own", "foreign"], default="auto", help="Is the source photo of you? (auto: decided by identity score)")
+    rep.add_argument("--glasses", choices=["same", "yes", "no"], default="same", help="same: keep the glasses the source photo shows; yes: thin metal glasses; no: none")
+    rep.add_argument("--look", choices=["any", "curly", "short"], default="any", help="Hair when the head is replaced")
+    rep.add_argument("--expression", default="auto", help="auto: describe the source expression from landmarks; none: say nothing; or free text such as 'a broad smile with teeth showing'")
+    rep.add_argument("--build", choices=["normal", "strong"], default="normal", help="Wording of the physique edit for head+build (strong asks for visibly broader shoulders and arms)")
+    rep.add_argument("--count", type=int, default=2, help="How many candidates must PASS every check before stopping (best is kept)")
+    rep.add_argument("--max-attempts", type=int, default=6, dest="max_attempts", help="Ceiling on Gemini calls per photo while chasing --count passing candidates")
+    rep.add_argument("--force", action="store_true", help="Run even when the source is already you (own-photo benchmark)")
+    rep.add_argument("--model", default=None, help="Model id override")
+
     args = parser.parse_args()
     args.verbose = getattr(args, "verbose", False)
     sync_handlers = {
@@ -423,7 +561,7 @@ def main() -> int:
     }
     if args.command in sync_handlers:
         return sync_handlers[args.command](args)
-    async_handlers = {"check": cmd_check, "models": cmd_models, "gen": cmd_gen}
+    async_handlers = {"check": cmd_check, "models": cmd_models, "gen": cmd_gen, "replicate": cmd_replicate}
     return asyncio.run(async_handlers[args.command](args))
 
 

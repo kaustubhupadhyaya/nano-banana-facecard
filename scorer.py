@@ -35,9 +35,9 @@ class NoFaceError(RuntimeError):
     pass
 
 
-def analyze_face(image_path: str | Path) -> dict:
+def analyze_face(image_path: str | Path | np.ndarray) -> dict:
     """Analyze face geometry, yaw ratio, and sharpness to identify profiles and blurriness."""
-    img = cv2.imread(str(image_path))
+    img = image_path if isinstance(image_path, np.ndarray) else cv2.imread(str(image_path))
     if img is None:
         raise FileNotFoundError(f"Could not read image: {image_path}")
 
@@ -50,6 +50,9 @@ def analyze_face(image_path: str | Path) -> dict:
             "detected": False,
             "box": None,
             "yaw_ratio": 1.0,
+            "nose_norm": 0.0,
+            "direction": "Frontal",
+            "pose_bin": "frontal",
             "is_profile": False,
             "sharpness": 0.0,
         }
@@ -68,16 +71,45 @@ def analyze_face(image_path: str | Path) -> dict:
 
     landmarks = f[4:14].reshape(5, 2)
     le, re, nose = landmarks[0], landmarks[1], landmarks[2]
+
+    eye_mid = (le + re) / 2.0
+    eye_dist = float(np.linalg.norm(re - le))
+    nose_norm = float((nose[0] - eye_mid[0]) / (eye_dist + 1e-5))
+
     d_l = float(np.linalg.norm(le - nose))
     d_r = float(np.linalg.norm(re - nose))
     yaw_ratio = float(d_l / (d_r + 1e-5))
-    is_profile = yaw_ratio > 1.35 or yaw_ratio < 0.75
+
+    # Unified angle classification matching restore.py
+    if abs(nose_norm) < 0.12 and 0.80 <= yaw_ratio <= 1.25:
+        pose_bin = "frontal"
+        direction = "Frontal"
+        is_profile = False
+    elif nose_norm < -0.12 or yaw_ratio < 0.80:
+        direction = "Left"
+        if nose_norm < -0.25 or yaw_ratio < 0.65:
+            pose_bin = "profile_left"
+            is_profile = True
+        else:
+            pose_bin = "three_quarter_left"
+            is_profile = False
+    else:
+        direction = "Right"
+        if nose_norm > 0.25 or yaw_ratio > 1.45:
+            pose_bin = "profile_right"
+            is_profile = True
+        else:
+            pose_bin = "three_quarter_right"
+            is_profile = False
 
     return {
         "detected": True,
         "box": (fx, fy, fw, fh),
         "landmarks": landmarks.tolist(),
         "yaw_ratio": round(yaw_ratio, 2),
+        "nose_norm": round(nose_norm, 2),
+        "direction": direction,
+        "pose_bin": pose_bin,
         "is_profile": is_profile,
         "sharpness": round(sharpness, 1),
     }
@@ -115,21 +147,76 @@ class ArcFaceScorer:
             raise NoFaceError("Could not estimate alignment transform")
         return cv2.warpAffine(img, transform, (112, 112), borderValue=0.0)
 
-    def embed(self, image_path: str | Path) -> np.ndarray:
-        img = cv2.imread(str(image_path))
-        if img is None:
-            raise FileNotFoundError(f"Could not read image: {image_path}")
-        face = self._detect(img)
-        aligned = self._align(img, face)
+    def _embed_aligned(self, aligned: np.ndarray) -> np.ndarray:
         blob = cv2.dnn.blobFromImage(aligned, 1.0 / 127.5, (112, 112), (127.5, 127.5, 127.5), swapRB=True)
         emb = self.session.run(None, {self.input_name: blob})[0][0]
         return emb / np.linalg.norm(emb)
 
+    def embed_array(self, img: np.ndarray) -> np.ndarray:
+        """Embedding with YuNet 5-point alignment (unreliable beyond ~30 degrees of yaw)."""
+        return self._embed_aligned(self._align(img, self._detect(img)))
+
+    def embed_array_fan(self, img: np.ndarray, box: tuple[int, int, int, int] | None = None) -> np.ndarray:
+        """Embedding with 2dfan4 68-landmark alignment (built for large poses). `box` skips detection when known."""
+        import landmarks
+
+        box = tuple(int(v) for v in box) if box is not None else tuple(int(v) for v in self._detect(img)[:4])
+        # searched, not plain: a failed landmark fit produces a skewed 112x112 crop and therefore a meaningless embedding
+        lm, _ = landmarks.landmarks68_searched(img, box)
+        return self._embed_aligned(landmarks.align_arcface(img, lm))
+
+    def embed(self, image_path: str | Path) -> np.ndarray:
+        img = cv2.imread(str(image_path))
+        if img is None:
+            raise FileNotFoundError(f"Could not read image: {image_path}")
+        return self.embed_array(img)
+
+    def embed_head(self, image: str | Path | np.ndarray, min_face: int = 320, align: str = "fan",
+                   box: tuple[int, int, int, int] | None = None) -> np.ndarray:
+        """Embed the largest face from a tight head crop upscaled so the face is at least `min_face` px wide.
+
+        Full-body frames leave faces ~50 px wide, which the aligner and embedder handle poorly. Cropping first and
+        upscaling gives the detector and the 112x112 alignment warp a stable input. align="fan" uses 2dfan4
+        landmarks and falls back to YuNet if they cannot be computed.
+        """
+        img = cv2.imread(str(image)) if not isinstance(image, np.ndarray) else image
+        if img is None:
+            raise FileNotFoundError(f"Could not read image: {image}")
+        fx, fy, fw, fh = map(int, box) if box is not None else map(int, self._detect(img)[:4])
+        fs = max(fw, fh)
+        side = int(fs * 2.4)
+        cx, cy = fx + fw // 2, fy + fh // 2
+        m = np.float32([[1, 0, -(cx - side // 2)], [0, 1, -(cy - side // 2)]])
+        crop = cv2.warpAffine(img, m, (side, side), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT_101)
+        k = 1.0
+        if fs < min_face:
+            k = min_face / fs
+            crop = cv2.resize(crop, None, fx=k, fy=k, interpolation=cv2.INTER_LANCZOS4)
+        box_in_crop = (int((side - fw) / 2 * k), int((side - fh) / 2 * k), int(fw * k), int(fh * k)) if box is not None else None
+        try:
+            return self.embed_array_fan(crop, box_in_crop) if align == "fan" else self.embed_array(crop)
+        except (NoFaceError, ValueError, FileNotFoundError):
+            return self.embed_array(img)  # raises NoFaceError when the stricter embedder-side detector finds nothing
+
     def embed_many(self, paths: list[str | Path]) -> dict[str, np.ndarray | None]:
+        cache_dir = Path(__file__).parent / ".cache" / "embeddings"
+        cache_dir.mkdir(parents=True, exist_ok=True)
         result = {}
         for p in paths:
+            p_obj = Path(p)
+            mtime = int(p_obj.stat().st_mtime) if p_obj.exists() else 0
+            cached_file = cache_dir / f"{p_obj.stem}_{mtime}.npy"
+            if cached_file.exists():
+                try:
+                    result[str(p)] = np.load(str(cached_file))
+                    continue
+                except Exception:
+                    pass
             try:
-                result[str(p)] = self.embed(p)
+                emb = self.embed(p)
+                result[str(p)] = emb
+                if emb is not None:
+                    np.save(str(cached_file), emb)
             except (NoFaceError, FileNotFoundError) as e:
                 print(f"  [skip] {p}: {e}")
                 result[str(p)] = None
@@ -239,10 +326,13 @@ def score_images(image_paths: list[Path], ref_paths: list[Path]) -> None:
 
         profile_tag = "PROFILE" if info.get("is_profile") else "FRONTAL/3/4"
         yaw_r = info.get("yaw_ratio", 1.0)
+        norm_val = info.get("nose_norm", 0.0)
+        p_bin = info.get("pose_bin", "frontal")
+        direction = info.get("direction", "Frontal")
         sharp = info.get("sharpness", 0.0)
 
         print(f"{img_path.name}:")
-        print(f"  Pose: {profile_tag} (yaw_ratio={yaw_r:.2f}) | Sharpness: {sharp:.1f}")
+        print(f"  Pose: {p_bin} ({direction}, yaw={yaw_r:.2f}, norm={norm_val:+.2f}) | Sharpness: {sharp:.1f} | [{profile_tag}]")
         print(f"  max_ref_sim={max_sim:.3f} (top: {per_ref[0][0]}) | mean={mean_sim:.3f} | centroid={centroid_sim:.3f}")
         if len(per_ref) > 1:
             top_3 = ", ".join(f"{name}:{sim:.3f}" for name, sim in per_ref[:3])

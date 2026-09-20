@@ -7,11 +7,19 @@
     "IMG_6859.jpg",
     "IMG_6861.jpg",
     "IMG_6862.jpg",
-    "IMG_6862_mirrored.jpg",
     "IMG_6863.jpg",
     "IMG_6864.jpg",
     "IMG_6868.jpg",
     "IMG_6869.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg",
+    "IMG_6923 Copy.JPG",
+    "IMG_5850_fav_34left.jpg",
+    "IMG_4861_fav_right.jpg"
+  ],
+  "restore_refs": [
+    "IMG_6858.jpg",
+    "IMG_6862.jpg",
     "IMG_6873.jpg",
     "IMG_6875.jpg",
     "IMG_6923 Copy.JPG"
@@ -25,6 +33,7 @@
       "IMG_6923 Copy.JPG"
     ],
     "three_quarter_left": [
+      "IMG_5850_fav_34left.jpg",
       "IMG_6868.jpg"
     ],
     "profile_left": [
@@ -36,11 +45,71 @@
       "IMG_6869.jpg"
     ],
     "profile_right": [
-      "IMG_6862_mirrored.jpg"
+      "IMG_4861_fav_right.jpg",
+      "IMG_6864.jpg"
     ]
   },
+  "anchors": [
+    "IMG_6873.jpg",
+    "IMG_6858.jpg"
+  ],
+  "build_refs": [
+    "IMG_6923 Copy.JPG",
+    "IMG_6858.jpg",
+    "IMG_6864.jpg",
+    "IMG_6862.jpg"
+  ],
   "out_dir": "outputs",
   "cache_dir": ".cache/refs",
   "model": "e6fa609c3fa255c0",
-  "identity_threshold": 0.60
+  "identity_threshold": 0.6,
+  "vision_model": "56fdd199312815e2",
+  "attractiveness_note": "Render him at his best, as he looks in the reference photos: a defined jawline, calm confident eyes, and a relaxed closed-lip smile or a calm focused expression. Never tense, awkward, forced, smirking or caught mid-motion.",
+  "approved_outputs": {
+    "_note": "Outputs the user reviewed on 2026-09-20. 'perfect' means keep behaving like this; the notes say what each proves. Identity score alone does not capture expression quality.",
+    "perfect": {
+      "20260920_034849_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round 2: nearly right",
+      "20260920_061004_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round 3: perfect",
+      "20260920_060631_replicate_google-4__IMG_5850_Original/c1_head_raw.jpg": "stained glass, face and reflection in ONE Gemini pass: perfect; proves reflections belong in the same call",
+      "20260920_061432_replicate_google-2__IMG_3943/c1_head_raw.jpg": "table tennis: perfectly nailed a hard head angle (needs attractiveness); proves a re-framed return is a registration problem, not a bad render",
+      "20260920_060329_replicate_google-1__IMG_5549/best.jpg": "kayak: perfect face emotion (calm closed-lip smile) but light off (dE 16.5); proves the expression to aim for",
+      "20260920_150905_replicate_google-1__IMG_5549/c2_head_raw.jpg": "kayak, round-4 pipeline attempt 2: user said 'this is good'. Pipeline metrics for it: score 0.592, gt_sim 0.746, light dE 4.0, drift SSIM 0.987, AI judge all clear. Its siblings in the same run: attempt 1 (light dE 23, vest redrawn) rejected correctly; attempts 3 and 4 rejected by glasses/light gates",
+      "20260920_150905_replicate_google-1__IMG_5549/best.jpg": "kayak, round-4 pipeline pick (attempt 6, 2 wins in the AI expression comparison): the user said perfect on 2026-09-20 when asked to compare it with attempt 2 (c2 above, also good); no preference between the two was stated, so both are kept. Pipeline: identity 0.598, similarity 0.682, light dE 7.7, drift SSIM 0.966",
+      "20260920_153829_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky, round-4 pipeline pick (attempt 3, 2 wins in the AI expression comparison, a brighter face, light dE 9.9): the user said perfect on 2026-09-20 when asked to compare it with attempt 1 (cand1.png, subtler, dE 1.1); no preference stated, both kept. Pipeline: identity 0.556, similarity 0.507, drift SSIM 0.997"
+    },
+    "bad": {
+      "20260920_064200_replicate_google-1__IMG_5549/best.jpg": "kayak final round 3: light good (dE 7.1) but awkward, tense expression",
+      "20260920_064235_replicate_pinterest_target/best.jpg": "Pinterest: head and hair too big",
+      "20260920_054417_replicate_pinterest_target/best.jpg": "Pinterest round 2: head bad, two faces overlapping",
+      "20260920_053307_replicate_google-1__IMG_5549/best.jpg": "kayak round 2: attractive but not him, ghost outlines ('three faces')",
+      "20260920_053504_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "rocky round 2: bad",
+      "20260920_063313_replicate_google-4__IMG_5850_Original/c1_copy1_raw.jpg": "separate reflection pass: perfect as a reflection but does not mirror him, different expression"
+    },
+    "source_defects_not_generated": {
+      "20260920_064633_replicate_google-4__IMG_5850_Original/c1_head_send.png": "user reported a double chin; this file is the crop SENT to Gemini (byte-identical to the source), so the fold is in the original photo, not a generation"
+    },
+    "needs_fix": {
+      "20260920_152548_replicate_pinterest_target/best.jpg": "Pinterest, round-4 pipeline attempt 1 (identity 0.587, head 0.968 of the source, light dE 15.3 which is not gated for foreign photos, judge clear): user accepted it EXCEPT the hair. Only the front hair is his; from the middle back and along the sides it is still the reference model's. Cause found: for a foreign photo scene_block listed the source man's hair under 'must stay exactly as they are' while edit_prompt asked for his hair with the source's outline, so the two instructions contradicted. Fix pending the user's approval"
+    },
+    "promising": {
+      "20260920_151934_replicate_google-4__IMG_5850_Original/c1_head_raw.jpg": "stained glass, round-4 pipeline attempt 1 (face AND reflection in one crop, one call): user said 'very promising'. Pipeline: verdict UNCERTAIN, identity 0.447 (profile faces score low), similarity to his real face 0.641, face light dE 2.1, drift SSIM 0.972, judge clear except a WARNING that the reflection does not clearly match the re-rendered real face"
+    }
+  },
+  "identity_thresholds": {
+    "hard_reject": 0.2,
+    "accept": 0.52,
+    "own_min": 0.4
+  },
+  "gates": {
+    "light_de_max": 14.0,
+    "size_own": [
+      0.85,
+      1.15
+    ],
+    "size_foreign": [
+      0.95,
+      1.04
+    ]
+  },
+  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing."
 }
