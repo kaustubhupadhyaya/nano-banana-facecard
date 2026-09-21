@@ -94,3 +94,27 @@ Rounds: 1 first `replicate` prototype; 3 the review of 14 outputs after the roun
 
 Code state: commit `20a62ef` (references named as identity only for another man's photo, the reference's own expression, a light limit of 20, size floor 0.94). Open problems from the reviews above: a better face is never rewarded and an unchanged look-alike is preferred (selection ends in `gt_sim`); a good face with wrong framing is rejected; the own-photo light and size gates miss a face brighter than its neck (car2); the sparkle watermark leaks when a return needed re-alignment. The plan that addresses them is in `SKILL.md` (Round 7) once applied.
 
+## 6. Round 7 verdict matrix (2026-09-21): the reward-better-face pipeline on the ten feedback photos
+
+a = attractiveness, i = identity; P = improved, N = degraded, O = no change (the user's own scale). Code: commit of round 7 (unchanged gate, neck gap, whole-face pairwise, rescue). Evidence in `.cache/feedback/<run>/`, the two ideals also in `.cache/feedback/ideal/`.
+
+| # | File | What it actually is | a | i | Complete picture? | Measured | What it teaches |
+|---|---|---|---|---|---|---|---|
+| 1 | night out `c2_head_raw.jpg` (run 042258) | raw return of attempt 2, own mode | P | P | no, headshot; rejected: size 0.935, moved 0.134, judge angle changed; 2 rescues failed (one unchanged, one copied the reference's pose) | pool identity 0.784 | the best face was found on attempt 2 and never made it into the photo |
+| 2 | nerd `best.png` (run 042928, attempt 1) | pasted composite | N | P | yes | face L 52.9 vs source 43.7; neck L 43.8 vs source 16.9 (+27); yaw 9 degrees off; light dE 8.9 and neck gap -18.5 passed | identity is there; the head-and-neck lighting degrades attractiveness and no gate saw it |
+| 3 | beach `c1_head_raw.jpg` (run 043251) | raw return of attempt 1, re-framed by Gemini (scale 0.74, shift 0.26) | P | P | no, headshot; alignment failed so it was never measured or kept | pool identity 0.557 (measured afterwards) | 'wins in all: attraction, identity, pose'; discarded before anyone looked at the face |
+| 4 | car2 `c1_head_raw.jpg` (run 043841) | raw return of attempt 1, aligned fine | P | P | no; the composite was rejected by the AI 'not better than the source' comparison | pool identity 0.561, size 1.0, neck gap 2.1 | the general AI comparison was wrong against the user's eye; it must not reject |
+| 5 | mountain `c1_head_send.png` (run 044504) | the crop SENT to Gemini, byte-identical to the source (the run died on the quota) | O | P | - | - | the user rated the source crop; 'no change' is exactly right |
+| 6 / 9 | Pinterest `best.jpg` (run 064221, attempt 4) | composite, foreign mode, a RESCUE of attempt 3 | P | P | yes: 'more than perfect', the ideal | identity 0.506, size 0.981, shift 0.115, light dE 5.7, neck gap 4.9, pose within 2.4 degrees, expression same | face first, then the same face re-rendered in the right frame |
+| 7 | table tennis `c1_head_raw.jpg` (run 070955) | raw return of attempt 1, re-framed (scale 1.31, shift 0.36), never measured | N | P | no, headshot | pool identity 0.595 vs source crop 0.488; classified as another man's photo (109 px face), hair and expression replaced | classification by the number misfires on a tiny face |
+| 8 | stained glass `best.jpg` (run 070221, attempt 4) | composite, own mode, normal path | P | P | yes, perfect | identity 0.488, gt_sim 0.762, size 1.009, light dE 1.0 | the own path with the attractiveness policy works on a real photo |
+| 9 | `D:\Downloads\AI me\beach.jpg` | gen output `20260917_144731...` v1_0.jpg (md5 match): from scratch, raw, no restore | P | P | yes, ideal | not a replicate run | 9 whole references, identity-lock text, scene text with pose, expression, light direction and lens |
+
+No verdict was given on kayak (064910), rocky (065438), mountain `best.png` (063352), or on the candidates rejected only for size (beach 1.059, car2 1.033, rocky 0.925-0.939).
+
+**How the two ideals were made.** Pinterest 064221 attempt 4: attempt 3 rendered a good face at size 0.923; its raw return went back as one more reference with 'render that same face, keep the head at the position, size, turn and tilt of the last image'. beach.jpg: one `gen` call on 2026-09-17 with 9 whole reference photos (all angles), the identity-lock text and a scene text that states the pose, the expression, the light direction and the lens; nothing cropped, pasted or measured.
+
+**Preserve:** the foreign path as it made 064221; the own path as it made 070221; whole-crop paste with zero change outside; the unchanged gate; pairwise in both orders; the identity floor as a floor only.
+
+**Improve (round 8):** rescue from alignment failures too; the rescue reference is a head crop of the raw face; the AI vs-source comparison ranks but does not reject; two-sided neck lightness checks; references sent the way beach.jpg was made; gray-zone classification asked of the AI.
+
