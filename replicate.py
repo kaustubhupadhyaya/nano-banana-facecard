@@ -78,7 +78,9 @@ LIGHT_DE_MAX = 14.0
 # fish for a render as dark and warm as the photo.
 LIGHT_DE_MAX_FOREIGN = 20.0
 ANCHOR_TURN_MAX = 65.0  # when Gemini reads the head as turned this many degrees or more, no frontal anchor references are sent
-SIZE_MIN, SIZE_MAX = 0.85, 1.15   # output head width over source head width (own photos)
+# Own photos: the limit was 0.85-1.15 until car2 (own mode, size 1.04, face 12 lightness units brighter than the source) was called "not proportional to
+# the rest of the body and scene"; every output the user approved measures 0.959-1.018. PROVISIONAL, from that review.
+SIZE_MIN, SIZE_MAX = 0.94, 1.03   # output head width over source head width (own photos)
 # Foreign photos: the user called a head at size_ratio 1.054 (run 064235) "too big". PROVISIONAL, from that one review; Gemini returns heads
 # anywhere from 0.87 to 1.21 of the source, so this only makes the retries fish for a matching size. A text judge cannot see head size
 # (measured 2026-09-20: it read the too-big head as smaller, 43% vs 45% of shoulder width), so this is a geometric gate.
@@ -94,6 +96,15 @@ SPARKLE_OFFSET, SPARKLE_RADIUS = 120.0, 52.0
 # drift inside the crop but away from the heads (clothes and background must not be redrawn). Measured 2026-09-20:
 # good returns 1.3-3.7 mean abs diff / SSIM 0.95-0.996; a return with the wrong framing 54.5 / 0.35.
 DRIFT_MAD_MAX, DRIFT_SSIM_MIN = 10.0, 0.80
+# Round 7 (2026-09-21), all PROVISIONAL, each from the user's reviews (FEEDBACK_LOG.md):
+# unchanged: the face similarity to the SOURCE face (gt_sim) of everything the user approved is 0.23-0.75, of everything the user called "as it is" 0.93-0.99.
+UNCHANGED_GT_SIM = 0.90
+# neck gap: (face L minus neck L) of the output minus the same in the source, in Lab lightness. Approved outputs stay within +6.5; car2, called out of
+# proportion with the scene, is +13.7. It is the measurable form of a head that looks pasted in.
+NECK_GAP_MAX = 10.0
+RESCUE_ATTEMPTS = 2      # extra attempts that reuse a good face which failed only the framing gates (night out, 2026-09-21)
+GEOMETRY_PROBLEMS = ("head size changed", "head moved", "were redrawn", "head angle changed", "clothes, body, hands or background changed",
+                     "a seam or cut-out edge")
 
 
 # ---------------------------------------------------------------------------------------------- helpers
@@ -109,7 +120,10 @@ def gate_values(config: dict) -> dict:
     return {"light_de_max": float(g.get("light_de_max", LIGHT_DE_MAX)),
             "size_own": tuple(g.get("size_own", (SIZE_MIN, SIZE_MAX))),
             "size_foreign": tuple(g.get("size_foreign", (SIZE_MIN_FOREIGN, SIZE_MAX_FOREIGN))),
-            "light_de_max_foreign": float(g.get("light_de_max_foreign", LIGHT_DE_MAX_FOREIGN))}
+            "light_de_max_foreign": float(g.get("light_de_max_foreign", LIGHT_DE_MAX_FOREIGN)),
+            "unchanged_gt_sim": float(g.get("unchanged_gt_sim", UNCHANGED_GT_SIM)),
+            "neck_gap_max": float(g.get("neck_gap_max", NECK_GAP_MAX)),
+            "rescue_attempts": int(g.get("rescue_attempts", RESCUE_ATTEMPTS))}
 
 
 def thresholds(config: dict) -> dict:
@@ -234,12 +248,24 @@ JUDGE_PROMPT = (
     "reflection\n"
     "notes: one short sentence naming the single biggest problem, or 'none'")
 
-# Pairwise expression comparison. Measured 2026-09-20: asked to RATE one image the judge gave the user's "awkward" and "perfect emotion"
-# kayak outputs the same 6/10; asked to COMPARE the two, in both orders, it picked the one the user preferred 4 of 4 times.
-EXPRESSION_PAIR_PROMPT = (
-    "Both images show the same man in the same photo, but with two different renderings of his face. Which image shows the more "
-    "relaxed, natural, confident and attractive facial expression, like a flattering candid photo? Ignore lighting and sharpness; judge "
-    "only the expression (mouth, eyes, brows, tension). Reply with ONLY a JSON object: {\"better\": 1 or 2, \"why\": one short sentence}")
+# Pairwise comparison of two renderings of the same photo. Measured 2026-09-20: asked to RATE one image the judge gave the user's "awkward" and
+# "perfect emotion" kayak outputs the same 6/10; asked to COMPARE the two, in both orders, it picked the one the user preferred 4 of 4 times.
+# Round 7 widens the question from the expression to the whole face, with the user's own criteria from every review (FEEDBACK_LOG.md).
+FACE_PAIR_PROMPT = (
+    "Both images are the same photo of the same man, with two different renderings of his face and head. Which image is the better photograph of "
+    "him: the more attractive AND the more natural one, like a flattering candid photo that a real camera took? Judge: calm confident eyes; a "
+    "defined jawline; a relaxed closed-lip smile or a slight smile with soft eyes, never tense, awkward, forced or smirking; natural full hair; "
+    "skin lit exactly like his neck, hands and the rest of the picture (not brighter, paler or cleaner than the scene); a head and face in "
+    "proportion with his body; and no sign that the head was pasted in. Reply with ONLY a JSON object: "
+    "{\"better\": 1 or 2, \"why\": one short sentence}")
+
+# The same question about the FACE alone. Used to decide whether a return whose framing failed still carries a face worth keeping: measured 2026-09-21,
+# the general question preferred the source over the night-out return the user liked, because it also weighs head angle, posture and blending.
+FACE_ONLY_PAIR_PROMPT = (
+    "Both images are the same photo of the same man, with two different renderings of his face and hair. Ignore the head angle, the posture, the "
+    "framing, the size of the head and the background. Judge only the face and hair: which image shows the more attractive AND more natural face, "
+    "with calm confident eyes, a defined jawline, a relaxed slight smile or calm expression (never tense, awkward, forced or smirking), natural skin "
+    "and natural full hair? Reply with ONLY a JSON object: {\"better\": 1 or 2, \"why\": one short sentence}")
 
 
 def parse_json_reply(text: str) -> dict | None:
@@ -300,7 +326,7 @@ def expression_rule(expression: str, attractiveness: str, scene: dict | None) ->
 
 
 def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | None, expression: str,
-                attractiveness: str, retry_note: str | None = None, reflection: bool = False) -> str:
+                attractiveness: str, retry_note: str | None = None, reflection: bool = False, rescue: bool = False) -> str:
     what = "face" if zone == "face" else "head"
     if zone == "face":
         hair = " Keep his hair exactly as it is in the last image, the same size and shape."
@@ -314,7 +340,10 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
                 "sides. None of the hair of the man in the last image is kept.")
     # Another man's photo: the references leaked their exposure into the render (face lightness 57-65 against the photo's 37, measured 2026-09-20; the prompt
     # used to say "skin tone exactly as in the reference photos"), so they are named as the source of who he is only. His own photo keeps the original wording.
-    ident = ("lips, skin tone and beard exactly as in the reference photos." if zone == "face" else
+    # His own or look-alike photo (zone face): the source face already resembles him, and Gemini returned it as it was (gt_sim 0.93-0.99, 2026-09-21),
+    # so the prompt says it is only a look-alike to be replaced by the real face.
+    ident = ("lips, skin tone and beard exactly as in the reference photos. The man in the last image is only a look-alike: do not keep his face, "
+             "render this man's own face from the reference photos in its place." if zone == "face" else
              "lips, natural complexion and beard as in the reference photos. Use the reference photos only for who he is: ignore their lighting, "
              "exposure, colour cast and head angle; those come from the last image.")
     gl = {"same": " If the man in the last image wears glasses, he keeps wearing the same glasses.",
@@ -326,6 +355,9 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
                 "same expression as his real face, as a reflection: keep its softness, its colour cast and its partial transparency, and "
                 "keep it consistent with the man himself.")
     retry = (f"\n\nA previous attempt at this edit had these problems, so avoid them: {retry_note}" if retry_note else "")
+    rescue_txt = ("\n\nThe image just before the last one is an earlier attempt at this edit. His face, hair and expression in it are exactly right, but its "
+                  "head is at the wrong position or size. Render that same face, hair and expression, but keep the head at exactly the position, size, "
+                  "turn and tilt of the last image, and leave everything else in the last image untouched.") if rescue else ""
     return (f"The first {n_refs} images are photos of the same man: the identity reference. The last image is the photo to edit.\n\n"
             f"Edit the last image so that the man in it has this exact man's {what}: his face structure, jawline, nose, eyes, brows, "
             f"{ident}{hair}{gl}{expression_rule(expression, attractiveness, scene)}"
@@ -334,7 +366,7 @@ def edit_prompt(n_refs: int, zone: str, glasses: str, look: str, scene: dict | N
             "size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. "
             "The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it "
             "belongs in the picture like a real phone photo and not a studio portrait.\n"
-            f"Keep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.{refl}{retry}")
+            f"Keep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.{refl}{retry}{rescue_txt}")
 
 
 def build_prompt(n_refs: int, strength: str = "normal") -> str:
@@ -445,10 +477,10 @@ def person_rect(shape: tuple[int, ...], box: tuple[int, int, int, int]) -> compo
 
 
 # ---------------------------------------------------------------------------------------------- one edit stage
-def align_to_ring(crop: np.ndarray, edit: np.ndarray) -> tuple[np.ndarray, float, dict, str, np.ndarray | None]:
+def align_to_ring(crop: np.ndarray, edit: np.ndarray) -> tuple[np.ndarray, float, dict, str, np.ndarray | None, np.ndarray | None]:
     """Fit the returned crop to the source crop using only the outer ring, where nothing was supposed to change.
 
-    Returns (edit at crop size, ECC correlation, warp magnitude, how, validity mask or None). The warp is applied only
+    Returns (edit at crop size, ECC correlation, warp magnitude, how, validity mask or None, warp matrix or None). The warp is applied only
     when it is measurably needed; otherwise the plain resize is used, so no resampling softness is added for nothing.
     When a warp is applied, the validity mask marks the pixels it could actually fill.
     """
@@ -460,10 +492,10 @@ def align_to_ring(crop: np.ndarray, edit: np.ndarray) -> tuple[np.ndarray, float
     mag = composite.warp_magnitude(warp, (w, h))
     plain = cv2.resize(edit, (w, h), interpolation=cv2.INTER_CUBIC if edit.shape[0] < h else cv2.INTER_AREA)
     if cc > 0 and abs(mag["scale"] - 1) < 0.004 and mag["shift_frac"] < 0.002:
-        return plain, cc, mag, "resize only", None
+        return plain, cc, mag, "resize only", None, None
     valid = cv2.warpAffine(np.full((h, w), 255, np.uint8), warp, (w, h), flags=cv2.INTER_NEAREST | cv2.WARP_INVERSE_MAP,
                            borderMode=cv2.BORDER_CONSTANT, borderValue=0)
-    return aligned, cc, mag, "ECC on the border ring", valid
+    return aligned, cc, mag, "ECC on the border ring", valid, warp
 
 
 async def edit_stage(client, model, log: RunLog, run_dir: Path, tag: str, base: np.ndarray, rect: composite.Rect, prompt: str,
@@ -481,13 +513,19 @@ async def edit_stage(client, model, log: RunLog, run_dir: Path, tag: str, base: 
     if dev > ASPECT_TOL:
         meta["failed"] = f"Gemini returned a {ew}x{eh} image for a {w}x{h} crop (different aspect ratio)"
         return base, None, meta
-    aligned, cc, mag, how, valid = align_to_ring(crop, edit)
+    aligned, cc, mag, how, valid, warp = align_to_ring(crop, edit)
     meta.update({"ecc": round(cc, 4), "warp": mag, "aligned_by": how})
     if cc < ECC_FAIL or abs(mag["scale"] - 1) > ALIGN_MAX_SCALE or mag["shift_frac"] > ALIGN_MAX_SHIFT:
         meta["failed"] = f"returned crop does not line up with the source (ecc {cc:.3f}, warp {mag})"
         return base, None, meta
     sx, sy = w / ew, h / eh
-    holes = [((ew - SPARKLE_OFFSET) * sx, (eh - SPARKLE_OFFSET) * sy, SPARKLE_RADIUS * sx)]
+    hx, hy, hr = (ew - SPARKLE_OFFSET) * sx, (eh - SPARKLE_OFFSET) * sy, SPARKLE_RADIUS * sx
+    if warp is not None:
+        # The aligned return was warped, so the watermark moved with it (night out, 2026-09-21: a 3 percent shift let the star leak into the paste).
+        # The warp maps aligned coordinates to the resized return (cv2.WARP_INVERSE_MAP), so the star's place in the aligned image is the inverse.
+        hx, hy = (cv2.invertAffineTransform(warp) @ np.array([hx, hy, 1.0])).tolist()
+        hr = hr / max(0.5, mag["scale"]) * 1.15
+    holes = [(hx, hy, hr)]
     out, zone = composite.paste_rect_soft(base, aligned, rect, BORDER_FRAC, holes, valid)
     return out, zone, meta
 
@@ -520,6 +558,23 @@ def physique_report(src: np.ndarray, out: np.ndarray, src_box: tuple[int, int, i
 
 
 # ---------------------------------------------------------------------------------------------- verdict
+def face_neck_gap(img: np.ndarray, box) -> float | None:
+    """Lab lightness of the face skin minus that of the neck skin inside the same image (BiSeNet masks, eroded), or None when either
+    mask is too small. A head that was rendered brighter than its own neck reads as pasted in; the source's own gap is the baseline."""
+    try:
+        parts = segment.head_parts(img, tuple(int(v) for v in box))
+    except Exception:
+        return None
+    lab = cv2.cvtColor(img.astype(np.float32) / 255.0, cv2.COLOR_BGR2LAB)
+    lightness = {}
+    for name, key in (("face", "skin"), ("neck", "neck_b")):
+        mask = cv2.erode((parts[key] > 0).astype(np.uint8), np.ones((7, 7), np.uint8)) > 0
+        if int(mask.sum()) < 150:
+            return None
+        lightness[name] = float(lab[mask][:, 0].mean())
+    return lightness["face"] - lightness["neck"]
+
+
 def turn_degrees(scene: dict | None) -> float | None:
     """The head turn, in degrees, as Gemini read it (the largest number in its description; 'profile' alone counts as 80)."""
     txt = str((scene or {}).get("head_turn") or "")
@@ -536,6 +591,15 @@ def retry_note_from(problems: list[str], judge: dict | None) -> str | None:
         low = p.lower()
         if "head angle" in low:
             bits.append("his head was turned more toward the camera than in the last image; keep it turned exactly as it is there")
+        elif "returned unchanged" in low:
+            bits.append("the man in the last image only resembles him: replace his whole face with the real man's from the reference photos, and keep "
+                        "only the pose, framing and light of the last image")
+        elif "not better than the source" in low:
+            bits.append("the previous face was no improvement on the last image; render him at his best: calm confident eyes, a defined jawline, a "
+                        "relaxed natural expression, full natural hair")
+        elif "brighter than the neck" in low:
+            bits.append("his face came out brighter than his neck; face and neck have the same skin brightness as in the last image, lit like the "
+                        "rest of the picture")
         elif "expression differs" in low:
             bits.append("his expression did not match the last image; copy that expression exactly, the same mouth, eyes and brows")
         elif "lit differently" in low or "lighting" in low:
@@ -590,8 +654,20 @@ def judge_failures(judge: dict | None, expression_must_match: bool = False) -> t
 
 
 # ---------------------------------------------------------------------------------------------- main
-async def rank_by_expression(client, models: list[str | None], run_dir: Path, cands: list[dict], log: RunLog) -> dict[int, float]:
-    """Score the passing candidates by the AI's pairwise choice of the better expression (wins per attempt index).
+async def face_pair(client, models: list[str | None], file_a: Path, file_b: Path, log: RunLog, prompt: str | None = None) -> tuple[str, list]:
+    """The AI's pairwise choice between two renderings, asked in BOTH orders so position bias cancels: returns ("a", "b" or "tie", the reasons).
+    A split answer, or no answer, is a tie."""
+    r1 = await gemini_text(client, models, prompt or FACE_PAIR_PROMPT, [file_a, file_b], log, "pair")
+    r2 = await gemini_text(client, models, prompt or FACE_PAIR_PROMPT, [file_b, file_a], log, "pair")
+    v1, v2 = (r1 or {}).get("better"), (r2 or {}).get("better")
+    first = "a" if v1 == 1 else "b" if v1 == 2 else None      # order (a, b)
+    second = "b" if v2 == 1 else "a" if v2 == 2 else None      # order (b, a)
+    whys = [(r1 or {}).get("why"), (r2 or {}).get("why")]
+    return (first if first is not None and first == second else "tie"), whys
+
+
+async def rank_by_face(client, models: list[str | None], run_dir: Path, cands: list[dict], log: RunLog) -> dict[int, float]:
+    """Score the passing candidates by the AI's pairwise choice of the better face (wins per attempt index).
 
     Every pair is asked in BOTH orders (position bias cancels; a split answer counts as a tie). Wins decide, ties fall back to the
     identity score. The AI does the visual judgement it was validated for; nothing about the images is changed.
@@ -602,8 +678,8 @@ async def rank_by_expression(client, models: list[str | None], run_dir: Path, ca
         for b in range(a + 1, len(cands)):
             ca, cb = cands[a], cands[b]
             fa, fb = run_dir / f"cand{ca['index']}_crop.jpg", run_dir / f"cand{cb['index']}_crop.jpg"
-            r1 = await gemini_text(client, models, EXPRESSION_PAIR_PROMPT, [fa, fb], log, "pair")
-            r2 = await gemini_text(client, models, EXPRESSION_PAIR_PROMPT, [fb, fa], log, "pair")
+            r1 = await gemini_text(client, models, FACE_PAIR_PROMPT, [fa, fb], log, "pair")
+            r2 = await gemini_text(client, models, FACE_PAIR_PROMPT, [fb, fa], log, "pair")
             v1 = (r1 or {}).get("better")
             v2 = (r2 or {}).get("better")
             first = ca["index"] if v1 == 1 else cb["index"] if v1 == 2 else None      # order (a, b)
@@ -617,8 +693,8 @@ async def rank_by_expression(client, models: list[str | None], run_dir: Path, ca
                 verdict = "tie (the two orders disagreed or no answer)"
             log_pairs.append({"a": ca["index"], "b": cb["index"], "orders": [first, second], "winner": verdict,
                               "why": [(r1 or {}).get("why"), (r2 or {}).get("why")]})
-            log.say(f"  expression comparison attempt {ca['index']} vs {cb['index']}: {verdict}")
-    log.data["expression_ranking"] = {"wins": wins, "pairs": log_pairs}
+            log.say(f"  face comparison attempt {ca['index']} vs {cb['index']}: {verdict}")
+    log.data["face_ranking"] = {"wins": wins, "pairs": log_pairs}
     return wins
 
 
@@ -668,12 +744,10 @@ async def run(args) -> int:
     zone_mode = args.zone
     if zone_mode == "auto":
         zone_mode = "face" if source_kind == "own" else "head"
-    if source_kind == "own" and not args.force:
-        log.say("This photo is already you, so there is nothing to replace. Re-run with --force to run the pipeline on it "
-                "anyway (own-photo benchmark: the output should stay the same person).")
-        log.data["status"] = "own_photo_no_force"
-        log.save()
-        return 0
+    if source_kind == "own":
+        # Applied anyway (the user, 2026-09-21: "just apply it", never skip on the pipeline's own choice): a look-alike is replaced by the real
+        # face, a real photo is re-rendered at its best.
+        log.say(f"This photo already looks like you (similarity {src_res['score']:.3f}); applying the pipeline anyway (--force is no longer needed).")
     log.data.update({"source_kind": source_kind, "zone_mode": zone_mode, "duplicates_excluded": sorted(dups)})
     kind = "face" if zone_mode == "face" else "head"
     # Expression: the attractiveness policy suits his own photos (approved kayak and rocky). Another man's photo is a reference whose expression
@@ -754,6 +828,10 @@ async def run(args) -> int:
                     + (f"  [no frontal anchors: Gemini read the head as turned {turn:.0f} degrees]" if skip_anchors else ""))
             log.data["identity_refs"] = ref_names
             retry_note: str | None = None
+            good_face: dict | None = None      # best returned face that failed only the framing gates: reused by the rescue attempts
+            rescues = 0
+            src_gap = face_neck_gap(src_crop, src_eval["box"])
+            log.data["source_face_neck_gap"] = None if src_gap is None else round(src_gap, 1)
 
             while passing < args.count and attempts < args.max_attempts:
                 attempts += 1
@@ -776,9 +854,15 @@ async def run(args) -> int:
                         log.say(f"  build stage: {meta.get('failed') or ('ecc ' + str(meta['ecc']) + ', ' + meta['aligned_by'])}")
 
                     if not any("failed" in s for s in cand["stages"]):
+                        use_rescue = good_face is not None and rescues < gates["rescue_attempts"]
                         prompt = edit_prompt(len(head_refs), kind, args.glasses, args.look, scene, expression, attractiveness, retry_note,
-                                             reflection=len(head_boxes) > 1)
-                        base, z, meta = await edit_stage(client, model, log, run_dir, f"c{i}_head", base, rect, prompt, head_refs, args.verbose)
+                                             reflection=len(head_boxes) > 1, rescue=use_rescue)
+                        stage_refs = head_refs + ([good_face["raw"]] if use_rescue else [])
+                        if use_rescue:
+                            rescues += 1
+                            cand["rescue_of_attempt"] = good_face["index"]
+                            log.say(f"  rescue attempt {rescues}/{gates['rescue_attempts']}: the good face of attempt {good_face['index']} goes in as one more reference")
+                        base, z, meta = await edit_stage(client, model, log, run_dir, f"c{i}_head", base, rect, prompt, stage_refs, args.verbose)
                         cand["stages"].append(meta)
                         if z is not None:
                             union = np.maximum(union, z)
@@ -852,6 +936,18 @@ async def run(args) -> int:
                     if lt["dE"] > light_max:
                         problems.append(f"face is lit differently from the source (light dE {lt['dE']} > {light_max}, dL {lt['dL']:+}: "
                                         "rendered brighter and cleaner than the photo)")
+                    # Neck gap: the face must not be brighter than its own neck by more than in the source (the cut-and-paste look).
+                    gap_out = face_neck_gap(out_crop, res["box"]) if src_gap is not None else None
+                    if gap_out is not None:
+                        m["neck_gap"] = round(gap_out - src_gap, 1)
+                        if m["neck_gap"] > gates["neck_gap_max"]:
+                            problems.append(f"face is brighter than the neck ({m['neck_gap']:+} more than in the source, limit {gates['neck_gap_max']:g}): "
+                                            "the head reads as pasted in")
+                    else:
+                        warnings.append("face and neck lightness could not be measured, so the neck-gap check was skipped")
+                    # Unchanged: a look-alike source returned as it is (gt_sim 0.93-0.99 for what the user called "as it is", 0.23-0.75 for what he approved).
+                    if source_kind == "own" and m["gt_sim"] > gates["unchanged_gt_sim"]:
+                        problems.append(f"face returned unchanged (similarity to the source face {m['gt_sim']} > {gates['unchanged_gt_sim']:g})")
 
                 # ---- the AI judges what code cannot: angle, glasses, seam, lighting, anything else changed
                 judge = await gemini_text(client, text_models, JUDGE_PROMPT, [run_dir / "source_crop.png", run_dir / f"cand{i}_crop.jpg"], log, "judge")
@@ -859,6 +955,14 @@ async def run(args) -> int:
                 hard, soft = judge_failures(judge, expression_must_match=(expression == "same"))
                 problems += hard
                 warnings += soft
+                # His own or look-alike photo: the AI compares the rendering with the SOURCE face, both orders. A candidate the AI prefers the source over is
+                # no improvement. Asked only when everything else passed, so the text calls are not spent on candidates that are rejected anyway.
+                if source_kind == "own" and not problems and m.get("score", 0) >= thr["hard_reject"]:
+                    who, whys = await face_pair(client, text_models, run_dir / "source_crop.png", run_dir / f"cand{i}_crop.jpg", log)
+                    cand["face_vs_source"] = {"winner": {"a": "source", "b": "candidate", "tie": "tie"}[who], "why": whys}
+                    log.say(f"  face comparison against the source: {cand['face_vs_source']['winner']} ({'; '.join(w_ for w_ in whys if w_)})")
+                    if who == "a":
+                        problems.append("face is not better than the source face (the AI preferred the source rendering in both orders)")
                 cand["problems"], cand["warnings"] = problems, warnings
 
                 if problems:
@@ -873,11 +977,26 @@ async def run(args) -> int:
                     passing += 1
                 else:
                     retry_note = retry_note_from(problems, judge)
+                    # A good face that failed only the framing gates is kept: the AI is asked to render that same face in the right frame. Code never
+                    # warps or pastes it (night out, 2026-09-21: the raw return the user liked was rejected for size, position and angle).
+                    if (problems and all(any(k_ in p_ for k_ in GEOMETRY_PROBLEMS) for p_ in problems) and m.get("score", 0) >= thr["accept"]
+                            and (good_face is None or m["score"] > good_face["score"]) and cand["stages"] and cand["stages"][-1].get("raw")):
+                        better_than_source = True
+                        if source_kind == "own":
+                            # the RAW return and the face-only question: the pasted composite is judged on posture and blending too, and the general
+                            # question preferred the source over the night-out return the user liked (probe 2026-09-21)
+                            who, _ = await face_pair(client, text_models, run_dir / "source_crop.png", run_dir / cand["stages"][-1]["raw"], log,
+                                                     prompt=FACE_ONLY_PAIR_PROMPT)
+                            better_than_source = who != "a"
+                        if better_than_source:
+                            cand["good_face_wrong_frame"] = True
+                            good_face = {"index": i, "score": m["score"], "raw": run_dir / cand["stages"][-1]["raw"]}
+                            log.say(f"  good face in the wrong frame (identity {m['score']}): kept for the rescue attempts")
 
                 log.say(f"  outside-crop changed px: {ver['changed_outside']}")
                 log.say(f"  score={m.get('score')} gt_sim={m.get('gt_sim')} shape_dist={m.get('shape_dist')} size_ratio={m.get('size_ratio')} "
                         f"face_shift={m.get('face_shift_frac')} sharp_ratio={m.get('sharp_ratio')} light={m.get('light')} "
-                        f"drift={m.get('drift')} -> {cand['verdict'].upper()}")
+                        f"drift={m.get('drift')} neck_gap={m.get('neck_gap')} -> {cand['verdict'].upper()}")
                 log.say(f"  AI judge: {json.dumps(judge, ensure_ascii=False) if judge else 'no answer'}")
                 for p_ in problems:
                     log.say(f"    FAIL: {p_}")
@@ -910,8 +1029,8 @@ async def run(args) -> int:
             # ---- several candidates passed the objective gates: the AI picks the better expression, pair by pair, in both orders
             passing_now = [c for c in candidates if c.get("verdict") in ("accept", "uncertain") and c.get("metrics", {}).get("file")]
             if len(passing_now) >= 2:
-                log.say(f"\n{len(passing_now)} candidates passed; asking Gemini which has the better expression (each pair in both orders)")
-                expr_wins = await rank_by_expression(client, text_models, run_dir, passing_now, log)
+                log.say(f"\n{len(passing_now)} candidates passed; asking Gemini which has the better face (each pair in both orders)")
+                expr_wins = await rank_by_face(client, text_models, run_dir, passing_now, log)
                 log.save()
     except UsageLimitExceededError as e:
         log.say(f"Gemini quota reached, stopping the batch: {e}")
@@ -924,13 +1043,14 @@ async def run(args) -> int:
 
     log.data["attempts"] = attempts
     ranked = [c for c in candidates if c.get("verdict") in ("accept", "uncertain")]
-    # Order: the AI's pairwise expression wins first, then the identity band (accept > uncertain) as a tiebreak, then the identity number.
+    # Round 7: gt_sim (the similarity to the SOURCE face) is no longer part of the key. For his own or look-alike photos it made the candidate closest to
+    # the source win, so a better face was never rewarded (nerd, beach, night out came back "as it is", 2026-09-21).
+    # Order: the AI's pairwise face wins first, then the identity band (accept > uncertain) as a tiebreak, then the identity number.
     # The band used to come first; that let "accept" (score >= 0.52) beat a candidate the AI and the user both preferred, although the
     # calibration shows the score cannot tell good from bad below 0.52, and a 0.96 similarity to the source only means the face was
     # barely edited (stained-glass run 151934: the user's promising attempt 1 lost to an almost untouched attempt 3).
     rank = {"accept": 2, "uncertain": 1}
-    key = (lambda c: (expr_wins.get(c["index"], 0.0), rank[c["verdict"]],
-                      c["metrics"].get("gt_sim", 0) if source_kind == "own" else c["metrics"]["score"]))
+    key = (lambda c: (expr_wins.get(c["index"], 0.0), rank[c["verdict"]], c["metrics"]["score"]))
     if ranked:
         best = max(ranked, key=key)
         img = cv2.imread(str(run_dir / best["metrics"]["file"]))
@@ -938,14 +1058,15 @@ async def run(args) -> int:
         cv2.imwrite(str(run_dir / "best.jpg"), img, [cv2.IMWRITE_JPEG_QUALITY, 97])
         log.data["best"] = {"candidate": best["index"], "verdict": best["verdict"],
                             **{k: best["metrics"].get(k) for k in ("score", "gt_sim", "shape_dist", "size_ratio")}}
-        why = (f"; AI expression wins {expr_wins}" if expr_wins else "")
+        why = (f"; AI face wins {expr_wins}" if expr_wins else "")
         log.say(f"\n[BEST] attempt {best['index']} ({best['verdict']}) after {attempts} attempts{why} -> best.png / best.jpg")
     else:
         # Nothing passed every gate. Keep the closest candidate visible for the user's own eye, clearly labelled as not passing.
         usable = [c for c in candidates if c.get("metrics", {}).get("score") is not None and c["metrics"].get("file")
                   and not any("changed outside" in p for p in c.get("problems", []))]
         if usable:
-            near = min(usable, key=lambda c: (len(c.get("problems", [])), -c["metrics"]["score"]))  # fewest problems, then identity
+            # a good face in the wrong frame first, then the fewest problems, then identity
+            near = min(usable, key=lambda c: (not c.get("good_face_wrong_frame"), len(c.get("problems", [])), -c["metrics"]["score"]))
             img = cv2.imread(str(run_dir / near["metrics"]["file"]))
             cv2.imwrite(str(run_dir / "not_passing_closest.jpg"), img, [cv2.IMWRITE_JPEG_QUALITY, 97])
             log.data["not_passing_closest"] = {"candidate": near["index"], "problems": near.get("problems")}

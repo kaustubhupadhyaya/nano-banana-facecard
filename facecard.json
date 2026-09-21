@@ -64,7 +64,7 @@
   "model": "e6fa609c3fa255c0",
   "identity_threshold": 0.6,
   "vision_model": "56fdd199312815e2",
-  "attractiveness_note": "Render him at his best, as he looks in the reference photos: a defined jawline, calm confident eyes, and a relaxed closed-lip smile or a calm focused expression. Never tense, awkward, forced, smirking or caught mid-motion.",
+  "attractiveness_note": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
   "approved_outputs": {
     "_note": "Outputs the user reviewed on 2026-09-20. 'perfect' means keep behaving like this; the notes say what each proves. Identity score alone does not capture expression quality. See FEEDBACK_LOG.md for the full table of reviewed outputs.",
     "perfect": {
@@ -121,14 +121,17 @@
   "gates": {
     "light_de_max": 14.0,
     "size_own": [
-      0.85,
-      1.15
+      0.94,
+      1.03
     ],
     "size_foreign": [
       0.94,
       1.04
     ],
-    "light_de_max_foreign": 20.0
+    "light_de_max_foreign": 20.0,
+    "unchanged_gt_sim": 0.9,
+    "neck_gap_max": 10.0,
+    "rescue_attempts": 2
   },
-  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing. On 2026-09-21, with the plan the user approved: size_foreign floor 0.95 to 0.94 (cand3, whose size he approved, measured 0.949) and a new light_de_max_foreign of 20 for another man's photo (cand3, lighting approved, measured dE 18.4; the renders he called pasted or mismatched measured 31 to 35). Both PROVISIONAL, from one review each; re-check them against his next verdict."
+  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing. On 2026-09-21, with the plan the user approved: size_foreign floor 0.95 to 0.94 (cand3, whose size he approved, measured 0.949) and a new light_de_max_foreign of 20 for another man's photo (cand3, lighting approved, measured dE 18.4; the renders he called pasted or mismatched measured 31 to 35). Both PROVISIONAL, from one review each; re-check them against his next verdict. On 2026-09-21 (round 7, plan approved by the user), all PROVISIONAL and each from his reviews (FEEDBACK_LOG.md): size_own [0.94, 1.03] (was 0.85-1.15; approved outputs measure 0.959-1.018, car2 at 1.04 was called out of proportion); unchanged_gt_sim 0.90 (approved outputs 0.23-0.75, outputs called as-it-is 0.93-0.99); neck_gap_max 10 (approved outputs within +6.5, car2 +13.7); rescue_attempts 2."
 }

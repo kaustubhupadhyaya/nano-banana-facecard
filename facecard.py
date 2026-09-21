@@ -548,7 +548,7 @@ def main() -> int:
     rep.add_argument("--build", choices=["normal", "strong"], default="normal", help="Wording of the physique edit for head+build (strong asks for visibly broader shoulders and arms)")
     rep.add_argument("--count", type=int, default=2, help="How many candidates must PASS every check before stopping (best is kept)")
     rep.add_argument("--max-attempts", type=int, default=6, dest="max_attempts", help="Ceiling on Gemini calls per photo while chasing --count passing candidates")
-    rep.add_argument("--force", action="store_true", help="Run even when the source is already you (own-photo benchmark)")
+    rep.add_argument("--force", action="store_true", help="No longer needed: a photo that already looks like you is always processed. Accepted for old scripts")
     rep.add_argument("--model", default=None, help="Model id override")
 
     args = parser.parse_args()
