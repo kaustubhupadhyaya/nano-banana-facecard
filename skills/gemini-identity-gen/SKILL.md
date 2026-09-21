@@ -181,6 +181,12 @@ Result (run `20260920_165702_replicate_pinterest_target`, 4 attempts): the hair 
 
 **Known bug:** the sparkle-watermark exclusion hole is not moved with the ECC warp, so a re-aligned return leaks the star into the paste (seen in the night-out `not_passing_closest.jpg`).
 
+## Round 8 (2026-09-21): tried and rolled back; the record is in research/round8_attempt.md
+
+The user rolled the code back to round 7 (commit `7fd3ebc`): attractiveness and identity were right, the one mistake was that the good renders existed only as head crops. What round 8 measured before the rollback, so it is not tried twice: whole-photo references were WORSE (Pinterest pick dE 15.8 against the ideal's 5.7; stained glass 1 of 6); the face-only AI comparison against the source agreed with the user's eye in 1 of 3 cases, so it is never a veto; the AI same-man check for gray-zone classification was right 3 of 3; and a face-box registration can merge a re-framed return into the complete picture (0 changed px outside the crop). The beach `c1` raw the user liked was Gemini re-rendering the kayak reference photo, not the beach crop. The patch is `research/round8_attempt.patch`.
+
+The rule that follows from the review: a rendered head is never a result; it is always merged into the complete picture, and only a complete picture that passes the gates can be `best`.
+
 ## Scorer and pool (identity.py, scorer.py, landmarks.py, calibrate.py)
 
 - Pool = every photo of the user (FaceCard_Originals + `.cache/super_favs`), derived files (mirrored, headless) excluded,
