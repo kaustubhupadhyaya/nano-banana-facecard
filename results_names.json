@@ -1,0 +1,48 @@
+{
+ "_comment": "goal picture stem -> collection (folder), number and title (file names). Used by tools/export_results.py; a goal not listed here is filed under misc/<stem>.",
+ "pin_783485666539775315": {
+  "collection": "motorcycle-outfit-men",
+  "number": 1,
+  "title": "motorcycle maroon tee helmet"
+ },
+ "pin_783485666539775327": {
+  "collection": "motorcycle-outfit-men",
+  "number": 2,
+  "title": "porch reading smoking grey tee"
+ },
+ "pin_783485666539775340": {
+  "collection": "motorcycle-outfit-men",
+  "number": 3,
+  "title": "stairs white tank black trousers bag"
+ },
+ "pin_783485666539777050": {
+  "collection": "motorcycle-outfit-men",
+  "number": 4,
+  "title": "mirror camera selfie shirtless"
+ },
+ "pin_783485666539777054": {
+  "collection": "motorcycle-outfit-men",
+  "number": 5,
+  "title": "poolside reading bw"
+ },
+ "pin_783485666539777055": {
+  "collection": "motorcycle-outfit-men",
+  "number": 6,
+  "title": "shirtless pencil in mouth bw"
+ },
+ "pin_783485666539777115": {
+  "collection": "motorcycle-outfit-men",
+  "number": 7,
+  "title": "mirror selfie cat grey tee sweatpants"
+ },
+ "pin_783485666539777118": {
+  "collection": "motorcycle-outfit-men",
+  "number": 8,
+  "title": "mirror selfie cat shirtless"
+ },
+ "pin_783485666539779317": {
+  "collection": "motorcycle-outfit-men",
+  "number": 9,
+  "title": "black polo leaning over desk office"
+ }
+}

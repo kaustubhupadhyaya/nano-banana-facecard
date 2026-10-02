@@ -62,6 +62,11 @@ def refs_dir() -> Path:
     return _resolve("FACECARD_REFS_DIR", "refs_dir", Path(r"D:\Downloads\FaceCard_Originals"))
 
 
+def results_dir() -> Path:
+    """Where tools/export_results.py (the end hook of the gemini-identity-gen skill) copies every generated picture, named and versioned for people."""
+    return _resolve("FACECARD_RESULTS_DIR", "results_dir", Path(r"D:\FacecardResults"))
+
+
 def vault_dir() -> Path:
     """The secure-vault skill, which holds vault.py. Defaults to the user's home folder."""
     return _resolve("SECURE_VAULT_DIR", "vault_dir", Path.home() / ".agents" / "skills" / "secure-vault")

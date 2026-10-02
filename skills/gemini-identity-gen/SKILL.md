@@ -1,6 +1,6 @@
 ---
 name: gemini-identity-gen
-description: Put the user's face into a source photo (their own or someone else's) without changing anything else in it, or generate identity-consistent images of the user from scratch, via their Google AI Pro Gemini web session (no billed API). Use for "generate a photo of me", "replicate this photo with my face", "facecard", "nano banana [pro]", "face restore", or anything mentioning __Secure-1PSID/__Secure-1PSIDTS cookies. For writing scene prompt text for from-scratch generation, use the scene-prompt-writer skill.
+description: Redo the user's own photo with their face without changing anything else in it (replicate), or generate identity-consistent images of them from scratch, including a scene copied from someone else's photo or a Pinterest pin (scene-prompt-writer, then gen), via their Google AI Pro Gemini web session (no billed API). Use for "generate a photo of me", "replicate this photo with my face", "facecard", "nano banana [pro]", "face restore", or anything mentioning __Secure-1PSID/__Secure-1PSIDTS cookies. For writing scene prompt text for from-scratch generation, use the scene-prompt-writer skill.
 ---
 
 # gemini-identity-gen
@@ -17,12 +17,90 @@ all resolve, and prints the exact fix for anything missing (paths are set in `pa
 
 | You have | Use | Why |
 |---|---|---|
-| A source photo (theirs or a Pinterest/Instagram image) to reproduce with the user's face | **`replicate`** | Edits a crop and pastes it back into the untouched original. Background, clothes, body and framing cannot drift. |
-| No source photo, a scene described in words | `gen` | Draws a new image. Everything is regenerated, so expect drift outside the face. |
+| The subject's own photo to redo with his own face | **`replicate`** | Edits a crop and pastes it back into the untouched original. Background, clothes, body and framing cannot drift. |
+| Someone else's photo, a Pinterest/Instagram pin or a screenshot, as a style to copy | **scene-prompt-writer** (reference mode), then `gen --subject <name>` | His head on another man's photo keeps that man's body (silhouette within 2%), about 15% of results were acceptable, and it is catfishing. The skill turns the pin into a structured scene with his own traits; the pin itself never reaches the generator. |
+| No source photo, a scene described in words or a style template | scene-prompt-writer (template mode), then `gen --subject <name>` | Draws a new image. Everything is regenerated, so expect drift outside the face. |
 
-`gen --scene-image` now just runs `replicate`; the prompt text is ignored, because the photo is the scene.
-**Never describe a source photo in words and ask for a new photo of it.** That is what redrew the whole frame,
-changed the pose, clothes, background and physique, and dropped glasses (measured 2026-09-19/20).
+`gen --scene-image` now just runs `replicate`; the prompt text is ignored, because the photo is the scene. Leave it off for
+someone else's photo. The subject's own photo is always redone with `replicate`: describing it in words and regenerating
+redrew the whole frame, changed the pose, clothes, background and physique, and dropped glasses (measured 2026-09-19/20).
+For someone else's photo, scene-prompt-writer's spec and its drift-five check exist to close exactly those gaps.
+
+## Loop until perfect (the user, 2026-10-01: "when you already know exactly which one is failing, then why did you stop?")
+
+**Never stop at a failed attempt. A goal is finished only when a picture of it passes all 30 items of BEST_CHECKLIST.md (or the user accepts one with
+`best_check.py --user-approved`).** Knowing which items fail is the start of the next attempt, not a reason to report and wait. The loop, per goal and
+for all open goals at once (parallel processes, one per goal; `tools\goal_status.py --open` lists them and exits 1 while any is open):
+
+1. **Generate** (`gen --goal ... --replace-subject --inventory ...`, several samples; Flash and Pro both).
+2. **Audit every picture that passed the pose gate** against all 30 items at full zoom (`toolsudit_views.py`, `body_sheet.py`, the pose json numbers);
+   record it with `tools\best_check.py ... --fail ... --note "what was wrong" --right "what went right"`. A pass is exported automatically.
+3. **Diagnose** with `tools\goal_status.py`: it prints the items that failed most, what was already tried (model and inventory variant) and the fix the
+   ledger's lessons attach to each failed item. Read the goal's section of `FEEDBACK_LEDGER.md` first: **never repeat a fix that already failed**.
+4. **Change only the request section that controls the failed item** (a new inventory variant `..._vN.json`; never edit the one that produced a result),
+   switch model when two variants on one model failed the same item, and go back to 1. Several variants of one goal run in parallel.
+5. **Pace by credits, never by giving up.** Check `tools\quota.py` before a wave and size the wave to the credits left (about 60-200 per image).
+   When the window is empty, schedule the next wave right after its reset (`.cache\waveN.sh` waits until the reset time, runs all open goals in
+   parallel, touches a done-file; arm a Monitor on it) and keep auditing in the meantime. Credits run out; the loop does not end.
+
+**The only reasons to stop:** every goal is DONE; the user says stop; or a blocker only the user can clear (Gemini cookies expired: give the YOUR TURN
+vault block; a request Gemini refuses on every sample; a checklist item the user must rule on, such as identity in the 0.20-0.52 gray zone after at
+least three Pro samples at different seeds, shown with the compare sheet). In all three cases keep every OTHER goal running.
+
+**Lessons that finished the hard goals (2026-10-01, FEEDBACK_LEDGER.md has the evidence; try these before inventing a new fix):**
+- **Head bow / turn below the goal's number:** renders land about 0.12 short of the bow the request asks for. Ask for MORE than the goal (pin 9: nose 1.1 eye-distances below the eye line when the goal is 0.87) and state it first and last in the keep list. A reference of him at the same pose (`.cache\synthetic_refs`) did nothing.
+- **The pin man's build keeps coming back:** a build sentence alone is ignored on goals where his arms fill the frame. What works: the VISIBLE CONSEQUENCE of a slim body (gaping armholes, loose sleeves, collarbone and ribs showing), and for the hardest cases a TWO-STAGE route: stage 1 = a render that already has the right head, posture and size; stage 2 = `gen --replace-subject --body-only` with the inventory's `photo_to_edit` set to that render and the slimming written with EXPLICIT AMOUNTS (arms a third thinner, shoulders a fifth narrower, loose polo). Without amounts the edit changes nothing.
+- **Never write 'exactly as in the PHOTO TO EDIT' about the head or arms of the goal's own photo** (it hands the pin man back) and never add a FRAMING sentence that says 'never closer' on a close crop (same result). In a stage-2 edit of HIS OWN render it is correct.
+- **Hidden or bowed faces cannot be scored** (ArcFace 0.0-0.3 on a face that is his): judge hair, beard, jaw, nose against his references at zoom, report the number, pass item 21 only by eye, and flag it for the user to confirm.
+- **Parallel runs of the same goal** are safe now (unique run folders, atomic mkdir); give each run its own log tag.
+
+**The user's verdict on pin 5 and pin 6 (2026-10-01) and what it changed in the audit:** both pictures passed 30/30 by my eye and the user called both wrong. Cause, measured: (1) the hair and beard were the pin man's (long loose curls, patchy stubble) instead of his references' (tight curls, SHORT FADED SIDES with ear and scalp visible, a FULL DENSE beard); (2) pin 5's face was lit 1.7x brighter than the pin's (103 vs 61: in the pin the hair shades the whole upper face). A profile or bowed face cannot be scored by ArcFace, so these were passed by eye, loosely. From now on every audit runs `toolsudit_views.py <label> <goal> <render> <run folder>`: it puts the render's head beside ALL his reference heads (black and white when the goal is), and prints FACE LIGHT (render vs goal, limit 0.77-1.30): judge items 19 and 28 on that head row, hair and beard separately, and never pass them from the whole-picture view. Write his haircut and beard into every inventory as explicit geometry (tight curls ~6-8 cm on top, sides short and faded, ear and scalp visible; full dense beard from the sideburns along the whole jaw, neat edges), and for a goal whose face is shaded, name the shade as a keep line (the hair falls forward over the brow, the face is not brighter than the white tee).
+
+**What the loop may never do to finish faster:** loosen a gate, a limit or a checklist item; call a picture best that failed an item; count a picture the
+pose gate passed only because the pin's own man came back unchanged (diff to the goal under about 10, face still the pin man's) as a result; skip the
+audit because a number looks good. A fixed limit that a picture misses by a hair (size 1.08 against 1.07) is a FAIL: regenerate.
+
+**Progress report each time something passes or a wave ends, in two lines per goal** (what passed or what still fails and what the next wave changes);
+never a closing summary that offers to continue: the next wave is already running or scheduled.
+
+## End hook: results export (the user, 2026-10-01; only passed pictures, one flat folder)
+
+Pictures that PASS are copied out of the repo's `outputs\<run>\` into one flat results folder outside it. Nothing else is copied, and there are no
+subfolders: the file name alone says what a picture is.
+
+```
+D:\FacecardResults\                  paths.results_dir(): FACECARD_RESULTS_DIR env var, results_dir in facecard.json, or this default
+    motorcycle-outfit-men_02_porch-reading-smoking-grey-tee_v1.jpg        <collection>_<NN>_<title>_v<N>.jpg
+    motorcycle-outfit-men_02_porch-reading-smoking-grey-tee_v2.jpg
+    motorcycle-outfit-men_06_shirtless-pencil-in-mouth-bw_v1.jpg
+```
+
+- **PASSED** = the picture's checklist (`tools\best_check.py`, BEST_CHECKLIST.md) says BEST, or **the user accepted it**. When the user says a picture is
+  good enough ("pencil in mouth pass v1 - sufficient"), record their words with
+  `tools\best_check.py "<picture>" --user-approved "<their words>"`: the failed items stay on record, the verdict becomes `BEST (user-approved)`, and the
+  picture is exported. Anything else (failed items, no checklist yet, pose-gate failures) is never copied; a picture whose checklist is re-recorded with
+  failed items is withdrawn (its copy is deleted).
+- **When it runs:** `tools\export_results.py` is called by `best_check.py` each time it records a checklist or an approval (this is what brings a
+  picture over), and at the end of every `facecard.py gen` / `replicate` run. Nothing needs to be run by hand;
+  `tools\export_results.py [<run> ...] [--dry-run]` does it manually and is idempotent.
+- **`vN`** counts the passed versions of one goal in the order they were generated (v1, v2, ...). A number is never reused or renumbered. Which run and
+  candidate a file came from is in the hidden `.export_index.json` in that folder; the names do not need it.
+- **A picture that already qualified elsewhere** (an archived run, the user's `D:\Downloads\AI me`) is brought in with
+  `tools\export_results.py --import "<picture>" --goal-key <goal stem>`; it needs its BEST / user-approved checklist next to it, like any other.
+  The user wants every goal of a board represented by its best picture (2026-10-01: "populate them if they are already present elsewhere").
+- **An approval can be withdrawn:** when the user rejects a picture they accepted before, record the checklist again without `--user-approved`,
+  with their words in `--note` and the items they named in `--fail`; the hook deletes its copy from the results folder.
+- **Name every new goal in `results_names.json` before its first run** (goal picture stem -> `collection`, `number`, `title`, in the user's words).
+  A goal that is not listed is named `misc_<stem>_vN`.
+- The copies are COPIES: `outputs\` keeps its run folders (the session-start prune may later delete candidates there).
+- This is not the user's best-versions folder: `D:\Downloads\AI me` is still only for pictures the user marks `keep`, and nothing reads the results folder back.
+- **When you hand pictures to the user, give the paths in the results folder** for the passed ones, and the `outputs\` path only for work in progress.
+- **Feedback ledger (the user, 2026-10-01): pictures that fail are not kept, so their lessons are.** The same hook writes `FEEDBACK_LEDGER.md` /
+  `feedback_ledger.json` (repo root, text only): ONE ENTRY FOR EVERY GENERATED PICTURE, passed or not, with its result, identity score, pose-gate detail,
+  **what was wrong** and **what went right**. Entries are never removed, so they outlive the files in `outputs\` (the session-start prune deletes those).
+  Every `best_check.py` call must therefore say both: `--note "what was wrong"` and `--right "what went right"` (a lesson learned is written into the
+  prompt of the next attempt, not only into the ledger). Pictures that failed the pose gate and were never checked get an automatic entry from `run.json`.
+  Before regenerating a goal, read that goal's section of the ledger so a fix that already failed is not tried again.
 
 ## replicate (the default workflow)
 
@@ -128,6 +206,57 @@ If a result looks wrong, retry the generation or read the AI judge's note; do no
 - **Gemini answers with text when its image quota is spent** ("I can create more images as soon as your limit resets");
   that is detected and stops the batch rather than retrying. The judge occasionally answers "I seem to be encountering
   an error"; it is retried once.
+
+## Quota meter (2026-10-01): see it before the wall, not at it
+
+The web app charges compute credits, not requests: **2,400 per 5-hour window and 48,384 per week** on this Pro account, about 64-86 credits per
+image, 1-2 per text call (FEEDBACK_LOG section 13). The numbers are Gemini's own Settings -> Usage Limits page, read through one text RPC that costs
+no image credits. `usage_percentage` is percent USED (measured: 114 credits left = 95% used).
+
+- **Live:** `.venv\Scripts\python.exe tools\quota.py --watch` (every 60 s, `--every 30` for faster) prints one line,
+  `tier PRO: 5h 114 left (95% used), resets 06:31 in 0h09m | week 32,876 left (32% used)`, and writes `.cache\quota.json` for any other tool.
+  It keeps one login open and never rotates the cookies, so it can run next to a real run; if its session dies it logs in again from the vault,
+  and if the cookies are really gone it stops and prints the refresh step. Without `--watch` it takes one reading.
+- **Every `replicate` run** prints `[Credits] window left at start: ...; up to N image calls may cost about ...` (a warning, never a block: it
+  does not change `--count` or `--max-attempts`), then `[Credits] <tag>: window dropped N during this call, ...` after each image call, and a
+  settled `[Credits] run total ...` at the end. **The meter is account-wide**: a parallel run (or the Gemini app) on the same account is counted
+  in these deltas. Measured 2026-10-01: one capped `replicate` showed 567 credits for 2 images while another `gen --count 4` ran at the same time;
+  the watcher's 20-second timeline showed drops of 173, 127 and 77 at moments when nothing of this run was calling Gemini. Per-image figures are
+  only clean when nothing else uses the account (check with the watcher first). The same block is saved in `run.json` as `credits`; `tools\credit_report.py` lists it. `batch_run.py`
+  shows the first and last of these lines per photo. `gen` (route G) already logged credits the same way.
+- Code: `session.py` (`credits_left`, `describe_usage`, `CreditMeter`, `CREDITS_PER_IMAGE = 85`).
+
+## Video through this session (2026-10-01): WORKS, from text or from the user's photo
+
+The Pro web session makes video with the app's "Create video" tool (Gemini Omni), no billed API. Library path, verified end to end with real calls:
+
+```powershell
+.venv\Scripts\python.exe tools\video_probe.py "<prompt>" [--photo "D:\Downloads\AI me\nightout.jpg"] [--aspect portrait] [--delete-chat]
+```
+Code: `video.py` (`generate_video`, `video_tool`). Clips and a record `<stem>.json` (credits, first reply, seconds, `request_rewritten`) go to `.cache\video_probe\`.
+
+- **Why a plain prompt failed:** "Create a video: ..." through `generate_content` got text ("I cannot directly generate or render video files"), 0 videos, 3
+  credits. The tool is switched on in the request, not by wording. Captured from the web page (browser profile `google-1` over CDP, signed in as Pro,
+  nothing typed): a video request is the chat request plus (1) slot 0 index 9 = `[null x6, [[null,null,null,ASPECT]]]` (ASPECT 1 landscape, 2 portrait),
+  (2) slot 49 = 11 (chat 0, deep research 1), slot 54 = `[]`, slot 55 = `[[16]]` text-only or `[[17]]` with a photo, (3) capability `16` added to the model
+  header list (`[4,5,6,8]` -> `[4,5,6,8,16,4,5,6,8,16]`). `video_tool` rewrites those on the one request the library sends; the library's own parser,
+  recovery polling and `GeneratedVideo.save()` do the rest. `gemini_webapi` 2.1.1 is untouched in site-packages (a library upgrade can break the slot
+  numbers: re-capture the web request if `request_rewritten` is 1 but the reply is plain text).
+- **What comes back:** 10.0 s, H.264 + AAC audio (it makes sound), 24 fps, 1280x720 landscape or 720x1280 portrait, about 3 MB, plus a thumbnail. The
+  Gemini sparkle watermark is in the bottom-right corner of every frame. `generate_content` blocks 70-78 s and returns "Your video is ready!" with the clip
+  attached (the library polls the chat itself); the first reply is "I'm generating your video..." and the clip is attached to the turn later.
+- **Cost, measured with nothing else running:** 525 (text-only landscape) and 520 (portrait + photo) credits per clip, about 22 percent of the 2,400 window,
+  against about 85 for an image. A browser-made clip showed no drop at the first reading and the meter was unchanged afterwards, so read the cost from a
+  quiet account. About 4 clips per window; the weekly 48,384 is not the limit.
+- **From the user's own photo:** `--photo` is sent as the first reference. Test: `D:\Downloads\AI me\nightout.jpg` (frontal, 768x1376) + portrait, prompt "turns his
+  head toward the camera, calm slight smile". Result: frame 0 is the photo, same scene, outfit and lights; the camera drifts in, the face turns and smiles.
+  `facecard.py score` on frames at 0 / 2.5 / 5 / 7.5 / 9.8 s: max reference similarity 0.80 / 0.75 / 0.78 / 0.79 / 0.79 (the photo itself 0.855; mean over
+  references 0.45-0.48 against 0.52). Same person by the scorer, about 0.06-0.10 below the source; the user's eye is the judge. A browser test with a
+  non-frontal photo (bent over a desk) was accepted too: no face refusal.
+- **Open:** whether slot 55 `[[17]]` means "has a photo" or "portrait" (text-only portrait and photo-seeded landscape were not run: 520 credits each);
+  the "Put yourself into any scene / create an avatar" feature in the video composer was not explored; up to 5 photos and one video can be attached in the
+  app (only one photo tried here); clip length and resolution have no control in the composer (aspect only).
+- The video chats stay in the Gemini history unless `--delete-chat` is given (video from a temporary chat was not tried).
 
 ## User review of rounds 1-3 (2026-09-20) and what changed for round 4
 
@@ -236,11 +365,12 @@ back-to-back, from a freshly reloaded tab.
 
 ## Ground rules
 
-- **Source photo -> `replicate`. Never redraw it from a text description.**
+- **The subject's own photo -> `replicate`. Anyone else's photo -> scene-prompt-writer, then `gen --subject <name>`.**
 - **NEVER judge identity by eye.** Read and report the numbers, and show the compare sheets.
 - **NEVER feed generated images back into the reference set,** and never add a mirrored photo to it.
 - **Never change a threshold quietly.** Thresholds live in `facecard.json`; changing one needs the user's approval.
-- Candidness is the goal for from-scratch scenes: asymmetrical posture, natural ground contact, mid-moment expressions.
+- From-scratch scenes follow scene-prompt-writer: the reference decides pose, light and expression; attractiveness levers
+  fill only what the reference leaves open.
 - Attractiveness levers belong in the scene prompt (lighting, posture, fit, framing), never in the identity lock.
 - Do not put "athletic/muscular/lean build" in any prompt that has the user's own body in the frame: it replaces the
   user's real physique with a generic one.

@@ -12,10 +12,12 @@ closes the client. That directory is redirected per-run to an isolated temp fold
 GEMINI_COOKIE_PATH and deleted afterwards, so no plaintext cookie file is left on disk.
 """
 
+import asyncio
 import shutil
 import sys
 import tempfile
 from contextlib import asynccontextmanager
+from datetime import datetime
 from pathlib import Path
 
 import paths
@@ -39,6 +41,105 @@ class AuthError(RuntimeError):
     pass
 
 
+# Measured 2026-09-27 (FEEDBACK_LOG section 13): the web app charges 64-86 credits per Pro image, 1-2 per text call.
+# The window itself (2,400 per 5 hours, 48,384 per week on this account) is read from Gemini, never assumed.
+CREDITS_PER_IMAGE = 85
+
+
+def usage_of(client) -> dict:
+    """Gemini's Settings -> Usage Limits as the client last read it: {'tier', 'current_5h', 'weekly'}; {} before the first reading."""
+    return getattr(client, "usage_info", None) or (getattr(client, "_quotas", None) or {}).get("usage_info") or {}
+
+
+def credits_left(client) -> int | None:
+    """Credits left in the current 5-hour window (gemini_webapi refreshes this after every generation)."""
+    v = (usage_of(client).get("current_5h") or {}).get("remaining_credits")
+    try:
+        return int(v) if v is not None else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _in(reset_at: str | None, now: datetime) -> str:
+    try:
+        secs = int((datetime.fromisoformat(reset_at) - now).total_seconds())
+    except (TypeError, ValueError):
+        return ""
+    if secs <= 0:
+        return "resets now"
+    return f"resets {datetime.fromisoformat(reset_at):%H:%M} in {secs // 3600}h{secs % 3600 // 60:02d}m"
+
+
+def describe_usage(info: dict, now: datetime | None = None) -> str:
+    """One line for a person: '5h 1,820 left (24% used), resets 21:31 in 2h13m | week 41,200 left (15% used)'. 'no reading' if empty."""
+    now = now or datetime.now().astimezone()
+    parts = []
+    for key, label in (("current_5h", "5h"), ("weekly", "week")):
+        w = info.get(key) or {}
+        if w.get("remaining_credits") is None:
+            continue
+        used = f" ({w['usage_percentage']}% used)" if w.get("usage_percentage") is not None else ""
+        when = _in(w.get("reset_at"), now)
+        parts.append(f"{label} {int(w['remaining_credits']):,} left{used}" + (f", {when}" if when and key == "current_5h" else ""))
+    return " | ".join(parts) if parts else "no reading"
+
+
+class CreditMeter:
+    """Credits spent by this process, read from Gemini's own meter: a start reading, one entry per image call, a settled end reading.
+    A text-only call costs 1-2 credits and is not noted; its cost lands in the next image call's delta."""
+
+    def __init__(self, client, say=print):
+        self.client, self.say = client, say
+        self.start = credits_left(client)
+        self.calls: list[dict] = []
+        self.end: int | None = None
+        self._last = self.start
+        self.info = usage_of(client)
+
+    def preflight(self, image_calls: int) -> str:
+        """What is left now and what up to `image_calls` image calls may cost. A warning only: it never blocks or changes the run."""
+        need = image_calls * CREDITS_PER_IMAGE
+        msg = f"[Credits] window left at start: {describe_usage(self.info)}; up to {image_calls} image calls may cost about {need}"
+        if self.start is not None and self.start < need:
+            msg += f" -- {self.start} may not be enough: the run can stop at the quota and wait for the reset"
+        return msg
+
+    def note(self, tag: str, outcome: str) -> None:
+        """Call right after an image call returned ('image', 'no_image')."""
+        self.info = usage_of(self.client)
+        now = credits_left(self.client)
+        used = (self._last - now) if (now is not None and self._last is not None) else None
+        self.calls.append({"tag": tag, "outcome": outcome, "credits": used, "left": now})
+        spent = sum(c["credits"] or 0 for c in self.calls)
+        self.say(f"[Credits] {tag}: window dropped {used} during this call, {spent} since the start of the run, {describe_usage(self.info)}")
+        self._last = now
+
+    async def settle(self) -> None:
+        """A settled end reading: a single reading can lag by a call (measured in facecard.py gen)."""
+        try:
+            await asyncio.sleep(3)
+            await self.client._fetch_usage_info()
+        except Exception:
+            pass
+        self.info = usage_of(self.client)
+        self.end = credits_left(self.client)
+
+    def as_dict(self) -> dict:
+        d = {"start": self.start, "calls": self.calls, "end": self.end}
+        if self.start is not None and self.end is not None:
+            d["total"] = self.start - self.end
+            n_img = sum(1 for c in self.calls if c["outcome"] == "image")
+            d["per_image"] = round(d["total"] / n_img, 1) if n_img else None
+        return d
+
+    def summary(self) -> str:
+        d = self.as_dict()
+        if "total" not in d:
+            return "[Credits] run total unknown (no reading)"
+        return (f"[Credits] run total {d['total']} for {sum(1 for c in self.calls if c['outcome'] == 'image')} images ({d['per_image']} per image; "
+                f"the meter is account-wide, so another run or the app on the same account is counted too); {describe_usage(self.info)}")
+
+
 def _psidts_candidates() -> list[str]:
     candidates = []
     for value in (vault.get_secret(PSIDTS_LABEL, "rotated"), vault.get_secret(PSIDTS_LABEL, "password")):
@@ -48,8 +149,9 @@ def _psidts_candidates() -> list[str]:
 
 
 @asynccontextmanager
-async def authenticated_client(verbose: bool = False):
-    """Yield an authenticated GeminiClient, or raise AuthError with no secret in the message."""
+async def authenticated_client(verbose: bool = False, auto_refresh: bool = True):
+    """Yield an authenticated GeminiClient, or raise AuthError with no secret in the message.
+    auto_refresh=False (the quota watcher) keeps this client from rotating the session cookies next to a real run."""
     secure_1psid = vault.get_secret(PSID_LABEL, "password")
     psidts_candidates = _psidts_candidates()
 
@@ -71,7 +173,7 @@ async def authenticated_client(verbose: bool = False):
         for secure_1psidts in psidts_candidates:
             candidate = GeminiClient(secure_1psid, secure_1psidts)
             try:
-                await candidate.init(timeout=120, verbose=verbose)
+                await candidate.init(timeout=120, verbose=verbose, auto_refresh=auto_refresh)
             except Exception as e:
                 last_error = e
                 continue
