@@ -61,7 +61,7 @@
   ],
   "out_dir": "outputs",
   "cache_dir": ".cache/refs",
-  "model": "e6fa609c3fa255c0",
+  "model": "56fdd199312815e2",
   "identity_threshold": 0.6,
   "vision_model": "56fdd199312815e2",
   "attractiveness_note": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
@@ -123,6 +123,25 @@
       "_note": "The user's ideal results (2026-09-21). Every new output is judged against these; see FEEDBACK_LOG.md section 6 for how each was made.",
       "20260921_064221_replicate_pinterest_target/best.jpg": "Pinterest, round-7 pipeline, attempt 4 = a RESCUE of attempt 3 (its raw face sent back as one more reference, re-rendered in the right frame): 'more than perfect, handles the awkward side pose perfectly'. Identity 0.506, size 0.981, shift 0.115, light dE 5.7, neck gap 4.9, pose within 2.4 degrees, expression the same as the reference",
       "D:/Downloads/AI me/beach.jpg": "gen output 20260917_144731 v1_0.jpg (md5 match): from scratch, 9 whole reference photos, the identity-lock text and a scene text stating pose, expression, light direction and lens; raw, no restore, nothing pasted. 'Wins in all: attraction, identity preservation, pose'. Copy in .cache/feedback/ideal/"
+    },
+    "verdicts_2026_09_23": {
+      "_note": "The user's verdicts of 2026-09-23 on the eleven pictures of the hard-rule batch (a = attractiveness, i = identity; P improved, N degraded, O no change), verbatim",
+      "20260921_213349_replicate_night out/best.jpg": "major improvement a,i-p (kept as the best version nightout.jpg)",
+      "20260921_215338_replicate_nerd/not_passing_closest.jpg": "nochanges",
+      "20260921_220113_replicate_beach/best.jpg": "improvement ,but it was already perfect and was being used as reference hence wasnt requirred to change again",
+      "20260921_221426_replicate_car2/best.jpg": "not the same as the reference image at all, do you even have the correct reference image? a,i-p but not amtching reference (the source's broad laugh became a closed smile; the kept best car.png kept the laugh)",
+      "20260921_222419_replicate_mountain/best.jpg": "no improvement a,i -n",
+      "20260921_223507_replicate_pinterest_target/not_passing_closest.jpg": "worst version till now. worst.",
+      "20260922_023359_replicate_pinterest_target/not_passing_closest.jpg": "worst",
+      "20260922_024138_replicate_google-1__IMG_5549/best.jpg": "ok, slight improvement a,i -p (kept as the best version kayak.jpg)",
+      "20260922_024632_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "no major improvements was allready good , a-p, i-n (kept as the best version mt1.jpg)",
+      "20260922_025116_replicate_google-4__IMG_5850_Original/best.jpg": "a-o, i-n",
+      "20260922_025509_replicate_google-2__IMG_3943/not_passing_closest.jpg": "worst version till now",
+      "20260923_040017_replicate_pinterest_target/not_passing_closest.jpg": "all are worse looking than ever (the user, 2026-09-23, on the five pictures of the think-again round)",
+      "20260923_033637_replicate_google-4__IMG_5850_Original/best.jpg": "all are worse looking than ever (the user, 2026-09-23, on the five pictures of the think-again round)",
+      "20260923_034524_replicate_google-1__IMG_5549/best.jpg": "all are worse looking than ever (the user, 2026-09-23, on the five pictures of the think-again round)",
+      "20260923_035023_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": "all are worse looking than ever (the user, 2026-09-23, on the five pictures of the think-again round)",
+      "20260923_032918_replicate_google-2__IMG_3943/not_passing_closest.jpg": "all are worse looking than ever (the user, 2026-09-23, on the five pictures of the think-again round)"
     }
   },
   "identity_thresholds": {
@@ -134,7 +153,7 @@
     "light_de_max": 14.0,
     "size_own": [
       0.94,
-      1.03
+      1.04
     ],
     "size_foreign": [
       0.94,
@@ -143,7 +162,370 @@
     "light_de_max_foreign": 20.0,
     "unchanged_gt_sim": 0.9,
     "neck_gap_max": 10.0,
-    "rescue_attempts": 2
+    "rescue_attempts": 3,
+    "sharp_max": 6.0
   },
-  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing. On 2026-09-21, with the plan the user approved: size_foreign floor 0.95 to 0.94 (cand3, whose size he approved, measured 0.949) and a new light_de_max_foreign of 20 for another man's photo (cand3, lighting approved, measured dE 18.4; the renders he called pasted or mismatched measured 31 to 35). Both PROVISIONAL, from one review each; re-check them against his next verdict. On 2026-09-21 (round 7, plan approved by the user), all PROVISIONAL and each from his reviews (FEEDBACK_LOG.md): size_own [0.94, 1.03] (was 0.85-1.15; approved outputs measure 0.959-1.018, car2 at 1.04 was called out of proportion); unchanged_gt_sim 0.90 (approved outputs 0.23-0.75, outputs called as-it-is 0.93-0.99); neck_gap_max 10 (approved outputs within +6.5, car2 +13.7); rescue_attempts 2."
+  "limits_approved": "Approved by the user on 2026-09-20 ('yes go ahead') after being shown these exact numbers. identity_thresholds come from calibrate.py (genuine photos 0.26-0.88, outputs he called good 0.53-0.68, drifted 0.23-0.58, a different man 0.11). gates.light_de_max rests on two of his judgements (fine 12.2 and 5.5, worse 16.5) and gates.size_foreign on one (a head at 1.054x was 'too big'), so treat those two as PROVISIONAL and re-check them against his next reviews. To revert: change the numbers here; replicate.py falls back to built-in defaults if a key is missing. On 2026-09-21, with the plan the user approved: size_foreign floor 0.95 to 0.94 (cand3, whose size he approved, measured 0.949) and a new light_de_max_foreign of 20 for another man's photo (cand3, lighting approved, measured dE 18.4; the renders he called pasted or mismatched measured 31 to 35). Both PROVISIONAL, from one review each; re-check them against his next verdict. On 2026-09-21 (round 7, plan approved by the user), all PROVISIONAL and each from his reviews (FEEDBACK_LOG.md): size_own [0.94, 1.03] (was 0.85-1.15; approved outputs measure 0.959-1.018, car2 at 1.04 was called out of proportion); unchanged_gt_sim 0.90 (approved outputs 0.23-0.75, outputs called as-it-is 0.93-0.99); neck_gap_max 10 (approved outputs within +6.5, car2 +13.7); rescue_attempts 2. On 2026-09-21 the own-photo size upper limit goes back to the approved 1.04 (1.03 was a slip and rejected car2 attempts 5 and 6, complete pictures with no other problem), and rescue_attempts is 3: these are placements of an already rendered face into the complete picture, since a rendered head is never a result by itself. On 2026-09-23 (think-again round, from the user's eight best versions and eleven verdicts), PROVISIONAL: gates.identity_drop_max 0.20 for his own photos (the face may not look less like him than the source did by more than 0.20 of pool identity; every best version drops 0.006-0.171, the pictures rated identity-down or 'not me' 0.325 and 0.405; mountain L-05, rated N at a drop of 0.141, is not caught by it). Also 2026-09-23, a code constant (replicate.py REF_LIGHT_MAX = 25, PROVISIONAL): on another man's photo the identity references are his photos whose face exposure is within 25 Lab L of the photo's face. Measured live on Pinterest: with the previous references five of six renders were too bright (dE 26-35), with these none of six (dE 5.3-12.6); head size is then the remaining failure (1.07-1.17). On 2026-09-23, after the verdict 'all are worse looking than ever' on the think-again round, the code went back to the state that made the best versions; gates.identity_drop_max and the dim-reference choice (REF_LIGHT_MAX) were removed with it. The angle / distance plan (approved 2026-09-23) adds gates.sharp_max 6.0, PROVISIONAL and for far faces (< 130 px) only (the face at most 6x sharper than the source's; kayak P-06, called perfect, is 8.3x at 219 px; every best version 0.17-4.6, the far-face failures 8.7-17.1), and ref_exclude IMG_6923 Copy.JPG (its reference head crop is a headless torso).",
+  "best_versions": {
+    "_note": "The user's best version of each photo (D:/Downloads/AI me, 2026-09-23: 'this has best versions of all photos'), matched to the run that made it by pixel content. A source whose file content (md5) equals one of these is returned unchanged unless --force (replicate.py, C8). No best version exists for nerd, mountain (the original), table tennis or IMG_0862.",
+    "D:/Downloads/AI me/beach.jpg": {
+      "md5": "d4529e14b61cc94f903d0f2e59d33ff7",
+      "run": "20260917_144731_sitting-on-a-sandy-beach-at-golden-hour",
+      "which": "v1_0.jpg",
+      "what": "gen from scratch: 9 whole reference photos, identity-lock text, scene text with pose, expression, light and lens"
+    },
+    "D:/Downloads/AI me/nightout.jpg": {
+      "md5": "e1a131b0b811e7b9d4459f5b8007d475",
+      "run": "20260921_213349_replicate_night out",
+      "which": "attempt 2",
+      "what": "hard rule: placement of attempt 1's face (identity 0.884); identity 0.84, size 0.994, light dE 2.6, expression kept"
+    },
+    "D:/Downloads/AI me/kayak.jpg": {
+      "md5": "7983d8a918aea1a298e8b9be48c4d138",
+      "run": "20260922_024138_replicate_google-1__IMG_5549",
+      "which": "attempt 1",
+      "what": "hard rule, fresh attempt; identity 0.597 (source 0.632), light dE 3.0"
+    },
+    "D:/Downloads/AI me/mt1.jpg": {
+      "md5": "fa35d1ffe7f03cef775b4344dd56332d",
+      "run": "20260922_024632_replicate_google-1__IMG_4861_SnapseedCop",
+      "which": "attempt 3",
+      "what": "rocky; hard rule: placement of attempt 2's face, which re-lit it (dE 18.7 to 1.0); identity 0.494 (source 0.665)"
+    },
+    "D:/Downloads/AI me/mirror.jpg": {
+      "md5": "e7860cd364ae741bb8245e78243f2cb9",
+      "run": "20260921_070221_replicate_google-4__IMG_5850_Original",
+      "which": "attempt 4",
+      "what": "stained glass; round 7, fresh attempt; identity 0.488, light dE 1.0"
+    },
+    "D:/Downloads/AI me/mt2.jpg": {
+      "md5": "d118218b760ff1f22b933659dca33607",
+      "run": "20260921_064221_replicate_pinterest_target",
+      "which": "attempt 4",
+      "what": "Pinterest ideal; round 7 rescue of attempt 3's well-lit face (dE 8.0, size 0.923); size 0.981, dE 5.7"
+    },
+    "D:/Downloads/AI me/cand1.png": {
+      "md5": "94a42e1550cae55e312d8b50161bb95c",
+      "run": "20260921_171345_replicate_pinterest_target",
+      "which": "attempt 1",
+      "what": "Pinterest; round 8 fresh attempt, rejected by the gates (size 0.91, judge: expression differs); dE 13.8"
+    },
+    "D:/Downloads/AI me/car.png": {
+      "md5": "45429db8e00e3adbba0ec3f3c50806d6",
+      "run": "20260921_043841_replicate_car2",
+      "which": "attempt 1",
+      "what": "car2; round 7 fresh attempt, rejected only by the AI 'not better than the source' veto (now demoted); the laugh kept; dE 1.8"
+    },
+    "D:/Downloads/AI me/google-4__IMG_0862_20260923_201520.jpg": {
+      "md5": "d104e1a36a7c50310660c73898ffaf4e",
+      "run": "20260923_201520_replicate_google-4__IMG_0862",
+      "which": "attempt 1",
+      "what": "kept by the user 2026-09-24: a +2 i +2"
+    },
+    "D:/Downloads/AI me/instagram_DWrFDrIiWW8_20260926_213623.jpg": {
+      "md5": "8a0caf5e504e825ec5cb046d2d011577",
+      "run": "20260926_213623_goal-instagram-dwrfdriiww8",
+      "which": "attempt 3",
+      "what": "kept by the user 2026-09-27"
+    },
+    "D:/Downloads/AI me/v4_0.jpg": {
+      "md5": "8c3edbc150082e51327a23bed977a60a",
+      "run": "20260926_214359_goal-pin-783485666539775315",
+      "which": "route G v5 render 4",
+      "what": "copied to D:/Downloads/AI me by the user by hand (found 2026-09-27); matched by md5"
+    },
+    "D:/Downloads/AI me/v3_0.jpg": {
+      "md5": "8a0caf5e504e825ec5cb046d2d011577",
+      "run": "20260926_213623_goal-instagram-dwrfdriiww8",
+      "which": "route G v4 render 3",
+      "what": "copied to D:/Downloads/AI me by the user by hand (found 2026-09-27); matched by md5"
+    },
+    "D:/Downloads/AI me/pin_783485666539775315_20260928_pin_fi.jpg": {
+      "md5": "5bf1cfe7116cfa0d325b2bd5b1865450",
+      "run": "20260928_pin_final",
+      "which": "attempt 1",
+      "what": "kept by the user 2026-09-29: a +2 i +2"
+    },
+    "D:/Downloads/AI me/google-2__IMG_5850.HEIC": {
+      "md5": "debc1c7f3ceaed81e58a7815bb27dee8",
+      "run": "20260920_032650_replicate_google-4__IMG_5850_Original",
+      "which": "best.jpg",
+      "what": "added by the user to D:/Downloads/AI me; matched by pixel content"
+    }
+  },
+  "ref_exclude": [
+    "IMG_6923 Copy.JPG"
+  ],
+  "reviews": {
+    "20260923_160011_replicate_google-2__IMG_3943/not_passing_closest.jpg": {
+      "a": -2,
+      "i": 0,
+      "keep": false,
+      "tags": [
+        "size",
+        "pasted"
+      ],
+      "note": "unreal, monsterish: head too big for the body",
+      "date": "2026-09-23",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-2__IMG_3943.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260923_160011_replicate_google-2__IMG_3943\\not_passing_closest.jpg",
+      "attempt": 1,
+      "raw": "1 a-2 i0 size pasted \"unreal, monsterish: head too big for the body\""
+    },
+    "20260923_161146_replicate_google-4__IMG_0862/not_passing_closest.jpg": {
+      "a": -2,
+      "i": 0,
+      "keep": false,
+      "tags": [
+        "pasted",
+        "angle",
+        "hair"
+      ],
+      "note": "unreal, monsterish: re-framed return merged on the face box, second hairline and ear, smeared collar",
+      "date": "2026-09-23",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-4__IMG_0862.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260923_161146_replicate_google-4__IMG_0862\\not_passing_closest.jpg",
+      "attempt": 1,
+      "raw": "2 a-2 i0 pasted angle hair \"unreal, monsterish: re-framed return merged on the face box, second hairline and ear, smeared collar\""
+    },
+    "20260923_201520_replicate_google-4__IMG_0862/not_passing_closest.jpg": {
+      "a": 2,
+      "i": 2,
+      "keep": true,
+      "tags": [],
+      "note": "perfect",
+      "date": "2026-09-24",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-4__IMG_0862.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260923_201520_replicate_google-4__IMG_0862\\not_passing_closest.jpg",
+      "attempt": 1,
+      "raw": "2 a+2 i+2 keep \"perfect\""
+    },
+    "20260923_201520_replicate_google-4__IMG_0862/cand2.png": {
+      "a": 2,
+      "i": -2,
+      "keep": false,
+      "tags": [],
+      "note": "meh",
+      "date": "2026-09-24",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-4__IMG_0862.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260923_201520_replicate_google-4__IMG_0862\\cand2.png",
+      "attempt": 2,
+      "raw": "3 a+2 i-2 \"meh\""
+    },
+    "20260923_183350_replicate_google-1__IMG_4861_SnapseedCop/best.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [
+        "pasted",
+        "angle"
+      ],
+      "note": "absolutely horrible: the same defect as diagnosed; face drawn level under hair and skull seen from above, looking down (a, i irrelevant)",
+      "date": "2026-09-24",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-1__IMG_4861_SnapseedCopy.JPG",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260923_183350_replicate_google-1__IMG_4861_SnapseedCop\\best.jpg",
+      "attempt": 6,
+      "raw": "1 pasted angle \"absolutely horrible: the same defect as diagnosed; face drawn level under hair and skull seen from above, looking down (a, i irrelevant)\""
+    },
+    "20260926_213623_goal-instagram-dwrfdriiww8/v3_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": true,
+      "tags": [],
+      "note": "huge success (the user, 2026-09-27); kept despite checklist items 6 (face slightly small) and 26 (helmet lettering)",
+      "date": "2026-09-27",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\instagram_DWrFDrIiWW8.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260926_213623_goal-instagram-dwrfdriiww8\\v3_0.jpg",
+      "attempt": 3,
+      "raw": "1 keep \"huge success (the user, 2026-09-27); kept despite checklist items 6 (face slightly small) and 26 (helmet lettering)\""
+    },
+    "20260928_pin_final/pin_v1_engine_v1_0.jpg": {
+      "a": 2,
+      "i": 2,
+      "keep": true,
+      "tags": [],
+      "note": "perfect version (the user, 2026-09-29): inventory run v22 v1_0 + engine region edit; passes all 30 items and the pose gate",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260928_pin_final\\pin_v1_engine_v1_0.jpg",
+      "attempt": 1,
+      "raw": "1 a+2 i+2 keep \"perfect version (the user, 2026-09-29): inventory run v22 v1_0 + engine region edit; passes all 30 items and the pose gate\""
+    },
+    "20260927_140839_goal-pin-783485666539775315/v3_0.jpg": {
+      "a": null,
+      "i": 2,
+      "keep": false,
+      "tags": [],
+      "note": "bike tank pattern not his; the goal's Ducati parts, helmet, watch and watermark seeped in",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_140839_goal-pin-783485666539775315\\v3_0.jpg",
+      "attempt": 3,
+      "raw": "2 i+2 other:\"bike tank pattern not his; the goal's Ducati parts, helmet, watch and watermark seeped in\" \"face and body language perfect (the user, 2026-09-28)\""
+    },
+    "20260927_192155_goal-v2-0/v1_0.jpg": {
+      "a": -2,
+      "i": null,
+      "keep": false,
+      "tags": [
+        "angle",
+        "expression"
+      ],
+      "note": "regressed 10 versions of progress in one go (the user, 2026-09-27): level head, eyes to camera, passport face on a candid body; checklist was skipped",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_192155_goal-v2-0\\v1_0.jpg",
+      "attempt": 1,
+      "raw": "3 a-2 angle expression \"regressed 10 versions of progress in one go (the user, 2026-09-27): level head, eyes to camera, passport face on a candid body; checklist was skipped\""
+    },
+    "20260927_192624_goal-v1-0/v2_0.jpg": {
+      "a": -2,
+      "i": null,
+      "keep": false,
+      "tags": [
+        "angle",
+        "expression"
+      ],
+      "note": "regressed 10 versions of progress in one go (the user, 2026-09-27): level head, eyes to camera",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_192624_goal-v1-0\\v2_0.jpg",
+      "attempt": 2,
+      "raw": "4 a-2 angle expression \"regressed 10 versions of progress in one go (the user, 2026-09-27): level head, eyes to camera\""
+    },
+    "20260927_192624_goal-v1-0/v1_0.jpg": {
+      "a": -2,
+      "i": null,
+      "keep": false,
+      "tags": [
+        "angle",
+        "expression"
+      ],
+      "note": "regressed 10 versions of progress in one go (the user, 2026-09-27): level head, eyes to camera, arms heavier",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_192624_goal-v1-0\\v1_0.jpg",
+      "attempt": 1,
+      "raw": "5 a-2 angle expression \"regressed 10 versions of progress in one go (the user, 2026-09-27): level head, eyes to camera, arms heavier\""
+    },
+    "20260927_134902_goal-pin-783485666539775315/v2_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [],
+      "note": "the goal man's heavy build, not his body",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_134902_goal-pin-783485666539775315\\v2_0.jpg",
+      "attempt": 2,
+      "raw": "6 other:\"the goal man's heavy build, not his body\" \"pinterest versions are not using my body (the user, 2026-09-27)\""
+    },
+    "20260926_214359_goal-pin-783485666539775315/v4_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [
+        "size"
+      ],
+      "note": "failure reasons identified correctly (the user, 2026-09-26); camera distance not kept as the goal; the user copied it to AI me by hand",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\pin_783485666539775315.jpg",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260926_214359_goal-pin-783485666539775315\\v4_0.jpg",
+      "attempt": 4,
+      "raw": "7 size \"failure reasons identified correctly (the user, 2026-09-26); camera distance not kept as the goal; the user copied it to AI me by hand\""
+    },
+    "20260927_024244_goal-google-2-img-3943/v3_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [],
+      "note": "posture not as the goal",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-2__IMG_3943.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_024244_goal-google-2-img-3943\\v3_0.jpg",
+      "attempt": 3,
+      "raw": "8 other:\"posture not as the goal\" \"wrong conclusion (the user, 2026-09-27): still does not match the goal's posture (stride instead of feet together)\""
+    },
+    "20260927_140053_goal-google-2-img-3943/v2_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [],
+      "note": "all generations improved further (the user, 2026-09-27): posture, glasses, head bow right (Flash)",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-2__IMG_3943.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_140053_goal-google-2-img-3943\\v2_0.jpg",
+      "attempt": 2,
+      "raw": "9 \"all generations improved further (the user, 2026-09-27): posture, glasses, head bow right (Flash)\""
+    },
+    "20260927_140053_goal-google-2-img-3943/v3_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [],
+      "note": "all generations improved further (the user, 2026-09-27): posture, glasses, head bow right (Flash)",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-2__IMG_3943.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260927_140053_goal-google-2-img-3943\\v3_0.jpg",
+      "attempt": 3,
+      "raw": "10 \"all generations improved further (the user, 2026-09-27): posture, glasses, head bow right (Flash)\""
+    },
+    "20260926_232006_goal-google-2-img-3943/v4_0.jpg": {
+      "a": null,
+      "i": 2,
+      "keep": false,
+      "tags": [
+        "hair",
+        "blur"
+      ],
+      "note": "body posture not as the goal",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-2__IMG_3943.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260926_232006_goal-google-2-img-3943\\v4_0.jpg",
+      "attempt": 4,
+      "raw": "11 i+2 hair blur other:\"body posture not as the goal\" \"even though blurring, face perfectly me; hair not from his references is a valid fail (the user, 2026-09-27)\""
+    },
+    "20260926_215045_goal-google-2-img-3943/v3_0.jpg": {
+      "a": null,
+      "i": null,
+      "keep": false,
+      "tags": [
+        "hair"
+      ],
+      "note": "posture not as the goal",
+      "date": "2026-09-29",
+      "source": "C:\\Users\\Admin\\Downloads\\super favs\\google-2__IMG_3943.HEIC",
+      "path": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\outputs\\20260926_215045_goal-google-2-img-3943\\v3_0.jpg",
+      "attempt": 3,
+      "raw": "12 hair other:\"posture not as the goal\" \"impressive progress (the user, 2026-09-26); the real failure was a bigger beard and moustache than his references, not a big head\""
+    }
+  },
+  "subject_profiles": {
+    "me": {
+      "note": "The builder. Uses the top-level refs, pose_bins and anchors (no overrides). Traits confirmed by the user 2026-09-23 for scene-prompt-writer; other subjects get their own entry with refs_dir, refs, pose_bins, anchors and traits.",
+      "traits": {
+        "presentation": "man",
+        "eyewear": "thin metal-framed glasses, sometimes",
+        "facial_hair": "full dark beard",
+        "hair": "dark curly hair",
+        "marks": "none",
+        "always_worn": "none"
+      },
+      "roles": {
+        "_note": "Route G (2026-09-26, the user's role-based single prompt): face refs are chosen per job by the goal's head pose from the pose bins, never the body or arm photos; body and arm refs checked by eye.",
+        "face_count": 4,
+        "body": [
+          "IMG_6923 Copy.JPG"
+        ],
+        "arms": [
+          "IMG_0440_Original.jpg"
+        ]
+      },
+      "face_text": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. His hair exactly as in the face references: his own tight curly black hair. His beard and moustache exactly as in the face references: the same length, density and shape. Lean face with low facial fat: defined cheekbones with a visible hollow beneath them, and a clear jawline meeting at a defined angle below the ear. His face at its true size in proportion to his head and body, as in the references. Warm medium-brown South Asian skin tone matching the references, never lightened. Real skin texture with visible pores.",
+      "build_text": "Match image {BODY} precisely: his true build and proportion. A slim, lean build: moderate shoulder width, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist and slim hips. Tall and lean, never bulky or heavily muscled.",
+      "face_text_note": "2026-09-26, the user: face, hair, beard and moustache always from the face references, never from the goal's face, even when the goal is his own photo (table tennis v5 got a bigger beard and moustache than his references; Instagram v4 a face slightly smaller than his real one). The 'full, dense beard' line of the first sample was replaced by the references.",
+      "build_text_before_2026_09_27": "Match image {BODY} precisely: his true build and proportion. Lean athletic V-taper. Broad shoulders, wide clavicle span. Visible deltoid caps, defined biceps and triceps. Flat, tight midsection. Narrow waist, slim hips. Tall and lean."
+    }
+  },
+  "model_before_flash": "e6fa609c3fa255c0"
 }
