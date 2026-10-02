@@ -1,0 +1,672 @@
+# Feedback ledger
+
+One entry for EVERY generated picture, passed or not (written by `tools/export_results.py`, the end hook of the gemini-identity-gen skill). Only passed pictures are copied to the results folder; everything that failed is recorded here, with what was wrong and what went right, so the lesson outlives the file in `outputs\` (the session-start prune deletes those). Entries are never removed. Add the human notes with `tools\best_check.py <picture> --fail ... --note "what was wrong" --right "what went right"`.
+
+Updated 2026-10-02 04:31. 229 pictures.
+
+## misc_beach
+
+1 pictures, 0 passed.
+
+- **attempt 1** `20261001_063602_replicate_beach/not_passing_closest.jpg`: **NOT CHECKED YET**
+
+## misc_pin5-stage1
+
+1 pictures, 0 passed.
+
+- **attempt 1** `20261001_221714_replicate_pin5_stage1/not_passing_closest.jpg`: **NOT CHECKED YET**
+
+## motorcycle-outfit-men_01_motorcycle-maroon-tee-helmet
+
+1 pictures, 1 passed.
+
+- **attempt 1** `D:\FacecardArchive\outputs_2026-09-29\20260928_pin_final/pin_v1_engine_v1_0.jpg`: **PASS (all 30 items)**
+  - right: Inventory run v22 v1_0 + objects-only engine region edit (frame slider, HONDA engine cover, 0 pixels changed outside the crop). Pose gate PASS incl. head bow; every inventory item checked at full zoom: his wheels, road tyres, plain disc, chrome mudguard, round black mirrors, black handguards, fog lamp, frame slider, HONDA engine cover, H'ness badge, brown seat, tank stripe pattern, his helmet (clear visor), his round watch; no watermark. Open detail for the user: the tank's HONDA letters read flatter and whiter than his polished chrome ones. 21 judged from visible features (sunglasses).
+
+## motorcycle-outfit-men_02_porch-reading-smoking-grey-tee
+
+4 pictures, 1 passed.
+
+- **attempt 1** `20260930_234015_goal-pin-783485666539775327/v1_0.jpg`: **FAIL (checklist)**, identity 0.56 (Flash, pin_783485666539775327.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal) | re-audit 2026-10-01 at full zoom: head pitch not as the goal (eyes straight to the camera, chin level; the goal's chin is lowered and the eyes look up at the camera); everything else passes; hands, hair, beard, identity 0.557 checked
+  - right: pose gate 11 of 11; hands, book, cigarette, smoke, water bottle, hillside and grey tee faithful to the pin; ASL watermark gone; his curly hair and full beard | pose gate passed every measured item | identity 0.56 (accept band) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 2** `20260930_234015_goal-pin-783485666539775327/v2_0.jpg`: **PASS (all 30 items)**, identity 0.60 (Flash, pin_783485666539775327.json)
+  - right: chin lowered and eyes up at the camera as in the pin; both hands clean at zoom; hair, beard and scene faithful; slim forearm; this is the picture that passes | pose gate passed every measured item | identity 0.60 (accept band) | 24 of 30 checklist items passed, 6 not applicable
+- **attempt 3** `20260930_234015_goal-pin-783485666539775327/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.50 (Flash, pin_783485666539775327.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.10; his right forearm direction 25 deg off; his right hand position shift 0.224 (goal x0.67 y0.70, render x0.46 y0.76)
+  - right: identity 0.50 (gray zone, needs a human eye)
+- **attempt 4** `20260930_234015_goal-pin-783485666539775327/v4_0.jpg`: **FAIL (pose gate, not checked)**, identity -0.00 (Flash, pin_783485666539775327.json)
+  - wrong: pose gate failed: his right hand position shift 0.064 (goal x0.67 y0.70, render x0.62 y0.73)
+  - right: identity -0.00 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+
+## motorcycle-outfit-men_03_stairs-white-tank-black-trousers-bag
+
+26 pictures, 1 passed.
+
+- **attempt 1** `20260930_234349_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.06 (Flash, pin_783485666539775340.json)
+  - wrong: pose gate failed: his left hand position shift 0.264 (goal x0.32 y0.54, render x0.58 y0.60)
+  - right: identity 0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 2** `20260930_234349_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity -0.01 (Flash, pin_783485666539775340.json)
+  - wrong: pose gate failed: his left hand position shift 0.321 (goal x0.32 y0.54, render x0.63 y0.61)
+  - right: identity -0.01 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 3** `20260930_235828_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (checklist)**, identity 0.06 (Flash, pin_783485666539775340.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | re-audit: the goal's face is completely hidden (crown of the head seen from above, hand over the mouth) but the render shows eyes, nose and mouth (head not bowed enough), and a dark band over the eyes reads as sunglasses the goal does not have
+  - right: framing now exact (man at the far left, cut by the edge) after the FRAMING line was added; slim arms; bag, hoodie, red sneaker, stairs, wall and slipper faithful; hands clean | pose gate passed every measured item | identity 0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 20 of 30 checklist items passed, 8 not applicable
+- **attempt 4** `20260930_235828_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (checklist)**, identity 0.03 (Flash, pin_783485666539775340.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal) | re-audit: the goal's face is completely hidden but the render shows the eyes, nose and beard: head not bowed enough
+  - right: framing exact; bag, hoodie, watch on the wrist, stairs and wall faithful; hands clean | pose gate passed every measured item | identity 0.03 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 5** `20260930_235828_goal-pin-783485666539775340/v3_0.jpg`: **NOT CHECKED YET**, identity 0.05 (Flash, pin_783485666539775340.json)
+  - right: pose gate passed every measured item | identity 0.05 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 6** `20260930_235828_goal-pin-783485666539775340/v4_0.jpg`: **FAIL (checklist)**, identity 0.03 (Flash, pin_783485666539775340.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 3 re-run v4: pose gate PASS, framing right, but the arm and shoulder keep the goal man's muscular build (seen on the review sheet)
+  - right: framing exact; pose gate passed; scene faithful | pose gate passed every measured item | identity 0.03 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 7** `20261001_041045_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539775340_v2.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | regeneration 1: pose gate PASS and the framing is right (man at the left, bag, stairs), slim arms, hands fine; but a dark band across the eyes reads as sunglasses the goal does not have (face hidden in the goal), despite the no-glasses wording
+  - right: pose gate passed; framing exact; slim arms, bag, stairs faithful; hands clean | pose gate passed every measured item | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 8** `20261001_041045_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.08 (Flash, pin_783485666539775340_v2.json)
+  - wrong: pose gate failed: his left hand position shift 0.283 (goal x0.32 y0.54, render x0.60 y0.59)
+  - right: identity 0.08 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 9** `20261001_041045_goal-pin-783485666539775340/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.04 (Flash, pin_783485666539775340_v2.json)
+  - wrong: pose gate failed: his left hand position shift 0.063 (goal x0.32 y0.54, render x0.37 y0.58)
+  - right: identity 0.04 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 10** `20261001_041558_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (checklist)**, identity 0.08 (Flash, pin_783485666539775340_v3.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | borderline: the eye region under the curls is a deep dark band; at 2.6x zoom it reads as shadow (no frame or nose pads seen) but cannot be proven not to be sunglasses, which the goal does not have; nose and mouth are visible where the goal's hand hides them
+  - right: best of this goal so far: pose gate passed; framing exact (man at the far left, cut by the edge); head bowed with the curls leading; slim arms; both hands clean; bag, hoodie, red sneaker, stairs, wall and slipper faithful | pose gate passed every measured item | identity 0.08 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 11** `20261001_041558_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (checklist)**, identity 0.01 (Flash, pin_783485666539775340_v3.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | clear dark sunglasses over the eyes although the prompt said no glasses (the goal's dark face area gets read as sunglasses)
+  - right: pose gate passed; framing exact; slim arms; hands clean; scene faithful | pose gate passed every measured item | identity 0.01 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 12** `20261001_041558_goal-pin-783485666539775340/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.00 (Flash, pin_783485666539775340_v3.json)
+  - wrong: pose gate failed: his left hand position shift 0.305 (goal x0.32 y0.54, render x0.59 y0.68)
+  - right: identity 0.00 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 13** `20261001_041558_goal-pin-783485666539775340/v4_0.jpg`: **FAIL (checklist)**, identity 0.07 (Flash, pin_783485666539775340_v3.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | dark sunglasses over the eyes again
+  - right: pose gate passed; framing exact; scene faithful; hands clean | pose gate passed every measured item | identity 0.07 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 14** `20261001_043444_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539775340_v4.json)
+  - wrong: pose gate failed: his left hand position shift 0.292 (goal x0.32 y0.54, render x0.59 y0.65)
+- **attempt 15** `20261001_043444_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.10 (Flash, pin_783485666539775340_v4.json)
+  - wrong: pose gate failed: his left hand position shift 0.095 (goal x0.32 y0.54, render x0.40 y0.59)
+  - right: identity 0.10 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 16** `20261001_063344_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (checklist)**, identity -0.06 (Flash, pin_783485666539775340_v4.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | the shoulders and upper arms are still the goal man's heavy, rounded muscle (thicker than his arm photos IMG_0440 / IMG_6923)
+  - right: the eyes-open-under-the-curls wording fixed the sunglasses: no glasses, eyes in the shadow of his curls; framing and pose exact (pose gate passed); cigarette hand, bag, hoodie, red sneaker, earring, stairs and wall faithful | pose gate passed every measured item | identity -0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 17** `20261001_063344_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.06 (Flash, pin_783485666539775340_v4.json)
+  - wrong: pose gate failed: his left hand position shift 0.275 (goal x0.32 y0.54, render x0.59 y0.60)
+  - right: identity 0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 18** `20261001_063344_goal-pin-783485666539775340/v3_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539775340_v4.json)
+  - wrong: pose gate failed: his left hand position shift 0.063 (goal x0.32 y0.54, render x0.38 y0.57)
+- **attempt 19** `20261001_064643_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.11 (Flash, pin_783485666539775340_v5.json)
+  - wrong: pose gate failed: his left hand position shift 0.072 (goal x0.32 y0.54, render x0.38 y0.58)
+  - right: identity 0.11 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 20** `20261001_064643_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.04 (Flash, pin_783485666539775340_v5.json)
+  - wrong: pose gate failed: his left hand position shift 0.129 (goal x0.32 y0.54, render x0.45 y0.57)
+  - right: identity 0.04 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 21** `20261001_065356_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539775340_v5.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | Pro still draws the goal man's thick rounded deltoids and biceps; the eyes sit in a dark shadow band under the curls (no frame visible, but close to the sunglasses look)
+  - right: pose gate passed; framing, cigarette hand, bag, hoodie, red sneaker, stairs and wall faithful; his curls | pose gate passed every measured item | 21 of 30 checklist items passed, 8 not applicable
+- **attempt 22** `20261001_065356_goal-pin-783485666539775340/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.08 (Pro, pin_783485666539775340_v5.json)
+  - wrong: pose gate failed: his left hand position shift 0.080 (goal x0.32 y0.54, render x0.37 y0.60)
+  - right: identity 0.08 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 23** `20261001_065356_goal-pin-783485666539775340/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.01 (Pro, pin_783485666539775340_v5.json)
+  - wrong: pose gate failed: his left hand position shift 0.075 (goal x0.32 y0.54, render x0.40 y0.54)
+  - right: identity 0.01 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 24** `20261001_071557_goal-pin-783485666539775340/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.07 (Flash, pin_783485666539775340_v6.json)
+  - wrong: pose gate failed: his left hand position shift 0.117 (goal x0.32 y0.54, render x0.43 y0.58)
+  - right: identity 0.07 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 25** `20261001_071557_goal-pin-783485666539775340/v2_0.jpg`: **PASS (all 30 items)**, identity 0.10 (Flash, pin_783485666539775340_v6.json)
+  - right: the slim-build line with its VISIBLE CONSEQUENCE (tank-top armholes gape around thin arms, straps wide of narrow shoulders) finally gave his build: thin arms, narrow shoulders; pose gate passed; framing exact; cigarette hand, bag, hoodie, red sneaker, chain, stairs and wall faithful; first pin 3 picture to pass every item | pose gate passed every measured item | identity 0.10 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 8 not applicable
+- **attempt 26** `20261001_071557_goal-pin-783485666539775340/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.12 (Flash, pin_783485666539775340_v6.json)
+  - wrong: pose gate failed: his left hand position shift 0.094 (goal x0.32 y0.54, render x0.41 y0.58)
+  - right: identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+
+## motorcycle-outfit-men_04_mirror-camera-selfie-shirtless
+
+14 pictures, 1 passed.
+
+- **attempt 1** `20260930_234557_goal-pin-783485666539777050/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050.json)
+  - wrong: pose gate failed: size in the frame (shoulders-to-nose x2.2) x1.20
+- **attempt 2** `20260930_234557_goal-pin-783485666539777050/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777050.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | re-audit: the raised arm and chest keep the goal man's deep muscle separation and striations, more than his arm photo IMG_0440 and his body photo IMG_6923 show; scene, camera, strap, hair and beard pass
+  - right: the very close crop is exact: blurred raised hand, camera, leather strap, dark band, panel; his curls at the top and his dark beard under the camera | pose gate passed every measured item | 20 of 30 checklist items passed, 9 not applicable
+- **attempt 3** `20260930_234557_goal-pin-783485666539777050/v3_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.047 (goal x0.38 y0.70, render x0.42 y0.71)
+- **attempt 4** `20260930_234557_goal-pin-783485666539777050/v4_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777050.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | re-audit: the raised arm and chest keep the goal man's deep muscle separation and striations, more than his arm photo IMG_0440 and his body photo IMG_6923 show; scene, camera, strap, hair and beard pass
+  - right: same exact crop, strap and camera; his curls and beard; hands clean | pose gate passed every measured item | 20 of 30 checklist items passed, 9 not applicable
+- **attempt 5** `20261001_041045_goal-pin-783485666539777050/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v2.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.084 (goal x0.38 y0.70, render x0.46 y0.71); head position shift 0.054 (goal x0.45 y0.54, render x0.50 y0.55); head bow (nose below eye line / eye distance) goal +0.45, render +0.32 (more level, chin up); neck/head direction 15 deg off; his left upper arm direction 15 deg off
+- **attempt 6** `20261001_041045_goal-pin-783485666539777050/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v2.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.060 (goal x0.38 y0.70, render x0.43 y0.73); head bow (nose below eye line / eye distance) goal +0.45, render +0.35 (more level, chin up); size in the frame (shoulders-to-nose x2.2) x1.13
+- **attempt 7** `20261001_041422_goal-pin-783485666539777050/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v3.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.048 (goal x0.38 y0.70, render x0.39 y0.75); size in the frame (shoulders-to-nose x2.2) x1.15
+- **attempt 8** `20261001_041422_goal-pin-783485666539777050/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v3.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.048 (goal x0.38 y0.70, render x0.39 y0.75); size in the frame (shoulders-to-nose x2.2) x1.25
+- **attempt 9** `20261001_041846_goal-pin-783485666539777050/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v4.json)
+  - wrong: pose gate failed: head position shift 0.046 (goal x0.45 y0.54, render x0.48 y0.56); size in the frame (shoulders-to-nose x2.2) x1.08
+- **attempt 10** `20261001_041846_goal-pin-783485666539777050/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v4.json)
+  - wrong: pose gate failed: size in the frame (shoulders-to-nose x2.2) x1.10
+- **attempt 11** `20261001_063340_goal-pin-783485666539777050/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v5.json)
+  - wrong: pose gate failed: size in the frame (shoulders-to-nose x2.2) x0.88
+- **attempt 12** `20261001_063340_goal-pin-783485666539777050/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777050_v5.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.060 (goal x0.38 y0.70, render x0.43 y0.73); head position shift 0.046 (goal x0.45 y0.54, render x0.49 y0.56); his left upper arm direction 16 deg off
+- **attempt 13** `20261001_063344_goal-pin-783485666539777050/v1_0.jpg`: **PASS (all 30 items)** (Pro, pin_783485666539777050_v5.json)
+  - right: Pro model with the measured FRAMING line (nose at 54 percent, shoulder line at 70 percent) and the slim-arm wording: pose gate passed for the first time on this pin; close crop, blurred raised hand, camera, leather strap, dark band and panel exact; his curls and dark beard | pose gate passed every measured item | 21 of 30 checklist items passed, 9 not applicable
+- **attempt 14** `20261001_063344_goal-pin-783485666539777050/v2_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777050_v5.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.087 (goal x0.38 y0.70, render x0.44 y0.76); size in the frame (shoulders-to-nose x2.2) x1.14
+
+## motorcycle-outfit-men_05_poolside-reading-bw
+
+33 pictures, 0 passed.
+
+- **attempt 1** `20260930_234859_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.21 (Flash, pin_783485666539777054.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | pin 5 poolside reader B&W: pose gate PASS; tattoos removed, sunglasses/phone/lighter/ring kept; identity score 0.21/0.18/0.14 (v1/v3/v4) is in the gray zone (bowed head, black and white), hair and beard match by eye at zoom but the number cannot confirm it: needs the user's eye; Gemini sparkle on the paper bottom-right left as produced
+  - right: head bow 0.50 = the pin's 0.50; black-and-white grade kept; forearm tattoos gone; ring, sunglasses, phone, lighter and cigarette kept; hair and beard look like his | pose gate passed every measured item | identity 0.21 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 2** `20260930_234859_goal-pin-783485666539777054/v3_0.jpg`: **FAIL (checklist)**, identity 0.16 (Flash, pin_783485666539777054.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | pin 5 poolside reader B&W: pose gate PASS; tattoos removed, sunglasses/phone/lighter/ring kept; identity score 0.21/0.18/0.14 (v1/v3/v4) is in the gray zone (bowed head, black and white), hair and beard match by eye at zoom but the number cannot confirm it: needs the user's eye; Gemini sparkle on the paper bottom-right left as produced
+  - right: head bow 0.50 = the pin's; black-and-white grade, tattoos gone, objects kept; fullest curls of the three | pose gate passed every measured item | identity 0.16 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 3** `20260930_234859_goal-pin-783485666539777054/v4_0.jpg`: **FAIL (checklist)**, identity 0.13 (Flash, pin_783485666539777054.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | pin 5 poolside reader B&W: pose gate PASS; tattoos removed, sunglasses/phone/lighter/ring kept; identity score 0.21/0.18/0.14 (v1/v3/v4) is in the gray zone (bowed head, black and white), hair and beard match by eye at zoom but the number cannot confirm it: needs the user's eye; Gemini sparkle on the paper bottom-right left as produced
+  - right: head bow 0.49 = the pin's; hair falls over the forehead like the pin's; tattoos gone | pose gate passed every measured item | identity 0.13 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 4** `20261001_041044_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.49 (Pro, pin_783485666539777054_v2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.495 is in the gray zone (best of all pin 5 samples, still below the 0.52 accept line, needs a human eye); the ring on his finger in the pin is missing
+  - right: Pro model: best face of the pin 5 samples (clear lean face, full dark beard and curls like his); pose gate passed; head bow matches the pin; black-and-white grade, tattoos gone, sunglasses, phone, lighter, cigarette and pack kept; hands clean | pose gate passed every measured item | identity 0.49 (gray zone, needs a human eye) | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 5** `20261001_041044_goal-pin-783485666539777054/v2_0.jpg`: **NOT CHECKED YET**, identity 0.35 (Pro, pin_783485666539777054_v2.json)
+  - right: pose gate passed every measured item | identity 0.35 (gray zone, needs a human eye)
+- **attempt 6** `20261001_041044_goal-pin-783485666539777054/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.10 (Pro, pin_783485666539777054_v2.json)
+  - wrong: pose gate failed: his left forearm direction 108 deg off; his left hand position shift 0.245 (goal x0.49 y0.79, render x0.68 y0.63)
+  - right: identity 0.10 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 7** `20261001_041044_goal-pin-783485666539777054/v4_0.jpg`: **NOT CHECKED YET**, identity 0.25 (Pro, pin_783485666539777054_v2.json)
+  - right: pose gate passed every measured item | identity 0.25 (gray zone, needs a human eye)
+- **attempt 8** `20261001_043444_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.34 (Pro, pin_783485666539777054_v3.json)
+  - wrong: pose gate failed: neck/head direction 16 deg off
+  - right: identity 0.34 (gray zone, needs a human eye)
+- **attempt 9** `20261001_043444_goal-pin-783485666539777054/v2_0.jpg`: **FAIL (checklist)**, identity 0.19 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity 0.193 (rejected band; the Pro face this time is not him)
+  - right: pose gate passed; ring kept after naming it; black-and-white scene and objects faithful | pose gate passed every measured item | identity 0.19 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 10** `20261001_063341_goal-pin-783485666539777054/v3_0.jpg`: **FAIL (checklist)**, identity 0.39 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity 0.392 is in the gray zone (needs a human eye); Pro returned only one of three pictures in this run
+  - right: pose gate passed; black-and-white scene and objects faithful | pose gate passed every measured item | identity 0.39 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 11** `20261001_064639_goal-pin-783485666539777054/v1_0.jpg`: **NOT CHECKED YET**, identity 0.03 (Pro, pin_783485666539777054_v3.json)
+  - right: pose gate passed every measured item | identity 0.03 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 12** `20261001_064639_goal-pin-783485666539777054/v2_0.jpg`: **FAIL (checklist)**, identity 0.40 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity 0.403, gray zone (needs a human eye)
+  - right: pose gate passed; black-and-white scene and objects faithful (Pro) | pose gate passed every measured item | identity 0.40 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 13** `20261001_113317_goal-pin-783485666539777054/v1_0.jpg`: **NOT CHECKED YET**, identity 0.18 (Pro, pin_783485666539777054_v3.json)
+  - right: pose gate passed every measured item | identity 0.18 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 14** `20261001_113317_goal-pin-783485666539777054/v2_0.jpg`: **FAIL (checklist)**, identity 0.36 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity 0.365 is in the 0.20-0.52 gray zone; the checklist counts what I cannot verify as a fail. By eye at zoom: his curly hair, full dark beard, jaw and nose look like his references, the silver ring is back on the finger (named in the request), tattoos gone, cigarette, sunglasses, phone, lighter, pack and scene faithful. THE USER'S EYE DECIDES THIS ONE after 5 Pro samples (0.495, 0.403, 0.365, 0.194, 0.184)
+  - right: pose gate passed, head bow 0.50 = the pin; ring present; every object and the black-and-white grade faithful; the only open item is identity in the gray zone | pose gate passed every measured item | identity 0.36 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 15** `20261001_113317_goal-pin-783485666539777054/v3_0.jpg`: **NOT CHECKED YET** (Pro, pin_783485666539777054_v3.json)
+  - right: pose gate passed every measured item
+- **attempt 16** `20261001_113317_goal-pin-783485666539777054/v4_0.jpg`: **NOT CHECKED YET**, identity 0.19 (Pro, pin_783485666539777054_v3.json)
+  - right: pose gate passed every measured item | identity 0.19 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 17** `20261001_114851_goal-pin-783485666539777054/v1_0.jpg`: **NOT CHECKED YET**, identity 0.52 (Pro, pin_783485666539777054_v3.json)
+  - right: pose gate passed every measured item | identity 0.52 (gray zone, needs a human eye)
+- **attempt 18** `20261001_114851_goal-pin-783485666539777054/v2_0.jpg`: **NOT CHECKED YET**, identity 0.06 (Pro, pin_783485666539777054_v3.json)
+  - right: pose gate passed every measured item | identity 0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 19** `20261001_114851_goal-pin-783485666539777054/v3_0.jpg`: **FAIL (checklist)**, identity 0.73 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 9 (The light on the face matches the photo); 10 (The face is not brighter than the neck and body); 19 (All of the hair is his own); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | THE USER, 2026-10-01: the poolside reading picture is wrong. My diagnosis against the pin and his references: (1) item 9/10 light: the face is lit about 1.7x brighter than the pin's (face-region mean 103 vs 61 of 255): in the pin the hair falls forward and shades the whole upper face, the render shows a clean, evenly lit, beauty-bright face; (2) items 19/28 hair: the render's curls are a bushy cap with long sides covering the ears' top, his references show tight curls with SHORT FADED sides (scalp visible above the ear) and longer curls only at the back; (3) skin is smooth/clean, the pin man is textured with stubble
+  - right: pose gate, objects, ring, B&W grade and overall tonal range (mean 132 vs 131, std 63 vs 66) match the pin | pose gate passed every measured item | identity 0.73 (accept band) | 19 of 30 checklist items passed, 7 not applicable
+- **attempt 20** `20261001_203506_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.23 (Pro, pin_783485666539777054_v4.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | THE USER, 2026-10-01: none of the three look like him, negative progress in identity retention compared with the previous versions. My earlier pass of item 21 'by eye' was wrong, and so was dismissing the low ArcFace scores (0.23-0.31 on pin 5 against 0.733 for the earlier picture of the same pose) as unusable: the number was a real warning. Suspected cause: I replaced the references-driven wording ('exactly as in the FACE references: same length, density and shape') with my own geometric description of his hair and beard, and added a face-shade line, so the model leaned on my words instead of his photos; the face drawn is leaner and more angular with a heavier, darker beard than his references.
+  - right: pose gate passed every measured item | identity 0.23 (gray zone, needs a human eye) | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 21** `20261001_213357_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.31 (Pro, pin_783485666539777054_v4.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | THE USER, 2026-10-01: none of the three look like him, negative progress in identity retention compared with the previous versions. My earlier pass of item 21 'by eye' was wrong, and so was dismissing the low ArcFace scores (0.23-0.31 on pin 5 against 0.733 for the earlier picture of the same pose) as unusable: the number was a real warning. Suspected cause: I replaced the references-driven wording ('exactly as in the FACE references: same length, density and shape') with my own geometric description of his hair and beard, and added a face-shade line, so the model leaned on my words instead of his photos; the face drawn is leaner and more angular with a heavier, darker beard than his references.
+  - right: pose gate passed every measured item | identity 0.31 (gray zone, needs a human eye) | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 22** `20261001_213357_goal-pin-783485666539777054/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.27 (Pro, pin_783485666539777054_v4.json)
+  - wrong: pose gate failed: where he stands along the table goal 0.29, render 0.37 of its length from picture-left
+  - right: identity 0.27 (gray zone, needs a human eye)
+- **attempt 23** `20261001_213357_goal-pin-783485666539777054/v3_0.jpg`: **NOT CHECKED YET** (Pro, pin_783485666539777054_v4.json)
+  - right: pose gate passed every measured item
+- **attempt 24** `20261001_214525_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777054_v5.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity: the face is hidden under the hair and the shade line, ArcFace finds no face; the six-photo run with the shade/face wording did not retain identity
+  - right: pose gate passed | pose gate passed every measured item | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 25** `20261001_214537_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.08 (Pro, pin_783485666539777054_v5.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity ArcFace 0.083, the shaded face does not look like him; the 'face exactly as in the references' wording did not help
+  - right: pose gate passed | pose gate passed every measured item | identity 0.08 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 26** `20261001_214939_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.01 (Pro, pin_783485666539777054_v3.json)
+  - wrong: pose gate failed: neck/head direction 19 deg off
+  - right: identity 0.01 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 27** `20261001_214944_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity not retained: the original wording with SIX face photos (instead of four) gave ArcFace 0.01 / none / 0.12 on pin 5 (baseline Pro n=11 mean 0.31): more reference photos did NOT help and may dilute the likeness
+  - right: pose gate passed | pose gate passed every measured item | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 28** `20261001_214949_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.12 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | identity not retained: the original wording with SIX face photos (instead of four) gave ArcFace 0.01 / none / 0.12 on pin 5 (baseline Pro n=11 mean 0.31): more reference photos did NOT help and may dilute the likeness
+  - right: pose gate passed | pose gate passed every measured item | identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 29** `20261002_023554_goal-pin-783485666539777054_3/v1_0.jpg`: **FAIL (checklist)**, identity 0.41 (Pro, pin_783485666539777054_v6.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | overnight experiment 2026-10-02: face about a quarter brighter than the pin's (face light ratio 1.12-1.23, within the limit), original hair/beard wording, default four face photos, Pro. Pipeline identity 0.34-0.41 (gray zone, below 0.52) and the sheet's ArcFace 0.18-0.23 against 0.36 for the old pin 5 v1 (0.733 in the pipeline's own score): a moderately brighter face did NOT recover identity; the old picture with the 1.6x brighter face stays the closest to his references. Awaiting the user's choice by eye.
+  - right: pose gate passed; face light within the limit; scene and objects faithful | pose gate passed every measured item | identity 0.41 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 30** `20261002_023554_goal-pin-783485666539777054_2/v1_0.jpg`: **FAIL (checklist)**, identity 0.34 (Pro, pin_783485666539777054_v6.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | overnight experiment 2026-10-02: face about a quarter brighter than the pin's (face light ratio 1.12-1.23, within the limit), original hair/beard wording, default four face photos, Pro. Pipeline identity 0.34-0.41 (gray zone, below 0.52) and the sheet's ArcFace 0.18-0.23 against 0.36 for the old pin 5 v1 (0.733 in the pipeline's own score): a moderately brighter face did NOT recover identity; the old picture with the 1.6x brighter face stays the closest to his references. Awaiting the user's choice by eye.
+  - right: pose gate passed; face light within the limit; scene and objects faithful | pose gate passed every measured item | identity 0.34 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 31** `20261002_023554_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.38 (Pro, pin_783485666539777054_v6.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | overnight experiment 2026-10-02: face about a quarter brighter than the pin's (face light ratio 1.12-1.23, within the limit), original hair/beard wording, default four face photos, Pro. Pipeline identity 0.34-0.41 (gray zone, below 0.52) and the sheet's ArcFace 0.18-0.23 against 0.36 for the old pin 5 v1 (0.733 in the pipeline's own score): a moderately brighter face did NOT recover identity; the old picture with the 1.6x brighter face stays the closest to his references. Awaiting the user's choice by eye.
+  - right: pose gate passed; face light within the limit; scene and objects faithful | pose gate passed every measured item | identity 0.38 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 32** `20261002_041740_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.26 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | think-again test 2026-10-02: ONLY clean studio photos as face references (IMG_6868, 6858, 6873, 6862; no _fav photos): identity 0.26 / 0.04, baseline 0.31 (n=11): the contaminated _fav reference was NOT the cause
+  - right: pose gate passed | pose gate passed every measured item | identity 0.26 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 33** `20261002_041749_goal-pin-783485666539777054/v1_0.jpg`: **FAIL (checklist)**, identity 0.04 (Pro, pin_783485666539777054_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | think-again test 2026-10-02: ONLY clean studio photos as face references (IMG_6868, 6858, 6873, 6862; no _fav photos): identity 0.26 / 0.04, baseline 0.31 (n=11): the contaminated _fav reference was NOT the cause
+  - right: pose gate passed | pose gate passed every measured item | identity 0.04 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 7 not applicable
+
+## motorcycle-outfit-men_06_shirtless-pencil-in-mouth-bw
+
+52 pictures, 0 passed.
+
+- **attempt 1** `20260930_235140_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055.json)
+  - wrong: failed checklist items: 5 (The head fits the body); 8 (Nothing looks unreal or monsterish, at thumbnail size or zoomed in); 12 (Head and face pose match the goal); 14 (Face position and alignment in the frame match the goal); 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 29 (The distance from the camera is the same as in the goal); 30 (Body posture and action exactly as in the goal) | THE USER, 2026-10-01 (withdrawing the earlier 'sufficient'): the pencil is not in my mouth at all, it is held by my chin in a physically impossible way; my head seems weirdly placed on top of the body; my body has not been changed, the physique is of a different person; not acceptable by our generation rules
+  - right: scene, palette, jar of brushes, bracelet and the folded arm match the pin; his curls and beard in profile | 15 of 30 checklist items passed, 7 not applicable
+- **attempt 2** `20260930_235140_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 14 (Face position and alignment in the frame match the goal); 21 (It is unmistakably him, not just attractive); 29 (The distance from the camera is the same as in the goal); 30 (Body posture and action exactly as in the goal) | pin 6: head bow +0.70 vs +0.61, head shift 0.042, size x1.14; the arm reaches out to the bottom-right where the goal's hand rests clasped at the lower left (item 30 by eye); identity unverified (profile, no face found)
+  - right: scene and objects match the pin; his curls and beard in profile | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 3** `20260930_235828_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v2.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | pin 6 re-run v1: returned the goal photo almost unchanged (mean abs diff 5.3): still the goal man's face and hair, not him; 'exactly as in the PHOTO TO EDIT' wording made Gemini keep the man. Not a result | LESSON: the wording 'exactly as in the PHOTO TO EDIT' about his head and arms makes Gemini hand back the pin's own man nearly unchanged (mean abs diff to the pin 5.3); the pose gate cannot see this
+  - right: pose gate passed every measured item | 19 of 30 checklist items passed, 7 not applicable
+- **attempt 4** `20260930_235828_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v2.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 14 (Face position and alignment in the frame match the goal); 21 (It is unmistakably him, not just attractive); 29 (The distance from the camera is the same as in the goal) | pin 6 re-run: pose gate FAIL head bowed lower (+0.83/+0.75 vs +0.61), size x1.21/x1.23, head shifted; identity unverified (profile)
+  - right: 19 of 30 checklist items passed, 7 not applicable
+- **attempt 5** `20260930_235828_goal-pin-783485666539777055/v3_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v2.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 14 (Face position and alignment in the frame match the goal); 21 (It is unmistakably him, not just attractive); 29 (The distance from the camera is the same as in the goal) | pin 6 re-run: pose gate FAIL head bowed lower (+0.83/+0.75 vs +0.61), size x1.21/x1.23, head shifted; identity unverified (profile)
+  - right: 19 of 30 checklist items passed, 7 not applicable
+- **attempt 6** `20261001_000531_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | pin 6 third attempt: pose gate PASS but the picture is the goal photo nearly unchanged (mean abs diff 6.5): the face and hair are the goal man's, not him | LESSON: same as the earlier pin 6 re-run: the photo is handed back with the pin's own man (mean abs diff 6.5)
+  - right: pose gate passed every measured item | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 7** `20261001_000531_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v3.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when); 30 (Body posture and action exactly as in the goal) | pin 6 third attempt v2: pose gate PASS, but the face still reads as the goal man's face (identity cannot be scored, profile) and the arm differs from the goal's
+  - right: pose gate passed every measured item | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 8** `20261001_000531_goal-pin-783485666539777055/v3_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v3.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.075 (goal x0.27 y0.21, render x0.29 y0.28); size in the frame (shoulders-to-nose x2.2) x0.86; neck/head direction 22 deg off
+- **attempt 9** `20261001_000531_goal-pin-783485666539777055/v4_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v3.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.054 (goal x0.27 y0.21, render x0.27 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.73 (bowed lower)
+- **attempt 10** `20261001_043443_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v4.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.087 (goal x0.27 y0.21, render x0.29 y0.29); head position shift 0.100 (goal x0.52 y0.22, render x0.60 y0.28); head bow (nose below eye line / eye distance) goal +0.61, render +1.13 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.17
+- **attempt 11** `20261001_043443_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v4.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.049 (goal x0.27 y0.21, render x0.25 y0.26); head position shift 0.052 (goal x0.52 y0.22, render x0.56 y0.26); size in the frame (shoulders-to-nose x2.2) x1.13
+- **attempt 12** `20261001_063342_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v4.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.065 (goal x0.27 y0.21, render x0.27 y0.27); head position shift 0.078 (goal x0.52 y0.22, render x0.59 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.92 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.23
+- **attempt 13** `20261001_063342_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v4.json)
+  - wrong: pose gate failed: head position shift 0.051 (goal x0.52 y0.22, render x0.56 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.70 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.13
+- **attempt 14** `20261001_063344_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v4.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.108 (goal x0.27 y0.21, render x0.30 y0.31); head position shift 0.134 (goal x0.52 y0.22, render x0.63 y0.30); head bow (nose below eye line / eye distance) goal +0.61, render +1.20 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.28; neck/head direction 16 deg off
+- **attempt 15** `20261001_063344_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v4.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.061 (goal x0.27 y0.21, render x0.27 y0.27); neck/head direction 18 deg off
+- **attempt 16** `20261001_064638_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.17 (Pro, pin_783485666539777055_v5.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.612 (goal x0.27 y0.21, render x0.86 y0.34); head position shift 0.240 (goal x0.52 y0.22, render x0.75 y0.29); neck/head direction 156 deg off
+  - right: identity 0.17 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 17** `20261001_064638_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v5.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 29 (The distance from the camera is the same as in the goal) | pose gate: size in the frame x1.15 (limit 1.07, head bowed a little lower and closer); the shoulders and arm are still broad and muscular, not his slim build
+  - right: fixes two of the user's complaints: the brush is clamped between his lips in his mouth (not against the chin) and the head joins the neck naturally; framing, objects, bracelet and the black-and-white grade match the pin; his curls and beard (Pro, measured FRAMING line) | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 18** `20261001_065356_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v6.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.053 (goal x0.27 y0.21, render x0.27 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.69 (bowed lower)
+- **attempt 19** `20261001_065356_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v6.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the pose gate passed only because Gemini handed back the pin's own man (mean abs diff to the pin 3.2 for v2, 9.6 for v3): his face, hair and heavy build are the goal man's. LESSON: the wave-4 FRAMING line ('the camera is as close as in the PHOTO TO EDIT ... nose tip only 9 percent below the shoulder line') made Pro keep the whole photo
+  - right: nothing new beyond the pin itself | pose gate passed every measured item | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 20** `20261001_065356_goal-pin-783485666539777055/v3_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v6.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the pose gate passed only because Gemini handed back the pin's own man (mean abs diff to the pin 3.2 for v2, 9.6 for v3): his face, hair and heavy build are the goal man's. LESSON: the wave-4 FRAMING line ('the camera is as close as in the PHOTO TO EDIT ... nose tip only 9 percent below the shoulder line') made Pro keep the whole photo
+  - right: nothing new beyond the pin itself | pose gate passed every measured item | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 21** `20261001_071557_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v7.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the pose gate passed because Gemini handed the pin back almost unchanged (mean abs diff to the pin 6.9 / 6.3): the pin man's face, hair and heavy build. LESSON (pin 6, 3 times now): any 'FRAMING exactly ... never closer' line on this goal makes it return the photo; the only real replacements came from the inventory WITHOUT a framing line (size then 1.14-1.15x)
+  - right: nothing beyond the pin | pose gate passed every measured item | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 22** `20261001_071557_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v7.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the pose gate passed because Gemini handed the pin back almost unchanged (mean abs diff to the pin 6.9 / 6.3): the pin man's face, hair and heavy build. LESSON (pin 6, 3 times now): any 'FRAMING exactly ... never closer' line on this goal makes it return the photo; the only real replacements came from the inventory WITHOUT a framing line (size then 1.14-1.15x)
+  - right: nothing beyond the pin | pose gate passed every measured item | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 23** `20261001_113317_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.058 (goal x0.27 y0.21, render x0.28 y0.27); head position shift 0.072 (goal x0.52 y0.22, render x0.58 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.74 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.14
+- **attempt 24** `20261001_113317_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: failed checklist items: 6 (The head and face are his true size); 19 (All of the hair is his own); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | THE USER, 2026-10-01: the shirtless pencil-in-mouth picture is wrong. My diagnosis against the pin and his references: (1) items 19/28 hair: long loose curls hang over the ear and temple like the pin man's, his references show tight curls with short faded sides and the ear and scalp visible; (2) item 28 beard: patchy short stubble on the cheeks with a goatee, like the pin man's, his references show a FULL DENSE dark beard along the whole jaw and cheeks with neat edges; (3) the profile face cannot be scored, so identity was judged by eye and this is what the eye missed
+  - right: brush clamped in the mouth, head joined to the neck, lean build, framing and objects, tonal range (mean 76 vs 72) | pose gate passed every measured item | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 25** `20261001_113317_goal-pin-783485666539777055/v3_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: head position shift 0.071 (goal x0.52 y0.22, render x0.59 y0.25); head bow (nose below eye line / eye distance) goal +0.61, render +0.89 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.27
+- **attempt 26** `20261001_113317_goal-pin-783485666539777055/v4_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.050 (goal x0.27 y0.21, render x0.23 y0.24); size in the frame (shoulders-to-nose x2.2) x1.12
+- **attempt 27** `20261001_113318_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.049 (goal x0.27 y0.21, render x0.28 y0.26); head position shift 0.094 (goal x0.52 y0.22, render x0.61 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.76 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.22
+- **attempt 28** `20261001_113318_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.102 (goal x0.27 y0.21, render x0.34 y0.28); head position shift 0.064 (goal x0.52 y0.22, render x0.58 y0.25); head bow (nose below eye line / eye distance) goal +0.61, render +0.85 (bowed lower); neck/head direction 18 deg off
+- **attempt 29** `20261001_203454_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v9.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.057 (goal x0.27 y0.21, render x0.29 y0.26); head position shift 0.110 (goal x0.52 y0.22, render x0.61 y0.29); head bow (nose below eye line / eye distance) goal +0.61, render +0.80 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.26
+- **attempt 30** `20261001_203500_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v9.json)
+  - wrong: failed checklist items: 9 (The light on the face matches the photo); 10 (The face is not brighter than the neck and body); 12 (Head and face pose match the goal); 14 (Face position and alignment in the frame match the goal); 29 (The distance from the camera is the same as in the goal) | pose gate failed (head bow / position / size) and the face is lit 1.44x the pin's (108 vs 75)
+  - right: THE HAIR AND BEARD FIX WORKED: tight curls with short faded sides and the ear plainly visible, a full dense beard along the jaw, as in his references; brush clamped in his mouth; lean build | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 31** `20261001_203500_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v9.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 23 (There is a visible change); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the pin handed back almost unchanged (mean abs diff 5.4): the pin man's face, hair and beard; the pose gate passes it by construction
+  - right: nothing beyond the pin | pose gate passed every measured item | 19 of 30 checklist items passed, 7 not applicable
+- **attempt 32** `20261001_203945_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v9.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.049 (goal x0.27 y0.21, render x0.28 y0.26); size in the frame (shoulders-to-nose x2.2) x0.93
+- **attempt 33** `20261001_203949_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v9.json)
+  - wrong: failed checklist items: 9 (The light on the face matches the photo); 10 (The face is not brighter than the neck and body); 29 (The distance from the camera is the same as in the goal) | closest so far: pose gate failed only on size (x1.11 vs limit 1.07) and the face is lit 1.35x the pin's (101 vs 75, limit 1.30); the pin's face is shaded
+  - right: hair is his (tight curls, short sides, ear visible), beard full and dense along the jaw, brush clamped between the lips, head bow, framing and objects match; real replacement (diff to the pin 20) | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 34** `20261001_203954_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v9.json)
+  - wrong: failed checklist items: 9 (The light on the face matches the photo); 10 (The face is not brighter than the neck and body); 12 (Head and face pose match the goal); 14 (Face position and alignment in the frame match the goal); 29 (The distance from the camera is the same as in the goal) | pose gate failed (head position, bow, size) and the face is lit 1.44x the pin's
+  - right: hair and beard fix visible | 18 of 30 checklist items passed, 7 not applicable
+- **attempt 35** `20261001_213326_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v10.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the beard is patchy and sparse (visible skin on the cheeks, like the pin man's), not his full dense beard: item 28; pose gate and face light pass (bow 0.58, size 1.01, face 75 vs 75)
+  - right: best measured match to the pin (size 1.01, face brightness identical) and a real replacement; hair on top and the ear are right | pose gate passed every measured item | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 36** `20261001_213331_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539777055_v10.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | THE USER, 2026-10-01: none of the three look like him, negative progress in identity retention compared with the previous versions. My earlier pass of item 21 'by eye' was wrong, and so was dismissing the low ArcFace scores (0.23-0.31 on pin 5 against 0.733 for the earlier picture of the same pose) as unusable: the number was a real warning. Suspected cause: I replaced the references-driven wording ('exactly as in the FACE references: same length, density and shape') with my own geometric description of his hair and beard, and added a face-shade line, so the model leaned on my words instead of his photos; the face drawn is leaner and more angular with a heavier, darker beard than his references.
+  - right: pose gate passed every measured item | 21 of 30 checklist items passed, 7 not applicable
+- **attempt 37** `20261001_213335_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v10.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.045 (goal x0.27 y0.21, render x0.25 y0.25); head bow (nose below eye line / eye distance) goal +0.61, render +0.80 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.12
+- **attempt 38** `20261001_213339_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v11.json)
+  - wrong: pose gate failed: head position shift 0.056 (goal x0.52 y0.22, render x0.54 y0.28)
+- **attempt 39** `20261001_213343_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v11.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.045 (goal x0.27 y0.21, render x0.29 y0.25); size in the frame (shoulders-to-nose x2.2) x0.90
+- **attempt 40** `20261001_213347_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539777055_v11.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.085 (goal x0.27 y0.21, render x0.29 y0.29); head position shift 0.106 (goal x0.52 y0.22, render x0.61 y0.28); head bow (nose below eye line / eye distance) goal +0.61, render +1.06 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.22; neck/head direction 15 deg off
+- **attempt 41** `20261001_213352_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v10.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.61, render +0.73 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.18
+- **attempt 42** `20261001_213352_goal-pin-783485666539777055/v2_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v10.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.083 (goal x0.27 y0.21, render x0.24 y0.29); head position shift 0.086 (goal x0.52 y0.22, render x0.58 y0.28); head bow (nose below eye line / eye distance) goal +0.61, render +0.90 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.10
+- **attempt 43** `20261001_214539_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v12.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | not confirmed as him (profile, no ArcFace); same references-driven wording as pin 5 which failed identity
+  - right: pose gate passed | pose gate passed every measured item | 22 of 30 checklist items passed, 7 not applicable
+- **attempt 44** `20261001_214555_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v12.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.078 (goal x0.27 y0.21, render x0.31 y0.27); head position shift 0.069 (goal x0.52 y0.22, render x0.59 y0.24); head bow (nose below eye line / eye distance) goal +0.61, render +0.81 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.08; neck/head direction 18 deg off
+- **attempt 45** `20261001_214954_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.054 (goal x0.27 y0.21, render x0.27 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.70 (bowed lower)
+- **attempt 46** `20261001_214957_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.073 (goal x0.27 y0.21, render x0.29 y0.28); head position shift 0.075 (goal x0.52 y0.22, render x0.58 y0.27); head bow (nose below eye line / eye distance) goal +0.61, render +1.00 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.12
+- **attempt 47** `20261002_023555_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 29 (The distance from the camera is the same as in the goal) | overnight sample 2026-10-02 with the ORIGINAL wording (v8), four face photos, Pro: failed the fixed pose gate; identity cannot be scored on a bowed profile, the user chooses by eye
+  - right: scene and objects faithful | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 48** `20261002_023555_goal-pin-783485666539777055_2/v1_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 29 (The distance from the camera is the same as in the goal) | overnight sample 2026-10-02 with the ORIGINAL wording (v8), four face photos, Pro: failed the fixed pose gate; identity cannot be scored on a bowed profile, the user chooses by eye
+  - right: scene and objects faithful | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 49** `20261002_023555_goal-pin-783485666539777055_2/v2_0.jpg`: **FAIL (checklist)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 29 (The distance from the camera is the same as in the goal) | overnight sample 2026-10-02 with the ORIGINAL wording (v8), four face photos, Pro: failed the fixed pose gate; identity cannot be scored on a bowed profile, the user chooses by eye
+  - right: scene and objects faithful | 20 of 30 checklist items passed, 7 not applicable
+- **attempt 50** `20261002_041757_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.61, render +0.74 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.18
+- **attempt 51** `20261002_041802_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: head position shift 0.049 (goal x0.52 y0.22, render x0.56 y0.26); head bow (nose below eye line / eye distance) goal +0.61, render +0.71 (bowed lower); size in the frame (shoulders-to-nose x2.2) x1.11
+- **attempt 52** `20261002_042928_goal-pin-783485666539777055/v1_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539777055_v8.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.072 (goal x0.27 y0.21, render x0.27 y0.28); neck/head direction 18 deg off
+
+## motorcycle-outfit-men_07_mirror-selfie-cat-grey-tee-sweatpants
+
+11 pictures, 1 passed.
+
+- **attempt 1** `20260930_235318_goal-pin-783485666539777115/v1_0.jpg`: **FAIL (checklist)**, identity 0.19 (Flash, pin_783485666539777115.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 7 mirror selfie with cat: pose gate PASS, watermark gone; identity 0.188 (looks like a different man), physique still the goal man's huge arms
+  - right: watermark gone; mirror, cat, phone and room faithful | pose gate passed every measured item | identity 0.19 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 2** `20260930_235318_goal-pin-783485666539777115/v2_0.jpg`: **FAIL (checklist)**, identity 0.44 (Flash, pin_783485666539777115.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 7: pose gate PASS; identity 0.442 gray zone (needs the user's eye); slimmer arms than the goal but the sweatpants came out blue-grey where the goal's are light grey
+  - right: slimmer arms than the pin; identity 0.44 is the best of the round; cat, phone, room faithful | pose gate passed every measured item | identity 0.44 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 3** `20260930_235318_goal-pin-783485666539777115/v3_0.jpg`: **FAIL (checklist)**, identity 0.11 (Flash, pin_783485666539777115.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 7: pose gate PASS; identity 0.106 (not him); goal man's huge arms
+  - right: pose and scene faithful | pose gate passed every measured item | identity 0.11 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 4** `20260930_235318_goal-pin-783485666539777115/v4_0.jpg`: **FAIL (checklist)**, identity 0.45 (Flash, pin_783485666539777115.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 7: pose gate PASS; best face of the four, identity 0.454 gray zone (needs the user's eye); physique is still the goal man's thick arms and forearms, not his slim build
+  - right: best face of this round (identity 0.454); light-grey sweatpants and the scene faithful | pose gate passed every measured item | identity 0.45 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 5** `20260930_235828_goal-pin-783485666539777115/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.12 (Flash, pin_783485666539777115_v2.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.10
+  - right: identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 6** `20260930_235828_goal-pin-783485666539777115/v2_0.jpg`: **FAIL (checklist)**, identity 0.12 (Flash, pin_783485666539777115_v2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 7 re-run: identity 0.089, arms still heavy
+  - right: slim-build wording worked on the arms; scene faithful | pose gate passed every measured item | identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 7** `20260930_235828_goal-pin-783485666539777115/v3_0.jpg`: **FAIL (checklist)**, identity 0.14 (Flash, pin_783485666539777115_v2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | pin 7 re-run: identity 0.150 (not him)
+  - right: light-grey sweatpants kept after naming the colour; scene faithful | pose gate passed every measured item | identity 0.14 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 8** `20260930_235828_goal-pin-783485666539777115/v4_0.jpg`: **FAIL (checklist)**, identity 0.59 (Flash, pin_783485666539777115_v2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | THE USER, 2026-10-01: can work with more clarity in the face; it is very smoothened, hence negative points on identity
+  - right: the user: it can work; slim arms, light-grey sweatpants, cat, phone, mirror and room faithful; head bow 0.24 = the pin | pose gate passed every measured item | identity 0.59 (accept band) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 9** `20261001_043443_goal-pin-783485666539777115/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.07 (Flash, pin_783485666539777115_v3.json)
+  - wrong: pose gate failed: his right forearm direction 15 deg off
+  - right: identity 0.07 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 10** `20261001_043443_goal-pin-783485666539777115/v2_0.jpg`: **NOT CHECKED YET**, identity 0.29 (Flash, pin_783485666539777115_v3.json)
+  - right: pose gate passed every measured item | identity 0.29 (gray zone, needs a human eye)
+- **attempt 11** `20261001_043443_goal-pin-783485666539777115/v3_0.jpg`: **PASS (all 30 items)**, identity 0.71 (Flash, pin_783485666539777115_v3.json)
+  - right: face sharp with real skin texture and individual beard hairs after the sharp-face line was added; identity 0.709 (accept band); pose gate passed; phone hand and cat clean; light-grey sweatpants, mirror, room and dim light as the pin; watermark gone | pose gate passed every measured item | identity 0.71 (accept band) | 24 of 30 checklist items passed, 6 not applicable
+
+## motorcycle-outfit-men_08_mirror-selfie-cat-shirtless
+
+8 pictures, 1 passed.
+
+- **attempt 1** `20260930_235607_goal-pin-783485666539777118/v1_0.jpg`: **FAIL (checklist)**, identity 0.75 (Flash, pin_783485666539777118.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 8 shirtless with cat: pose gate PASS, identity 0.752; physique is still heavily muscular like the goal (big pecs, arms), not his slim build
+  - right: highest identity of the project for a foreign pin (0.752); cat, phone, watch, chain, sweatpants and the blue edge light faithful | pose gate passed every measured item | identity 0.75 (accept band) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 2** `20260930_235607_goal-pin-783485666539777118/v2_0.jpg`: **FAIL (checklist)**, identity 0.68 (Flash, pin_783485666539777118.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 8: pose gate PASS, identity 0.680; physique moderately muscular, still broader than his
+  - right: identity 0.680; scene, cat, watch and chain faithful | pose gate passed every measured item | identity 0.68 (accept band) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 3** `20260930_235607_goal-pin-783485666539777118/v3_0.jpg`: **FAIL (checklist)**, identity 0.66 (Flash, pin_783485666539777118.json)
+  - wrong: failed checklist items: 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | re-audit: on the body sheet at the same torso scale the chest, shoulders and visible abs are clearly more muscular than his body photo IMG_6923 (flat chest, no abs); face, hands, cat, watch and scene pass, identity 0.659
+  - right: identity 0.659; face, hands, cat and scene faithful (only the body was too muscular) | pose gate passed every measured item | identity 0.66 (accept band) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 4** `20260930_235607_goal-pin-783485666539777118/v4_0.jpg`: **FAIL (checklist)**, identity 0.45 (Flash, pin_783485666539777118.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive) | pin 8: pose gate PASS, identity 0.451 gray zone (needs the user's eye); slimmest body
+  - right: slimmest body of the four; scene faithful | pose gate passed every measured item | identity 0.45 (gray zone, needs a human eye) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 5** `20261001_041044_goal-pin-783485666539777118/v1_0.jpg`: **NOT CHECKED YET**, identity 0.43 (Flash, pin_783485666539777118_v2.json)
+  - right: pose gate passed every measured item | identity 0.43 (gray zone, needs a human eye)
+- **attempt 6** `20261001_041044_goal-pin-783485666539777118/v2_0.jpg`: **PASS (accepted by the user)**, identity 0.63 (Flash, pin_783485666539777118_v2.json)
+  - wrong: the user accepted it anyway: the user, 2026-10-01: the mirror selfie cat shirtless is quite good actually
+  - right: identity 0.628; slim flat-chested build with no abs like his body photo; phone hand, cat, watch, chain and sweatpants clean; this is the picture that passes | pose gate passed every measured item | identity 0.63 (accept band) | 24 of 30 checklist items passed, 6 not applicable
+- **attempt 7** `20261001_041044_goal-pin-783485666539777118/v3_0.jpg`: **NOT CHECKED YET**, identity 0.43 (Flash, pin_783485666539777118_v2.json)
+  - right: pose gate passed every measured item | identity 0.43 (gray zone, needs a human eye)
+- **attempt 8** `20261001_041044_goal-pin-783485666539777118/v4_0.jpg`: **NOT CHECKED YET**, identity 0.39 (Flash, pin_783485666539777118_v2.json)
+  - right: pose gate passed every measured item | identity 0.39 (gray zone, needs a human eye)
+
+## motorcycle-outfit-men_09_black-polo-leaning-over-desk-office
+
+78 pictures, 1 passed.
+
+- **attempt 1** `20260930_235828_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (checklist)**, identity 0.07 (Flash, pin_783485666539779317.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 29 (The distance from the camera is the same as in the goal) | pin 9 classroom: pose gate FAIL head bow +0.67 vs goal +0.87 (chin up, more level), size x1.14; identity 0.074 (not him); arms still the goal man's
+  - right: scene and the foreground person unchanged; polo, trousers, plant, shelf, notice board faithful | identity 0.07 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 20 of 30 checklist items passed, 6 not applicable
+- **attempt 2** `20260930_235828_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)**, identity 0.39 (Flash, pin_783485666539779317.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 9: pose gate FAIL head bow +0.75 vs +0.87 (more level); identity 0.387 gray zone; arms and shoulders still the goal man's heavy build
+  - right: head bow passed the pose gate after the steep-bow wording; scene faithful; curly hair and dark beard | identity 0.39 (gray zone, needs a human eye) | 21 of 30 checklist items passed, 6 not applicable
+- **attempt 3** `20261001_000237_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539779317_v2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 9 classroom re-run (steep head bow + slim-build wording): pose gate PASS now (head bow matches the goal); scene and the foreground person unchanged; curly black hair and dark beard; identity score 0.13-0.16 (bowed head, gray zone, needs the user's eye); upper arms and biceps still heavy under the polo sleeves, the goal man's build; sparkle bottom-right left as produced
+  - right: steep head bow passed the pose gate; scene faithful | pose gate passed every measured item | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 4** `20261001_000237_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)**, identity 0.16 (Flash, pin_783485666539779317_v2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | pin 9 classroom re-run (steep head bow + slim-build wording): pose gate PASS now (head bow matches the goal); scene and the foreground person unchanged; curly black hair and dark beard; identity score 0.13-0.16 (bowed head, gray zone, needs the user's eye); upper arms and biceps still heavy under the polo sleeves, the goal man's build; sparkle bottom-right left as produced
+  - right: steep head bow passed the pose gate; scene faithful | pose gate passed every measured item | identity 0.16 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 5** `20261001_000237_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (checklist)**, identity 0.13 (Flash, pin_783485666539779317_v2.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique); 29 (The distance from the camera is the same as in the goal) | pin 9 re-run v3: head bow +0.71 vs +0.87, size x1.09
+  - right: identity 0.13 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 20 of 30 checklist items passed, 6 not applicable
+- **attempt 6** `20261001_002901_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.13 (Flash, pin_783485666539779317_v3.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.72 (more level, chin up)
+  - right: identity 0.13 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 7** `20261001_041045_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.13 (Pro, pin_783485666539779317_v3.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.69 (more level, chin up)
+  - right: identity 0.13 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 8** `20261001_041045_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.21 (Pro, pin_783485666539779317_v3.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.047 (goal x0.45 y0.48, render x0.50 y0.46); head position shift 0.040 (goal x0.33 y0.47, render x0.36 y0.45); head bow (nose below eye line / eye distance) goal +0.87, render +0.55 (more level, chin up); size in the frame (torso) x1.08
+  - right: identity 0.21 (gray zone, needs a human eye)
+- **attempt 9** `20261001_041443_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.25 (Flash, pin_783485666539779317_v3.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.73 (more level, chin up); size in the frame (torso) x1.08
+  - right: identity 0.25 (gray zone, needs a human eye)
+- **attempt 10** `20261001_041443_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.45 (Flash, pin_783485666539779317_v3.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.71 (more level, chin up)
+  - right: identity 0.45 (gray zone, needs a human eye)
+- **attempt 11** `20261001_041846_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539779317_v4.json)
+  - wrong: failed checklist items: 6 (The head and face are his true size); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | the curls are an oversized ball, bigger than his head should be (head too big, unreal); arms and shoulders are still the goal man's heavy build
+  - right: pose gate passed after the steep-bow wording (head bow matches the pin); scene and the foreground person unchanged; polo, trousers and props faithful | pose gate passed every measured item | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 12** `20261001_041846_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539779317_v4.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.63 (more level, chin up)
+- **attempt 13** `20261001_041846_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (checklist)**, identity 0.32 (Flash, pin_783485666539779317_v4.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.317 is in the gray zone (needs a human eye); upper arms, forearms and shoulders are still the goal man's heavy muscular build under tight polo sleeves although the wording asked for thin arms
+  - right: pose gate passed (steep head bow matches the pin); his curly hair and dark beard look right; scene, foreground person, polo and trousers faithful; best face of the pin 9 samples | pose gate passed every measured item | identity 0.32 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 14** `20261001_041846_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (checklist)**, identity 0.05 (Flash, pin_783485666539779317_v4.json)
+  - wrong: failed checklist items: 19 (All of the hair is his own); 21 (It is unmistakably him, not just attractive); 28 (His face, hair, beard and moustache come from his FACE REFERENCE photos, never from the goal's face, even when) | the face and the straight dark hair are the goal man's, not his curls (identity 0.054); the man was not replaced
+  - right: pose gate passed; scene faithful | pose gate passed every measured item | identity 0.05 (rejected band, not meaningful when the face is hidden, bowed or in profile) | 21 of 30 checklist items passed, 6 not applicable
+- **attempt 15** `20261001_063341_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.06 (Flash, pin_783485666539779317_v5.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.73 (more level, chin up); size in the frame (torso) x1.08
+  - right: identity 0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 16** `20261001_063341_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.14 (Flash, pin_783485666539779317_v5.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.63 (more level, chin up)
+  - right: identity 0.14 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 17** `20261001_063341_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.12 (Flash, pin_783485666539779317_v5.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.66 (more level, chin up); size in the frame (torso) x1.10
+  - right: identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 18** `20261001_063341_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.31 (Flash, pin_783485666539779317_v5.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.08
+  - right: identity 0.31 (gray zone, needs a human eye)
+- **attempt 19** `20261001_064734_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.12 (Flash, pin_783485666539779317_v6.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.12
+  - right: identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 20** `20261001_064734_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.03 (Flash, pin_783485666539779317_v6.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.102 (goal x0.45 y0.48, render x0.55 y0.47); head position shift 0.117 (goal x0.33 y0.47, render x0.44 y0.49); size in the frame (torso) x0.92; his right forearm direction 18 deg off; his right hand position shift 0.141 (goal x0.34 y0.87, render x0.48 y0.84); his left hand position shift 0.192 (goal x0.45 y0.87, render x0.64 y0.84)
+  - right: identity 0.03 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 21** `20261001_064734_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.33 (Flash, pin_783485666539779317_v6.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.09
+  - right: identity 0.33 (gray zone, needs a human eye)
+- **attempt 22** `20261001_064734_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.15 (Flash, pin_783485666539779317_v6.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.78 (more level, chin up); size in the frame (torso) x1.11
+  - right: identity 0.15 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 23** `20261001_065418_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.40 (Pro, pin_783485666539779317_v6.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.62 (more level, chin up)
+  - right: identity 0.40 (gray zone, needs a human eye)
+- **attempt 24** `20261001_065418_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.24 (Pro, pin_783485666539779317_v6.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.71 (more level, chin up)
+  - right: identity 0.24 (gray zone, needs a human eye)
+- **attempt 25** `20261001_071557_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.09 (Flash, pin_783485666539779317_v7.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.65 (more level, chin up)
+  - right: identity 0.09 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 26** `20261001_071557_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)**, identity 0.36 (Flash, pin_783485666539779317_v7.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.364 is in the gray zone (needs a human eye; bowed head); the upper arms, forearms and shoulders are still the pin man's heavy build under tight polo sleeves (the tank-top 'visible consequence' wording has not been tried on this goal's polo yet)
+  - right: first pin 9 picture that passes the pose gate with the right head bow AND the right size (both measured), with the numeric framing lines; his curls and dark beard; scene and the foreground person unchanged; hands and desk faithful; best face of the pin 9 samples | pose gate passed every measured item | identity 0.36 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 27** `20261001_071557_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.14 (Flash, pin_783485666539779317_v7.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.76 (more level, chin up)
+  - right: identity 0.14 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 28** `20261001_113317_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.23 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.67 (more level, chin up)
+  - right: identity 0.23 (gray zone, needs a human eye)
+- **attempt 29** `20261001_113317_goal-pin-783485666539779317/v1_0.png`: **NOT CHECKED YET** (Flash, pin_783485666539779317_v8.json)
+- **attempt 30** `20261001_113317_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.15 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.72 (more level, chin up)
+  - right: identity 0.15 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 31** `20261001_113317_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.34 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.07
+  - right: identity 0.34 (gray zone, needs a human eye)
+- **attempt 32** `20261001_113317_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.33 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.67 (more level, chin up); size in the frame (torso) x1.09
+  - right: identity 0.33 (gray zone, needs a human eye)
+- **attempt 33** `20261001_114849_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.11 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head position shift 0.055 (goal x0.33 y0.47, render x0.35 y0.42); head bow (nose below eye line / eye distance) goal +0.87, render +0.77 (more level, chin up); neck/head direction 16 deg off
+  - right: identity 0.11 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 34** `20261001_114849_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.08 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.75 (more level, chin up); size in the frame (torso) x1.09
+  - right: identity 0.08 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 35** `20261001_114849_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.20 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.78 (more level, chin up)
+  - right: identity 0.20 (gray zone, needs a human eye)
+- **attempt 36** `20261001_114849_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.25 (Flash, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.53 (more level, chin up); his left hand position shift 0.123 (goal x0.45 y0.87, render x0.57 y0.84)
+  - right: identity 0.25 (gray zone, needs a human eye)
+- **attempt 37** `20261001_114851_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.27 (Pro, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.59 (more level, chin up)
+  - right: identity 0.27 (gray zone, needs a human eye)
+- **attempt 38** `20261001_114851_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539779317_v8.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.11
+- **attempt 39** `20261001_115319_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.29 (Flash, pin_783485666539779317_v9.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.75 (more level, chin up)
+  - right: identity 0.29 (gray zone, needs a human eye)
+- **attempt 40** `20261001_115319_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.33 (Flash, pin_783485666539779317_v9.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.73 (more level, chin up)
+  - right: identity 0.33 (gray zone, needs a human eye)
+- **attempt 41** `20261001_115319_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.22 (Flash, pin_783485666539779317_v9.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.73 (more level, chin up)
+  - right: identity 0.22 (gray zone, needs a human eye)
+- **attempt 42** `20261001_115625_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.28 (Flash, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.66 (more level, chin up)
+  - right: identity 0.28 (gray zone, needs a human eye)
+- **attempt 43** `20261001_115625_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.32 (Flash, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.69 (more level, chin up)
+  - right: identity 0.32 (gray zone, needs a human eye)
+- **attempt 44** `20261001_115625_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (checklist)**, identity 0.31 (Flash, pin_783485666539779317_v10.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.312 is in the gray zone (needs a human eye; bowed head); the upper arms, forearms and shoulders are still the pin man's heavy muscular build in tight polo sleeves (on the body sheet they are far thicker than his body photo IMG_6923)
+  - right: FIRST pin 9 picture that passes the whole pose gate: head bow 0.85 vs 0.87, torso size x1.04, body shift 0.011, head shift 0.002, every limb within 4 degrees, both hand positions within 0.03; the fix was asking for a bow MORE STEEP than the pin (nose 1.1 eye distances below the eye line) because renders land about 0.12 short of the asked bow; scene, foreground person, polo, trousers, desk and hands faithful; his curls and dark beard | pose gate passed every measured item | identity 0.31 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 45** `20261001_115625_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.25 (Flash, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.72 (more level, chin up)
+  - right: identity 0.25 (gray zone, needs a human eye)
+- **attempt 46** `20261001_115629_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.22 (Pro, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.113 (goal x0.45 y0.48, render x0.55 y0.42); head position shift 0.162 (goal x0.33 y0.47, render x0.48 y0.42); head bow (nose below eye line / eye distance) goal +0.87, render +0.57 (more level, chin up); size in the frame (torso) x1.11; torso direction 21 deg off; his left forearm direction 17 deg off; his right hand position shift 0.065 (goal x0.34 y0.87, render x0.41 y0.85); his left hand position shift 0.214 (goal x0.45 y0.87, render x0.66 y0.84)
+  - right: identity 0.22 (gray zone, needs a human eye)
+- **attempt 47** `20261001_115629_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)** (Pro, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.069 (goal x0.45 y0.48, render x0.52 y0.47); head position shift 0.108 (goal x0.33 y0.47, render x0.43 y0.49); head bow (nose below eye line / eye distance) goal +0.87, render +0.63 (more level, chin up); size in the frame (torso) x0.91; neck/head direction 22 deg off
+- **attempt 48** `20261001_120058_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539779317_v11.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.61 (more level, chin up)
+- **attempt 49** `20261001_120058_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.06 (Flash, pin_783485666539779317_v11.json)
+  - wrong: pose gate failed: head position shift 0.133 (goal x0.33 y0.47, render x0.45 y0.44); head bow (nose below eye line / eye distance) goal +0.87, render +0.54 (more level, chin up); torso direction 34 deg off; his right upper arm direction 18 deg off; his right forearm direction 20 deg off; his left forearm direction 21 deg off; his right hand position shift 0.070 (goal x0.34 y0.87, render x0.28 y0.84); his left hand position shift 0.244 (goal x0.45 y0.87, render x0.69 y0.92)
+  - right: identity 0.06 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 50** `20261001_120058_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539779317_v11.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.043 (goal x0.45 y0.48, render x0.48 y0.44); head position shift 0.097 (goal x0.33 y0.47, render x0.39 y0.40); head bow (nose below eye line / eye distance) goal +0.87, render +0.77 (more level, chin up); size in the frame (torso) x1.18; torso direction 15 deg off; neck/head direction 27 deg off
+- **attempt 51** `20261001_163323_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (checklist)**, identity 0.38 (Flash, pin_783485666539779317_v10.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal) | pose gate failed (head too level or size) so not audited further
+  - right: scene faithful | identity 0.38 (gray zone, needs a human eye) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 52** `20261001_163323_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)**, identity 0.30 (Flash, pin_783485666539779317_v10.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal) | pose gate failed (head too level or size) so not audited further
+  - right: scene faithful | identity 0.30 (gray zone, needs a human eye) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 53** `20261001_163323_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (checklist)**, identity 0.37 (Flash, pin_783485666539779317_v10.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.369 gray zone; on the body sheet the upper arms and forearms are slimmer than the pin man's but still far heavier than his body photo IMG_6923 (build not his)
+  - right: the overshoot-bow wording reproduced: head bow 0.85 vs 0.87, torso size x1.06, whole pose gate passed again (2nd time in 2 batches, ~1 in 4 samples); his curls and dark beard; scene, foreground person, desk and hands faithful | pose gate passed every measured item | identity 0.37 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 54** `20261001_163323_goal-pin-783485666539779317/v4_0.jpg`: **FAIL (checklist)**, identity 0.24 (Flash, pin_783485666539779317_v10.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal) | pose gate failed (head too level or size) so not audited further
+  - right: scene faithful | identity 0.24 (gray zone, needs a human eye) | 23 of 30 checklist items passed, 6 not applicable
+- **attempt 55** `20261001_163326_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.32 (Pro, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.68 (more level, chin up)
+  - right: identity 0.32 (gray zone, needs a human eye)
+- **attempt 56** `20261001_163326_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.12 (Pro, pin_783485666539779317_v10.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.63 (more level, chin up); size in the frame (torso) x1.10
+  - right: identity 0.12 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 57** `20261001_163330_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.24 (Flash, pin_783485666539779317_v11.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.70 (more level, chin up); size in the frame (torso) x1.08
+  - right: identity 0.24 (gray zone, needs a human eye)
+- **attempt 58** `20261001_163330_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.23 (Flash, pin_783485666539779317_v11.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.70 (more level, chin up)
+  - right: identity 0.23 (gray zone, needs a human eye)
+- **attempt 59** `20261001_163330_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.31 (Flash, pin_783485666539779317_v11.json)
+  - wrong: pose gate failed: body position (shoulder midpoint) shift 0.052 (goal x0.45 y0.48, render x0.50 y0.46); head position shift 0.051 (goal x0.33 y0.47, render x0.37 y0.45); head bow (nose below eye line / eye distance) goal +0.87, render +0.68 (more level, chin up)
+  - right: identity 0.31 (gray zone, needs a human eye)
+- **attempt 60** `20261001_165831_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (checklist)**, identity 0.35 (Flash, pin_783485666539779317_v12.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.346 gray zone; arms and forearms still the pin man's heavy muscle (body sheet vs IMG_6923)
+  - right: pose gate fully passed: bow 0.83 vs 0.87, torso x1.03, body shift 0.010; scene, hands, polo and his curls and beard faithful | pose gate passed every measured item | identity 0.35 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 61** `20261001_165831_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.36 (Flash, pin_783485666539779317_v12.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.75 (more level, chin up)
+  - right: identity 0.36 (gray zone, needs a human eye)
+- **attempt 62** `20261001_165831_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.15 (Flash, pin_783485666539779317_v12.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.68 (more level, chin up); size in the frame (torso) x1.09
+  - right: identity 0.15 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 63** `20261001_165837_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.20 (Flash, pin_783485666539779317_v12.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.73 (more level, chin up)
+  - right: identity 0.20 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 64** `20261001_165837_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.11 (Flash, pin_783485666539779317_v12.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.66 (more level, chin up)
+  - right: identity 0.11 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 65** `20261001_165837_goal-pin-783485666539779317/v3_0.jpg`: **NOT CHECKED YET**, identity 0.10 (Flash, pin_783485666539779317_v12.json)
+  - right: pose gate passed every measured item | identity 0.10 (rejected band, not meaningful when the face is hidden, bowed or in profile)
+- **attempt 66** `20261001_165843_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.33 (Flash, pin_783485666539779317_v12.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.71 (more level, chin up)
+  - right: identity 0.33 (gray zone, needs a human eye)
+- **attempt 67** `20261001_165843_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539779317_v12.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity not scorable here; arms and forearms still the pin man's heavy muscle
+  - right: pose gate fully passed: bow 0.92 vs 0.87 (deeper, within 0.08), torso x1.02, body shift 0.007; scene faithful | pose gate passed every measured item | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 68** `20261001_165843_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.34 (Flash, pin_783485666539779317_v12.json)
+  - wrong: pose gate failed: head position shift 0.042 (goal x0.33 y0.47, render x0.35 y0.44); head bow (nose below eye line / eye distance) goal +0.87, render +0.72 (more level, chin up)
+  - right: identity 0.34 (gray zone, needs a human eye)
+- **attempt 69** `20261001_170359_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539779317_stage2.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.79 (more level, chin up)
+- **attempt 70** `20261001_170359_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)**, identity 0.32 (Flash, pin_783485666539779317_stage2.json)
+  - wrong: failed checklist items: 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | identity 0.317 gray zone; arms: the body-only slimming edit barely changed them (arm crop vs the source render and the pin man looks the same: bulging biceps and thick forearm under the sleeve); the polo is still tight
+  - right: body-only edit kept the head, bow (0.83), size (1.04) and framing: the pose gate passes on an edited render, so a body-only chain is viable for this goal; his curls and beard; scene faithful | pose gate passed every measured item | identity 0.32 (gray zone, needs a human eye) | 22 of 30 checklist items passed, 6 not applicable
+- **attempt 71** `20261001_170359_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.27 (Flash, pin_783485666539779317_stage2.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.79 (more level, chin up); size in the frame (torso) x1.07
+  - right: identity 0.27 (gray zone, needs a human eye)
+- **attempt 72** `20261001_170403_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.26 (Flash, pin_783485666539779317_stage2.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.78 (more level, chin up); size in the frame (torso) x1.07
+  - right: identity 0.26 (gray zone, needs a human eye)
+- **attempt 73** `20261001_170403_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)** (Flash, pin_783485666539779317_stage2.json)
+  - wrong: pose gate failed: size in the frame (torso) x1.08
+- **attempt 74** `20261001_170403_goal-pin-783485666539779317/v3_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.33 (Flash, pin_783485666539779317_stage2.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.77 (more level, chin up)
+  - right: identity 0.33 (gray zone, needs a human eye)
+- **attempt 75** `20261001_170832_goal-pin-783485666539779317/v1_0.jpg`: **FAIL (checklist)** (Flash, pin_783485666539779317_stage3.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | stage 3a render: pose gate failed on size (torso x1.09 / x1.07 > 1.07); v1 also grew glasses the pin does not have
+  - right: arms visibly slimmer with the explicit magnitudes | 21 of 30 checklist items passed, 6 not applicable
+- **attempt 76** `20261001_170832_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (checklist)**, identity 0.31 (Flash, pin_783485666539779317_stage3.json)
+  - wrong: failed checklist items: 12 (Head and face pose match the goal); 21 (It is unmistakably him, not just attractive); 26 (Scenery, background and clothes are unchanged from the source photo, and so is the physique) | stage 3a render: pose gate failed on size (torso x1.09 / x1.07 > 1.07); v1 also grew glasses the pin does not have
+  - right: arms visibly slimmer with the explicit magnitudes | identity 0.31 (gray zone, needs a human eye) | 21 of 30 checklist items passed, 6 not applicable
+- **attempt 77** `20261001_170837_goal-pin-783485666539779317/v1_0.jpg`: **PASS (all 30 items)**, identity 0.32 (Flash, pin_783485666539779317_stage3b.json)
+  - right: TWO-STAGE ROUTE that finally worked for pin 9: stage 1 = overshoot-bow wording (a render with the right head, bow 0.83 and size 1.03, passed ~6 of 9 samples); stage 2 = a body-only edit of that render with EXPLICIT MAGNITUDES (upper arms a third thinner, shoulders a fifth narrower, smaller chest, loose polo), which kept the head and slimmed the arms; the same edit without magnitudes changed nothing | pose gate passed every measured item | identity 0.32 (gray zone, needs a human eye) | 24 of 30 checklist items passed, 6 not applicable
+- **attempt 78** `20261001_170837_goal-pin-783485666539779317/v2_0.jpg`: **FAIL (pose gate, not checked)**, identity 0.33 (Flash, pin_783485666539779317_stage3b.json)
+  - wrong: pose gate failed: head bow (nose below eye line / eye distance) goal +0.87, render +0.78 (more level, chin up)
+  - right: identity 0.33 (gray zone, needs a human eye)

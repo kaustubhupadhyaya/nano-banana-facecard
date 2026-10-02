@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a picture gets made</title>
+<meta name="description" content="The complete image generation process of nano-banana-facecard: routes, the Gemini session, both pipelines, every gate, the 30-item audit, the loop, the records, credits and the video add-on.">
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --surface2:#efede6; --ink:#1c2230; --muted:#566074; --line:#d9d6cc;
+  --accent:#3451c7; --accent-ink:#ffffff;
+  --gemini:#6741d9; --code:#0b6e80; --you:#b35c00; --agent:#b3205a;
+  --good:#237a35; --bad:#b32222; --warn:#9a5b00;
+  --shadow:0 1px 2px rgba(20,25,40,.06),0 4px 14px rgba(20,25,40,.05);
+  --radius:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10131a; --surface:#181d28; --surface2:#212838; --ink:#e7eaf1; --muted:#a0a9bb; --line:#2c3446;
+    --accent:#8aa0ff; --accent-ink:#0d1020;
+    --gemini:#b8a0ff; --code:#53d1e3; --you:#ffb457; --agent:#ff8fb8;
+    --good:#6fdc84; --bad:#ff8c8c; --warn:#ffc15a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10131a; --surface:#181d28; --surface2:#212838; --ink:#e7eaf1; --muted:#a0a9bb; --line:#2c3446;
+  --accent:#8aa0ff; --accent-ink:#0d1020;
+  --gemini:#b8a0ff; --code:#53d1e3; --you:#ffb457; --agent:#ff8fb8;
+  --good:#6fdc84; --bad:#ff8c8c; --warn:#ffc15a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+code,pre,kbd{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em}
+code{background:var(--surface2);border:1px solid var(--line);border-radius:5px;padding:.05em .35em;overflow-wrap:anywhere}
+pre{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:auto;margin:0;line-height:1.5}
+pre code{background:none;border:0;padding:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+@media (min-width:700px){.wrap{padding:0 28px}}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:12px;height:52px}
+.brand{font-weight:700;white-space:nowrap}
+.nav{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:8px;font-size:.9rem}
+.nav a:hover{background:var(--surface2);color:var(--ink)}
+.nav a[aria-current="true"]{background:var(--surface2);color:var(--ink);font-weight:600}
+.iconbtn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+.iconbtn:hover{background:var(--surface2)}
+
+/* hero */
+.hero{padding:44px 0 26px}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.12;margin:0 0 14px;letter-spacing:-.02em}
+.hero p.lead{font-size:1.12rem;color:var(--muted);max-width:60ch;margin:0 0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:.88rem}
+
+/* sections */
+section{padding:30px 0;scroll-margin-top:60px}
+section>.wrap>h2{font-size:1.7rem;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+.kicker{color:var(--muted);margin:0 0 20px;max-width:68ch}
+h3{font-size:1.1rem;margin:22px 0 8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.muted{color:var(--muted)}
+.note{border-left:4px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0;padding:10px 14px;margin:14px 0}
+.note.warn{border-color:var(--warn)}
+.note.bad{border-color:var(--bad)}
+.note.good{border-color:var(--good)}
+
+/* actors */
+.actor{display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;border-radius:999px;padding:1px 10px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.actor i{font-style:normal}
+.a-gemini{color:var(--gemini)} .a-code{color:var(--code)} .a-you{color:var(--you)} .a-agent{color:var(--agent)}
+.actor-card{border-top:4px solid currentColor}
+.actor-card h3{margin:6px 0 6px;color:var(--ink)}
+.actor-card ul{margin:0;padding-left:1.1em;color:var(--ink)}
+.actor-card li{margin:3px 0}
+
+/* picker */
+.options{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-bottom:14px}
+.opt{text-align:left;border:2px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:12px 14px;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.opt b{display:block}
+.opt span{color:var(--muted);font-size:.9rem}
+.result dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:8px 16px;margin:0}
+.result dt{font-weight:600;color:var(--muted)}
+.result dd{margin:0;min-width:0}
+@media (max-width:640px){.result dl{grid-template-columns:minmax(0,1fr)}.result dt{margin-top:6px}}
+.cmd{position:relative;min-width:0}
+.cmd pre{padding-right:70px}
+.copy{position:absolute;top:8px;right:8px;font-size:.78rem;padding:3px 9px}
+
+/* stepper */
+.stepper{display:grid;gap:14px;grid-template-columns:minmax(210px,300px) 1fr}
+@media (max-width:820px){.stepper{grid-template-columns:1fr}}
+.steplist{display:flex;flex-direction:column;gap:6px}
+@media (max-width:820px){.steplist{flex-direction:row;overflow-x:auto;padding-bottom:4px}.steplist button{min-width:150px}}
+.steplist button{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 10px;cursor:pointer}
+.steplist button:hover{border-color:var(--accent)}
+.steplist button[aria-selected="true"]{border-color:var(--accent);background:var(--surface2);box-shadow:inset 3px 0 0 var(--accent)}
+.num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-size:.8rem;font-weight:700}
+[aria-selected="true"] .num{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.steplist .t{font-size:.92rem;line-height:1.3}
+.panel{min-height:300px}
+.panel h3{margin:0 0 8px;font-size:1.25rem}
+.panel .who{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.panel ul{margin:8px 0;padding-left:1.2em}
+.panel li{margin:5px 0}
+.why{background:var(--surface2);border-radius:10px;padding:10px 14px;margin-top:12px}
+.why b{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+.pager{display:flex;gap:8px;align-items:center;margin-top:14px}
+.pager .count{margin-left:auto;color:var(--muted);font-size:.9rem}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 14px;cursor:pointer}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:ui-monospace,Consolas,monospace;font-size:.88rem;white-space:nowrap}
+.tag{display:inline-block;border-radius:6px;padding:0 7px;font-size:.78rem;font-weight:600;border:1px solid currentColor}
+.tag.hard{color:var(--bad)} .tag.soft{color:var(--warn)} .tag.prov{color:var(--you)}
+.segmented{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:0 0 12px;background:var(--surface)}
+.segmented button{border:0;background:none;padding:6px 14px;cursor:pointer}
+.segmented button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+
+/* checklist simulator */
+.audit-top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.search{flex:1;min-width:200px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;padding:8px 12px;font:inherit}
+.verdict{border-radius:10px;padding:10px 14px;font-weight:700;border:2px solid currentColor}
+.verdict.ok{color:var(--good)} .verdict.no{color:var(--bad)}
+.group{margin:16px 0 6px;font-weight:700;color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.06em}
+.items{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.item{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 11px;cursor:pointer;width:100%}
+.item:hover{border-color:var(--accent)}
+.item .n{flex:none;width:28px;height:28px;border-radius:7px;background:var(--surface2);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.item .st{flex:none;margin-left:auto;font-size:.75rem;font-weight:700;border:1px solid currentColor;border-radius:6px;padding:0 6px;align-self:flex-start}
+.item[data-s="pass"] .st{color:var(--good)} .item[data-s="fail"]{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface))}
+.item[data-s="fail"] .st{color:var(--bad)} .item[data-s="na"]{opacity:.7} .item[data-s="na"] .st{color:var(--muted)}
+.item small{display:block;color:var(--muted)}
+.meas{color:var(--code);font-size:.75rem;font-weight:700}
+
+/* calculator */
+.calc{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media (max-width:760px){.calc{grid-template-columns:1fr}}
+.field{display:flex;align-items:center;gap:10px;margin:8px 0}
+.field label{flex:1}
+.field input,.field select{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 8px;font:inherit}
+.field input{width:84px;text-align:right}
+.field select{max-width:230px}
+.cmd pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.bar{height:16px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);overflow:hidden;position:relative}
+.bar .hi{position:absolute;inset:0 auto 0 0;background:color-mix(in srgb,var(--accent) 38%,transparent)}
+.bar .lo{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.big{font-size:1.9rem;font-weight:800;letter-spacing:-.02em}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.presets button{font-size:.85rem;padding:4px 10px}
+
+/* flow diagram */
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .box{flex:1 1 150px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px}
+.flow .box b{display:block}
+.flow .box small{color:var(--muted)}
+.flow .arrow{align-self:center;color:var(--muted);font-size:1.2rem}
+@media (max-width:700px){.flow .arrow{display:none}}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 14px;margin:8px 0}
+summary{cursor:pointer;padding:10px 0;font-weight:600}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+details ul{margin:6px 0 12px;padding-left:1.2em}
+.tree{white-space:pre;overflow:auto}
+.stat{display:flex;flex-direction:column}
+.stat b{font-size:1.5rem;letter-spacing:-.01em}
+footer{padding:30px 0 60px;color:var(--muted);font-size:.9rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <span class="brand">How a picture gets made</span>
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
+    <button class="iconbtn" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <h1>From a source photo to a picture that passes 30 checks</h1>
+  <p class="lead">This page walks through the whole image generation process of <code>nano-banana-facecard</code>: which route to take, how the Gemini session works, what each pipeline does step by step, which numbers decide pass or fail, and how a picture earns the word "best".</p>
+  <div class="chips">
+    <span class="chip">Your Google AI Pro Gemini session, no billed API</span>
+    <span class="chip">2,400 credits per 5 hours, 48,384 per week</span>
+    <span class="chip">The AI draws, code measures, you judge</span>
+    <span class="chip">Snapshot of the code and skills on 2026-10-02</span>
+  </div>
+</div>
+
+<section id="idea"><div class="wrap">
+  <h2>The idea in one glance</h2>
+  <p class="kicker">Four parties take part. Each does only the job it is good at, and no one marks their own work.</p>
+  <div class="grid g4" id="actors"></div>
+  <div class="note"><b>The rule everything else follows:</b> nothing Gemini renders is altered by a heuristic. In round 2 a face mask, a relight, added grain and a landmark warp sat on top of Gemini's crop, and the kayak photo's identity score fell from 0.58 to 0.23. Those steps understood the picture less well than Gemini did, so they were removed. Code now only copies pixels that must not change, measures, and retries.</div>
+</div></section>
+
+<section id="route"><div class="wrap">
+  <h2>Pick the route</h2>
+  <p class="kicker">The first decision is what you start from. Choose one to see the command, why it exists, what you get and what it costs.</p>
+  <div class="options" id="routeOptions" role="group" aria-label="What do you have?"></div>
+  <div class="card result" id="routeResult" aria-live="polite"></div>
+</div></section>
+
+<section id="session"><div class="wrap">
+  <h2>How it talks to Gemini</h2>
+  <p class="kicker">There is no browser and no API key. A small client logs in with two cookies from your encrypted vault and sends the same requests the Gemini web app sends.</p>
+  <div class="flow" id="sessionFlow"></div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card">
+      <h3 style="margin-top:0">What a call is</h3>
+      <ul id="callKinds" style="margin:0;padding-left:1.2em"></ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">When it goes wrong</h3>
+      <ul id="failModes" style="margin:0;padding-left:1.2em"></ul>
+    </div>
+  </div>
+  <h3>Credits: what one thing costs</h3>
+  <p class="muted" style="margin-top:0">Gemini charges compute credits, not requests. Image and video draw from the same pool. These are measured costs on your Pro account, not Google's published prices. The estimate is only accurate when nothing else uses the account at the same time, because the meter is account-wide.</p>
+  <div class="calc">
+    <div class="card">
+      <div class="presets" id="presets"></div>
+      <div class="field"><label for="imgModel">Image model</label>
+        <select id="imgModel" class="num-select"><option value="pro">Pro (64 to 86 per image)</option><option value="flash">Flash (about 20 to 64 per image)</option></select></div>
+      <div class="field"><label for="nImg">Image calls</label><input id="nImg" type="number" min="0" max="200" value="4"></div>
+      <div class="field"><label for="nTxt">Text calls (reading, judging, comparing)</label><input id="nTxt" type="number" min="0" max="500" value="10"></div>
+      <div class="field"><label for="nVid">Video clips (10 s each)</label><input id="nVid" type="number" min="0" max="20" value="0"></div>
+      <div class="muted" style="font-size:.88rem">Per call: text 1 to 2, video about 520. Video is the same price whichever image model is chosen.</div>
+    </div>
+    <div class="card" id="calcOut" aria-live="polite"></div>
+  </div>
+  <div class="note warn">Check the meter before a wave: <code>.venv\Scripts\python.exe tools\quota.py --watch</code> keeps one line updated and writes <code>.cache\quota.json</code>. When the window is empty the work does not stop, it waits for the reset time.</div>
+</div></section>
+
+<section id="replicate"><div class="wrap">
+  <h2>Route A: <code>replicate</code>, your own photo</h2>
+  <p class="kicker">It edits a crop of the head and pastes it back into the untouched original. The background, clothes, body and framing cannot drift because those pixels are never sent for editing. Step through it.</p>
+  <div id="repStepper"></div>
+  <h3>Outputs of one run</h3>
+  <div class="card"><pre class="tree" id="repFiles"></pre></div>
+</div></section>
+
+<section id="gates"><div class="wrap">
+  <h2>The numbers that decide</h2>
+  <p class="kicker">A candidate that fails a hard gate is invalid and retried, never quietly accepted. Limits live in <code>facecard.json</code> and the tools, and changing one needs your approval.</p>
+  <div class="segmented" role="group" aria-label="Which gates">
+    <button type="button" data-g="rep" aria-pressed="true">replicate gates</button>
+    <button type="button" data-g="pose" aria-pressed="false">pose gate (goals)</button>
+    <button type="button" data-g="id" aria-pressed="false">identity score</button>
+  </div>
+  <div id="gateOut"></div>
+</div></section>
+
+<section id="goal"><div class="wrap">
+  <h2>Route B: <code>gen --goal</code>, a pin or someone else's photo</h2>
+  <p class="kicker">Here the picture is built, not edited in place, so more can drift. That is why this route measures the goal first, lists every element before the first render, and audits by hand after it.</p>
+  <div id="goalStepper"></div>
+  <div class="note"><b>Why the other man's photo is handled so carefully:</b> photos sent to the generator pass their model's skull, jaw and neck into the output (measured 2026-09-19, even with the face blurred). Putting your head on his body kept his silhouette within 2 percent and about 15 percent of results were acceptable. The default is therefore text plus measurements. With <code>--replace-subject</code> the pin is sent as the photo to edit, and his whole man is replaced by you from your own references.</div>
+</div></section>
+
+<section id="audit"><div class="wrap">
+  <h2>The 30-item audit</h2>
+  <p class="kicker">No picture is called best until it passes every item below, checked by eye with the head zoomed in next to the source. Every item comes from a complaint you made. Click an item to cycle it: pass, fail, not applicable. This is the same logic <code>tools\best_check.py</code> records.</p>
+  <div class="audit-top">
+    <input class="search" id="auditSearch" type="search" placeholder="Search the items, for example hair, reflection, size" aria-label="Search the items">
+    <button class="btn" id="auditReset" type="button">Reset all to pass</button>
+    <div class="verdict ok" id="auditVerdict" role="status"></div>
+  </div>
+  <div id="auditList"></div>
+  <div class="card" style="margin-top:14px">
+    <b>The command this would record</b>
+    <div class="cmd" style="margin-top:8px"><pre><code id="auditCmd"></code></pre></div>
+  </div>
+  <div class="grid g3" style="margin-top:14px" id="auditRules"></div>
+</div></section>
+
+<section id="loop"><div class="wrap">
+  <h2>The loop until perfect</h2>
+  <p class="kicker">A goal is finished only when a picture passes all 30 items, or you accept one. A failed attempt is the start of the next attempt, never a place to stop and report.</p>
+  <div class="grid g2">
+    <div class="card"><h3 style="margin-top:0">One turn of the loop</h3><ol id="loopSteps" style="margin:0;padding-left:1.2em"></ol></div>
+    <div class="card"><h3 style="margin-top:0">The only reasons to stop</h3><ul id="loopStop" style="margin:0;padding-left:1.2em"></ul>
+      <h3>What the loop may never do to finish faster</h3><ul id="loopNever" style="margin:0;padding-left:1.2em"></ul></div>
+  </div>
+  <h3>Lessons that finished the hard goals</h3>
+  <div id="lessons"></div>
+</div></section>
+
+<section id="records"><div class="wrap">
+  <h2>What gets written down</h2>
+  <p class="kicker">Failed pictures are not kept, so their lessons are. Passed pictures are copied out of the working folders into one flat results folder.</p>
+  <div class="grid g2">
+    <div class="card"><h3 style="margin-top:0">The results folder</h3><pre class="tree" id="resultsTree"></pre><ul id="resultsRules" style="padding-left:1.2em;margin-bottom:0"></ul></div>
+    <div class="card"><h3 style="margin-top:0">The feedback ledger</h3><ul id="ledgerRules" style="margin:0;padding-left:1.2em"></ul>
+      <h3>Around every session</h3><ul id="sessionRules" style="margin:0;padding-left:1.2em"></ul></div>
+  </div>
+</div></section>
+
+<section id="video"><div class="wrap">
+  <h2>Add-on: video from the same session</h2>
+  <p class="kicker">Added and measured on 2026-10-01. It uses the same headless login and the same credit pool as images.</p>
+  <div class="grid g4" id="videoStats"></div>
+  <div class="card" style="margin-top:14px"><ul id="videoNotes" style="margin:0;padding-left:1.2em"></ul>
+    <div class="cmd" style="margin-top:12px"><pre><code>.venv\Scripts\python.exe tools\video_probe.py "he turns toward the camera and smiles" --photo "D:\Downloads\AI me\nightout.jpg" --aspect portrait</code></pre></div></div>
+</div></section>
+
+<section id="limits"><div class="wrap">
+  <h2>What not to claim</h2>
+  <p class="kicker">Measured limits, so the numbers are read honestly.</p>
+  <div class="grid g2" id="limitCards"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  Built from <code>skills\gemini-identity-gen\SKILL.md</code>, <code>skills\facecard-session\SKILL.md</code>, <code>BEST_CHECKLIST.md</code>, <code>tools\pose_compare.py</code>, <code>facecard.py</code>, <code>replicate.py</code>, <code>video.py</code> and the <code>scene-prompt-writer</code> skill. It is a snapshot: when the code or a limit changes, this page does not follow, so the skill files stay the source of truth.
+</div></footer>
+
+<script>
+"use strict";
+
+/* ------------------------------------------------------------------ data */
+const ACTORS = {
+  gemini: {label: "Gemini", glyph: "●", cls: "a-gemini"},
+  code:   {label: "Code",   glyph: "■", cls: "a-code"},
+  you:    {label: "You",    glyph: "▲", cls: "a-you"},
+  agent:  {label: "Agent",  glyph: "◆", cls: "a-agent"}
+};
+
+const ACTOR_CARDS = [
+  {a: "gemini", title: "Gemini, the AI", items: ["Reads each picture in text calls: head turn, gaze, glasses, light", "Draws: edits the crop or renders the new picture", "Judges source against output in a text call", "Compares two faces and says which is better"]},
+  {a: "code", title: "Code", items: ["Crops, pastes back and aligns", "Measures identity, size, position, drift, light and pose", "Retries with what went wrong written into the prompt", "Records every number and exports passed pictures"]},
+  {a: "agent", title: "The agent (Claude Code or similar)", items: ["Turns a pin into scene text with scene-prompt-writer", "Writes the element inventory", "Audits each picture against all 30 items by eye", "Runs the loop and paces it by credits"]},
+  {a: "you", title: "You", items: ["Make the final call: your eye is the judge", "Own the rules: every checklist item is one of your complaints", "Approve or withdraw a picture", "Refresh the Gemini cookies in the vault popup when they expire"]}
+];
+
+const ROUTES = [
+  {id: "own", title: "Your own photo", sub: "Redo it with your face, change nothing else", jump: "replicate",
+   cmd: '.venv\\Scripts\\python.exe facecard.py replicate --scene "C:\\path\\photo.jpg"',
+   why: "It edits a crop of the head and pastes it back into the untouched original, so the background, clothes, body and framing cannot drift. Describing a photo in words and regenerating it was measured to redraw the whole frame, change the pose, clothes and physique, and drop glasses (2026-09-19 and 20).",
+   get: "A run folder with best.png (or not_passing_closest.jpg when nothing passed), compare sheets, run.json and run.log.",
+   cost: "About 500 to 840 credits per run, measured on Pro: up to 6 image calls, a few reference renders and about 10 text calls. Flash is cheaper per image."},
+  {id: "pin", title: "Someone else's photo", sub: "A Pinterest pin, a screenshot, another man's picture", jump: "goal",
+   cmd: '.venv\\Scripts\\python.exe facecard.py gen --subject me --goal "<pin.jpg>" --replace-subject --inventory .cache\\inventories\\<goal>.json --prompt "<sections.txt>" --count 4',
+   why: "His body and head leak into anything sent to the generator, so the pin is first turned into text and measurements by scene-prompt-writer. With --replace-subject the pin is sent as the photo to edit and his man is replaced by you, from your own face, body and arm references.",
+   get: "Renders in outputs\\<run>\\, each pose-gated automatically. Pictures that pass the 30-item audit are copied to D:\\FacecardResults.",
+   cost: "About 260 to 300 credits for a 4-image run on Pro (2026-09-27), less on Flash, and usually several waves per goal."},
+  {id: "words", title: "Only an idea", sub: "A scene in words or a style template", jump: "goal",
+   cmd: '.venv\\Scripts\\python.exe facecard.py gen --subject me --prompt "<scene.txt>" --count 2',
+   why: "Everything is drawn new, so expect drift outside the face. scene-prompt-writer (template mode) writes the scene text from the template, and the levers (eye-level camera, soft side light, relaxed expression) fill only what the template leaves open.",
+   get: "v<n>_<i>.jpg files and a best.jpg candidate, scored against your references.",
+   cost: "About 70 to 160 credits for the first runs of 1 or 2 images. An image is about 85."},
+  {id: "video", title: "A photo to bring to life", sub: "A 10 second clip with sound", jump: "video",
+   cmd: '.venv\\Scripts\\python.exe tools\\video_probe.py "he turns toward the camera and smiles" --photo "<photo.jpg>" --aspect portrait',
+   why: "The Create video tool of the Gemini app (Gemini Omni), reached through the same headless login. The tool is switched on in the request itself, not by wording.",
+   get: "An MP4 (10 s, H.264 and AAC audio, 720x1280 or 1280x720) plus a thumbnail and a record file in .cache\\video_probe\\.",
+   cost: "About 520 credits per clip, which is about 22 percent of a 5-hour window."}
+];
+
+const SESSION_FLOW = [
+  {t: "Vault", s: "Two cookies, __Secure-1PSID and __Secure-1PSIDTS, sit in a DPAPI-encrypted file only your Windows user can open. You enter them in a popup, never in chat."},
+  {t: "session.py", s: "authenticated_client() reads them in the process, tries the rotated PSIDTS first, then the original, and never prints one."},
+  {t: "gemini_webapi", s: "A plain HTTPS client that sends the web app's requests. No browser window opens. Its cookie cache goes to a temp folder that is deleted afterwards."},
+  {t: "Gemini", s: "Account status must read AVAILABLE. The image model is `model` in facecard.json, now 3.8 Flash (it was 3.1 Pro before), and --model overrides it for one run. Text reading uses `vision_model`, also Flash now."},
+  {t: "Meter", s: "After each image call the credit meter is read again (a free text request). Rotated cookies are written back to the vault."}
+];
+
+const CALL_KINDS = [
+  "**Text call:** reads or judges a picture and returns JSON. 1 to 2 credits, no image quota.",
+  "**Image call:** edits or draws. The expensive one: 64 to 86 credits on Pro, about 20 to 64 on Flash.",
+  "**Usage read:** asks Gemini for the 5-hour and weekly numbers. Free, and the basis of the live meter.",
+  "**Video call:** the same request with the Create video tool on. About 520 credits."
+];
+const FAIL_MODES = [
+  "**Cookies expired:** the log says “Authentication failed” or “Missing cookies in vault”. You refresh them in the vault popup. Batches stop and print that step.",
+  "**Credits spent:** Gemini answers an image request with plain text (“I can create more images as soon as your limit resets”). That is detected, the run stops with status usage_limit, and a batch waits for the reset and repeats the photo.",
+  "**A judge call fails:** it occasionally answers “I seem to be encountering an error”. It is retried once.",
+  "**A refusal:** nearly free in credits. The text of the refusal is the evidence, and it goes in the record."
+];
+
+const CREDIT = {img: {pro: [64, 86], flash: [20, 64]}, txt: [1, 2], vid: [520, 525], window: 2400, week: 48384};
+const PRESETS = [
+  {name: "Route G run, 4 images", img: 4, txt: 6, vid: 0},
+  {name: "replicate run", img: 9, txt: 10, vid: 0},
+  {name: "One video clip", img: 0, txt: 0, vid: 1},
+  {name: "Clip + 4 images", img: 4, txt: 6, vid: 1}
+];
+
+const REP_STEPS = [
+  {t: "Decide whose face it is", who: ["code"], short: "The photo's face is scored against your photo pool to decide: yours, or someone else's.",
+   pts: ["The score is the mean of the 3 most similar pool photos (an ArcFace embedding), with the photo itself and its near-duplicates left out.",
+         "Yours at 0.40 or more. A score of 0.20 to 0.50 is a gray zone, because a small or turned face scores low even when it is you. The log then asks you to pass `--source own` or `--source foreign`.",
+         "Your own photo gets zone `face`. Someone else's gets zone `head`, the whole head with its hair."],
+   why: "Your own photo must come back as the same photo with your best face. Another man's photo needs the whole head replaced, not just the face."},
+  {t: "Cut the crop", who: ["code", "gemini"], short: "A crop around the head is cut from the full-resolution original.",
+   pts: ["It is cut from the full-resolution file, tightened so the face keeps its own pixels inside the 1024 px that are sent.",
+         "Gemini marks the head on a wide look around the face (a text call). A crop that would cut the hair grows until the head sits 8 percent inside every edge.",
+         "Any other copy of the face in the frame, such as a window or mirror reflection, goes into the same crop."],
+   why: "A close-up crop cuts the hair, and Gemini then zooms out and re-frames. A crop that holds the whole head avoids that."},
+  {t: "Read the crop", who: ["gemini"], short: "A text call, with no image credits, describes what is in the crop.",
+   pts: ["It reads head turn and tilt, gaze, glasses, hair, light, how bright the face is and whether a reflection is present.",
+         "It reads the source expression too, but that is not copied into the prompt. Copying it produced “lips slightly parted” and an open laugh, both reviewed as bad.",
+         "The same reading is done for each of your reference photos, so references can be matched to the pose."],
+   why: "The AI reads the scene because heuristics that tried to read it (landmark yaw, for example) were measured unreliable. A frontal photo read +132 degrees."},
+  {t: "Choose the references", who: ["code"], short: "Three or four head crops of you, nearest in pose, go with the edit.",
+   pts: ["Nearest in pose as the AI read it. A studio photo is preferred when it is within 15 degrees of a closer non-studio one. The source photo itself stays among them only when no other reference is within 20 degrees of the needed pose.",
+         "If no reference is near the needed angle, the angle library (`angle_refs.py`) renders the missing angle from your studio photos. A render is kept only if identity is at least 0.60 and its AI-read pose is within 15 degrees. Kept renders are cached in `.cache\\synthetic_refs`.",
+         "Two frontal anchor photos are added only when the head is turned less than 65 degrees. They help skin tone and eyes but pull a strongly turned head toward the camera."],
+   why: "The identity references leak into the render: their lighting, exposure and head angle came back in the output. The prompt now names them as the source of identity only."},
+  {t: "Edit the crop", who: ["gemini"], short: "One image call edits the crop, with a prompt built from the reading.",
+   pts: ["For your own photo it asks for the attractiveness policy: you at your best, calm confident eyes, a relaxed closed-lip smile or a calm focused look, never tense or awkward. `--expression same` copies the source instead.",
+         "The head, hair included, exactly the size of the source's and never larger. A jaw and neck as clean as the source, with no extra fold. The exact exposure, colour and grain of the photo.",
+         "For another man's photo the default expression is the reference's own, and the references' lighting, colour cast and head angle are ignored.",
+         "A reflection stays in the same crop and the same call. A separate reflection pass “does not mirror me” and was removed."],
+   why: "Your own verdicts showed the AI can pick the better expression between two images 4 of 4 times, but cannot rate one image's expression, so expression is used to choose, never as a gate."},
+  {t: "Paste it back", who: ["code"], short: "The whole returned crop is pasted into the untouched original.",
+   pts: ["The returned crop is aligned to the source by its outer ring (ECC). Good returns line up at 0.99 or better.",
+         "It is pasted with a wide soft border at the crop edge, so face, hair, neck and light stay consistent with each other.",
+         "Never pasted: Gemini's sparkle watermark and any pixels an alignment warp had to invent.",
+         "Pixels outside the crop are asserted identical to the source: 0 changed."],
+   why: "Cutting the face out along a mask looked pasted. The mask cannot see thin glasses and mislabels dark curly hair, and the jaw seam is what read as a sticker."},
+  {t: "Measure and judge", who: ["code", "gemini"], short: "Code takes the measurements, and Gemini judges source against output.",
+   pts: ["Code measures identity score, head size and position of the face being edited, drift away from the heads, and the light on the face.",
+         "Gemini, in a text call, judges head angle, glasses, ghost faces, seams, lighting and whether anything else changed.",
+         "A candidate that fails any hard gate is invalid. The gate table below has every limit."],
+   why: "Head size cannot be judged by the AI. Asked for head width as a percentage of shoulder width it read a too-big head as smaller. So size is geometry, not opinion."},
+  {t: "Retry and pick", who: ["code", "gemini"], short: "Failures are retried with the reason written into the next prompt. Passing candidates are ranked.",
+   pts: ["Attempts continue until `--count` candidates pass (default 2) or `--max-attempts` image calls are used (default 6).",
+         "What went wrong, the judge's own note plus one sentence per failed check, goes into the next prompt.",
+         "If several pass, Gemini compares the faces pair by pair, each pair in both orders. The order of choice is: the AI's expression wins, then the identity band as a tiebreak, then the identity number.",
+         "If none pass, the candidate with the fewest problems is saved as `not_passing_closest.jpg` for your eye. It is never promoted to best."],
+   why: "Identity used to rank first. A nearly untouched candidate (similarity 0.96 to the source) then beat the one that the AI and you both preferred."}
+];
+
+const REP_FILES = [
+  "outputs\\<time>_replicate_<name>\\",
+  "    cand1.png ... candN.png         lossless candidates",
+  "    best.png / best.jpg             the chosen candidate, only if it passed",
+  "    not_passing_closest.jpg         when nothing passed: for your eye",
+  "    compare_head_N.jpg              source | output | difference | crop border",
+  "    compare_full_N.jpg              whole picture, source beside output",
+  "    run.json, run.log               every number, the judge's notes, and the credits block"
+].join("\n");
+
+const GATES_REP = [
+  ["Pixels changed outside the crop", "0", "hard", "Asserted on the saved PNG."],
+  ["Returned crop lines up with the source", "ECC 0.80 or more, scale within 20%, shift 30% or less", "hard", "Good returns: ECC 0.99+, scale 1.000. A wrongly framed return measured 0.53 / 1.05 / 0.30."],
+  ["Aspect ratio of the returned crop", "within 3% of the crop", "hard", "Gemini sometimes returns another framing."],
+  ["Drift inside the crop, away from the heads", "mean difference 10 or less, SSIM 0.80 or more", "hard", "Good returns 1.3 to 3.7 and 0.95 to 0.996. A wrong return 54.5 and 0.35."],
+  ["Head size against the source (face box)", "yours 0.85 to 1.15; another man's 0.94 to 1.04. Head moves 0.12 head widths or less", "prov", "Gemini returns heads at 0.87 to 1.21 of the source. The foreign limits rest on one review."],
+  ["Face light against the source", "colour distance dE 14 or less (yours); 20 or less (another man's)", "prov", "Rests on two of your judgements: outputs you called fine measured 12.2 and 5.5, the one you called worse 16.5."],
+  ["AI judge, hard flags", "same head angle; glasses in both or neither; no ghost or overlapping face; no seam; lighting consistent; nothing else changed; for another man's photo also the same expression", "hard", "The ghost question caught a flagged Pinterest output twice with no false alarms on four outputs you called perfect. It missed the kayak “three faces” one, so recall is partial."],
+  ["Judge says the expression differs, or gave no usable answer", "warning", "soft", "Never fails a candidate on its own."]
+];
+const GATES_POSE = [
+  ["body_shift_max", "0.04", "Where his shoulders sit in the frame, against the goal", "14"],
+  ["head_shift_max", "0.04", "Where his head sits in the frame", "12, 14"],
+  ["scale_ratio", "0.93 to 1.07", "His size in the frame (torso length or shoulders to nose)", "29"],
+  ["angle_max_deg", "15", "Direction of each visible limb segment against the goal's", "12, 30"],
+  ["torso_angle_max_deg", "10", "The lean of the torso. An 11 degree lean read as visibly different", "30"],
+  ["wrist_shift_max", "0.06", "Where each hand is", "30"],
+  ["stance_ratio", "0.75 to 1.33", "Feet apart divided by torso length", "30"],
+  ["object_rel_shift_max", "0.08", "His position along the main object, the bike or the table", "14"],
+  ["head_pitch_max", "0.08", "Head bow: nose below the eye line, in eye distances. Added 2026-09-27 after level heads (0.40 to 0.42) passed where the goal read 0.52", "12"]
+];
+const ID_ROWS = [
+  ["accept", "0.52 or more", "good", "Outputs you confirmed good scored 0.53 to 0.68."],
+  ["uncertain", "0.20 to 0.52", "soft", "The score cannot tell “you, poorly rendered” from “someone similar”. Show the compare sheet and let your eye decide."],
+  ["reject", "below 0.20", "hard", "A different man scored 0.11."],
+  ["invalid", "any hard gate failed", "hard", "Retried, never accepted."]
+];
+
+const GOAL_STEPS = [
+  {t: "Screen and read the goal", who: ["agent"], short: "scene-prompt-writer turns the pin into a scene spec and one paragraph, and never copies the pin man's face or body.",
+   pts: ["It refuses first when the picture shows a minor in the story, a sexual framing, an attempt to pass as a real person, a government uniform, a weapon, or anything else the generator's policy bars. A text-only pin is “unusable”.",
+         "It writes one paragraph of 120 to 200 words: shot and pose, the head as numbers (“face turned about N degrees toward picture-left”), expression in muscle terms, outfit with colour, material and one detail per garment, setting anchors, light, camera height and lens.",
+         "Your hair, beard and eyewear come from your traits, not from the pin. Fields the pin leaves open are filled from the levers: eye-level camera, soft side light, a relaxed closed-lip smile.",
+         "The result is a sections file: POSE, WARDROBE, SCENE, LIGHT, CAMERA."],
+   why: "The reference image stays inside this step. A reference sent to the generator passed its model's skull, jaw and neck into the output."},
+  {t: "Measure the goal", who: ["code"], short: "The goal's posture and layout are measured, so the prompt agrees with the picture.",
+   pts: ["`pose_compare.py \"<goal>\" --save-goal` runs a local YOLO11 pose model and saves the goal's 17 keypoints and main objects to `.cache\\poses`.",
+         "`goal_layout.py` stores boxes for the whole body, the head and each object in Gemini's own format: [ymin, xmin, ymax, xmax] on a 0 to 1000 scale.",
+         "The POSE text must agree with the measured facts: stance, knee angles, torso lean, hand heights. `--pose-points` writes them into the prompt.",
+         "Rule: never write a POSE from reading alone."],
+   why: "“Posture fixed” was once called by eye on a render whose legs stood in a wide stride where the goal's feet are close together. Numbers do not slip."},
+  {t: "Write the element inventory", who: ["agent", "you"], short: "Before the first render, every visible element of the goal gets a source.",
+   pts: ["Each element is HIS (from your references), GOAL (kept as it is) or REMOVE (a watermark, inpainted away before sending).",
+         "Each HIS item reads “the photo shows X; make it Y (image N)”, with a reference cut from your own photos by `ref_sheet.py`. The inventory lives in `.cache\\inventories\\<goal>.json`.",
+         "An edit keeps every goal pixel the prompt does not name.",
+         "Never edit an inventory that produced a result: write a new `..._vN.json`."],
+   why: "“The motorcycle becomes his” left the Ducati's wheels, tyres and disc. Naming each part is how a goal goes right at the first go."},
+  {t: "Build the request by role", who: ["code"], short: "The images and the text go out in labelled roles, in one prompt.",
+   pts: ["Images in order: FACE references of you (4 by default, or the exact photos named with `--face-refs`), the BODY reference, the SHOULDER AND ARM reference, any props (`--prop PATH::LABEL`), then the PHOTO TO EDIT when `--replace-subject` is on.",
+         "The prompt: REFERENCE IMAGES BY ROLE, then “Generate a new photograph of THIS EXACT MAN, not a lookalike” (with `--replace-subject` that line becomes an edit instruction: “Edit image N, the PHOTO TO EDIT: replace the man in it…”), FACE and BUILD text from `facecard.json`, the sections file, and the style line “Photorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.”",
+         "Face rule baked in: his face, hair, beard and moustache come only from the FACE references, never from the goal's picture, even when the goal is his own photo.",
+         "Optional controls: `--pose-points`, `--layout-image` with `--pose-image` (a flat sketch of boxes and skeleton), `--body-only` for a second-stage body edit."],
+   why: "Every Pinterest version kept the goal man's heavy build until the prompt named the consequence: his shoulders, arms, chest and waist are the slimmer ones of the references."},
+  {t: "Render", who: ["gemini"], short: "Several samples, one image call each, with credits logged per call.",
+   pts: ["`--count 4` draws four. Flash and Pro are both tried across attempts.",
+         "`--stop-after-fails N` stops after N renders in a row fail the pose gate. `--stop-on-pass` stops at the first that passes.",
+         "Every call's credits are logged (“[Credits] this call N, run total M, window left L”). A refusal is nearly free.",
+         "Several runs of one goal can go in parallel: each gets its own run folder."],
+   why: "Credits are the real budget. Stopping early on a failing approach saves them for the next change."},
+  {t: "Pose gate", who: ["code"], short: "Every render is measured against the goal automatically, with fixed limits.",
+   pts: ["`tools\\pose_compare.py` runs on every render. It reports pass or fail per measure and writes an overlay, `<render>_pose.jpg`, with the goal's skeleton ghosted over it.",
+         "A FAIL is a FAIL. It is never explained away, and a render that fails is never picked as best.",
+         "The limits are in the table above under “pose gate”."],
+   why: "Posture and position mistakes kept passing by eye. Items 12, 14, 29 and 30 are therefore measured first and judged second."},
+  {t: "Audit all 30 items", who: ["agent"], short: "Each picture that passed the pose gate is checked by eye, at full zoom.",
+   pts: ["`audit_views.py <label> <goal> <render> <run folder>` puts the render's head beside all of your reference heads and prints the face-light ratio against the goal (limit 0.77 to 1.30). Items 19 and 28 are judged on that head row, hair and beard separately.",
+         "`inventory_check.py` puts the render's parts beside your reference parts.",
+         "A hidden or bowed face cannot be scored (ArcFace reads 0.0 to 0.3 on a face that is his). Judge hair, beard, jaw and nose at zoom, report the number, and flag it for you to confirm.",
+         "Record it: `best_check.py ... --fail 4,26 --note \"what was wrong\" --right \"what went right\"`."],
+   why: "Pins 5 and 6 passed 30 of 30 by the agent's eye and you called both wrong. The hair and beard were the pin man's instead of your references', and pin 5's face was lit 1.7 times brighter than the pin's."},
+  {t: "Export and learn", who: ["code"], short: "A pass is copied out. Every picture, pass or fail, leaves a lesson.",
+   pts: ["A picture whose checklist says BEST, or that you accepted, is copied to `D:\\FacecardResults` as `<collection>_<NN>_<title>_v<N>.jpg`.",
+         "Every picture gets an entry in `FEEDBACK_LEDGER.md` with its result, identity score, pose-gate detail, what was wrong and what went right.",
+         "The lesson is written into the prompt of the next attempt, not only into the ledger."],
+   why: "Failed pictures are pruned at the start of each session. The ledger is how a fix that already failed is not tried twice."},
+  {t: "You review", who: ["you"], short: "Your word ends a goal.",
+   pts: ["Say a picture is good enough and it is recorded as “BEST (user-approved)”, with the failed items kept on record.",
+         "Reject a picture you accepted before and the checklist is re-recorded with your words, and its copy in the results folder is deleted.",
+         "Identity in the 0.20 to 0.52 gray zone, after at least three Pro samples at different seeds, goes to you with the compare sheet."],
+   why: "The identity score cannot decide the gray zone, and an item that cannot be verified counts as a fail."}
+];
+
+const AUDIT_GROUPS = [
+  ["One head, no seams", [
+    [1, "One face only: no overlapping or second face", ""],
+    [2, "No ghost outline, doubled edge, second hairline, second ear or second collar", ""],
+    [3, "No extra faces: a reflection shows the same single head, not a third face", "no reflection or glass in the picture"],
+    [4, "Not lasso-ed in: face, hair, ears and neck read as one head, not a face patch under kept hair", ""],
+    [5, "The head fits the body: the same turn and tilt as the neck and shoulders", ""],
+    [8, "Nothing looks unreal or monsterish, at thumbnail size or zoomed in", ""],
+    [11, "Neck and above do not look copy-pasted: no seam, halo, patch or colour step", ""],
+    [18, "No fold, double chin or bulge under the chin that the source does not have", ""]]],
+  ["Size", [
+    [6, "The head and face are his true size, not bigger or smaller than his real face", ""],
+    [7, "Face size is in proportion to the body and the scene", ""]]],
+  ["Light", [
+    [9, "The light on the face matches the photo: direction, colour, exposure, grain", ""],
+    [10, "The face is not brighter than the neck and body", ""]]],
+  ["Pose and position (measured first)", [
+    [12, "Head and face pose match the goal: turn, tilt, roll and gaze", "you accepted a new pose for this photo", true],
+    [13, "Face angle matches the head: the face points where the skull, hair and neck point", ""],
+    [14, "Face position and alignment in the frame match the goal", "", true],
+    [29, "The same distance from the camera: shot size, his size in the frame, perspective", "", true],
+    [30, "Body posture and action exactly as in the goal: stance, lean, weight, each arm and hand, the feet", "", true]]],
+  ["Expression", [
+    [15, "Expression matches the reference at the same strength, never caught mid-motion", "not another man's photo"],
+    [16, "No awkward, tense, forced or smirking reaction", ""],
+    [17, "A laugh in his own photo is kept as a laugh, not closed into a smile", "the source shows no laugh"],
+    [20, "A reflection mirrors him: the same face and the same reaction", "no reflection of him"]]],
+  ["Identity and hair", [
+    [19, "All of the hair is his own: front, top, sides and back", ""],
+    [21, "Unmistakably him, not just attractive: checked against his references. With the eyes hidden: hair, beard, jaw, nose, ears and skin match, and the score is reported", ""],
+    [22, "The face is better than or equal to the source face, never worse", "another man's photo"],
+    [28, "His face, hair, beard and moustache come from his FACE references, never from the goal's face", ""]]],
+  ["Source fidelity and progress", [
+    [23, "A visible change: not the source returned as it is", "the source is one of his best versions"],
+    [24, "No better attempt of the same run was thrown out by the checks: all attempts compared by eye", ""],
+    [25, "The source was not already perfect: if it is one of his best versions, it is returned unchanged", ""],
+    [26, "Scenery, background, clothes and physique unchanged. For another man's photo: scene and clothes as in the reference, the physique always his own", ""],
+    [27, "None of the flaws recorded for earlier versions of this photo is back", "first version of a new photo"]]]
+];
+const AUDIT_RULES = [
+  ["Every item is pass, fail or not applicable", "An item that cannot be verified counts as a fail, because both Gemini's vision and the agent's have missed defects you saw."],
+  ["One fail is not best", "The picture goes back into the loop: name the failed item, find why, fix that cause, make the next version. The pipeline's own best.jpg is only a candidate until this passes."],
+  ["Nothing is shown as progress before it is recorded", "Compare it item by item with the current best version of the same photo. An item that passed there and fails here is a regression, and the picture is not shown as progress."]
+];
+
+const LOOP_STEPS = [
+  "**Generate:** several samples per goal, Flash and Pro both.",
+  "**Audit** every picture that passed the pose gate against all 30 items, and record it with what was wrong and what went right.",
+  "**Diagnose** with `tools\\goal_status.py`: the items that failed most, what was already tried, and the fix the ledger attaches to each. Read the goal's section of the ledger first.",
+  "**Change only the request section that controls the failed item.** Switch model when two variants on one model failed the same item.",
+  "**Pace by credits:** size each wave to the credits left. When the window is empty, schedule the next wave right after its reset and keep auditing meanwhile."
+];
+const LOOP_STOP = [
+  "Every goal is done.",
+  "You say stop.",
+  "A blocker only you can clear: expired cookies, a request Gemini refuses on every sample, or a checklist item you must rule on. Every other goal keeps running."
+];
+const LOOP_NEVER = [
+  "Loosen a gate, a limit or a checklist item.",
+  "Call a picture best that failed an item.",
+  "Count as a result a picture that passed the pose gate only because the pin's own man came back unchanged.",
+  "Skip the audit because a number looks good. A limit missed by a hair (size 1.08 against 1.07) is a fail: regenerate."
+];
+const LESSONS = [
+  ["Head bow or turn lands short of the goal", ["Renders land about 0.12 short of the bow the request asks for. Ask for more than the goal (pin 9: 1.1 eye distances when the goal is 0.87) and state it first and last in the keep list.", "A reference of him at the same pose did nothing."]],
+  ["The pin man's build keeps coming back", ["A build sentence alone is ignored when his arms fill the frame.", "What works: the visible consequence of a slim body (gaping armholes, loose sleeves, collarbone and ribs showing).", "For the hardest cases, two stages: stage 1 gets the right head, posture and size. Stage 2 is `gen --replace-subject --body-only` on that render, with explicit amounts: arms a third thinner, shoulders a fifth narrower. Without amounts the edit changes nothing."]],
+  ["Wording that hands the pin man back", ["Never write “exactly as in the PHOTO TO EDIT” about the head or arms of the goal's own photo.", "Never add a framing sentence that says “never closer” on a close crop.", "In a stage-2 edit of his own render, that wording is correct."]],
+  ["Faces that cannot be scored", ["Hidden or bowed faces score 0.0 to 0.3 even when they are his.", "Judge hair, beard, jaw and nose against his references at zoom, report the number, pass item 21 only by eye, and flag it for you."]],
+  ["Hair and beard written as geometry", ["Tight curls about 6 to 8 cm on top, sides short and faded with ear and scalp visible, a full dense beard from the sideburns along the whole jaw with neat edges.", "For a goal whose face is shaded, name the shade as a keep line: the hair falls forward over the brow, the face is not brighter than the white tee."]],
+  ["The angle-routed references can contradict yours", ["The default set always included a photo with glasses and short hair that contradicts the clean curly references, and 139 renders never varied it.", "`--face-refs` names the exact photos instead."]]
+];
+
+const RESULTS_TREE = [
+  "D:\\FacecardResults\\",
+  "    motorcycle-outfit-men_02_porch-reading-smoking-grey-tee_v1.jpg",
+  "    motorcycle-outfit-men_02_porch-reading-smoking-grey-tee_v2.jpg",
+  "    motorcycle-outfit-men_06_shirtless-pencil-in-mouth-bw_v1.jpg",
+  "         <collection>_<NN>_<title>_v<N>.jpg    one flat folder, no subfolders"
+].join("\n");
+const RESULTS_RULES = [
+  "Only passed pictures are copied: the checklist says BEST, or you accepted it.",
+  "`vN` counts the passed versions of one goal in order, and a number is never reused.",
+  "It happens by itself at the end of every `gen` and `replicate` run and each time a checklist is recorded.",
+  "The copies are copies: the run folders in `outputs\\` stay, and the session-start prune may later delete candidates there.",
+  "Name every new goal in `results_names.json` before its first run, or it is filed as `misc_<stem>_vN`."
+];
+const LEDGER_RULES = [
+  "One entry for every generated picture, passed or not, in `FEEDBACK_LEDGER.md` and `feedback_ledger.json`.",
+  "Each says the result, identity score, pose-gate detail, what was wrong and what went right.",
+  "Entries are never removed, so they outlive the files that the session prune deletes.",
+  "Before regenerating a goal, read that goal's section so a fix that already failed is not tried again."
+];
+const SESSION_RULES = [
+  "**Start:** `tools\\session_prune.py` keeps each run's picture, logs and anything you reviewed, and deletes candidates, raw returns and compare sheets. `match_best_versions.py --record` picks up pictures you copied by hand.",
+  "**Status:** `git status`, `tools\\quota.py`, and `pending_review.py --all` for unreviewed pictures.",
+  "**End:** numbered pictures with full paths, your scores and defect tags recorded into the matrix and log."
+];
+
+const VIDEO_STATS = [
+  ["10 s", "per clip, with an AAC audio track, 24 fps"],
+  ["1280×720 or 720×1280", "landscape or portrait, about 3 MB"],
+  ["about 520", "credits per clip, against about 85 for an image"],
+  ["70 to 78 s", "for the call to return the finished clip"]
+];
+const VIDEO_NOTES = [
+  "**It is the chat request plus four changes.** A tool element carrying the aspect (1 landscape, 2 portrait) in slot 0 index 9, slot 49 set to 11, slots 54 and 55 set, and capability 16 added to the model header. `video.py` applies them to the one request the library sends.",
+  "**Why a plain prompt failed:** asking in words gets a text answer. The tool is switched on in the request, not by the wording. The request was found by driving the app once in a signed-in browser profile and comparing its request with a plain chat.",
+  "**From your photo:** the photo is sent as the first reference. In the test, frame 0 is the photo, and the face scored 0.75 to 0.80 against references, against 0.855 for the photo itself. Your eye is the judge.",
+  "**Cost:** two clips measured 525 and 520 credits on a quiet account, so about 4 clips fit in one window.",
+  "**Not known yet:** whether slot 55 means “has a photo” or “portrait”, the avatar feature in the composer, and more than one photo. Every clip carries Gemini's sparkle watermark in the bottom-right corner."
+];
+
+const LIMITS = [
+  ["Identity score", ["Decisive only at the extremes: your own photos score 0.26 to 0.88 against each other, outputs you confirmed good 0.53 to 0.68, drifted ones 0.23 to 0.58, a different man 0.11.", "Between 0.20 and 0.52 it cannot tell “him, poorly rendered” from “someone similar”. Report the number, show the sheet, let your eye judge."]],
+  ["Gemini re-renders the face", ["Even in the best case the output face matches the source face at about 0.66 to 0.69, where real same-session frames score 0.85 to 0.93.", "The expression can soften."]],
+  ["Bodies are not reshaped", ["On another man's photo the silhouette stays within 2 percent of the source, even with `--build strong`, and a clothing detail such as an undershirt collar can drop.", "On your own photo the body is never touched."]],
+  ["The AI judge is partial", ["It caught the ghost faces it was asked about and raised no false alarm on four perfect outputs, but it missed the kayak “three faces”.", "It cannot judge head size or rate a single expression, and a gate that depends on it is unvalidated."]],
+  ["Provisional limits", ["The light limit for another man's photo (20) and the head size limit for another man's photo (0.94 to 1.04) rest on one or two of your reviews.", "Re-check them against your next reviews before trusting them."]],
+  ["Things that were tried and removed", ["Relight, grain matching, sharpness matching, a landmark warp, and cutting the face out along a BiSeNet or ATR mask all made results worse.", "If a result looks wrong, retry the generation or read the judge's note. Do not post-process Gemini's pixels."]]
+];
+
+/* --------------------------------------------------------------- helpers */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+function esc(s){ return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function md(s){ return esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); }
+function h(tag, attrs, ...kids){
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})){
+    if (k === "class") e.className = v;
+    else if (k === "html") e.innerHTML = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v);
+  }
+  for (const kid of kids.flat()) if (kid != null) e.append(kid.nodeType ? kid : document.createTextNode(kid));
+  return e;
+}
+function actorChip(key){
+  const a = ACTORS[key];
+  return h("span", {class: "actor " + a.cls, title: a.label}, h("i", {"aria-hidden": "true"}, a.glyph), a.label);
+}
+function list(el, items){ el.innerHTML = items.map(i => "<li>" + md(i) + "</li>").join(""); }
+async function copyText(text, btn){
+  try { await navigator.clipboard.writeText(text); }
+  catch (e) {
+    const t = h("textarea", {style: "position:fixed;opacity:0"}); t.value = text; document.body.append(t); t.select();
+    try { document.execCommand("copy"); } catch (e2) {} t.remove();
+  }
+  const old = btn.textContent; btn.textContent = "Copied"; setTimeout(() => { btn.textContent = old; }, 1200);
+}
+function cmdBlock(text){
+  const wrap = h("div", {class: "cmd"}, h("pre", {}, h("code", {}, text)));
+  const b = h("button", {class: "iconbtn copy", type: "button", "aria-label": "Copy the command"}, "Copy");
+  b.addEventListener("click", () => copyText(text, b));
+  wrap.append(b);
+  return wrap;
+}
+const fmtN = n => n.toLocaleString("en-US");
+
+/* ----------------------------------------------------------------- theme */
+(function theme(){
+  const root = document.documentElement, btn = $("#theme");
+  let saved = null;
+  try { saved = localStorage.getItem("igp-theme"); } catch (e) {}
+  if (saved) root.setAttribute("data-theme", saved);
+  const isDark = () => root.getAttribute("data-theme") === "dark" ||
+    (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  const label = () => { btn.textContent = isDark() ? "Light" : "Dark"; };
+  label();
+  btn.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("igp-theme", next); } catch (e) {}
+    label();
+  });
+})();
+
+/* ------------------------------------------------------------------- nav */
+(function nav(){
+  const items = [["idea", "Idea"], ["route", "Route"], ["session", "Session"], ["replicate", "Route A"], ["gates", "Gates"], ["goal", "Route B"], ["audit", "Audit"], ["loop", "Loop"], ["records", "Records"], ["video", "Video"], ["limits", "Limits"]];
+  const nav = $("#nav");
+  items.forEach(([id, label]) => nav.append(h("a", {href: "#" + id, "data-id": id}, label)));
+  const links = new Map($$("a", nav).map(a => [a.dataset.id, a]));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){
+        links.forEach(a => a.removeAttribute("aria-current"));
+        const a = links.get(en.target.id);
+        if (a){ a.setAttribute("aria-current", "true"); a.scrollIntoView({block: "nearest", inline: "center"}); }
+      }
+    });
+  }, {rootMargin: "-20% 0px -70% 0px"});
+  items.forEach(([id]) => { const s = document.getElementById(id); if (s) io.observe(s); });
+})();
+
+/* --------------------------------------------------------------- actors */
+(function actors(){
+  const box = $("#actors");
+  ACTOR_CARDS.forEach(c => {
+    const card = h("div", {class: "card actor-card " + ACTORS[c.a].cls}, actorChip(c.a), h("h3", {}, c.title), h("ul", {html: c.items.map(i => "<li>" + md(i) + "</li>").join("")}));
+    box.append(card);
+  });
+})();
+
+/* ------------------------------------------------------------ route picker */
+(function picker(){
+  const opts = $("#routeOptions"), out = $("#routeResult");
+  function show(id){
+    const r = ROUTES.find(x => x.id === id);
+    $$("button", opts).forEach(b => b.setAttribute("aria-pressed", String(b.dataset.id === id)));
+    out.innerHTML = "";
+    const dl = h("dl", {},
+      h("dt", {}, "Command"), h("dd", {}, cmdBlock(r.cmd)),
+      h("dt", {}, "Why this route"), h("dd", {html: md(r.why)}),
+      h("dt", {}, "What you get"), h("dd", {html: md(r.get)}),
+      h("dt", {}, "Cost"), h("dd", {html: md(r.cost)}),
+      h("dt", {}, "Details"), h("dd", {}, h("a", {href: "#" + r.jump}, "Jump to the section")));
+    out.append(dl);
+  }
+  ROUTES.forEach(r => opts.append(h("button", {class: "opt", type: "button", "data-id": r.id, "aria-pressed": "false", onclick: () => show(r.id)}, h("b", {}, r.title), h("span", {}, r.sub))));
+  show("own");
+})();
+
+/* --------------------------------------------------------------- session */
+(function session(){
+  const flow = $("#sessionFlow");
+  SESSION_FLOW.forEach((s, i) => {
+    flow.append(h("div", {class: "box"}, h("b", {}, (i + 1) + ". " + s.t), h("small", {}, s.s)));
+    if (i < SESSION_FLOW.length - 1) flow.append(h("div", {class: "arrow", "aria-hidden": "true"}, "→"));
+  });
+  list($("#callKinds"), CALL_KINDS);
+  list($("#failModes"), FAIL_MODES);
+
+  const nImg = $("#nImg"), nTxt = $("#nTxt"), nVid = $("#nVid"), model = $("#imgModel"), out = $("#calcOut"), presets = $("#presets");
+  const num = (el, max) => Math.max(0, Math.min(max, Math.floor(Number(el.value) || 0)));
+  function calc(){
+    const i = num(nImg, 200), t = num(nTxt, 500), v = num(nVid, 20), img = CREDIT.img[model.value];
+    const lo = i * img[0] + t * CREDIT.txt[0] + v * CREDIT.vid[0];
+    const hi = i * img[1] + t * CREDIT.txt[1] + v * CREDIT.vid[1];
+    const rawLo = lo / CREDIT.window * 100, rawHi = hi / CREDIT.window * 100;   // shown as text, so an overshoot reads as 143 percent
+    const pctLo = Math.min(100, rawLo), pctHi = Math.min(100, rawHi);          // the bar stops at the window's edge
+    const left = CREDIT.window - hi;
+    const fits = hi <= CREDIT.window;
+    out.innerHTML = "";
+    out.append(
+      h("div", {class: "muted"}, "Estimated cost"),
+      h("div", {class: "big"}, lo === hi ? fmtN(lo) : fmtN(lo) + " to " + fmtN(hi)), h("div", {class: "muted"}, "credits"),
+      h("div", {class: "bar", style: "margin:12px 0 6px", role: "img", "aria-label": "Share of the 5-hour window"},
+        h("div", {class: "hi", style: "width:" + pctHi.toFixed(1) + "%"}), h("div", {class: "lo", style: "width:" + pctLo.toFixed(1) + "%"})),
+      h("div", {}, (rawLo.toFixed(0) === rawHi.toFixed(0) ? rawLo.toFixed(0) : rawLo.toFixed(0) + " to " + rawHi.toFixed(0)) + " percent of one 5-hour window (" + fmtN(CREDIT.window) + ")."),
+      h("div", {class: "muted"}, (hi / CREDIT.week * 100).toFixed(1) + " percent at most of the weekly pool (" + fmtN(CREDIT.week) + ")."),
+      h("div", {class: "verdict " + (fits ? "ok" : "no"), style: "margin-top:12px"}, fits ? "Fits in a fresh window, with about " + fmtN(left) + " to spare" : "Does not fit in one window: about " + fmtN(hi - CREDIT.window) + " too many. It waits for the reset."));
+  }
+  PRESETS.forEach(p => presets.append(h("button", {class: "btn", type: "button", onclick: () => { nImg.value = p.img; nTxt.value = p.txt; nVid.value = p.vid; calc(); }}, p.name)));
+  [nImg, nTxt, nVid, model].forEach(el => el.addEventListener("input", calc));
+  calc();
+})();
+
+/* --------------------------------------------------------------- stepper */
+function stepper(mount, steps, label){
+  let cur = 0;
+  const list = h("div", {class: "steplist", role: "tablist", "aria-label": label, "aria-orientation": "vertical"});
+  const panel = h("div", {class: "card panel", role: "tabpanel", tabindex: "0"});
+  const prev = h("button", {class: "btn", type: "button"}, "Previous");
+  const next = h("button", {class: "btn primary", type: "button"}, "Next step");
+  const count = h("span", {class: "count"});
+  const tabs = steps.map((s, i) => {
+    const b = h("button", {type: "button", role: "tab", id: mount.id + "-t" + i, "aria-controls": mount.id + "-p", "aria-selected": "false", tabindex: "-1"},
+      h("span", {class: "num"}, String(i + 1)), h("span", {class: "t"}, s.t));
+    b.addEventListener("click", () => go(i, true));
+    b.addEventListener("keydown", e => {
+      if (["ArrowDown", "ArrowRight"].includes(e.key)){ e.preventDefault(); go(Math.min(steps.length - 1, cur + 1), true); }
+      if (["ArrowUp", "ArrowLeft"].includes(e.key)){ e.preventDefault(); go(Math.max(0, cur - 1), true); }
+    });
+    list.append(b);
+    return b;
+  });
+  panel.id = mount.id + "-p";
+  function go(i, focus){
+    cur = i;
+    const s = steps[i];
+    tabs.forEach((b, j) => { b.setAttribute("aria-selected", String(j === i)); b.tabIndex = j === i ? 0 : -1; });
+    if (focus) tabs[i].focus();
+    panel.setAttribute("aria-labelledby", mount.id + "-t" + i);
+    panel.innerHTML = "";
+    panel.append(
+      h("div", {class: "who"}, s.who.map(actorChip)),
+      h("h3", {}, (i + 1) + ". " + s.t),
+      h("p", {style: "margin:0", html: md(s.short)}),
+      h("ul", {html: s.pts.map(p => "<li>" + md(p) + "</li>").join("")}),
+      s.why ? h("div", {class: "why"}, h("b", {}, "Why it is built this way"), h("span", {html: md(s.why)})) : null);
+    prev.disabled = i === 0; next.disabled = i === steps.length - 1;
+    count.textContent = "Step " + (i + 1) + " of " + steps.length;
+  }
+  prev.addEventListener("click", () => go(cur - 1, false));
+  next.addEventListener("click", () => go(cur + 1, false));
+  mount.append(h("div", {class: "stepper"}, list, h("div", {}, panel, h("div", {class: "pager"}, prev, next, count))));
+  go(0, false);
+}
+stepper($("#repStepper"), REP_STEPS, "Steps of replicate");
+stepper($("#goalStepper"), GOAL_STEPS, "Steps of route G");
+$("#repFiles").textContent = REP_FILES;
+
+/* ----------------------------------------------------------------- gates */
+(function gates(){
+  const out = $("#gateOut"), btns = $$(".segmented button");
+  const tag = k => h("span", {class: "tag " + k}, {hard: "hard gate", soft: "warning", prov: "provisional", good: "pass band"}[k] || k);
+  const views = {
+    rep(){
+      const rows = GATES_REP.map(r => h("tr", {}, h("td", {}, r[0]), h("td", {}, r[1]), h("td", {}, r[2] === "prov" ? [tag("hard"), " ", tag("prov")] : tag(r[2])), h("td", {class: "muted"}, r[3])));
+      return [h("p", {class: "muted", style: "margin-top:0"}, "A candidate that fails any hard gate is invalid and retried. Provisional means the limit rests on one or two of your reviews and is re-checked against the next ones."),
+        h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["Gate", "Limit", "Kind", "Evidence"].map(x => h("th", {}, x)))), h("tbody", {}, rows)))];
+    },
+    pose(){
+      const rows = GATES_POSE.map(r => h("tr", {}, h("td", {class: "mono"}, r[0]), h("td", {class: "mono"}, r[1]), h("td", {}, r[2]), h("td", {}, r[3])));
+      return [h("p", {class: "muted", style: "margin-top:0"}, "Run by tools\\pose_compare.py on every render of a goal, goal against render, with a local YOLO11 pose model. Units are shares of the frame's width or height. Fixed on 2026-09-27 and never loosened for a render that fails them."),
+        h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["Measure", "Limit", "What it compares", "Checklist item"].map(x => h("th", {}, x)))), h("tbody", {}, rows)))];
+    },
+    id(){
+      const rows = ID_ROWS.map(r => h("tr", {}, h("td", {class: "mono"}, r[0]), h("td", {class: "mono"}, r[1]), h("td", {}, tag(r[2] === "good" ? "good" : r[2])), h("td", {class: "muted"}, r[3])));
+      return [h("p", {class: "muted", style: "margin-top:0"}, "Identity is the mean of the 3 most similar photos in your pool, by ArcFace. It is a measurement to report, never the reason to call a picture good. Picking a candidate by it chose a regression once, because ArcFace rates a level, camera-facing studio face highest."),
+        h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["Verdict", "Score", "Kind", "What it means"].map(x => h("th", {}, x)))), h("tbody", {}, rows)))];
+    }
+  };
+  function show(k){
+    btns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.g === k)));
+    out.innerHTML = ""; views[k]().forEach(n => out.append(n));
+  }
+  btns.forEach(b => b.addEventListener("click", () => show(b.dataset.g)));
+  show("rep");
+})();
+
+/* ----------------------------------------------------------------- audit */
+(function audit(){
+  const state = {};   // item number -> "pass" | "fail" | "na"
+  const order = ["pass", "fail", "na"], nameOf = {pass: "PASS", fail: "FAIL", na: "N/A"};
+  const mount = $("#auditList"), q = $("#auditSearch"), verdict = $("#auditVerdict"), cmd = $("#auditCmd");
+  const nodes = [];
+  AUDIT_GROUPS.forEach(([title, items]) => {
+    const g = h("div", {class: "group"}, title);
+    const wrap = h("div", {class: "items"});
+    items.forEach(([n, text, na, meas]) => {
+      state[n] = "pass";
+      const st = h("span", {class: "st"}, "PASS");
+      const b = h("button", {class: "item", type: "button", "data-s": "pass", "aria-label": "Item " + n + ": " + text + ". Click to change."},
+        h("span", {class: "n"}, String(n)),
+        h("span", {}, text, na ? h("small", {}, "N/A when: " + na) : null, meas ? h("span", {class: "meas"}, "measured first by the pose gate") : null),
+        st);
+      b.addEventListener("click", () => {
+        state[n] = order[(order.indexOf(state[n]) + 1) % 3];
+        b.dataset.s = state[n]; st.textContent = nameOf[state[n]]; summary();
+      });
+      b._text = (n + " " + text + " " + na).toLowerCase();
+      b._s = {b, st, n};
+      nodes.push(b); wrap.append(b);
+    });
+    mount.append(g, wrap); g._wrap = wrap; nodes.push(g);
+  });
+  function summary(){
+    const fails = Object.keys(state).filter(k => state[k] === "fail").map(Number).sort((a, b) => a - b);
+    const nas = Object.keys(state).filter(k => state[k] === "na").map(Number).sort((a, b) => a - b);
+    verdict.className = "verdict " + (fails.length ? "no" : "ok");
+    verdict.textContent = fails.length ? "NOT BEST: " + fails.length + " failed (" + fails.join(", ") + ")" : "BEST: all items pass" + (nas.length ? " (" + nas.length + " not applicable)" : "");
+    cmd.textContent = '.venv\\Scripts\\python.exe tools\\best_check.py "<picture>" --source "<source photo>"' + (fails.length ? " --fail " + fails.join(",") : "") + (nas.length ? " --na " + nas.join(",") : "") + ' --note "what was wrong" --right "what went right"';
+  }
+  function filter(){
+    const term = q.value.trim().toLowerCase();
+    $$(".items", mount).forEach(w => {
+      let any = false;
+      $$(".item", w).forEach(b => { const hit = !term || b._text.includes(term); b.style.display = hit ? "" : "none"; any = any || hit; });
+      w.style.display = any ? "" : "none"; w.previousElementSibling.style.display = any ? "" : "none";
+    });
+  }
+  q.addEventListener("input", filter);
+  $("#auditReset").addEventListener("click", () => { Object.keys(state).forEach(k => state[k] = "pass"); nodes.forEach(b => { if (b._s){ b.dataset.s = "pass"; b._s.st.textContent = "PASS"; } }); summary(); });
+  const rules = $("#auditRules");
+  AUDIT_RULES.forEach(([t, s]) => rules.append(h("div", {class: "card"}, h("b", {}, t), h("p", {class: "muted", style: "margin:6px 0 0"}, s))));
+  summary();
+})();
+
+/* ------------------------------------------------------------------ loop */
+(function loop(){
+  list($("#loopSteps"), LOOP_STEPS); list($("#loopStop"), LOOP_STOP); list($("#loopNever"), LOOP_NEVER);
+  const mount = $("#lessons");
+  LESSONS.forEach(([t, pts], i) => { const d = h("details", {}, h("summary", {}, t), h("ul", {html: pts.map(p => "<li>" + md(p) + "</li>").join("")})); if (i === 0) d.open = true; mount.append(d); });
+})();
+
+/* --------------------------------------------------------------- records */
+(function records(){
+  $("#resultsTree").textContent = RESULTS_TREE;
+  list($("#resultsRules"), RESULTS_RULES); list($("#ledgerRules"), LEDGER_RULES); list($("#sessionRules"), SESSION_RULES);
+})();
+
+/* ----------------------------------------------------------------- video */
+(function video(){
+  const stats = $("#videoStats");
+  VIDEO_STATS.forEach(([b, s]) => stats.append(h("div", {class: "card stat"}, h("b", {}, b), h("span", {class: "muted"}, s))));
+  list($("#videoNotes"), VIDEO_NOTES);
+})();
+
+/* ---------------------------------------------------------------- limits */
+(function limits(){
+  const box = $("#limitCards");
+  LIMITS.forEach(([t, pts]) => box.append(h("div", {class: "card"}, h("b", {}, t), h("ul", {style: "margin:8px 0 0;padding-left:1.2em", html: pts.map(p => "<li>" + md(p) + "</li>").join("")}))));
+})();
+</script>
+</body>
+</html>
