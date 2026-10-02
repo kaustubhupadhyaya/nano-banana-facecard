@@ -1,0 +1,12 @@
+REFERENCE IMAGES BY ROLE:
+{ROLES}
+
+Generate a new photograph of THIS EXACT MAN — not a lookalike.
+
+FACE: {FACE}
+
+BUILD: {BUILD}
+
+{SCENE}
+
+Photorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.
