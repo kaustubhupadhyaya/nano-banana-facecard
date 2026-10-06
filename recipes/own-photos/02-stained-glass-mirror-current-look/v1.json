@@ -1,0 +1,304 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "google-4__IMG_5850_Original",
+ "version": 1,
+ "created": "2026-10-07T03:26:41",
+ "because": "the user, 2026-10-07: regenerate the mirror (stained glass with his reflection) photo to look like current me. FACE references: current look only (the user, 2026-10-07: 'the current me is the one where I have shared reference images of mine in different profiles'): the IMG_68xx studio photos nearest the goal's measured head turn, plus two front views (goal yaw +69).",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "google-4__IMG_5850_Original",
+  "path": ".cache/super_favs/google-4__IMG_5850_Original.jpg",
+  "sha256": "66bd4a96bb4171c892c3dbe5bd15d9ce6aef13be23d73bff6b9925573dc600c3",
+  "pose": {
+   "path": ".cache/poses/google-4__IMG_5850_Original.json",
+   "sha256": "4ee3f19e29da58048291d4cca8633ca303344884870e81b2b81479f8dc8d24b9"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/super_favs/google-4__IMG_5850_Original.jpg",
+   "prompt": "His face is turned about 69 degrees toward picture-left, in profile.",
+   "inventory": ".cache/inventories/google-4__IMG_5850_Original.json",
+   "goal_as_image": "yes",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": "IMG_6863.jpg,IMG_6862.jpg,IMG_6868.jpg,IMG_6858.jpg",
+   "face_count": null,
+   "subject": "me"
+  },
+  "model": {
+   "id": "e6fa609c3fa255c0",
+   "label": "pro"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "yes",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": true,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 69 degrees toward picture-left, in profile.",
+   "from": "inline text",
+   "sha256": "9a1ad7055fd4c4b821cfeaba0d432ffe648d9d2b2d16dc93173b80486ba5071d",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/google-4__IMG_5850_Original.json",
+   "sha256": "eb036fa8e594473ffaff69928a640ecab0e468a4f6963917673361c7fb4aedf5",
+   "data": {
+    "goal": ".cache/super_favs/google-4__IMG_5850_Original.jpg",
+    "photo_to_edit": ".cache/super_favs/google-4__IMG_5850_Original.jpg",
+    "written": "2026-10-07, by eye from his own stained-glass photo with his reflection in the window. The user: 'edit these two to look like current me; the current me is the one where I have shared reference images of mine in different profiles' (the IMG_68xx studio photos).",
+    "refs": [],
+    "change": [
+     {
+      "item": "his face",
+      "goal": "his own face as it was when this photo was taken",
+      "his": "his face as it is now, exactly as in the FACE references: the same bone structure, nose, eyes, eyebrows, lips and lean cheeks"
+     },
+     {
+      "item": "hair",
+      "goal": "short neat hair with faded sides",
+      "his": "his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back)"
+     },
+     {
+      "item": "beard",
+      "goal": "a short trimmed beard and moustache",
+      "his": "his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape along the whole jaw"
+     },
+     {
+      "item": "his reflection in the window glass",
+      "goal": "the reflection of his earlier face, hair and beard beside his head",
+      "his": "the mirror image of the new him: the same face, curly hair, full beard and glasses, seen from the other side, faint and tinted by the glass exactly like the reflection now"
+     }
+    ],
+    "keep": [
+     "his thin metal-framed glasses stay on his face, the same shape, colour and position, and the reflection shows them too",
+     "his expression: calm and focused, looking out through the window",
+     "the photograph itself: the saturated yellow-green and purple light of the stained glass, the exposure, the colour cast on his face and shirt, the grain and the sharpness",
+     "the light on his face: the same yellow-green light as his neck and shirt, never brighter or cleaner than his neck",
+     "his face is as sharp and detailed as the photo around it: real skin texture, individual beard and moustache hairs; never smoothed",
+     "his exact posture: standing leaning against the window frame with his legs crossed, his head turned in profile toward picture-left, looking out through the glass",
+     "his clothes and things: the yellow polo shirt, the black jeans, the watch, the bracelet and the black shoes",
+     "the window, its frames and the patterned glass, the floor and the walls, exactly where they are",
+     "his size and position in the frame and the camera distance: the frame is not cropped, zoomed or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "names",
+   "evidence": "--face-refs IMG_6863.jpg,IMG_6862.jpg,IMG_6868.jpg,IMG_6858.jpg",
+   "measured": {
+    "detected": true,
+    "yaw": 69.4,
+    "pitch": 12.7,
+    "roll": 9.4,
+    "side": "picture-left",
+    "score": 0.75,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6863.jpg",
+    "IMG_6862.jpg",
+    "IMG_6868.jpg",
+    "IMG_6858.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6863.jpg",
+    "sha256": "133314862cd770ca8d52156010e93127849ba7779132d5841944f4a8ee259d90",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6863.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6863.jpg,IMG_6862.jpg,IMG_6868.jpg,IMG_6858.jpg"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6862.jpg",
+    "sha256": "28167b00ccd44f060ac76878c58e9917926fd11033dc1eda88dc482d16d20048",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6862.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6863.jpg,IMG_6862.jpg,IMG_6868.jpg,IMG_6858.jpg"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6863.jpg,IMG_6862.jpg,IMG_6868.jpg,IMG_6858.jpg"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6863.jpg,IMG_6862.jpg,IMG_6868.jpg,IMG_6858.jpg"
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "subject_profiles.roles.body: his true build"
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "name": "IMG_0440_Original.jpg",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_0440_Original.jpg",
+    "prep": "fit2048_q95",
+    "why": "subject_profiles.roles.arms: his shoulders and arms"
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "name": "google-4__IMG_5850_Original.jpg",
+    "sha256": "9e1d44375218a14fffcb6d8caab2fc29aa7ec1c3a0d949264509e9c14356cac6",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/super_favs/google-4__IMG_5850_Original.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-4 are FACE references of this man.\nImage 5 is the BODY reference — his true build and proportion.\nImage 6 is the SHOULDER AND ARM reference.\nImage 7 is the PHOTO TO EDIT.\n\nEdit image 7, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. His hair exactly as in the face references: his own tight curly black hair. His beard and moustache exactly as in the face references: the same length, density and shape. Lean face with low facial fat: defined cheekbones with a visible hollow beneath them, and a clear jawline meeting at a defined angle below the ear. His face at its true size in proportion to his head and body, as in the references. Warm medium-brown South Asian skin tone matching the references, never lightened. Real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-4), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 5 precisely: his true build and proportion. A slim, lean build: moderate shoulder width, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist and slim hips. Tall and lean, never bulky or heavily muscled.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- his face: the PHOTO TO EDIT shows his own face as it was when this photo was taken; make it his face as it is now, exactly as in the FACE references: the same bone structure, nose, eyes, eyebrows, lips and lean cheeks.\n- hair: the PHOTO TO EDIT shows short neat hair with faded sides; make it his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back).\n- beard: the PHOTO TO EDIT shows a short trimmed beard and moustache; make it his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape along the whole jaw.\n- his reflection in the window glass: the PHOTO TO EDIT shows the reflection of his earlier face, hair and beard beside his head; make it the mirror image of the new him: the same face, curly hair, full beard and glasses, seen from the other side, faint and tinted by the glass exactly like the reflection now.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his thin metal-framed glasses stay on his face, the same shape, colour and position, and the reflection shows them too.\n- his expression: calm and focused, looking out through the window.\n- the photograph itself: the saturated yellow-green and purple light of the stained glass, the exposure, the colour cast on his face and shirt, the grain and the sharpness.\n- the light on his face: the same yellow-green light as his neck and shirt, never brighter or cleaner than his neck.\n- his face is as sharp and detailed as the photo around it: real skin texture, individual beard and moustache hairs; never smoothed.\n- his exact posture: standing leaning against the window frame with his legs crossed, his head turned in profile toward picture-left, looking out through the glass.\n- his clothes and things: the yellow polo shirt, the black jeans, the watch, the bracelet and the black shoes.\n- the window, its frames and the patterned glass, the floor and the walls, exactly where they are.\n- his size and position in the frame and the camera distance: the frame is not cropped, zoomed or re-centred.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "5bc18741b651c1c1fdeb4669b97a2c9866b2bd07838a173ca2ae683f06fbe31e",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "133314862cd770ca8d52156010e93127849ba7779132d5841944f4a8ee259d90",
+    "upload_name": "IMG_6863.jpg",
+    "bytes": 698748,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "28167b00ccd44f060ac76878c58e9917926fd11033dc1eda88dc482d16d20048",
+    "upload_name": "IMG_6862.jpg",
+    "bytes": 668610,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "upload_name": "IMG_0440_Original.jpg",
+    "bytes": 451859,
+    "px": [
+     1423,
+     2048
+    ]
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "sha256": "9e1d44375218a14fffcb6d8caab2fc29aa7ec1c3a0d949264509e9c14356cac6",
+    "upload_name": "google-4__IMG_5850_Original.jpg",
+    "bytes": 1141098,
+    "px": [
+     1536,
+     2048
+    ]
+   }
+  ],
+  "model": "e6fa609c3fa255c0",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "0998195128e029ee89a299713ee18c3ce27bd27778b91353bc46db86643bb76d"
+ }
+}

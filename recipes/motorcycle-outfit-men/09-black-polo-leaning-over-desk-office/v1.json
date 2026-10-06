@@ -1,0 +1,343 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539779317",
+ "version": 1,
+ "created": "2026-10-07T03:26:54",
+ "because": "the user, 2026-10-07: new images of pin 9 with the new system in one stage. Inventory v10 (its best single-stage attempts failed only item 12, head bow), Flash as then. FACE references: current look only (the user, 2026-10-07: 'the current me is the one where I have shared reference images of mine in different profiles'): the IMG_68xx studio photos nearest the goal's measured head turn, plus two front views (goal yaw -12, pitch -22).",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539779317",
+  "path": ".cache/pin_783485666539779317.jpg",
+  "sha256": "cfa62c0156df45fc74ab2237020a58d767e7b6df74955460f67c7222c22b2e98",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539779317.json",
+   "sha256": "fdfb4d872e76cb84d6a4cec7a48f56e4fff139482020e464823f04d18a16fe28"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666539779317.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539779317_route.txt",
+   "inventory": ".cache/inventories/pin_783485666539779317_v10.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": "IMG_6869.jpg,IMG_6861.jpg,IMG_6858.jpg,IMG_6873.jpg",
+   "face_count": null,
+   "subject": "me"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 40 degrees toward picture-left, bowed down.",
+   "from": ".cache/loop_prompts/pin_783485666539779317_route.txt",
+   "sha256": "e3a0053044d49a01b3e7eba8f4ea9e3801e1909c4174cb22e9e8fe37a23c661b",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666539779317_v10.json",
+   "sha256": "8314080546d606c33785d5b79773bb016826103d38e9cc5acee764e27695c6fd",
+   "data": {
+    "goal": ".cache/pin_783485666539779317.jpg",
+    "photo_to_edit": ".cache/pin_783485666539779317.jpg",
+    "written": "2026-09-30, by eye from the pin (motorcycle-outfit-men board, the user's number 9)",
+    "refs": [
+     {
+      "key": "head_bow",
+      "path": ".cache/inventories/pin9_refs/head_bow.jpg",
+      "label": "HIS HEAD BOW, a reference of the same man: his head turned about 30 degrees toward picture-left with his chin lowered about 25 degrees and his eyes cast down. Take ONLY how steeply the head is bowed from this image (and how little of the face shows under the brow and curls); his identity comes from the FACE references."
+     }
+    ],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "a muscular young man with dark wavy hair, clean-shaven, fair skin",
+      "his": "him: the man of the references, a different person, a slim man with his own face"
+     },
+     {
+      "item": "hair",
+      "goal": "dark wavy hair",
+      "his": "his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back), never cut shorter or straighter"
+     },
+     {
+      "item": "beard",
+      "goal": "clean-shaven",
+      "his": "his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape"
+     },
+     {
+      "item": "skin tone",
+      "goal": "a fair or lighter skin tone",
+      "his": "his own warm medium-brown skin tone, as in the references, on face, neck, arms, hands and torso"
+     },
+     {
+      "item": "build",
+      "goal": "a muscular build with big arms",
+      "his": "his own slim lean build from the BODY reference image: narrow shoulders, thin upper arms barely thicker than his forearms, a flat chest, a narrow waist. The visible result: the short polo sleeves hang loose and baggy with air between the fabric and his thin upper arms, and the polo drapes loosely over his narrow shoulders and chest. The big biceps, thick forearms and broad shoulders of the man in the PHOTO TO EDIT are not his and must not appear"
+     },
+     {
+      "item": "head bow",
+      "goal": "the other man's head bowed steeply over the desk",
+      "his": "his head bowed even more steeply than in the HEAD BOW reference: chin tucked almost to his chest, eyes straight down at his hands, brow and curls leading, so little of his face shows",
+      "ref": "head_bow"
+     }
+    ],
+    "keep": [
+     "his HEAD BOW, the most important thing in the picture, bowed MORE steeply than in the PHOTO TO EDIT: the tip of his nose is about 1.1 times the distance between his eyes below the line of his eyes; his chin is tucked almost to his chest and his eyes look straight down at his hands; the camera sees the top of his curls, his forehead, the tip of his nose and only the upper edge of his beard; a level or lifted face is wrong, and so is a face shown fully",
+     "his HEAD BOW, the most important thing in the picture: bowed so steeply that the tip of his nose sits far below the line of his eyes (nearly 0.9 of the distance between his eyes), his chin tucked toward his chest, his eyes hidden under his brows and curls and looking straight down at his hands on the desk; the camera sees his forehead and the top of his curls more than his face; never level, never chin up",
+     "the FRAMING exactly: the camera is as far from him as in the PHOTO TO EDIT; his shoulders sit at about 45 percent from the left and 48 percent from the top, his hips at about 69 percent from the left and 74 percent from the top, so his torso is no longer than 34 percent of the picture height; his head at about 33 percent from the left and 47 percent from the top; never closer, never bigger in the frame",
+     "his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered",
+     "his exact posture: bent forward at the waist over a desk with both hands on it, his head lowered with his eyes looking down at his hands, his face seen in three-quarter view turned toward picture-left",
+     "the black short-sleeve textured polo shirt with an open collar and the brown trousers",
+     "the person in the foreground at picture-left, seen from behind (brown hair in a ponytail, a hand at her ear), exactly as she is: unchanged, turned away from the camera",
+     "the whole classroom scene: the beige cinder-block wall, the bookshelf of binders at picture-left, the green plant behind him, the whiteboard calendar, the notice board with posters and its rainbow border at picture-right, the green folder on the desk, the yellow cable hanging behind him, the black backpack edge at the bottom-right",
+     "the flat indoor snapshot light, the phone-photo softness, his size and position in the frame and the camera distance"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "names",
+   "evidence": "--face-refs IMG_6869.jpg,IMG_6861.jpg,IMG_6858.jpg,IMG_6873.jpg",
+   "measured": {
+    "detected": true,
+    "yaw": -11.6,
+    "pitch": -22.2,
+    "roll": -37.8,
+    "side": "picture-right",
+    "score": 0.73,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6869.jpg",
+    "IMG_6861.jpg",
+    "IMG_6858.jpg",
+    "IMG_6873.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6869.jpg",
+    "sha256": "607b697a0dd91edcacc049e03a4ec9ae7a2ed833fb9dbf2bd0235a4c8d218a77",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6869.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6869.jpg,IMG_6861.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6869.jpg,IMG_6861.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6869.jpg,IMG_6861.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "IMG_6873.jpg",
+    "sha256": "37c6932c90d7175bb7e496772e03b30ccf03165038b2f746c8e7882f834879b6",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6873.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6869.jpg,IMG_6861.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "subject_profiles.roles.body: his true build"
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "name": "IMG_0440_Original.jpg",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_0440_Original.jpg",
+    "prep": "fit2048_q95",
+    "why": "subject_profiles.roles.arms: his shoulders and arms"
+   },
+   {
+    "n": 7,
+    "role": "inv_ref",
+    "name": "head_bow.jpg",
+    "sha256": "e256ab2f5f9911c3ca663a432c9ce24a9937a8e0ad03b4eb3ecffe4053f9e21c",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/inventories/pin9_refs/head_bow.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS HEAD BOW, a reference of the same man: his head turned about 30 degrees toward picture-left with his chin lowered about 25 degrees and his eyes cast down. Take ONLY how steeply the head is bowed from this image (and how little of the face shows under the brow and curls); his identity comes from the FACE references.",
+    "key": "head_bow"
+   },
+   {
+    "n": 8,
+    "role": "photo_to_edit",
+    "name": "pin_783485666539779317.jpg",
+    "sha256": "f67edbd3477aa0ca9e101ea8ca7d60ad3480a543f4fafdb01a0ad7813ea7a94b",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666539779317.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-4 are FACE references of this man.\nImage 5 is the BODY reference — his true build and proportion.\nImage 6 is the SHOULDER AND ARM reference.\nImage 7 is HIS HEAD BOW, a reference of the same man: his head turned about 30 degrees toward picture-left with his chin lowered about 25 degrees and his eyes cast down. Take ONLY how steeply the head is bowed from this image (and how little of the face shows under the brow and curls); his identity comes from the FACE references.\nImage 8 is the PHOTO TO EDIT.\n\nEdit image 8, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. His hair exactly as in the face references: his own tight curly black hair. His beard and moustache exactly as in the face references: the same length, density and shape. Lean face with low facial fat: defined cheekbones with a visible hollow beneath them, and a clear jawline meeting at a defined angle below the ear. His face at its true size in proportion to his head and body, as in the references. Warm medium-brown South Asian skin tone matching the references, never lightened. Real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-4), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 5 precisely: his true build and proportion. A slim, lean build: moderate shoulder width, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist and slim hips. Tall and lean, never bulky or heavily muscled. His whole body is his own, from images 5 and 6: never the build of the man in the photo to edit, who is broader and far more muscular, with thicker arms and a bigger chest. His shoulders, arms, chest and waist are the slimmer ones of his references.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows a muscular young man with dark wavy hair, clean-shaven, fair skin; make it him: the man of the references, a different person, a slim man with his own face.\n- hair: the PHOTO TO EDIT shows dark wavy hair; make it his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back), never cut shorter or straighter.\n- beard: the PHOTO TO EDIT shows clean-shaven; make it his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape.\n- skin tone: the PHOTO TO EDIT shows a fair or lighter skin tone; make it his own warm medium-brown skin tone, as in the references, on face, neck, arms, hands and torso.\n- build: the PHOTO TO EDIT shows a muscular build with big arms; make it his own slim lean build from the BODY reference image: narrow shoulders, thin upper arms barely thicker than his forearms, a flat chest, a narrow waist. The visible result: the short polo sleeves hang loose and baggy with air between the fabric and his thin upper arms, and the polo drapes loosely over his narrow shoulders and chest. The big biceps, thick forearms and broad shoulders of the man in the PHOTO TO EDIT are not his and must not appear.\n- head bow: the PHOTO TO EDIT shows the other man's head bowed steeply over the desk; make it his head bowed even more steeply than in the HEAD BOW reference: chin tucked almost to his chest, eyes straight down at his hands, brow and curls leading, so little of his face shows (image 7).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his HEAD BOW, the most important thing in the picture, bowed MORE steeply than in the PHOTO TO EDIT: the tip of his nose is about 1.1 times the distance between his eyes below the line of his eyes; his chin is tucked almost to his chest and his eyes look straight down at his hands; the camera sees the top of his curls, his forehead, the tip of his nose and only the upper edge of his beard; a level or lifted face is wrong, and so is a face shown fully.\n- his HEAD BOW, the most important thing in the picture: bowed so steeply that the tip of his nose sits far below the line of his eyes (nearly 0.9 of the distance between his eyes), his chin tucked toward his chest, his eyes hidden under his brows and curls and looking straight down at his hands on the desk; the camera sees his forehead and the top of his curls more than his face; never level, never chin up.\n- the FRAMING exactly: the camera is as far from him as in the PHOTO TO EDIT; his shoulders sit at about 45 percent from the left and 48 percent from the top, his hips at about 69 percent from the left and 74 percent from the top, so his torso is no longer than 34 percent of the picture height; his head at about 33 percent from the left and 47 percent from the top; never closer, never bigger in the frame.\n- his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered.\n- his exact posture: bent forward at the waist over a desk with both hands on it, his head lowered with his eyes looking down at his hands, his face seen in three-quarter view turned toward picture-left.\n- the black short-sleeve textured polo shirt with an open collar and the brown trousers.\n- the person in the foreground at picture-left, seen from behind (brown hair in a ponytail, a hand at her ear), exactly as she is: unchanged, turned away from the camera.\n- the whole classroom scene: the beige cinder-block wall, the bookshelf of binders at picture-left, the green plant behind him, the whiteboard calendar, the notice board with posters and its rainbow border at picture-right, the green folder on the desk, the yellow cable hanging behind him, the black backpack edge at the bottom-right.\n- the flat indoor snapshot light, the phone-photo softness, his size and position in the frame and the camera distance.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "6550c5718a98edaed50c65f01f76f44d7c14ebd5cfd2b8faa92fb88ecc3c66b0",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "607b697a0dd91edcacc049e03a4ec9ae7a2ed833fb9dbf2bd0235a4c8d218a77",
+    "upload_name": "IMG_6869.jpg",
+    "bytes": 653124,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "37c6932c90d7175bb7e496772e03b30ccf03165038b2f746c8e7882f834879b6",
+    "upload_name": "IMG_6873.jpg",
+    "bytes": 656191,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "upload_name": "IMG_0440_Original.jpg",
+    "bytes": 451859,
+    "px": [
+     1423,
+     2048
+    ]
+   },
+   {
+    "n": 7,
+    "role": "inv_ref",
+    "sha256": "e256ab2f5f9911c3ca663a432c9ce24a9937a8e0ad03b4eb3ecffe4053f9e21c",
+    "upload_name": "head_bow.jpg",
+    "bytes": 182988,
+    "px": [
+     1024,
+     1024
+    ]
+   },
+   {
+    "n": 8,
+    "role": "photo_to_edit",
+    "sha256": "f67edbd3477aa0ca9e101ea8ca7d60ad3480a543f4fafdb01a0ad7813ea7a94b",
+    "upload_name": "pin_783485666539779317.jpg",
+    "bytes": 121236,
+    "px": [
+     828,
+     886
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "8d030c3c2943af23b33343b42e2a271cce7a998bb92976fad7c768a4a2ab2401"
+ }
+}

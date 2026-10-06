@@ -1,0 +1,302 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "google-1__IMG_5549",
+ "version": 2,
+ "created": "2026-10-07T03:50:38",
+ "because": "checklist item 28 failed on both v1 pictures (medium curls, no short faded sides, beard only a little fuller): the haircut and beard written as geometry (the skill's 10-01 lesson)",
+ "parent": "v1",
+ "origin": {
+  "kind": "bump",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "google-1__IMG_5549",
+  "path": ".cache/super_favs/google-1__IMG_5549.jpg",
+  "sha256": "cd3baf036aa620b0092865ea8dfadaaf553bc8a3f77d16c4146f5af1d42af46b",
+  "pose": {
+   "path": ".cache/poses/google-1__IMG_5549.json",
+   "sha256": "93e9e7ccf37405ebe93231c733cc95dfcbca4b65287e68c36c6d09c01b1fcde2"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/super_favs/google-1__IMG_5549.jpg",
+   "prompt": "His face is turned about 33 degrees toward picture-right.",
+   "inventory": ".cache/inventories/google-1__IMG_5549_v2.json",
+   "goal_as_image": "yes",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": "IMG_6861.jpg,IMG_6869.jpg,IMG_6858.jpg,IMG_6873.jpg",
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": null,
+   "build_sheet": null,
+   "head_swap": null
+  },
+  "model": {
+   "id": "e6fa609c3fa255c0",
+   "label": "pro"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "yes",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": true,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 33 degrees toward picture-right.",
+   "from": "inline text",
+   "sha256": "816ac0373eafba2061103adc0083a4c23cfe17a791e5939c9556b5c2b4881185",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/google-1__IMG_5549_v2.json",
+   "sha256": "f9ad0f66f38e3d1dddde31ffd30f97283656add863ac3b4e42256f010809e4fc",
+   "data": {
+    "goal": ".cache/super_favs/google-1__IMG_5549.jpg",
+    "photo_to_edit": ".cache/super_favs/google-1__IMG_5549.jpg",
+    "written": "2026-10-07, by eye from his own kayak photo. The user: 'edit these two to look like current me; the current me is the one where I have shared reference images of mine in different profiles' (the IMG_68xx studio photos). v2 (2026-10-07): the haircut and beard written as geometry (checklist item 28 failed on v1: curls all around, no short faded sides).",
+    "refs": [],
+    "change": [
+     {
+      "item": "his face",
+      "goal": "his own face as it was when this photo was taken",
+      "his": "his face as it is now, exactly as in the FACE references: the same bone structure, nose, eyes, eyebrows, lips and lean cheeks"
+     },
+     {
+      "item": "hair",
+      "goal": "shorter dark curls",
+      "his": "his own haircut exactly as in the FACE references: tight black curls about 6 to 8 cm long on top, and the sides and back short and faded close to the scalp, so his ears and the skin at his temples show; never curls covering the sides or the ears"
+     },
+     {
+      "item": "beard",
+      "goal": "a short light beard and moustache",
+      "his": "his own full, dense dark beard and moustache exactly as in the FACE references: from the sideburns along the whole jaw and chin, neat edges, a full moustache over the lip"
+     }
+    ],
+    "keep": [
+     "his thin round metal-framed glasses stay on his face, the same shape, colour and position",
+     "his expression: a relaxed, happy smile, the same as in the photograph",
+     "the photograph itself: the warm sunset colours, the low golden backlight from the sun at picture-right, the haze over the water, the exposure, the grain and the sharpness",
+     "the light on his face: lit by the same low warm sun as his neck and arms, never brighter than his neck and arms",
+     "his face is as sharp and detailed as the photo around it: real skin texture, individual beard and moustache hairs; never smoothed",
+     "his exact posture: sitting in the yellow kayak with his legs stretched out and his bare feet up front, both hands holding the paddle diagonally across his body, his head turned toward picture-right",
+     "his clothes: the orange life jacket over the white-and-navy striped polo, the dark trousers and the watch",
+     "the yellow kayak with the KONKAN KAYAK lettering, the yellow paddle, the water, the reeds, the bare trees and the sunset sky, exactly where they are",
+     "his size and position in the frame and the camera distance: the frame is not cropped, zoomed or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "names",
+   "evidence": "--face-refs IMG_6861.jpg,IMG_6869.jpg,IMG_6858.jpg,IMG_6873.jpg",
+   "measured": {
+    "detected": true,
+    "yaw": -33.1,
+    "pitch": -0.7,
+    "roll": -9.2,
+    "side": "picture-right",
+    "score": 0.86,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6861.jpg",
+    "IMG_6869.jpg",
+    "IMG_6858.jpg",
+    "IMG_6873.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6861.jpg,IMG_6869.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6869.jpg",
+    "sha256": "607b697a0dd91edcacc049e03a4ec9ae7a2ed833fb9dbf2bd0235a4c8d218a77",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6869.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6861.jpg,IMG_6869.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6861.jpg,IMG_6869.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "IMG_6873.jpg",
+    "sha256": "37c6932c90d7175bb7e496772e03b30ccf03165038b2f746c8e7882f834879b6",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6873.jpg",
+    "prep": "fit2048_q95",
+    "why": "--face-refs IMG_6861.jpg,IMG_6869.jpg,IMG_6858.jpg,IMG_6873.jpg"
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "subject_profiles.roles.body: his true build"
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "name": "IMG_0440_Original.jpg",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_0440_Original.jpg",
+    "prep": "fit2048_q95",
+    "why": "subject_profiles.roles.arms: his shoulders and arms"
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "name": "google-1__IMG_5549.jpg",
+    "sha256": "16600ddce51bafd45154149c66e8d693fbbe7845a50d9a74e398cc680691d97f",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/super_favs/google-1__IMG_5549.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-4 are FACE references of this man.\nImage 5 is the BODY reference — his true build and proportion.\nImage 6 is the SHOULDER AND ARM reference.\nImage 7 is the PHOTO TO EDIT.\n\nEdit image 7, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. His hair exactly as in the face references: his own tight curly black hair. His beard and moustache exactly as in the face references: the same length, density and shape. Lean face with low facial fat: defined cheekbones with a visible hollow beneath them, and a clear jawline meeting at a defined angle below the ear. His face at its true size in proportion to his head and body, as in the references. Warm medium-brown South Asian skin tone matching the references, never lightened. Real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-4), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 5 precisely: his true build and proportion. A slim, lean build: moderate shoulder width, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist and slim hips. Tall and lean, never bulky or heavily muscled.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- his face: the PHOTO TO EDIT shows his own face as it was when this photo was taken; make it his face as it is now, exactly as in the FACE references: the same bone structure, nose, eyes, eyebrows, lips and lean cheeks.\n- hair: the PHOTO TO EDIT shows shorter dark curls; make it his own haircut exactly as in the FACE references: tight black curls about 6 to 8 cm long on top, and the sides and back short and faded close to the scalp, so his ears and the skin at his temples show; never curls covering the sides or the ears.\n- beard: the PHOTO TO EDIT shows a short light beard and moustache; make it his own full, dense dark beard and moustache exactly as in the FACE references: from the sideburns along the whole jaw and chin, neat edges, a full moustache over the lip.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his thin round metal-framed glasses stay on his face, the same shape, colour and position.\n- his expression: a relaxed, happy smile, the same as in the photograph.\n- the photograph itself: the warm sunset colours, the low golden backlight from the sun at picture-right, the haze over the water, the exposure, the grain and the sharpness.\n- the light on his face: lit by the same low warm sun as his neck and arms, never brighter than his neck and arms.\n- his face is as sharp and detailed as the photo around it: real skin texture, individual beard and moustache hairs; never smoothed.\n- his exact posture: sitting in the yellow kayak with his legs stretched out and his bare feet up front, both hands holding the paddle diagonally across his body, his head turned toward picture-right.\n- his clothes: the orange life jacket over the white-and-navy striped polo, the dark trousers and the watch.\n- the yellow kayak with the KONKAN KAYAK lettering, the yellow paddle, the water, the reeds, the bare trees and the sunset sky, exactly where they are.\n- his size and position in the frame and the camera distance: the frame is not cropped, zoomed or re-centred.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "ccda94eead551d6f51638ae8abce231793d72c20a54defb3714f6808401ffaf5",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "607b697a0dd91edcacc049e03a4ec9ae7a2ed833fb9dbf2bd0235a4c8d218a77",
+    "upload_name": "IMG_6869.jpg",
+    "bytes": 653124,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "37c6932c90d7175bb7e496772e03b30ccf03165038b2f746c8e7882f834879b6",
+    "upload_name": "IMG_6873.jpg",
+    "bytes": 656191,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "upload_name": "IMG_0440_Original.jpg",
+    "bytes": 451859,
+    "px": [
+     1423,
+     2048
+    ]
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "sha256": "16600ddce51bafd45154149c66e8d693fbbe7845a50d9a74e398cc680691d97f",
+    "upload_name": "google-1__IMG_5549.jpg",
+    "bytes": 876224,
+    "px": [
+     2048,
+     1152
+    ]
+   }
+  ],
+  "model": "e6fa609c3fa255c0",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "9e60df6bed61c1029fb55b6bdd168e37dd59ac908d1749064cc3255499c5f24b"
+ }
+}
