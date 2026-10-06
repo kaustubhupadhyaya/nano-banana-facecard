@@ -1,0 +1,315 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539777054",
+ "version": 1,
+ "created": "2026-10-07T01:15:51",
+ "because": "the user, 2026-10-07: both renders of this run are great ('the image you generated now was great'; answered Both): the reference for 'generate the same image again'",
+ "parent": null,
+ "origin": {
+  "kind": "import-run",
+  "run": "20261002_171750_goal-pin-783485666539777054",
+  "proof": {
+   "prompt_equal": true,
+   "files_predate_run": true,
+   "run_started": "2026-10-02T17:17:50"
+  },
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539777054",
+  "path": ".cache/pin_783485666539777054.jpg",
+  "sha256": "d4871df2b53f6307a819d73bd3705cfd93c7b011b7a9d0d6eb68b8b2b09016b6",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539777054.json",
+   "sha256": "764ceb68b5b9d01c4c8990306038c0d9d5fef7f40aede11eeeb9f5d735105be7"
+  },
+  "layout": null,
+  "source": {
+   "path": "D:\\PinterestBoards\\motorcycle-outfit-men\\783485666539777054.jpg",
+   "sha256": "320b686f604e387d424ce018455746562e1084baef836626198bfbcbe4169195",
+   "derivation": "the goal is a re-encoded copy of this board file; how it was made was not recorded"
+  }
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache\\pin_783485666539777054.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539777054_route.txt",
+   "inventory": ".cache/inventories/pin_783485666539777054_v6.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me"
+  },
+  "model": {
+   "id": "e6fa609c3fa255c0",
+   "label": "pro"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 25 degrees toward picture-left, bowed down toward a book.",
+   "from": ".cache/loop_prompts/pin_783485666539777054_route.txt",
+   "sha256": "1f9406f2b7a72be38d1d811d1f00101c97f7a92cedb3200f37a1fe0cfd901317",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666539777054_v6.json",
+   "sha256": "ae97a14b967eb974d5686be5e25e93ac01a637b6c144e847a18d9b75e71a7fc2",
+   "data": {
+    "goal": ".cache/pin_783485666539777054.jpg",
+    "photo_to_edit": ".cache/pin_783485666539777054.jpg",
+    "written": "2026-09-30, by eye from the pin (motorcycle-outfit-men board, the user's number 5)",
+    "refs": [],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "a man with dark curly hair, light stubble and tattooed forearms, in black and white",
+      "his": "him: the man of the references, a different person, a slim man with his own face"
+     },
+     {
+      "item": "hair",
+      "goal": "dark curly hair",
+      "his": "his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back), never cut shorter or straighter"
+     },
+     {
+      "item": "beard",
+      "goal": "light stubble",
+      "his": "his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape"
+     },
+     {
+      "item": "skin tone",
+      "goal": "the goal man's skin",
+      "his": "his own skin, with the warm medium-brown tone of the references rendered in the same black-and-white grade as the photo"
+     },
+     {
+      "item": "build",
+      "goal": "a lean-to-average build",
+      "his": "his own slim lean build from the BODY and SHOULDER AND ARM reference images: moderate shoulders, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist"
+     },
+     {
+      "item": "tattoos",
+      "goal": "tattoos on both forearms",
+      "his": "no tattoos at all: plain bare forearms and hands, as his own skin has none"
+     }
+    ],
+    "keep": [
+     "the black-and-white photograph exactly: the same grey tones, contrast and film grain (the picture stays black and white)",
+     "the LIGHT on his face: soft shade from his curls like the man's in the PHOTO TO EDIT, but about a QUARTER brighter than his: his forehead stays in shade under the curls, while his eyes, nose, cheeks, mouth and beard are clearly lit and readable; his face is still darker than his white tee, not evenly lit and not retouched",
+     "his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered",
+     "his exact posture: sitting at the poolside table leaning forward with both forearms on it, his head bowed about 40 degrees toward the open book, his eyes looking down at it, a cigarette in the corner of his lips pointing down",
+     "the loose white crew-neck T-shirt with its sleeves rolled, and a thin silver ring on a finger of his hand at picture-left, resting on the book",
+     "the table: the open book, the round sunglasses lying on it, the phone, the cigarette pack, the lighter and the menu, exactly where they are",
+     "the whole scene: the white cushions behind him, the pool at picture-right, the white parasols, the palm-thatch roof edge across the top, the trees and the overcast sky",
+     "the soft daylight, his size and position in the frame and the camera distance"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "three_quarter_left",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"face is turned about 25 degrees toward picture-left\"",
+   "count": 4,
+   "names": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left_head768_1789837650.jpg",
+    "IMG_6868.jpg"
+   ],
+   "note": "re-derived at import from the goal picture and the route text; the run itself did not record it"
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6862.jpg",
+    "sha256": "28167b00ccd44f060ac76878c58e9917926fd11033dc1eda88dc482d16d20048",
+    "from": ".cache/refs/IMG_6862.jpg",
+    "prep": "",
+    "why": "face reference, bin three_quarter_left (text: YuNet found no face in the goal; the text says: \"face is turned about 25 degrees toward picture-left\")"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6863.jpg",
+    "sha256": "133314862cd770ca8d52156010e93127849ba7779132d5841944f4a8ee259d90",
+    "from": ".cache/refs/IMG_6863.jpg",
+    "prep": "",
+    "why": "face reference, bin three_quarter_left (text: YuNet found no face in the goal; the text says: \"face is turned about 25 degrees toward picture-left\")"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_5850_fav_34left_head768_1789837650.jpg",
+    "sha256": "78b526191c576023e412d05641777495ad1ce3ee5b6265c45571d3e51e955d9c",
+    "from": ".cache/refcrops/IMG_5850_fav_34left_head768_1789837650.jpg",
+    "prep": "",
+    "why": "face reference, bin three_quarter_left (text: YuNet found no face in the goal; the text says: \"face is turned about 25 degrees toward picture-left\")"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": ".cache/refs/IMG_6868.jpg",
+    "prep": "",
+    "why": "face reference, bin three_quarter_left (text: YuNet found no face in the goal; the text says: \"face is turned about 25 degrees toward picture-left\")"
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": ".cache/refs/IMG_6923 Copy.jpg",
+    "prep": "",
+    "why": "subject_profiles.roles.body"
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "name": "IMG_0440_Original.jpg",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "from": ".cache/refs/IMG_0440_Original.jpg",
+    "prep": "",
+    "why": "subject_profiles.roles.arms"
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "name": "pin_783485666539777054.jpg",
+    "sha256": "4dbd7dcca35fe23975cc02595fb6be64ab488b1004d6bf794a95b6b69f063a8e",
+    "from": ".cache/refs/pin_783485666539777054.jpg",
+    "prep": "",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-4 are FACE references of this man.\nImage 5 is the BODY reference — his true build and proportion.\nImage 6 is the SHOULDER AND ARM reference.\nImage 7 is the PHOTO TO EDIT.\n\nEdit image 7, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. His hair exactly as in the face references: his own tight curly black hair. His beard and moustache exactly as in the face references: the same length, density and shape. Lean face with low facial fat: defined cheekbones with a visible hollow beneath them, and a clear jawline meeting at a defined angle below the ear. His face at its true size in proportion to his head and body, as in the references. Warm medium-brown South Asian skin tone matching the references, never lightened. Real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-4), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 5 precisely: his true build and proportion. A slim, lean build: moderate shoulder width, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist and slim hips. Tall and lean, never bulky or heavily muscled. His whole body is his own, from images 5 and 6: never the build of the man in the photo to edit, who is broader and far more muscular, with thicker arms and a bigger chest. His shoulders, arms, chest and waist are the slimmer ones of his references.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows a man with dark curly hair, light stubble and tattooed forearms, in black and white; make it him: the man of the references, a different person, a slim man with his own face.\n- hair: the PHOTO TO EDIT shows dark curly hair; make it his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back), never cut shorter or straighter.\n- beard: the PHOTO TO EDIT shows light stubble; make it his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape.\n- skin tone: the PHOTO TO EDIT shows the goal man's skin; make it his own skin, with the warm medium-brown tone of the references rendered in the same black-and-white grade as the photo.\n- build: the PHOTO TO EDIT shows a lean-to-average build; make it his own slim lean build from the BODY and SHOULDER AND ARM reference images: moderate shoulders, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist.\n- tattoos: the PHOTO TO EDIT shows tattoos on both forearms; make it no tattoos at all: plain bare forearms and hands, as his own skin has none.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the black-and-white photograph exactly: the same grey tones, contrast and film grain (the picture stays black and white).\n- the LIGHT on his face: soft shade from his curls like the man's in the PHOTO TO EDIT, but about a QUARTER brighter than his: his forehead stays in shade under the curls, while his eyes, nose, cheeks, mouth and beard are clearly lit and readable; his face is still darker than his white tee, not evenly lit and not retouched.\n- his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered.\n- his exact posture: sitting at the poolside table leaning forward with both forearms on it, his head bowed about 40 degrees toward the open book, his eyes looking down at it, a cigarette in the corner of his lips pointing down.\n- the loose white crew-neck T-shirt with its sleeves rolled, and a thin silver ring on a finger of his hand at picture-left, resting on the book.\n- the table: the open book, the round sunglasses lying on it, the phone, the cigarette pack, the lighter and the menu, exactly where they are.\n- the whole scene: the white cushions behind him, the pool at picture-right, the white parasols, the palm-thatch roof edge across the top, the trees and the overcast sky.\n- the soft daylight, his size and position in the frame and the camera distance.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "94298437f22634275fe6957841049e849641d5a307729bf4585894bb26185374",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "28167b00ccd44f060ac76878c58e9917926fd11033dc1eda88dc482d16d20048",
+    "upload_name": "IMG_6862.jpg",
+    "bytes": 668610,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "133314862cd770ca8d52156010e93127849ba7779132d5841944f4a8ee259d90",
+    "upload_name": "IMG_6863.jpg",
+    "bytes": 698748,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "78b526191c576023e412d05641777495ad1ce3ee5b6265c45571d3e51e955d9c",
+    "upload_name": "IMG_5850_fav_34left_head768_1789837650.jpg",
+    "bytes": 163026,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 6,
+    "role": "arms",
+    "sha256": "9bfd0fe7191abd88f5646e320e757662982df69133a5235fb035fec04fc0934d",
+    "upload_name": "IMG_0440_Original.jpg",
+    "bytes": 451859,
+    "px": [
+     1423,
+     2048
+    ]
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "sha256": "4dbd7dcca35fe23975cc02595fb6be64ab488b1004d6bf794a95b6b69f063a8e",
+    "upload_name": "pin_783485666539777054.jpg",
+    "bytes": 298299,
+    "px": [
+     736,
+     918
+    ]
+   }
+  ],
+  "model": "e6fa609c3fa255c0",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "325809ba02e3104e44115b3774cc955a861fde7536be00ad594f380454758a3e"
+ }
+}

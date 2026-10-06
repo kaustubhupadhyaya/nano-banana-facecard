@@ -2,29 +2,40 @@
   "version": "2.0.0",
   "inputs": [
     {
-      "id": "promptFile",
+      "id": "recipeRef",
       "type": "promptString",
-      "description": "Prompt text, or a path to a .txt file (e.g. prompts/studio_test.txt)"
+      "description": "Recipe: <goal key>[@vN], e.g. pin_783485666539777054@v1 (facecard.py recipe show <key> lists the versions)"
     },
     {
-      "id": "genCount",
+      "id": "samples",
       "type": "pickString",
-      "description": "How many variations to generate",
+      "description": "Pictures this run",
       "options": ["1", "2", "4"],
-      "default": "1"
+      "default": "2"
     }
   ],
   "tasks": [
     {
-      "label": "Facecard: generate",
+      "label": "Facecard: dry-run a recipe (free)",
       "type": "shell",
       "command": "${workspaceFolder}/.venv/Scripts/python.exe",
-      "args": [
-        "facecard.py",
-        "gen",
-        "--prompt", "${input:promptFile}",
-        "--count", "${input:genCount}"
-      ],
+      "args": ["facecard.py", "run", "${input:recipeRef}", "--dry-run"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Facecard: run a recipe",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["facecard.py", "run", "${input:recipeRef}", "--samples", "${input:samples}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Facecard: open goals",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["tools/goal_status.py", "--open", "--next"],
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "dedicated" }
     },

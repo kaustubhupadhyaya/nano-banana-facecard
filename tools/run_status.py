@@ -31,7 +31,13 @@ def main() -> int:
             print(f"{d.name[:15]}  run.json being written")
             continue
         rg = j.get("route_g") or {}
-        inv = Path(str(rg.get("inventory") or "")).name.replace("pin_" + a.goal, "").replace(".json", "") or "-"
+        rcp = j.get("recipe") or {}
+        if rcp:          # a staged run (runner.py): the recipe version and the request it sent say more than the inventory name
+            m = json.loads((d / "manifest.json").read_text(encoding="utf-8")) if (d / "manifest.json").exists() else {}
+            failed = m.get("failed_stage")
+            inv = f"{rcp.get('id', '')[-6:]}@v{rcp.get('version')} req:{str(rcp.get('request_sha256'))[:8]} [{m.get('status')}{f' at {failed:02d}' if failed else ''}]"
+        else:
+            inv = Path(str(rg.get("inventory") or "")).name.replace("pin_" + a.goal, "").replace(".json", "") or "-"
         model = "Pro" if str(j.get("model", "")).startswith("e6fa") else "Flash"
         gate = {Path(g.get("render", "")).name: ("PASS" if not g.get("fails") else "FAIL " + ",".join(sorted(set(map(str, g["fails"]))))) for g in j.get("pose_gate") or []}
         cells = []

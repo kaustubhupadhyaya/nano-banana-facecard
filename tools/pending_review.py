@@ -52,6 +52,9 @@ def main() -> int:
         state = "passed every gate" if q["passed"] else "closest; did not pass: " + "; ".join(p.split(" (")[0] for p in q["problems"])[:120]
         print(f"{q['n']}. {q['path']}")
         print(f"   source {q['source']} | attempt {q['attempt']}, {state} | identity {q['identity']} (source {q['source_identity']}), light dE {q['light_dE']}, size {q['size']}")
+        rep = Path(q["path"]).parent / "report.html"
+        if rep.is_file():          # a staged run (runner.py): its 8 stages on one page
+            print(f"   report {rep}")
     print(f"\nqueue written to {REVIEW_QUEUE}")
     return 0
 
