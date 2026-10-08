@@ -4,7 +4,14 @@ Authenticated GeminiClient factory, reading cookies from the local DPAPI vault.
 Vault layout:
     gemini-cookies-psid.password   __Secure-1PSID    (user-entered only, via vault GUI)
     gemini-cookies.password        __Secure-1PSIDTS   (user-entered only, via vault GUI)
-    gemini-cookies.rotated         latest rotated __Secure-1PSIDTS (written by this module)
+    gemini-cookies-psid.browser    __Secure-1PSID read from the signed-in google-1 browser profile (written by this module, 2026-10-09)
+    gemini-cookies.rotated         latest __Secure-1PSIDTS (written by this module)
+
+How the session stays alive without the user (2026-10-09, after it died overnight): runs NEVER renew the cookie (auto_refresh off by
+default), because parallel long-waiting runs renewing the same session got HTTP 429 and invalidated each other. A run saves a changed
+__Secure-1PSIDTS at close only when no other process saved one since it started (fingerprints under a lock), so a stale value can never
+overwrite a newer one. tools/gemini_keepalive.py renews once, under the same lock, when no run is in flight. When every vault cookie fails,
+the cookies are read from the signed-in google-1 browser profile (gemini_cookies.py, the user's choice: "From your browser").
 
 gemini_webapi persists cookies to a plaintext JSON cache file under its cookie-cache
 directory (keyed by the raw __Secure-1PSID value) whenever it rotates the session or
@@ -148,46 +155,113 @@ def _psidts_candidates() -> list[str]:
     return candidates
 
 
+def _pairs() -> list[tuple[str, str]]:
+    """Every (__Secure-1PSID, __Secure-1PSIDTS) pair to try, newest first: the browser-read session, then the user-entered one."""
+    out = []
+    for psid in (vault.get_secret(PSID_LABEL, "browser"), vault.get_secret(PSID_LABEL, "password")):
+        for ts in _psidts_candidates():
+            if psid and ts and (psid, ts) not in out:
+                out.append((psid, ts))
+    return out
+
+
+def _fp(value: str | None) -> str | None:
+    """A short fingerprint of a cookie (never the cookie): tells whether the vault value changed since a run started."""
+    import hashlib
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()[:12] if value else None
+
+
+LOCK_PATH = Path(__file__).resolve().parent / ".cache" / "gemini_session.lock"
+
+
 @asynccontextmanager
-async def authenticated_client(verbose: bool = False, auto_refresh: bool = True):
+async def session_lock(wait: float = 120.0):
+    """One process at a time renews, saves or re-reads the session (a lock file; a crashed holder's lock is taken over after 3 minutes)."""
+    import os
+    import time as _t
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    t0 = _t.time()
+    while True:
+        try:
+            fd = os.open(str(LOCK_PATH), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.close(fd)
+            break
+        except FileExistsError:
+            try:
+                if _t.time() - LOCK_PATH.stat().st_mtime > 180:
+                    LOCK_PATH.unlink()
+                    continue
+            except OSError:
+                pass
+            if _t.time() - t0 > wait:
+                raise TimeoutError("the Gemini session lock is held by another process")
+            await asyncio.sleep(0.5)
+    try:
+        yield
+    finally:
+        try:
+            LOCK_PATH.unlink()
+        except OSError:
+            pass
+
+
+async def _try_pair(psid: str, psidts: str, verbose: bool, auto_refresh: bool):
+    candidate = GeminiClient(psid, psidts)
+    try:
+        await candidate.init(timeout=120, verbose=verbose, auto_refresh=auto_refresh)
+    except Exception as e:
+        return None, e
+    if candidate.account_status == AccountStatus.AVAILABLE:
+        return candidate, None
+    await candidate.close()
+    return None, AuthError(f"account_status={candidate.account_status.name}")
+
+
+@asynccontextmanager
+async def authenticated_client(verbose: bool = False, auto_refresh: bool = False):
     """Yield an authenticated GeminiClient, or raise AuthError with no secret in the message.
-    auto_refresh=False (the quota watcher) keeps this client from rotating the session cookies next to a real run."""
-    secure_1psid = vault.get_secret(PSID_LABEL, "password")
-    psidts_candidates = _psidts_candidates()
-
-    if not secure_1psid or not psidts_candidates:
-        raise AuthError(
-            "Missing cookies in vault. Need gemini-cookies-psid.password (__Secure-1PSID) "
-            "and gemini-cookies.password (__Secure-1PSIDTS). From the secure-vault folder run:\n"
-            f"  {REFRESH_COMMAND}"
-        )
-
+    auto_refresh is OFF by default (2026-10-09): runs never renew the session cookie; tools/gemini_keepalive.py renews it, alone."""
+    pairs = _pairs()
+    start_fp = _fp(vault.get_secret(PSIDTS_LABEL, "rotated"))
     cookie_tmp_dir = Path(tempfile.mkdtemp(prefix="gemini_webapi_cookies_"))
     client: GeminiClient | None = None
+    used_psidts = None
     try:
         import os
 
         os.environ["GEMINI_COOKIE_PATH"] = str(cookie_tmp_dir)
 
         last_error: Exception | None = None
-        for secure_1psidts in psidts_candidates:
-            candidate = GeminiClient(secure_1psid, secure_1psidts)
-            try:
-                await candidate.init(timeout=120, verbose=verbose, auto_refresh=auto_refresh)
-            except Exception as e:
-                last_error = e
-                continue
-
-            if candidate.account_status == AccountStatus.AVAILABLE:
-                client = candidate
+        for psid, psidts in pairs:
+            client, last_error = await _try_pair(psid, psidts, verbose, auto_refresh)
+            if client is not None:
+                used_psidts = psidts
                 break
-            else:
-                await candidate.close()
-                last_error = AuthError(f"account_status={candidate.account_status.name}")
+
+        if client is None:
+            # every vault cookie failed: read the session from the signed-in google-1 browser profile (the user's choice, 2026-10-09)
+            async with session_lock(wait=300):
+                pairs_now = _pairs()
+                if pairs_now != pairs:          # another process restarted the session while this one waited: use that
+                    for psid, psidts in pairs_now:
+                        client, last_error = await _try_pair(psid, psidts, verbose, auto_refresh)
+                        if client is not None:
+                            used_psidts = psidts
+                            break
+                if client is None:
+                    import gemini_cookies
+                    found = await asyncio.to_thread(gemini_cookies.from_browser)
+                    if found:
+                        client, last_error = await _try_pair(found["__Secure-1PSID"], found["__Secure-1PSIDTS"], verbose, auto_refresh)
+                        if client is not None:
+                            vault.set_value(PSID_LABEL, "browser", found["__Secure-1PSID"])
+                            vault.set_value(PSIDTS_LABEL, "rotated", found["__Secure-1PSIDTS"])
+                            used_psidts = found["__Secure-1PSIDTS"]
+                            start_fp = _fp(used_psidts)
 
         if client is None:
             raise AuthError(
-                "Authentication failed with all known cookies (session likely expired). "
+                "Authentication failed with all known cookies and the google-1 browser profile (session likely expired). "
                 f"Underlying: {type(last_error).__name__ if last_error else 'unknown'}\n"
                 f"Refresh from the secure-vault folder: {REFRESH_COMMAND}"
             )
@@ -203,8 +277,11 @@ async def authenticated_client(verbose: bool = False, auto_refresh: bool = True)
                         fresh_psidts = cookie.value
                         break
                 await client.close()
-                if fresh_psidts and fresh_psidts not in psidts_candidates:
-                    vault.set_value(PSIDTS_LABEL, "rotated", fresh_psidts)
+                if fresh_psidts and fresh_psidts != used_psidts:
+                    # save only if no other process saved a newer value since this one started (a stale value must never win)
+                    async with session_lock(wait=60):
+                        if _fp(vault.get_secret(PSIDTS_LABEL, "rotated")) == start_fp:
+                            vault.set_value(PSIDTS_LABEL, "rotated", fresh_psidts)
             except Exception:
                 pass
 
