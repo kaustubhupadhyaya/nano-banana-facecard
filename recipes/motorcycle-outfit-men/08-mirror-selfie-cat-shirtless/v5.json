@@ -1,0 +1,227 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539777118",
+ "version": 5,
+ "created": "2026-10-08T23:32:57",
+ "because": "the user, 2026-10-08: the same build in every picture; pin 8 v4 sample 4 has his face, hair and pose (pose gate pass) but the pin man's shoulders and arms (arm width 1.67 vs his 1.30-1.48): a body-only second edit of that render with the character's build",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539777118",
+  "path": ".cache/pin_783485666539777118.jpg",
+  "sha256": "5e536fc37eb39804f471b942eb1ec99d8d09451cca2ecd127e621419494a5f55",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539777118.json",
+   "sha256": "786f87aacf4e6660f5ec53f861ea62856e5fc458067fffc2085d923db1bf6e15"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666539777118.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539777118_route.txt",
+   "inventory": ".cache/inventories/pin_783485666539777118_stage2_body.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": true,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v1"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-08T23:17:53"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": true,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 15 degrees toward picture-right, eyes down at a phone.",
+   "from": ".cache/loop_prompts/pin_783485666539777118_route.txt",
+   "sha256": "e782147605c5063902fe8bd8fff56da819d61620da48d1779b8abb39ea5b24d1",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666539777118_stage2_body.json",
+   "sha256": "dc69c284bb100c11996d85e107360cf90ccc8bc0f0d04cf02866c54d5421e6a6",
+   "data": {
+    "goal": ".cache/pin_783485666539777118.jpg",
+    "photo_to_edit": "outputs/20261008_231611_goal-pin-783485666539777118/v4_0.jpg",
+    "written": "2026-10-08: stage 2 (body only) for pin 8 on the character me@v1 render that passed the pose gate (v4_0): his face, hair and pose are right, the build still follows the pin's man (upper-arm width 1.67 eye distances against his 1.30-1.48, character audit). Only his body below the neck changes.",
+    "refs": [],
+    "change": [
+     {
+      "item": "build",
+      "goal": "broad, rounded muscular shoulders and thick upper arms, a fuller chest",
+      "his": "(replaced by the character's build in a character recipe)"
+     },
+     {
+      "item": "arms and shoulders",
+      "goal": "upper arms about 1.7 times as wide as the distance between his eyes, rounded shoulder caps",
+      "his": "his upper arms about 15 percent thinner than in the PHOTO TO EDIT (about 1.4 times the distance between his eyes, as in his BODY reference) and his shoulders a little narrower and less rounded"
+     }
+    ],
+    "keep": [
+     "his HEAD exactly as it is in the PHOTO TO EDIT: his curly black hair, his face, his beard, the bow of his head and his eyes looking down at the phone screen; the head is not redrawn",
+     "his exact posture and position: standing facing the mirror, his right hand holding the black iPhone up in front of his face at picture-right, his other arm holding the white-and-cream kitten against his side, his size in the frame and the camera distance",
+     "the kitten exactly as it is: its colours, size and pose",
+     "the thin chain necklace, the black smartwatch, and the loose light-grey sweatpants with a white drawstring",
+     "bare shoulders, chest and stomach: he is shirtless",
+     "the whole scene: the dark bedroom wall with its dark horizontal band, the round white table at the bottom-right with a heap of clothes, the dim warm light with a cool blue edge light on picture-left"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v1",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -11.9,
+    "pitch": -9.9,
+    "roll": 13.0,
+    "side": "picture-right",
+    "score": 0.86,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_4861_fav_right.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "character me@v1: his true build"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "v4_0.jpg",
+    "sha256": "50cb2d5a5eeec36c62a909c75c7c338e355df9dbbfb034e3fc2ab2bfbdc66de7",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/outputs/20261008_231611_goal-pin-783485666539777118/v4_0.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "scoring_faces": [
+   {
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd"
+   },
+   {
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192"
+   },
+   {
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587"
+   }
+  ],
+  "character": {
+   "ref": "me@v1",
+   "sha256": "348c295dd301e428849d9f3c63a225a8671e9b79baede02f0b1d09bc2467b54b",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. His cheeks are moderately full, with soft tissue over the cheekbones and no hollow beneath them; under the beard his jaw is fairly square and his chin rounded; his neck is of medium thickness. His face is exactly as full or as lean as in the references, never thinner and never fuller, and at its true size in proportion to his head and body.",
+    "hair": "His own hair exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A slim-to-average build with moderate shoulders: arms of moderate size with light muscle tone, a flat chest, a flat stomach with slight natural softness below the navel, a narrow waist and slim hips. His body is exactly as lean or as full as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the BODY reference — his true build and proportion.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: change ONLY his body below the neck (shoulders, arms, chest, waist) to his own build from the BODY references. Everything else in the PHOTO TO EDIT stays exactly as it is: his whole head, his exact posture, both hands, the clothes (refitted to his build), every object, the background, the framing and the light.\n\nFACE: Do not redraw his head. His head stays exactly as it is in the PHOTO TO EDIT, pixel for pixel: the same face, hair, beard, eyewear, head tilt and bow, and the same gaze direction.\n\nBUILD: Match image 1 precisely. A slim-to-average build with moderate shoulders: arms of moderate size with light muscle tone, a flat chest, a flat stomach with slight natural softness below the navel, a narrow waist and slim hips. His body is exactly as lean or as full as in image 1: never more muscular, never heavier, never thinner. His whole body is his own, from image 1: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- build: the PHOTO TO EDIT shows broad, rounded muscular shoulders and thick upper arms, a fuller chest; make it his own build exactly as in the BODY reference (image 1): A slim-to-average build with moderate shoulders: arms of moderate size with light muscle tone, a flat chest, a flat stomach with slight natural softness below the navel, a narrow waist and slim hips. His body is exactly as lean or as full as in image 1: never more muscular, never heavier, never thinner.\n- arms and shoulders: the PHOTO TO EDIT shows upper arms about 1.7 times as wide as the distance between his eyes, rounded shoulder caps; make it his upper arms about 15 percent thinner than in the PHOTO TO EDIT (about 1.4 times the distance between his eyes, as in his BODY reference) and his shoulders a little narrower and less rounded.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his HEAD exactly as it is in the PHOTO TO EDIT: his curly black hair, his face, his beard, the bow of his head and his eyes looking down at the phone screen; the head is not redrawn.\n- his exact posture and position: standing facing the mirror, his right hand holding the black iPhone up in front of his face at picture-right, his other arm holding the white-and-cream kitten against his side, his size in the frame and the camera distance.\n- the kitten exactly as it is: its colours, size and pose.\n- the thin chain necklace, the black smartwatch, and the loose light-grey sweatpants with a white drawstring.\n- bare shoulders, chest and stomach: he is shirtless.\n- the whole scene: the dark bedroom wall with its dark horizontal band, the round white table at the bottom-right with a heap of clothes, the dim warm light with a cool blue edge light on picture-left.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "80e455b66a9f4f8c2ff8e5ae33722ace97c3e839b27bc520410d85165bddae6b",
+  "files": [
+   {
+    "n": 1,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "50cb2d5a5eeec36c62a909c75c7c338e355df9dbbfb034e3fc2ab2bfbdc66de7",
+    "upload_name": "v4_0.jpg",
+    "bytes": 125238,
+    "px": [
+     768,
+     1365
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "7b14921e63ab98731f760b96a21d4abdf1e669c75ac2d6714cf411d98454c239"
+ }
+}
