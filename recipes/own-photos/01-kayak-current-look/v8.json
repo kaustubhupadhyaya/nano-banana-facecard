@@ -1,0 +1,241 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "google-1__IMG_5549",
+ "version": 8,
+ "created": "2026-10-09T00:58:58",
+ "because": "the user, 2026-10-08: 'body and hair rework needed since the current physique and face has been changed as can be seen in the reference images'. Pass A: his body changed to his current physique (character me@v2, the leaner look), every other pixel kept; Flash",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "freeze_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\replicate_freeze\\20261009_005825_google-1__IMG_5549_build",
+  "notices": []
+ },
+ "goal": {
+  "key": "google-1__IMG_5549",
+  "path": ".cache/super_favs/google-1__IMG_5549.jpg",
+  "sha256": "cd3baf036aa620b0092865ea8dfadaaf553bc8a3f77d16c4146f5af1d42af46b",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "replicate",
+  "compiler": "replicate/1",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/super_favs/google-1__IMG_5549.jpg",
+   "zone": "build",
+   "character": "me@v2",
+   "current_look": true
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "text_models": [
+   "56fdd199312815e2",
+   "e6fa609c3fa255c0"
+  ],
+  "samples": 2,
+  "max_attempts": 4,
+  "stop": {
+   "after_pose_fails": 0,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {},
+  "own": true,
+  "own_score": 0.626,
+  "source_kind": "own",
+  "zone": "build",
+  "kind": "build",
+  "current_look": true,
+  "crop": [
+   217,
+   1045,
+   750,
+   1000
+  ],
+  "main_box": [
+   401,
+   954,
+   219,
+   260
+  ],
+  "head_boxes": [
+   [
+    401,
+    954,
+    219,
+    260
+   ]
+  ],
+  "source_size": [
+   4032,
+   2268
+  ],
+  "far": false,
+  "readings": {
+   "build": {
+    "prompt_sha256": "c83a814f608cc36cffbf525e136f18da80668ba9131acfdadc5ddeb119b20a6d",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "old_vs_current": {
+     "shoulders": "fuller",
+     "upper_arms": "fuller",
+     "forearms": "a little fuller",
+     "chest": "a little fuller",
+     "stomach": "a little fuller",
+     "waist": "a little fuller"
+    },
+    "current_vs_old": {
+     "shoulders": "slimmer",
+     "upper_arms": "slimmer",
+     "forearms": "slimmer",
+     "chest": "slimmer",
+     "stomach": "slimmer",
+     "waist": "slimmer"
+    },
+    "used": {
+     "shoulders": 2,
+     "upper_arms": 2,
+     "forearms": 1,
+     "chest": 1,
+     "stomach": 1,
+     "waist": 1
+    }
+   }
+  },
+  "build_change": {
+   "shoulders": 2,
+   "upper_arms": 2,
+   "forearms": 1,
+   "chest": 1,
+   "stomach": 1,
+   "waist": 1
+  },
+  "character_build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner.",
+  "build_gates": {
+   "bg_mad_max": 10.0,
+   "bg_ssim_min": 0.8,
+   "person_dilate": 0.03
+  },
+  "thresholds": {
+   "hard_reject": 0.2,
+   "accept": 0.52,
+   "own_min": 0.4,
+   "approved": true
+  },
+  "gates": {
+   "light_de_max": 14.0,
+   "size_own": [
+    0.94,
+    1.04
+   ],
+   "size_foreign": [
+    0.94,
+    1.04
+   ],
+   "light_de_max_foreign": 20.0,
+   "unchanged_gt_sim": 0.9,
+   "neck_gap_max": 10.0,
+   "rescue_attempts": 3,
+   "sharp_max": 6.0
+  },
+  "expression": "none",
+  "glasses": "same",
+  "look": "any",
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e"
+  },
+  "face_choice": {
+   "decided_by": "character me@v2",
+   "names": [],
+   "count": 0
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "body",
+    "name": "body_full.jpg",
+    "sha256": "20ffec4d527e49e22055d6841740d20e8363744fd927c590d8b871002a1412d6",
+    "from": "IMG_6923 Copy.JPG",
+    "prep": "full1600_q95 (replicate.whole_ref)",
+    "why": "character me@v2: his current physique, full length"
+   },
+   {
+    "n": 2,
+    "role": "body",
+    "name": "body_waist_up.jpg",
+    "sha256": "a806524f4b59c87041139a03cc22d9fc140ee706de7efac2f8ed91ef8d4d9e2b",
+    "from": "IMG_6858.jpg",
+    "prep": "full1600_q95 (replicate.whole_ref)",
+    "why": "character me@v2: his current shoulders and arms, waist up"
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "name": "photo_to_edit.png",
+    "sha256": "cfe89d1207f5e6cd0827c58b642d93b8c9bc9bdb45887fcbc6dab051fc3b4b4d",
+    "from": ".cache/super_favs/google-1__IMG_5549.jpg",
+    "prep": "body crop [217, 1045, 750, 1000] of the 4032x2268 original, long side 1024 px",
+    "why": "the crop of his body that is edited to his current physique and pasted back into the untouched original"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "replicate/1",
+   "template_sha256": "5f7be3521647c9a0d4ffe504735fbe869e94682b989e302f41ef60dba047d4da",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "The first 2 images show this man's CURRENT physique (shoulders, arms, chest, stomach and waist), as he looks today. The last image is an older photo of him, from a time when his body was different.\n\nEdit the last image so that his body has his current physique, exactly as in the first 2 images: A lean build with low body fat, exactly as in image 1: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 1: never more muscular, never heavier, never thinner. Compared with the last image: his shoulders are clearly slimmer than in the last image; his upper arms are clearly slimmer than in the last image; his forearms are a little slimmer than in the last image; his chest is a little slimmer than in the last image; his stomach is a little slimmer than in the last image; his waist is a little slimmer than in the last image.\n\nKeep everything else in the last image exactly as it is: his head, face, hair and beard; his exact pose and the position of both arms and both hands; everything he holds or wears, the same garments in the same colours, fabric and fit style, refitted only as far as his body requires; any reflection of him, given the same body; and the whole background, light, colour and grain. Return the image with exactly the same framing, crop and scale as the last image.",
+  "prompt_sha256": "d86c5c133d25370886caa962f49cb8cfcaa2875052fc14a41b1d00abe85ec1a3",
+  "files": [
+   {
+    "n": 1,
+    "role": "body",
+    "sha256": "20ffec4d527e49e22055d6841740d20e8363744fd927c590d8b871002a1412d6",
+    "upload_name": "body_full.jpg",
+    "bytes": 408423,
+    "px": [
+     1200,
+     1600
+    ]
+   },
+   {
+    "n": 2,
+    "role": "body",
+    "sha256": "a806524f4b59c87041139a03cc22d9fc140ee706de7efac2f8ed91ef8d4d9e2b",
+    "upload_name": "body_waist_up.jpg",
+    "bytes": 395916,
+    "px": [
+     1200,
+     1600
+    ]
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "sha256": "cfe89d1207f5e6cd0827c58b642d93b8c9bc9bdb45887fcbc6dab051fc3b4b4d",
+    "upload_name": "photo_to_edit.png",
+    "bytes": 1102519,
+    "px": [
+     768,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "da8716fa9b4c4e35eb01657676ea5c68cc007749ddd06fd14561a839c31d6506"
+ }
+}

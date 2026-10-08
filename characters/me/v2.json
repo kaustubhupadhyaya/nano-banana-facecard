@@ -1,0 +1,267 @@
+{
+ "schema": "facecard.character/1",
+ "name": "me",
+ "version": 2,
+ "created": "2026-10-09T00:50:03",
+ "because": "the user, 2026-10-08: 'if it's the leanness, stick to the leaner look' (the beard may widen the face, fat may not); v1's text called his cheeks moderately full and his stomach slightly soft. Same photos, the leaner wording, the current haircut named",
+ "parent": null,
+ "references": [
+  {
+   "role": "face",
+   "name": "IMG_6858.jpg",
+   "sha256": "3c61ddb9efdcf41568ab340213409be04140a802fb5c8a6d776e4cc9ae4d06c8",
+   "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+   "taken": "2026-09-08 13:48:08",
+   "head_pose": {
+    "detected": true,
+    "yaw": 0.1,
+    "pitch": -1.5,
+    "roll": 0.7,
+    "side": "frontal"
+   },
+   "why": "the fixed front photo of the current look",
+   "slot": "front"
+  },
+  {
+   "role": "face",
+   "name": "IMG_6868.jpg",
+   "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+   "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/refs/IMG_6868.jpg",
+   "taken": null,
+   "head_pose": {
+    "detected": true,
+    "yaw": 30.4,
+    "pitch": 1.2,
+    "roll": -3.2,
+    "side": "picture-left"
+   },
+   "why": "the fixed three quarter left photo of the current look",
+   "slot": "three_quarter_left"
+  },
+  {
+   "role": "face",
+   "name": "IMG_6861.jpg",
+   "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+   "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/refs/IMG_6861.jpg",
+   "taken": null,
+   "head_pose": {
+    "detected": true,
+    "yaw": -30.4,
+    "pitch": 6.0,
+    "roll": -0.5,
+    "side": "picture-right"
+   },
+   "why": "the fixed three quarter right photo of the current look",
+   "slot": "three_quarter_right"
+  },
+  {
+   "role": "face",
+   "name": "IMG_6863.jpg",
+   "sha256": "71ea52fb21dd4f565be988af329b780656dfe79d74e3728e73eab349150fbfd6",
+   "from": "D:/Downloads/FaceCard_Originals/IMG_6863.jpg",
+   "taken": "2026-09-08 13:48:43",
+   "head_pose": {
+    "detected": true,
+    "yaw": 69.3,
+    "pitch": -3.2,
+    "roll": -6.7,
+    "side": "picture-left"
+   },
+   "why": "the fixed profile photo of the current look",
+   "slot": "profile"
+  },
+  {
+   "role": "body",
+   "name": "IMG_6923 Copy.JPG",
+   "sha256": "8643f644859fa54968d3122829cb97c56f90d87a62a3c9295e6725265f52803f",
+   "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+   "taken": "2026-09-15 20:29:15",
+   "head_pose": {
+    "detected": true,
+    "yaw": 1.1,
+    "pitch": 12.0,
+    "roll": 0.9,
+    "side": "frontal"
+   },
+   "why": "his true build in the current look: standing, full length"
+  }
+ ],
+ "excluded": [
+  {
+   "name": "IMG_0440_Original.jpg",
+   "why": "2026-01-18, eight months older, Picasa-edited, shot from below with the arms held tense: fuller arms and shoulders and short hair"
+  },
+  {
+   "name": "IMG_5850_fav_34left.jpg",
+   "why": "an older photo: short hair and glasses"
+  },
+  {
+   "name": "IMG_4861_fav_right.jpg",
+   "why": "an older photo: short hair and glasses, head tilted up"
+  }
+ ],
+ "description": {
+  "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+  "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+  "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+  "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+  "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+ },
+ "sends": {
+  "G": [
+   "IMG_6858.jpg",
+   "IMG_6868.jpg",
+   "IMG_6861.jpg",
+   "IMG_6923 Copy.JPG"
+  ],
+  "replicate": [
+   "IMG_6858.jpg",
+   "IMG_6868.jpg",
+   "IMG_6861.jpg",
+   "IMG_6863.jpg"
+  ]
+ },
+ "band": {
+  "face": {
+   "cjwr": {
+    "min": 1.0798,
+    "max": 1.157,
+    "median": 1.1036,
+    "n": 5
+   },
+   "fwhr": {
+    "min": 2.4308,
+    "max": 2.9674,
+    "median": 2.6494,
+    "n": 5
+   },
+   "par": {
+    "min": 2.1459,
+    "max": 2.2201,
+    "median": 2.1955,
+    "n": 5
+   },
+   "jaw_iod": {
+    "min": 1.9512,
+    "max": 2.1515,
+    "median": 2.0486,
+    "n": 5
+   },
+   "cheek_iod": {
+    "min": 2.2575,
+    "max": 2.3232,
+    "median": 2.2991,
+    "n": 5
+   },
+   "neck_face": {
+    "min": 0.1503,
+    "max": 0.756,
+    "median": 0.6535,
+    "n": 5
+   }
+  },
+  "body": {
+   "arm_length": {
+    "min": 0.3044,
+    "max": 0.3711,
+    "median": 0.3358,
+    "n": 11
+   },
+   "arm_iod": {
+    "min": 1.304,
+    "max": 1.4803,
+    "median": 1.361,
+    "n": 5
+   },
+   "arm_shoulder": {
+    "min": 0.2874,
+    "max": 0.3124,
+    "median": 0.3077,
+    "n": 5
+   },
+   "shoulder_iod": {
+    "min": 4.2292,
+    "max": 4.811,
+    "median": 4.6924,
+    "n": 5
+   },
+   "torso_head": {
+    "min": 3.307,
+    "max": 4.6523,
+    "median": 3.6558,
+    "n": 5
+   },
+   "bideltoid_iod": {
+    "min": 5.9084,
+    "max": 6.7219,
+    "median": 6.0023,
+    "n": 5
+   },
+   "waist_shoulder": {
+    "min": 0.7811,
+    "max": 1.0085,
+    "median": 0.8564,
+    "n": 5
+   },
+   "waist_iod": {
+    "min": 3.6904,
+    "max": 4.6591,
+    "median": 4.0562,
+    "n": 5
+   },
+   "shoulder_ears": {
+    "min": 1.8438,
+    "max": 2.0091,
+    "median": 1.8858,
+    "n": 3
+   }
+  }
+ },
+ "band_from": [
+  {
+   "name": "IMG_6858.jpg",
+   "sha256": "3c61ddb9efdcf41568ab340213409be04140a802fb5c8a6d776e4cc9ae4d06c8"
+  },
+  {
+   "name": "IMG_6859.jpg",
+   "sha256": "42532db48910ef42ab8e26d1139283a529a56afbf03398fbb8958af7f10c4b3e"
+  },
+  {
+   "name": "IMG_6873.jpg",
+   "sha256": "ecd79f36343ecbdccf14364afff4a8d8d9b4fae8a3f0d3a384fecddaf5095ea8"
+  },
+  {
+   "name": "IMG_6875.jpg",
+   "sha256": "bf87c8a164347f05878ab69d92edf13920d0d61fd6ba9fddafa7edfea5fe28ba"
+  },
+  {
+   "name": "IMG_6861.jpg",
+   "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587"
+  },
+  {
+   "name": "IMG_6862.jpg",
+   "sha256": "ae3c19fe06aaa2141e3822fac5b6b115ee57eb897d16c851e8430862ec79b972"
+  },
+  {
+   "name": "IMG_6863.jpg",
+   "sha256": "71ea52fb21dd4f565be988af329b780656dfe79d74e3728e73eab349150fbfd6"
+  },
+  {
+   "name": "IMG_6864.jpg",
+   "sha256": "c42291e981fddc423e18d3f59e3ea469b7f2581829b37f7503647c3950665767"
+  },
+  {
+   "name": "IMG_6868.jpg",
+   "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192"
+  },
+  {
+   "name": "IMG_6869.jpg",
+   "sha256": "607b697a0dd91edcacc049e03a4ec9ae7a2ed833fb9dbf2bd0235a4c8d218a77"
+  },
+  {
+   "name": "IMG_6923 Copy.JPG",
+   "sha256": "8643f644859fa54968d3122829cb97c56f90d87a62a3c9295e6725265f52803f"
+  }
+ ],
+ "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e"
+}

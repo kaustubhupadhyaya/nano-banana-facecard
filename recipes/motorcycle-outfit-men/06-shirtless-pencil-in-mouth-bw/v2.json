@@ -1,0 +1,303 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539777055",
+ "version": 2,
+ "created": "2026-10-09T00:56:21",
+ "because": "the user, 2026-10-08: 'only this needs rework' (pin 06 v2 failed 6, 19, 28: head size, the pin man's hair). Character me@v2 (the fixed current-look photos, the lean face and build); the inventory's face, hair, beard and build lines come from the character; Flash",
+ "parent": "v1",
+ "origin": {
+  "kind": "bump",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539777055",
+  "path": ".cache/pin_783485666539777055.jpg",
+  "sha256": "75c1eeefd962046deb1676cb10b8bd9a6f29ea9965727eb82c535df585bd416d",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539777055.json",
+   "sha256": "91a6a38f1e6c9972c75bd054bc530c4c933f48ecdbfc74b94a51738e27ad6bb4"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666539777055.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539777055_route.txt",
+   "inventory": ".cache/inventories/pin_783485666539777055_v12.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": null,
+   "build_sheet": null,
+   "head_swap": null,
+   "character": "me@v2"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-08T23:36:29"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 85 degrees toward picture-right, in profile, bowed down.",
+   "from": ".cache/loop_prompts/pin_783485666539777055_route.txt",
+   "sha256": "2fe3edb8c221277273612479a9a8361b3419d8aa9cef4949b0cadfd0b938b623",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666539777055_v12.json",
+   "sha256": "5d595b6f0a13f760b84883931f86b32af49c53fca256e2e1390e593a14a16f76",
+   "data": {
+    "goal": ".cache/pin_783485666539777055.jpg",
+    "photo_to_edit": ".cache/pin_783485666539777055.jpg",
+    "written": "2026-09-30, by eye from the pin (motorcycle-outfit-men board, the user's number 6)",
+    "refs": [],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "a muscular shirtless man with dark curly hair and a beard, in black and white",
+      "his": "him: the man of the references, a different person, a slim man with his own face"
+     },
+     {
+      "item": "face",
+      "goal": "the other man's narrow angular face",
+      "his": "his face exactly as in the FACE reference photos: the same face shape with fuller cheeks, the same eyes, brows, nose and mouth; not leaner, not more angular and not more chiselled than in the references"
+     },
+     {
+      "item": "hair",
+      "goal": "dark curly hair",
+      "his": "his own haircut exactly as in the FACE reference photos (copy it from them, never from the man in the PHOTO TO EDIT): tight curls on top, the sides short, the curls longer at the back; his hair is his, whatever the PHOTO TO EDIT's man has"
+     },
+     {
+      "item": "beard",
+      "goal": "a short dark beard",
+      "his": "his own beard exactly as in the FACE reference photos, copied from them and never from the man in the PHOTO TO EDIT: a short beard about one centimetre long, full and dark along the jaw and on the chin with the moustache joined to it, only LIGHTLY stubbled on the cheeks above the jawline (skin shows through there); it is NOT darker, NOT thicker and NOT longer than in the reference photos"
+     },
+     {
+      "item": "skin tone",
+      "goal": "the goal man's skin",
+      "his": "his own skin, with the warm medium-brown tone of the references rendered in the same black-and-white grade as the photo"
+     },
+     {
+      "item": "build",
+      "goal": "a muscular, broad build",
+      "his": "his own slim lean build from the BODY reference image: narrow shoulders, a thin upper arm barely thicker than his forearm, a flat chest. The visible result: his collarbone and ribs show, his shoulder is narrow and bony with no round heavy deltoid, and his forearm is thin with visible tendons. The thick shoulder, big arm and heavy chest of the man in the PHOTO TO EDIT are not his"
+     },
+     {
+      "item": "head, neck and body",
+      "goal": "the other man's head, neck, shoulders, chest and arms",
+      "his": "his own head, neck, shoulders, chest and arms drawn together as one continuous body, the head sitting naturally on his own neck and shoulders"
+     }
+    ],
+    "keep": [
+     "the FRAMING exactly: his head in the top 30 percent of the picture at about 52 percent from the left edge, his back and left shoulder cut off by the left edge of the picture, his lower arm and hand cut off by the bottom edge; he is never re-centred, the picture is never zoomed in or out, the crop never changes",
+     "his face is softly shaded by his curls like the face of the man in the PHOTO TO EDIT, but its features stay clearly readable, and it is not brighter than his white tee",
+     "the black-and-white photograph exactly: the same grey tones, contrast and film grain (the picture stays black and white)",
+     "the paintbrush: a long thin brush clamped crosswise between his teeth, his lips closed around it at the corner of his mouth, its handle running down toward picture-right; it is held in his mouth, never resting against his chin",
+     "the paintbrush: a long thin brush clamped crosswise between his teeth, his lips closed around it at the corner of his mouth, its handle running down toward picture-right; it is held in his mouth, never resting against his chin",
+     "his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered",
+     "his exact posture: shirtless, sitting on the marble floor leaning far forward, seen in profile with his head bowed and his eyes cast down at the painting on the floor, his face pointing toward picture-right; a long thin paintbrush held sideways between his lips and teeth; one forearm resting on his knee and the other arm reaching down at picture-left with a steel cuff bracelet on its wrist",
+     "the dark loose trousers",
+     "the objects on the floor exactly where they are: the round palette plate with brushes, the stone jar of brushes at picture-right, the painting knife and the paper",
+     "the whole scene: the white marble floor with grey veining, the marble skirting and the window at the top",
+     "the dim moody light from behind, his size and position in the frame and the camera distance"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -18.9,
+    "pitch": -37.1,
+    "roll": 38.8,
+    "side": "picture-right",
+    "score": 0.55,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_4861_fav_right.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: his true build"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "pin_783485666539777055.jpg",
+    "sha256": "27daee45ad7b57593b5a0386992ec2c28c6415334afb5a4e5c487f4df555af0e",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666539777055.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImage 4 is the BODY reference — his true build and proportion.\nImage 5 is the PHOTO TO EDIT.\n\nEdit image 5, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-3), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 4 precisely. A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner. His whole body is his own, from image 4: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows a muscular shirtless man with dark curly hair and a beard, in black and white; make it him: the man of the references, a different person, a slim man with his own face.\n- face: the PHOTO TO EDIT shows the other man's narrow angular face; make it his own face exactly as in the FACE references (images 1-3): Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.\n- hair: the PHOTO TO EDIT shows dark curly hair; make it his own hair exactly as in the FACE references (images 1-3): His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.\n- beard: the PHOTO TO EDIT shows a short dark beard; make it his own beard exactly as in the FACE references (images 1-3): His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.\n- skin tone: the PHOTO TO EDIT shows the goal man's skin; make it his own skin, with the warm medium-brown tone of the references rendered in the same black-and-white grade as the photo.\n- build: the PHOTO TO EDIT shows a muscular, broad build; make it his own build exactly as in the BODY reference (image 4): A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner.\n- head, neck and body: the PHOTO TO EDIT shows the other man's head, neck, shoulders, chest and arms; make it his own head, neck, shoulders, chest and arms drawn together as one continuous body, the head sitting naturally on his own neck and shoulders.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the FRAMING exactly: his head in the top 30 percent of the picture at about 52 percent from the left edge, his back and left shoulder cut off by the left edge of the picture, his lower arm and hand cut off by the bottom edge; he is never re-centred, the picture is never zoomed in or out, the crop never changes.\n- his face is softly shaded by his curls like the face of the man in the PHOTO TO EDIT, but its features stay clearly readable, and it is not brighter than his white tee.\n- the black-and-white photograph exactly: the same grey tones, contrast and film grain (the picture stays black and white).\n- the paintbrush: a long thin brush clamped crosswise between his teeth, his lips closed around it at the corner of his mouth, its handle running down toward picture-right; it is held in his mouth, never resting against his chin.\n- the paintbrush: a long thin brush clamped crosswise between his teeth, his lips closed around it at the corner of his mouth, its handle running down toward picture-right; it is held in his mouth, never resting against his chin.\n- his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered.\n- his exact posture: shirtless, sitting on the marble floor leaning far forward, seen in profile with his head bowed and his eyes cast down at the painting on the floor, his face pointing toward picture-right; a long thin paintbrush held sideways between his lips and teeth; one forearm resting on his knee and the other arm reaching down at picture-left with a steel cuff bracelet on its wrist.\n- the dark loose trousers.\n- the objects on the floor exactly where they are: the round palette plate with brushes, the stone jar of brushes at picture-right, the painting knife and the paper.\n- the whole scene: the white marble floor with grey veining, the marble skirting and the window at the top.\n- the dim moody light from behind, his size and position in the frame and the camera distance.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "ad22cb07631ead8fae97ca402894be5f6c479412b8498561545194fe77fa7791",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "27daee45ad7b57593b5a0386992ec2c28c6415334afb5a4e5c487f4df555af0e",
+    "upload_name": "pin_783485666539777055.jpg",
+    "bytes": 149562,
+    "px": [
+     1200,
+     1500
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "f1ec7822cd351aa5b17e27789d7badfba0a5a5316d22206ed6f2e58cb96195bb"
+ }
+}
