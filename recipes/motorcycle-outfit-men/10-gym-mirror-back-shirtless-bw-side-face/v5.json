@@ -1,0 +1,341 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666540141734",
+ "version": 5,
+ "created": "2026-10-09T19:42:41",
+ "because": "v5 = v4 with the back-and-shoulders sentence reordered (nothing run on v4): the automatic image reference now follows the part about HIS BACK, not the shoulder-width clause",
+ "parent": "v4",
+ "origin": {
+  "kind": "bump",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666540141734",
+  "path": ".cache/pin_783485666540141734.jpg",
+  "sha256": "7b5fb9e1cf398613076d682e6de0e873a38a6789967189e87dcbc2a15e377503",
+  "pose": {
+   "path": ".cache/poses/pin_783485666540141734.json",
+   "sha256": "b2b09afd6ed1c627f8a9a3e1681adfefd6c74617963b996e8a92fd7a811144d5"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666540141734.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666540141734_route.txt",
+   "inventory": ".cache/inventories/pin_783485666540141734_v5.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "restore_background": true
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-09T16:52:53"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His head is bowed and turned away toward picture-left, about 12 degrees further toward the camera than the pin so a narrow strip of the side of his face shows.",
+   "from": ".cache/loop_prompts/pin_783485666540141734_route.txt",
+   "sha256": "56c5d17c2ea089bacba0cd1c7168523805f76ac03327ebdb1b8582b3c3400ded",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666540141734_v5.json",
+   "sha256": "ced0499494237419aa72146106fc1493cbd638fdf63d9b446f746ce011067364",
+   "data": {
+    "goal": ".cache/pin_783485666540141734.jpg",
+    "photo_to_edit": ".cache/pin_783485666540141734.jpg",
+    "written": "2026-10-09, by eye from the pin (the user's link pin.it/5szsWsl8E, motorcycle-outfit-men board, number 10). The user: the pin with his side face VERY slightly more visible than in the pin. v2/v3 (2026-10-09): the head-turn item rewritten twice because 'turn it about 8 degrees' drew a lowered profile; v3 asked for the pin's own head pose. v4 (2026-10-09, the user's second review of the first samples): 'you are removing the back definition that I actually have, increase back definition a little more; face and body fat percent are mismatching, the face looks a lot smoother compared to the body; hide the face a little more'. v4 therefore (1) sends HIS BACK, two frames of his real back from his own video (tools/back_reference.py, frames 54 and 74 of D:/Downloads/B9F9CBB0-...MP4, the thin earphone wire cleaned off the skin), and asks for that definition: v3's 'a fifth narrower, lats slimmer and smoother, no deep grooves' was what removed it; (2) hides the face more (the bowed head's curls fall forward over the brow, only the lower cheek edge and the beard along the jaw show) and asks the little that shows to be as lean and as crisp as the body; (3) names the background people and the mirrored lettering in keep lines (the user's rules, checklist items 33 and 34, same day) and has the pin's own background pixels copied back after the edit (--restore-background). v5: the same as v4 with the back-and-shoulders sentence reordered, so the automatic '(image 5)' follows the part about HIS BACK.",
+    "refs": [
+     {
+      "key": "his_back",
+      "path": ".cache/inventories/pin_refs/his_back.jpg",
+      "label": "HIS BACK, two frames of his own back seen from behind, taken from his own video. Take his back from this image only: the shoulder-blade edges and the gap between them, the groove down the spine, the outline of the lats narrowing to a slim waist, the rear shoulders and the trapezius, how clearly defined they are, and his shoulder width against his waist. Nothing of the room, the door, the trousers, the head, the hair or the light in it."
+     }
+    ],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "an extremely muscular, lean and vascular shirtless man seen from behind, with long dark wavy hair gathered in a bun",
+      "his": "him: the man of the references, a different person, a lean man with his own head, hair and body"
+     },
+     {
+      "item": "hair",
+      "goal": "long dark wavy hair pulled up into a bun at the crown with long loose strands falling over the nape and neck",
+      "his": "his own hair exactly as in the FACE references"
+     },
+     {
+      "item": "hair length",
+      "goal": "a bun at the crown and long loose strands falling to the shoulders",
+      "his": "no bun and no long strands at all: his curls stand up on top with volume, the sides above and behind his ear are tapered short and close to the scalp so the ear shows, and only the nape hair is a little longer"
+     },
+     {
+      "item": "visible side of the face",
+      "goal": "the head bowed deeply and turned away from the camera, with the man's long hair hanging over his cheek and jaw, so only the back of the head, the ear with its earbud and the neck show and no part of his face",
+      "his": "the head bowed as deeply and turned away from the camera exactly as in the PHOTO TO EDIT, the chin toward his chest and the face pointing down at the floor at picture-left, so the camera sees the top and the back of his head, the ear with its earbud, the side of his neck and his shoulder; his curls hang forward over his brow and the upper side of his face because the head is bowed, hiding his eye, brow and nose; only the lower edge of his cheek and the dark beard along his jaw show below the curls, in the deep shadow the gym's overhead light leaves under a bowed head; nothing of his face is turned toward the camera"
+     },
+     {
+      "item": "leanness of the face that shows",
+      "goal": "no face is visible",
+      "his": "the little of his face that shows, the lower cheek edge, the jaw line and the beard along it, is as lean and as hard-edged as his body: a sharp defined jaw line, a hollow under the cheekbone, no roundness or softness, with real skin pores and beard grain as crisp as the skin of his back"
+     },
+     {
+      "item": "beard",
+      "goal": "no beard visible, the face is turned away",
+      "his": "his own beard exactly as in the FACE references"
+     },
+     {
+      "item": "skin tone",
+      "goal": "the goal man's skin in black and white",
+      "his": "his own skin, with the warm medium-brown tone of the references rendered in the same black-and-white grade as the photo, on his neck, ear, shoulders, back and arms"
+     },
+     {
+      "item": "build",
+      "goal": "an extremely muscular build",
+      "his": "his own lean build from the BODY reference image: moderate shoulders, slim arms with light muscle tone, a narrow waist"
+     },
+     {
+      "item": "arms",
+      "goal": "huge, hard, vascular arms: the upper arm about as thick as his neck, thick forearms covered in prominent veins",
+      "his": "much slimmer arms: his upper arms about a THIRD THINNER than in the PHOTO TO EDIT with only light muscle tone, and his forearms about a quarter thinner with visible tendons but only faint veins"
+     },
+     {
+      "item": "back and shoulders",
+      "goal": "a very broad, deeply carved back: huge lats flaring from a narrow waist, deep grooves along the spine and between the shoulder blades, thick striated rear shoulders and a thick trapezius",
+      "his": "his shoulders about a TENTH NARROWER than in the PHOTO TO EDIT, and his own real back, clearly less carved than the man's in the PHOTO TO EDIT but never smooth or soft, with real skin texture: exactly as in the HIS BACK image, his shoulder blades with their edges and the gap between them, the groove down the spine, the outline of the lats narrowing to a slim waist, his rear shoulders and his trapezius, each as clearly defined as there and, in this photo's hard side light, a little more pronounced",
+      "ref": "his_back"
+     }
+    ],
+    "keep": [
+     "the FRAMING exactly: the figure left of centre with his head and bowed neck in the upper-middle of the frame, his body filling the frame down to the bottom edge where his legs are cut off at the shins; he is never re-centred, the picture is never zoomed in or out, the crop never changes",
+     "the black-and-white photograph exactly: the same grey tones, high contrast and film grain (the picture stays black and white), and its candid handheld phone-snapshot character, the slight tilt, the grain, the uneven harsh light and the soft focus of the background",
+     "the white wireless earbud in his ear at picture-left",
+     "the loose, baggy black trousers with a black elastic waistband and their long folds down to the floor",
+     "he stays shirtless: bare shoulders, back and arms, with no clothes added above the trousers",
+     "the background people exactly as in the PHOTO TO EDIT, the same number, in the same places, sizes and poses and no sharper than there: a man in a grey top and light trousers standing at picture-left beside the rack, a dark-clothed man at the far left edge, and the bare feet of another man standing on the black step platform at the bottom-left; no person is added, removed or moved",
+     "the lettering exactly as in the PHOTO TO EDIT, with the same letters, typeface and colour: the sign reflected in the mirror at the upper centre, white capitals ending in STENU on the top line and in KEY on the line below, partly hidden by his head and shoulder, and the cut-off white letters on the black banner at the lower right; no other text, caption or logo anywhere in the picture",
+     "the whole gym scene: the black metal power-rack frame with its curved pull-up bars and the long fluorescent tube light across the top, the mirror frame edges, the black towel hanging on the bar behind him, the black rubber floor, the battle ropes and the weight stack at picture-right",
+     "the dim, harsh gym light with deep shadows and strong highlights, his size and position in the frame and the camera distance",
+     "his exact posture and head pose: standing in front of the gym mirror with his upper body bent slightly forward and his shoulders rolled forward, his head bowed down and turned away toward picture-left exactly as the man's in the PHOTO TO EDIT, the face pointing down and away from the camera and not turned toward it; the arm at picture-left bent at the elbow with the hand holding a black phone in a case with a round magnetic ring at his hip, and a thin silver bangle on that wrist; the arm at picture-right hanging straight down with the hand loosely open beside his thigh and a black strap bracelet on that wrist"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": false
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: his true build"
+   },
+   {
+    "n": 5,
+    "role": "inv_ref",
+    "name": "his_back.jpg",
+    "sha256": "7e4d88d1672f8fc07d60ed11f2d7572490f3826134ed99d0c020d97b4ef04921",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/inventories/pin_refs/his_back.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BACK, two frames of his own back seen from behind, taken from his own video. Take his back from this image only: the shoulder-blade edges and the gap between them, the groove down the spine, the outline of the lats narrowing to a slim waist, the rear shoulders and the trapezius, how clearly defined they are, and his shoulder width against his waist. Nothing of the room, the door, the trousers, the head, the hair or the light in it.",
+    "key": "his_back"
+   },
+   {
+    "n": 6,
+    "role": "photo_to_edit",
+    "name": "pin_783485666540141734.jpg",
+    "sha256": "70d32e211324ac1288bf3c42b7021bb5d27d9be6a2a888b0dbaf7a6814d47823",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666540141734.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImage 4 is the BODY reference — his true build and proportion.\nImage 5 is HIS BACK, two frames of his own back seen from behind, taken from his own video. Take his back from this image only: the shoulder-blade edges and the gap between them, the groove down the spine, the outline of the lats narrowing to a slim waist, the rear shoulders and the trapezius, how clearly defined they are, and his shoulder width against his waist. Nothing of the room, the door, the trousers, the head, the hair or the light in it.\nImage 6 is the PHOTO TO EDIT.\n\nEdit image 6, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-3), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 4 precisely. A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner. His whole body is his own, from image 4: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows an extremely muscular, lean and vascular shirtless man seen from behind, with long dark wavy hair gathered in a bun; make it him: the man of the references, a different person, a lean man with his own head, hair and body.\n- hair: the PHOTO TO EDIT shows long dark wavy hair pulled up into a bun at the crown with long loose strands falling over the nape and neck; make it his own hair exactly as in the FACE references (images 1-3): His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.\n- hair length: the PHOTO TO EDIT shows a bun at the crown and long loose strands falling to the shoulders; make it no bun and no long strands at all: his curls stand up on top with volume, the sides above and behind his ear are tapered short and close to the scalp so the ear shows, and only the nape hair is a little longer.\n- visible side of the face: the PHOTO TO EDIT shows the head bowed deeply and turned away from the camera, with the man's long hair hanging over his cheek and jaw, so only the back of the head, the ear with its earbud and the neck show and no part of his face; make it the head bowed as deeply and turned away from the camera exactly as in the PHOTO TO EDIT, the chin toward his chest and the face pointing down at the floor at picture-left, so the camera sees the top and the back of his head, the ear with its earbud, the side of his neck and his shoulder; his curls hang forward over his brow and the upper side of his face because the head is bowed, hiding his eye, brow and nose; only the lower edge of his cheek and the dark beard along his jaw show below the curls, in the deep shadow the gym's overhead light leaves under a bowed head; nothing of his face is turned toward the camera.\n- leanness of the face that shows: the PHOTO TO EDIT shows no face is visible; make it the little of his face that shows, the lower cheek edge, the jaw line and the beard along it, is as lean and as hard-edged as his body: a sharp defined jaw line, a hollow under the cheekbone, no roundness or softness, with real skin pores and beard grain as crisp as the skin of his back.\n- beard: the PHOTO TO EDIT shows no beard visible, the face is turned away; make it his own beard exactly as in the FACE references (images 1-3): His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.\n- skin tone: the PHOTO TO EDIT shows the goal man's skin in black and white; make it his own skin, with the warm medium-brown tone of the references rendered in the same black-and-white grade as the photo, on his neck, ear, shoulders, back and arms.\n- build: the PHOTO TO EDIT shows an extremely muscular build; make it his own build exactly as in the BODY reference (image 4): A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner.\n- arms: the PHOTO TO EDIT shows huge, hard, vascular arms: the upper arm about as thick as his neck, thick forearms covered in prominent veins; make it much slimmer arms: his upper arms about a THIRD THINNER than in the PHOTO TO EDIT with only light muscle tone, and his forearms about a quarter thinner with visible tendons but only faint veins.\n- back and shoulders: the PHOTO TO EDIT shows a very broad, deeply carved back: huge lats flaring from a narrow waist, deep grooves along the spine and between the shoulder blades, thick striated rear shoulders and a thick trapezius; make it his shoulders about a TENTH NARROWER than in the PHOTO TO EDIT, and his own real back, clearly less carved than the man's in the PHOTO TO EDIT but never smooth or soft, with real skin texture: exactly as in the HIS BACK image, his shoulder blades with their edges and the gap between them, the groove down the spine, the outline of the lats narrowing to a slim waist, his rear shoulders and his trapezius, each as clearly defined as there and, in this photo's hard side light, a little more pronounced (image 5).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the FRAMING exactly: the figure left of centre with his head and bowed neck in the upper-middle of the frame, his body filling the frame down to the bottom edge where his legs are cut off at the shins; he is never re-centred, the picture is never zoomed in or out, the crop never changes.\n- the black-and-white photograph exactly: the same grey tones, high contrast and film grain (the picture stays black and white), and its candid handheld phone-snapshot character, the slight tilt, the grain, the uneven harsh light and the soft focus of the background.\n- the white wireless earbud in his ear at picture-left.\n- the loose, baggy black trousers with a black elastic waistband and their long folds down to the floor.\n- he stays shirtless: bare shoulders, back and arms, with no clothes added above the trousers.\n- the background people exactly as in the PHOTO TO EDIT, the same number, in the same places, sizes and poses and no sharper than there: a man in a grey top and light trousers standing at picture-left beside the rack, a dark-clothed man at the far left edge, and the bare feet of another man standing on the black step platform at the bottom-left; no person is added, removed or moved.\n- the lettering exactly as in the PHOTO TO EDIT, with the same letters, typeface and colour: the sign reflected in the mirror at the upper centre, white capitals ending in STENU on the top line and in KEY on the line below, partly hidden by his head and shoulder, and the cut-off white letters on the black banner at the lower right; no other text, caption or logo anywhere in the picture.\n- the whole gym scene: the black metal power-rack frame with its curved pull-up bars and the long fluorescent tube light across the top, the mirror frame edges, the black towel hanging on the bar behind him, the black rubber floor, the battle ropes and the weight stack at picture-right.\n- the dim, harsh gym light with deep shadows and strong highlights, his size and position in the frame and the camera distance.\n- his exact posture and head pose: standing in front of the gym mirror with his upper body bent slightly forward and his shoulders rolled forward, his head bowed down and turned away toward picture-left exactly as the man's in the PHOTO TO EDIT, the face pointing down and away from the camera and not turned toward it; the arm at picture-left bent at the elbow with the hand holding a black phone in a case with a round magnetic ring at his hip, and a thin silver bangle on that wrist; the arm at picture-right hanging straight down with the hand loosely open beside his thigh and a black strap bracelet on that wrist.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "46c9447fa7a142d229b3e0f75f90668aad71fcb819aa5b3402fc6510baf5522b",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "inv_ref",
+    "sha256": "7e4d88d1672f8fc07d60ed11f2d7572490f3826134ed99d0c020d97b4ef04921",
+    "upload_name": "his_back.jpg",
+    "bytes": 325399,
+    "px": [
+     1572,
+     1150
+    ]
+   },
+   {
+    "n": 6,
+    "role": "photo_to_edit",
+    "sha256": "70d32e211324ac1288bf3c42b7021bb5d27d9be6a2a888b0dbaf7a6814d47823",
+    "upload_name": "pin_783485666540141734.jpg",
+    "bytes": 356885,
+    "px": [
+     912,
+     1621
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "20a5c7ade3b847c324859f9d6542a94587457dd665e0b0b4187cadf41c5b9aa3"
+ }
+}

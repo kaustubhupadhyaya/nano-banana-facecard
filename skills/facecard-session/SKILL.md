@@ -16,25 +16,39 @@ Repo `C:\Users\Admin\GitHub\nano-banana-facecard`, Python `.venv\Scripts\python.
 
 ## 0. The best-picture checklist (the user's rule, 2026-09-26; applies to every step below)
 
-- **No picture is called best until it passes [`BEST_CHECKLIST.md`](../../BEST_CHECKLIST.md)** (repo root). That is 30 numbered checks, from the user's own complaints, done by eye:
+- **No picture is called best until it passes [`BEST_CHECKLIST.md`](../../BEST_CHECKLIST.md)** (repo root). That is 35 numbered checks (31 face fullness and 32 build added 2026-10-08; 33 background people, 34 text in the picture and 35 candid capture look added 2026-10-09), from the user's own complaints, done by eye:
   - open the picture next to its source, head zoomed in, whole picture seen;
   - record the result with `tools\best_check.py "<picture>" --source "<source>" --fail <n,...> --na <n,...> --note "..."`.
 - **One failed item means NOT BEST, and so does one item that can't be verified.** Never present such a picture as best, and don't copy it to `D:\Downloads\AI me`. Rework it in a `/loop` with `/think-again`: name the failed item, find its cause, fix that, make the next version, and never repeat a fix on the DO NOT RETRY lists in `FEEDBACK_LOG.md`.
 - The pipeline's `best.jpg` / `best.png` (and `facecard.py gen`'s `best.jpg`) is only a candidate until the checklist passes.
+- **Three more rules (the user, 2026-10-09; items 33-35):** every inventory has keep lines for the background PEOPLE and the LETTERING (`tools\inventory_lint.py` notes it when not);
+  a text-mode scene is written empty with signs as glow (`inventory_lint.py --scene <paragraph>`); a picture with no reference reads as a candid rush (motion blur, tilt, off-centre).
+  Edit-mode recipes with `--restore-background` get the pin's own background copied back (`tools\background_restore.py <run>`), and the checklist is recorded on the `vN_0r.jpg`.
+  `tools\wave.py <spec> --parallel 2 --stagger 240` keeps two runs at most (four stage-06 measurements at once ran out of memory); a job with `"restore": true` gets the restore after its run;
+  `--not-before HH:MM` inside a hidden one-time scheduled task (like `facecard-gemini-keepalive`) lets a wave survive a session crash. His back reference for back views: `tools\back_reference.py`.
 - **Posture and position (items 12, 14, 29, 30) are measured before they are judged** (the user, 2026-09-27: these mistakes kept getting past a by-eye check; root causes in FEEDBACK_LOG section 12).
   - Run: `D:\VisionModels\yolo\.venv\Scripts\python.exe tools\pose_compare.py "<goal>" <renders>` (`gen --goal` runs it automatically).
   - Its limits are fixed. A FAIL is a FAIL; never call its numbers "guides", and never loosen a limit without the user.
   - Judge these items on its overlay `<render>_pose.jpg`, limb by limb (legs and feet too) against the goal, never against the previous version.
 - **Never write a POSE from my own reading alone.** Save the goal's measurement first (`pose_compare.py "<goal>" --save-goal`). The POSE text must agree with its facts (stance, knee angles, torso lean, hand heights), and `--pose-points` adds them to the prompt.
 
-- **Loop until perfect (the user, 2026-10-01):** a goal is not finished until a picture passes all 30 items or the user accepts one. After every wave run
+- **Loop until perfect (the user, 2026-10-01):** a goal is not finished until a picture passes all 35 items or the user accepts one. After every wave run
   `tools\goal_status.py --open`, read the goal's section of `FEEDBACK_LEDGER.md`, change only the request section that controls the failed item, and start the
   next wave (all open goals in parallel, sized to `tools\quota.py`, scheduled after the credit reset when the window is empty). Never stop at a failed attempt;
   details in the gemini-identity-gen skill, section "Loop until perfect".
+- **Step 0 of every redo: ask what is wrong, in the user's own words** (2026-10-02). Never optimise a number (ArcFace, pose) before the defect is named; pin 5's complaint was
+  lighting, not identity. Then, per open goal: `tools\goal_status.py --open --next` (the goal's latest recipe version and its track record, or the `recipe new`
+  command), `recipe bump ... --because "<their words>"`, `facecard.py run <goal>@vN --dry-run`, a 2-sample run, then `tools\wave.py` with recipe jobs.
+- **Consistency (the user, 2026-10-07): every goal picture comes from a recipe version through the 8 stages of `facecard.py run`** (repo `AGENTS.md`). Each run's
+  report is in `D:\FacecardReview` (`index.html` lists them); compare two runs with `facecard.py diff <runA> <runB>`.
+- **Credits are guarded in stage 04 of every run** (`credit_guard.py`): fresh meter reading minus other runs' reservations, at most 4 generations at once; `--wait-max`, `--no-wait`
+  (exit 3, nothing generated), `--no-guard`. The meter lags, so never plan from one reading.
+- **Audit on the run's report** (stage 07 sheets: head row beside his references, hands; stage 06: pose gate, FACE light, FACE vs NECK). `tools\audit_views.py` builds the same sheets for any run.
 
 ## 0b. Route G: the user's role-based single prompt (the default for a goal picture, 2026-09-26)
 
-- **Command:** `.venv\Scripts\python.exe facecard.py gen --subject me --goal "<goal>" --prompt "<sections.txt>" --count 4`
+- **Command:** freeze the request as a recipe, then run it: `.venv\Scripts\python.exe facecard.py recipe new --goal "<goal>" --prompt "<sections.txt>" --inventory <json> --replace-subject --character me@v1 --because "..."` (his OWN photo: `recipe new --method replicate --goal <photo> --character me@v1 --because "..."`; Route G refuses it),
+  then `facecard.py run <goal>@vN --samples 2`. (`facecard.py gen --subject me --goal ... --count N` takes the same flags and runs as an ad-hoc recipe through the same stages.)
 - **References by role:**
   - images 1-4 are FACE references (studio photos chosen by the goal's head pose);
   - image 5 is the BODY reference (`IMG_6923 Copy.JPG`);
@@ -42,7 +56,7 @@ Repo `C:\Users\Admin\GitHub\nano-banana-facecard`, Python `.venv\Scripts\python.
   - plus the ORIGINAL PHOTO when the goal is his own photo (ArcFace decides; `--goal-as-image yes|no` overrides).
 - **Prompt:** the identity sentence, then FACE and BUILD (`facecard.json` `subject_profiles.me.face_text` / `build_text`), then the sections file, then the style line (`prompts\role_template.txt`).
 - **The sections file** holds POSE / WARDROBE / SCENE / LIGHT / CAMERA, written from the goal with the scene-prompt-writer skill. The goal picture of another man is never sent: sent photos leak their model's skull, jaw and neck, and public figures are refused.
-- **Each render:** `tools\review_sheet.py --goal "<goal>" <renders>`, then the 30 items (`tools\best_check.py`).
+- **Each render:** `tools\review_sheet.py --goal "<goal>" <renders>`, then the 35 items (`tools\best_check.py`).
 - **Inventory first** (the user, 2026-09-28: "make them all go right at the first go"): before the first render of a goal, write `.cache\inventories\<goal>.json`. Every visible element is HIS / GOAL / REMOVE, and each HIS item says what the goal shows and what replaces it, with a reference cut from his own photos (`tools\ref_sheet.py`).
   - Run `gen --replace-subject --inventory <json>`.
   - Check with `tools\inventory_check.py` at full zoom.
@@ -53,6 +67,8 @@ Repo `C:\Users\Admin\GitHub\nano-banana-facecard`, Python `.venv\Scripts\python.
   - `--goal-as-image goal`: the goal itself sent as the GOAL IMAGE, its man explicitly excluded (the user asked to try this);
   - `--replace-subject`: the goal sent as the PHOTO TO EDIT, its man replaced by him from the references;
   - `--prop PATH::LABEL`: his own objects, such as his CB350 (`.cache\props\`).
+- **Before the first paid render:** `tools\inventory_lint.py .cache\inventories\<goal>.json` (free; framing line for cropped goals, no "exactly as in the PHOTO TO EDIT" about the goal's head or arms, a measure in every build item, a deeper-than-goal line for a steep head bow, at most 10 files).
+- **Face references:** `--face-refs @clean_studio` / `@clean_profile_right` (named sets in `facecard.json` `face_ref_presets`) or exact file names; an opt-in per goal, judged by the user's eye.
 - **On a fail:** change only the section that controls the failed item.
 - **Fallbacks,** only after 3 rounds that cannot pass an item: the replicate edit, FaceFusion swap, or the free-GPU head swap (see the plan).
 
@@ -62,12 +78,18 @@ Repo `C:\Users\Admin\GitHub\nano-banana-facecard`, Python `.venv\Scripts\python.
    (2026-09-23): at session start keep only each run's picture (`best.*` or `not_passing_closest.jpg`), its `run.json` / `run.log`, and every file
    the user reviewed or the records name; delete the rest (candidates, raw returns, sent crops, compare sheets). It never touches runs written in
    the last 15 minutes, the best versions in `D:\Downloads\AI me`, `.cache\synthetic_refs`, `.cache\ref_poses.json`, source photos or patches. It
-   also marks the session start, which `pending_review.py` and `run_report.py` use.
+   also marks the session start, which `pending_review.py` and `run_report.py` use. Since 2026-10-07 it keeps every picture with a recorded checklist,
+   and a staged run (it has `manifest.json`) keeps all its text records and its report; only re-creatable copies are pruned there.
 2. `tools\match_best_versions.py --record`: picks up pictures the user copied into `D:\Downloads\AI me` by hand (matched to their run by pixel
    content, recorded with md5 in `facecard.json` `best_versions`; such a photo is returned unchanged by `replicate` unless `--force`).
 3. Status in three lines: `git status --short` (uncommitted pipeline changes are experiments waiting for the user's approval), `tools\quota.py`
    (credits left in the 5-hour window, reset time; `--watch` keeps a live line and `.cache\quota.json`), and `tools\pending_review.py --all` (unreviewed pictures from earlier sessions: ask for
    their reviews first).
+4. `tools\gold_tier.py list`: the gold tier (the user, 2026-10-09: "remember these five ... ALWAYS"). Every copy must read intact; a missing or
+   changed one is restored from the blob store and reported to the user.
+5. `tools\overnight.py status`: what the local Qwen night made (AGENTS.md, "Overnight local runs"). Show the user the morning page
+   (`D:\FacecardLocal\summary\<date>.html`). Then QC each new picture like a Gemini one: `facecard.py run <recipe> --remeasure <run folder>`,
+   then the 35 items recorded in the local run folder.
 
 ## 2. Applying the image creation
 
