@@ -1,0 +1,310 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "IMG_6858",
+ "version": 5,
+ "created": "2026-10-10T03:50:36",
+ "because": "Control for IMG_6858 v4: v3's smile words with NO smile crops, on v4's looser expression crop, so the crops' effect is measured (plan step 3, the user's approval 2026-10-10)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "freeze_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\replicate_freeze\\20261010_034958_IMG_6858",
+  "notices": []
+ },
+ "goal": {
+  "key": "IMG_6858",
+  "path": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+  "sha256": "3c61ddb9efdcf41568ab340213409be04140a802fb5c8a6d776e4cc9ae4d06c8",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "replicate",
+  "compiler": "replicate/1",
+  "subject": "me",
+  "args": {
+   "goal": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+   "zone": "expression",
+   "source": "auto",
+   "glasses": "same",
+   "look": "any",
+   "expression": "a genuine candid smile, the moment a friend's camera catches him really amused: his cheeks lifted, his eyes narrowed and crinkled at the corners, his lips parted in a natural smile with his upper teeth showing (his own teeth, a shade whiter); relaxed and warm, never a posed or forced grin",
+   "character": "me@v2",
+   "current_look": false,
+   "from_picture": null,
+   "rank": "smile"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "text_models": [
+   "56fdd199312815e2",
+   "e6fa609c3fa255c0"
+  ],
+  "samples": 2,
+  "max_attempts": 4,
+  "stop": {
+   "after_pose_fails": 0,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {},
+  "own": true,
+  "own_score": 0.879,
+  "source_kind": "own",
+  "duplicates_excluded": [
+   "IMG_6858.jpg"
+  ],
+  "zone": "expression",
+  "kind": "face",
+  "expression": "a genuine candid smile, the moment a friend's camera catches him really amused: his cheeks lifted, his eyes narrowed and crinkled at the corners, his lips parted in a natural smile with his upper teeth showing (his own teeth, a shade whiter); relaxed and warm, never a posed or forced grin",
+  "glasses": "same",
+  "look": "any",
+  "far": false,
+  "face_share": null,
+  "crop": [
+   799,
+   774,
+   1807,
+   1807
+  ],
+  "crop_before_head_fit": [
+   1142,
+   1135,
+   1058,
+   1058
+  ],
+  "head_boxes": [
+   [
+    1430,
+    1370,
+    482,
+    588
+   ]
+  ],
+  "copies_left_unedited": [],
+  "main_box": [
+   1430,
+   1370,
+   482,
+   588
+  ],
+  "main_in_crop": [
+   631,
+   596,
+   482,
+   588
+  ],
+  "source_size": [
+   3024,
+   4032
+  ],
+  "source_face": {
+   "box": [
+    646,
+    596,
+    485,
+    571
+   ],
+   "score": 0.884,
+   "face_w": 482
+  },
+  "readings": {
+   "head_box": {
+    "prompt_sha256": "c8f22d67b9e1aa5ea7ed6a2536464167daa4ac32bc58376f03b6bd2426d541b9",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "box": [
+     1225,
+     991,
+     2180,
+     2111
+    ],
+    "skipped": null
+   },
+   "describe": {
+    "prompt_sha256": "d14a6c159796543406a3bc171ab3cb99b83682f24921905cf2efc8043928c8a3",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "file": "photo_to_edit.png",
+    "reply": {
+     "head_turn": "facing directly forward towards the camera, 0 degrees",
+     "head_tilt": "chin is level and upright with no noticeable sideways tilt",
+     "gaze": "looking directly into the camera lens",
+     "expression": "neutral to slightly somber, mouth closed with relaxed lips, neutral eyes and brows",
+     "glasses": "none",
+     "hair": "curly, voluminous, short-to-medium length, black/dark brown",
+     "light": "diffuse frontal light slightly from above, warm natural tone, moderately bright",
+     "face_exposure": "similar brightness to the beige background, skin looks smooth and clean with subtle natural texture",
+     "reflection_present": false,
+     "reflection_where": "",
+     "other_people": false
+    }
+   }
+  },
+  "attractiveness": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
+  "thresholds": {
+   "hard_reject": 0.2,
+   "accept": 0.52,
+   "own_min": 0.4,
+   "approved": true
+  },
+  "gates": {
+   "light_de_max": 14.0,
+   "size_own": [
+    0.94,
+    1.04
+   ],
+   "size_foreign": [
+    0.94,
+    1.04
+   ],
+   "light_de_max_foreign": 20.0,
+   "unchanged_gt_sim": 0.9,
+   "neck_gap_max": 10.0,
+   "rescue_attempts": 3,
+   "sharp_max": 6.0
+  },
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e"
+  },
+  "face_choice": {
+   "decided_by": "character me@v2",
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg",
+    "IMG_6863.jpg"
+   ],
+   "count": 4
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "face_front.jpg",
+    "sha256": "e2106185088b395632868bb47c93463cd00a5810cceb578f76da5bcec5b4de9d",
+    "from": "IMG_6858.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "face_three_quarter_left.jpg",
+    "sha256": "bb9d1c692760e1c9a420059bfa6b6cea8d685976b285613d659c3398c4dbe995",
+    "from": "IMG_6868.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "face_three_quarter_right.jpg",
+    "sha256": "b56638a1789bb32dc74afb95c417cf2d7db96ed6fa28c52ce3cc677669382819",
+    "from": "IMG_6861.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "face_profile.jpg",
+    "sha256": "9611caa7ac60c0c5ad28780b5214c4a6c25ed03fed80da7c64d565b8444cc808",
+    "from": "IMG_6863.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: profile"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "photo_to_edit.png",
+    "sha256": "b7621b459a39fadf6b87ac8817cb3d198912de8ae5829426e38a6548745dd63a",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "crop [799, 774, 1807, 1807] of the 3024x4032 original, long side 1024 px",
+    "why": "the crop of his photo that is edited and pasted back into the untouched original"
+   }
+  ],
+  "rank": "smile"
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "replicate/1",
+   "template_sha256": "5f7be3521647c9a0d4ffe504735fbe869e94682b989e302f41ef60dba047d4da",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "The first 4 images are photos of the same man: the identity reference. The last image is the photo to edit.\n\nEdit the last image so that the man in it has this exact man's face: his face structure, jawline, nose, eyes, brows, lips, skin tone and beard exactly as in the reference photos. The man in the last image is only a look-alike: do not keep his face, render this man's own face from the reference photos in its place. Redraw his whole head as one, the hair included: his hair, beard and moustache exactly as in the reference photos (his own tight curly black hair), so that hair, face, ears and neck belong together like one real photograph. If the man in the last image wears glasses, he keeps wearing the same glasses. His expression: a genuine candid smile, the moment a friend's camera catches him really amused: his cheeks lifted, his eyes narrowed and crinkled at the corners, his lips parted in a natural smile with his upper teeth showing (his own teeth, a shade whiter); relaxed and warm, never a posed or forced grin.\n\nThis is what the last image shows before the edit. The head angle, gaze, glasses and light must stay exactly as they are:\n- head: facing directly forward towards the camera, 0 degrees\n- chin: chin is level and upright with no noticeable sideways tilt\n- eyes: looking directly into the camera lens\n- glasses: none\n- hair: curly, voluminous, short-to-medium length, black/dark brown\n- light on his face: diffuse frontal light slightly from above, warm natural tone, moderately bright\n- how bright his face is: similar brightness to the beige background, skin looks smooth and clean with subtle natural texture\n\nKeep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it belongs in the picture like a real phone photo and not a studio portrait.\nKeep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.",
+  "prompt_sha256": "1072684961137222020811dff9e2adbab8dce78c6879f3b87c047cf0e124d5f1",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "e2106185088b395632868bb47c93463cd00a5810cceb578f76da5bcec5b4de9d",
+    "upload_name": "face_front.jpg",
+    "bytes": 151235,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "bb9d1c692760e1c9a420059bfa6b6cea8d685976b285613d659c3398c4dbe995",
+    "upload_name": "face_three_quarter_left.jpg",
+    "bytes": 133701,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "b56638a1789bb32dc74afb95c417cf2d7db96ed6fa28c52ce3cc677669382819",
+    "upload_name": "face_three_quarter_right.jpg",
+    "bytes": 134170,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "9611caa7ac60c0c5ad28780b5214c4a6c25ed03fed80da7c64d565b8444cc808",
+    "upload_name": "face_profile.jpg",
+    "bytes": 186432,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "b7621b459a39fadf6b87ac8817cb3d198912de8ae5829426e38a6548745dd63a",
+    "upload_name": "photo_to_edit.png",
+    "bytes": 1343247,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "7ce63b2e2ab6c222c8594022fa7c97cb79a250bc80a6171605b9299082377b57"
+ }
+}
