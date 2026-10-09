@@ -1,0 +1,213 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666540141702",
+ "version": 1,
+ "created": "2026-10-09T15:53:00",
+ "because": "the user, 2026-10-09: instead of text print being on back, make it on front (the pin shows the back view, so the picture becomes a front view with the print on the chest)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin_783485666540141702",
+  "path": ".cache/pin_783485666540141702.jpg",
+  "sha256": "558c0d6e167d52415910b0a29ea946d648cb57b44429d281d44e797c7e56cf22",
+  "pose": {
+   "path": ".cache/poses/pin_783485666540141702.json",
+   "sha256": "a9cac7d4986ccc823d80f2f694dfb41b2197b4f927fafbee612bed5d6804ecf7"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666540141702.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666540141702_route.txt",
+   "inventory": null,
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-09T03:41:43"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Waist-up candid photograph of him standing squarely to the camera in a shopping-mall viewing gallery, shoulders level, his weight even on both feet. His face is turned about 20 degrees toward picture-right with his chin level and his eyes looking into the lens, a relaxed closed-lip smile and calm, confident eyes. A white non-woven tote bag hangs from his right shoulder at picture-left, its flat strap crossing the top of his tee, while his other arm hangs relaxed at his side with a round black smartwatch on that wrist. He wears an oversized, boxy cream cotton crew-neck t-shirt with short sleeves; across the chest is a bold dark-red sans-serif print in four centred lines of capital letters reading: I DON'T CARE / IF SHE GOT / RED FLAGS / I'M A BULL, the last line in a lighter weight. Behind him is a large floor-to-ceiling glass wall with a dark metal frame at the picture-right edge, and beyond it a multi-level mall atrium with warm and white shop lights, softly blurred. Soft, even indoor light from the front, low contrast, neutral-warm tones. Camera at his chest height about 1.5 metres away, phone 1x lens, he is sharp and the atrium is softly blurred. Natural colour, realistic phone photograph with natural skin texture and slight grain. Vertical 2:3 frame.",
+   "from": ".cache/loop_prompts/pin_783485666540141702_route.txt",
+   "sha256": "c7c48ae6d47205935e0f003f98bd62327777893e4709dacf27d6e3c92f086656",
+   "used_for": "the SCENE section"
+  },
+  "inventory": null,
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": false
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: his true build"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImage 4 is the BODY reference — his true build and proportion.\n\nGenerate a new photograph of THIS EXACT MAN — not a lookalike.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.\n\nBUILD: Match image 4 precisely. A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner.\n\nWaist-up candid photograph of him standing squarely to the camera in a shopping-mall viewing gallery, shoulders level, his weight even on both feet. His face is turned about 20 degrees toward picture-right with his chin level and his eyes looking into the lens, a relaxed closed-lip smile and calm, confident eyes. A white non-woven tote bag hangs from his right shoulder at picture-left, its flat strap crossing the top of his tee, while his other arm hangs relaxed at his side with a round black smartwatch on that wrist. He wears an oversized, boxy cream cotton crew-neck t-shirt with short sleeves; across the chest is a bold dark-red sans-serif print in four centred lines of capital letters reading: I DON'T CARE / IF SHE GOT / RED FLAGS / I'M A BULL, the last line in a lighter weight. Behind him is a large floor-to-ceiling glass wall with a dark metal frame at the picture-right edge, and beyond it a multi-level mall atrium with warm and white shop lights, softly blurred. Soft, even indoor light from the front, low contrast, neutral-warm tones. Camera at his chest height about 1.5 metres away, phone 1x lens, he is sharp and the atrium is softly blurred. Natural colour, realistic phone photograph with natural skin texture and slight grain. Vertical 2:3 frame.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "2086f784a5538a36f510ec7a3d747994396215e629f2de2400792bc7b99ed90f",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "0c30fbc73e15476358be4037e1d49777e07cc9e57cd5e3a62708b18f7f686dc6"
+ }
+}
