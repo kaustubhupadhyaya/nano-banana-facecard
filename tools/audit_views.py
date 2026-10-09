@@ -1,4 +1,4 @@
-"""Audit views for the 30-item checklist, built so the defects the user found on 2026-10-01 (pin 5 and pin 6 "wrong": hair and beard were the pin man's, not
+"""Audit views for the 35-item checklist, built so the defects the user found on 2026-10-01 (pin 5 and pin 6 "wrong": hair and beard were the pin man's, not
 his; the face was lit far brighter than the pin's) can no longer pass by eye alone.
 
     .venv\\Scripts\\python.exe tools\\audit_views.py <label> "<goal>" "<render>" "<run folder>" [--out DIR]
@@ -24,11 +24,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 import review_sheet as RS  # noqa: E402
+from lighting import LIGHT_RATIO, NECK_RATIO_TOL, face_mean, neck_mean  # noqa: E402
 from replicate import load_source  # noqa: E402
 
 REFS = Path(r"D:\Downloads\FaceCard_Originals")
 ALWAYS = ["IMG_6858.jpg", "IMG_6862.jpg", "IMG_6863.jpg"]          # front, right profile, left profile
-LIGHT_RATIO = (0.77, 1.30)
 
 
 def find_ref(name: str):
@@ -79,36 +79,64 @@ def wrist_crops(img, kp, size_frac=0.2, out=420):
     return crops
 
 
-def face_mean(img, kp):
-    """Mean grey level of the face region from the eye and nose keypoints (None when the face is a profile or hidden: keypoints unreliable)."""
-    H, W = img.shape[:2]
-    need = [kp.get(k) for k in ("nose", "l_eye", "r_eye")]
-    if any(n is None or n[2] < 0.3 for n in need):
-        return None
-    pts = np.array([[n[0] * W, n[1] * H] for n in need])
-    eye_d = float(np.hypot(*(pts[1] - pts[2])))
-    cx, cy = pts.mean(axis=0)
-    r = 0.9 * max(eye_d, 8)
-    x0, x1, y0, y1 = int(max(0, cx - r)), int(min(W, cx + r)), int(max(0, cy - 0.6 * r)), int(min(H, cy + 1.4 * r))
-    g = cv2.cvtColor(img[y0:y1, x0:x1], cv2.COLOR_BGR2GRAY)
-    return float(g.mean()) if g.size else None
+# face_mean / neck_mean / LIGHT_RATIO / NECK_RATIO_TOL live in lighting.py (shared with facecard.py gen)
 
 
-def neck_mean(img, kp):
-    """Mean grey level of the neck / upper-chest strip below the chin (None when the eye keypoints are not reliable)."""
-    H, W = img.shape[:2]
-    need = [kp.get(k) for k in ("nose", "l_eye", "r_eye")]
-    if any(n is None or n[2] < 0.3 for n in need):
-        return None
-    pts = np.array([[n[0] * W, n[1] * H] for n in need])
-    ed = float(np.hypot(*(pts[1] - pts[2])))
-    cx, cy = pts.mean(axis=0)
-    x0, x1, y0, y1 = int(max(0, cx - 0.9 * ed)), int(min(W, cx + 0.9 * ed)), int(max(0, cy + 2.2 * ed)), int(min(H, cy + 3.4 * ed))
-    g = cv2.cvtColor(img[y0:y1, x0:x1], cv2.COLOR_BGR2GRAY)
-    return float(np.median(g)) if g.size else None
+def make_views(label_: str, goal_path, render_path, run_dir, out, ref_paths=None, goal_kp: dict | None = None) -> list[str]:
+    """The two audit sheets for one picture, plus the light lines (printed and returned). `ref_paths`: the exact FACE references a run sent (the
+    staged runner passes them; otherwise the run's recorded face names are looked up). `goal_kp`: the goal's keypoints when the run pinned them."""
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    lines: list[str] = []
 
+    def say(msg: str) -> None:
+        print(msg)
+        lines.append(msg)
 
-NECK_RATIO_TOL = 0.12      # |face/neck in the render - face/neck in the goal| (the user, 2026-10-02: pin 5 'lighting off, face seems lasso-ed in': old picture 1.27 vs the pin's 0.97)
+    goal, render = RS.read(str(goal_path)), RS.read(str(render_path))
+    run = json.loads((Path(run_dir) / "run.json").read_text(encoding="utf-8")) if (Path(run_dir) / "run.json").exists() else {}
+    bw = is_bw(goal)
+    h = 1000
+    cv2.imwrite(str(out / f"{label_}_full.jpg"), hstack_pad([label(fit_h(goal, h), "goal"), label(fit_h(render, h), "render")]), [cv2.IMWRITE_JPEG_QUALITY, 92])
+    row = [label(RS.head_zoom(goal), "goal head"), label(RS.head_zoom(render), "render head")]
+    refs: list[tuple[str, Path]] = [(n, p) for n in ALWAYS for p in (find_ref(n),) if p is not None]
+    if ref_paths:
+        refs += [(Path(p).name, Path(p)) for p in ref_paths if Path(p).name not in ALWAYS][:2]
+    else:
+        refs += [(n, p) for n in (run.get("route_g", {}).get("roles", {}).get("face", []))[:2] if n not in ALWAYS for p in (find_ref(n),) if p is not None]
+    for n, p in refs[:5]:
+        try:
+            im = load_source(p)
+            row.append(label(RS.head_zoom(to_bw(im) if bw else im), "his ref " + n[:16] + (" (bw)" if bw else "")))
+        except Exception:
+            pass
+    rows = [hstack_pad([fit_h(i, 380) for i in row])]
+    rj = Path(render_path).with_name(Path(render_path).stem + "_pose.json")
+    gj = ROOT / ".cache" / "poses" / (Path(goal_path).stem + ".json")
+    rk = json.loads(rj.read_text(encoding="utf-8")).get("render_pose", {}).get("person", {}).get("kp", {}) if rj.exists() else {}
+    gk = goal_kp if goal_kp is not None else (json.loads(gj.read_text(encoding="utf-8")).get("person", {}).get("kp", {}) if gj.exists() else {})
+    hands = [label(c, "render hand") for c in wrist_crops(render, rk)] + [label(c, "goal hand") for c in wrist_crops(goal, gk)]
+    if hands:
+        rows.append(hstack_pad(hands))
+    W = max(r.shape[1] for r in rows)
+    rows = [np.hstack([r, np.full((r.shape[0], W - r.shape[1], 3), 255, np.uint8)]) if r.shape[1] < W else r for r in rows]
+    cv2.imwrite(str(out / f"{label_}_details.jpg"), np.vstack(rows), [cv2.IMWRITE_JPEG_QUALITY, 92])
+    fr, fg = face_mean(render, rk), face_mean(goal, gk)
+    if fr is None or fg is None:
+        say(f"{label_}: FACE LIGHT not measurable (profile or hidden face): compare the head crops by eye against the goal")
+    else:
+        ratio = fr / max(fg, 1e-6)
+        verdict = "ok" if LIGHT_RATIO[0] <= ratio <= LIGHT_RATIO[1] else "FAIL items 9/10: the face is " + ("brighter" if ratio > 1 else "darker") + " than the goal's"
+        say(f"{label_}: FACE LIGHT render {fr:.0f} vs goal {fg:.0f} (ratio {ratio:.2f}, limit {LIGHT_RATIO[0]}-{LIGHT_RATIO[1]}): {verdict}")
+    nr, ng = neck_mean(render, rk), neck_mean(goal, gk)
+    if None in (fr, fg, nr, ng):
+        say(f"{label_}: FACE vs NECK not measurable (profile or hidden face): judge the pasted-in look (items 4, 10, 11) by eye on the head row")
+    else:
+        rr, gr = fr / max(nr, 1e-6), fg / max(ng, 1e-6)
+        ok = abs(rr - gr) <= NECK_RATIO_TOL
+        say(f"{label_}: FACE vs NECK render {rr:.2f} vs goal {gr:.2f} (tolerance {NECK_RATIO_TOL}): " + ("ok" if ok else "FAIL items 4/10/11: the face is " + ("brighter" if rr > gr else "darker") + " than its own neck compared with the goal: it reads pasted in"))
+    say(f"{label_}: views written to {out}  (black-and-white references: {bw}); judge HAIR and BEARD (items 19/28) on the head row against his references")
+    return lines
 
 
 def main() -> int:
@@ -117,51 +145,10 @@ def main() -> int:
     ap.add_argument("goal")
     ap.add_argument("render")
     ap.add_argument("run_dir")
-    ap.add_argument("--out", default=str(ROOT / ".cache" / "audit"))
+    ap.add_argument("--out", default=None, help="default: <run>/07_review for a staged run (it has manifest.json), else .cache/audit")
     a = ap.parse_args()
-    out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
-    goal, render = RS.read(a.goal), RS.read(a.render)
-    run = json.loads((Path(a.run_dir) / "run.json").read_text(encoding="utf-8"))
-    bw = is_bw(goal)
-    h = 1000
-    cv2.imwrite(str(out / f"{a.label}_full.jpg"), hstack_pad([label(fit_h(goal, h), "goal"), label(fit_h(render, h), "render")]), [cv2.IMWRITE_JPEG_QUALITY, 92])
-    row = [label(RS.head_zoom(goal), "goal head"), label(RS.head_zoom(render), "render head")]
-    names = list(ALWAYS) + [n for n in (run.get("route_g", {}).get("roles", {}).get("face", []))[:2] if n not in ALWAYS]
-    for n in names[:5]:
-        p = find_ref(n)
-        if p is not None:
-            try:
-                im = load_source(p)
-                row.append(label(RS.head_zoom(to_bw(im) if bw else im), "his ref " + n[:16] + (" (bw)" if bw else "")))
-            except Exception:
-                pass
-    rows = [hstack_pad([fit_h(i, 380) for i in row])]
-    rj = Path(a.render).with_name(Path(a.render).stem + "_pose.json")
-    gj = ROOT / ".cache" / "poses" / (Path(a.goal).stem + ".json")
-    rk = json.loads(rj.read_text(encoding="utf-8")).get("render_pose", {}).get("person", {}).get("kp", {}) if rj.exists() else {}
-    gk = json.loads(gj.read_text(encoding="utf-8")).get("person", {}).get("kp", {}) if gj.exists() else {}
-    hands = [label(c, "render hand") for c in wrist_crops(render, rk)] + [label(c, "goal hand") for c in wrist_crops(goal, gk)]
-    if hands:
-        rows.append(hstack_pad(hands))
-    W = max(r.shape[1] for r in rows)
-    rows = [np.hstack([r, np.full((r.shape[0], W - r.shape[1], 3), 255, np.uint8)]) if r.shape[1] < W else r for r in rows]
-    cv2.imwrite(str(out / f"{a.label}_details.jpg"), np.vstack(rows), [cv2.IMWRITE_JPEG_QUALITY, 92])
-    fr, fg = face_mean(render, rk), face_mean(goal, gk)
-    if fr is None or fg is None:
-        print(f"{a.label}: FACE LIGHT not measurable (profile or hidden face): compare the head crops by eye against the goal")
-    else:
-        ratio = fr / max(fg, 1e-6)
-        verdict = "ok" if LIGHT_RATIO[0] <= ratio <= LIGHT_RATIO[1] else "FAIL items 9/10: the face is " + ("brighter" if ratio > 1 else "darker") + " than the goal's"
-        print(f"{a.label}: FACE LIGHT render {fr:.0f} vs goal {fg:.0f} (ratio {ratio:.2f}, limit {LIGHT_RATIO[0]}-{LIGHT_RATIO[1]}): {verdict}")
-    nr, ng = neck_mean(render, rk), neck_mean(goal, gk)
-    if None in (fr, fg, nr, ng):
-        print(f"{a.label}: FACE vs NECK not measurable (profile or hidden face): judge the pasted-in look (items 4, 10, 11) by eye on the head row")
-    else:
-        rr, gr = fr / max(nr, 1e-6), fg / max(ng, 1e-6)
-        ok = abs(rr - gr) <= NECK_RATIO_TOL
-        print(f"{a.label}: FACE vs NECK render {rr:.2f} vs goal {gr:.2f} (tolerance {NECK_RATIO_TOL}): " + ("ok" if ok else "FAIL items 4/10/11: the face is " + ("brighter" if rr > gr else "darker") + " than its own neck compared with the goal: it reads pasted in"))
-    print(f"{a.label}: views written to {out}  (black-and-white references: {bw}); judge HAIR and BEARD (items 19/28) on the head row against his references")
+    out = Path(a.out) if a.out else (Path(a.run_dir) / "07_review" if (Path(a.run_dir) / "manifest.json").exists() else ROOT / ".cache" / "audit")
+    make_views(a.label, a.goal, a.render, a.run_dir, out)
     return 0
 
 
