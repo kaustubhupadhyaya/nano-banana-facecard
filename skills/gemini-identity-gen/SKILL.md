@@ -1,6 +1,6 @@
 ---
 name: gemini-identity-gen
-description: Redo the user's own photo with their face without changing anything else in it (replicate), or generate identity-consistent images of them from scratch, including a scene copied from someone else's photo or a Pinterest pin (scene-prompt-writer, then gen), via their Google AI Pro Gemini web session (no billed API). Use for "generate a photo of me", "replicate this photo with my face", "facecard", "nano banana [pro]", "face restore", or anything mentioning __Secure-1PSID/__Secure-1PSIDTS cookies. For writing scene prompt text for from-scratch generation, use the scene-prompt-writer skill.
+description: Redo the user's own photo with their face without changing anything else in it (replicate), or generate identity-consistent images of them from scratch, including a scene copied from someone else's photo or a Pinterest pin (scene-prompt-writer, then a recipe run), via their Google AI Pro Gemini web session (no billed API). Use for "generate a photo of me", "replicate this photo with my face", "facecard", "nano banana [pro]", "face restore", or anything mentioning __Secure-1PSID/__Secure-1PSIDTS cookies. For writing scene prompt text for from-scratch generation, use the scene-prompt-writer skill.
 ---
 
 # gemini-identity-gen
@@ -17,8 +17,8 @@ all resolve, and prints the exact fix for anything missing (paths are set in `pa
 
 | You have | Use | Why |
 |---|---|---|
-| The subject's own photo to redo with his own face | **`replicate`** | Edits a crop and pastes it back into the untouched original. Background, clothes, body and framing cannot drift. |
-| Someone else's photo, a Pinterest/Instagram pin or a screenshot, as a style to copy | **scene-prompt-writer** (reference mode), then `gen --subject <name>` | His head on another man's photo keeps that man's body (silhouette within 2%), about 15% of results were acceptable, and it is catfishing. The skill turns the pin into a structured scene with his own traits; the pin itself never reaches the generator. |
+| The subject's own photo to redo with his own face | **a `replicate/1` recipe**: `facecard.py recipe new --method replicate --goal <photo> --character me@v1 --because "..."`, then `facecard.py run <goal>@vN` | Edits a crop of the full-resolution original and pastes it back. Background, clothes, body and framing cannot drift. Route G refuses his own photo (stage 01, exit 2): on 2026-10-07 it redrew the whole kayak photo at ~1 MP with a ~77 px face. An OLDER photo of his redone in his current look takes two passes (the user, 2026-10-08: "body and hair rework needed since the current physique and face has changed"): `--zone build --current-look` (his body), then `--from-picture <pass-A picture> --current-look` (his head: current cut, lean face, size up to 1.10 for the beard). |
+| Someone else's photo, a Pinterest/Instagram pin or a screenshot, as a style to copy | **scene-prompt-writer** (reference mode), an element inventory, then a **recipe**: `facecard.py recipe new ... --character me@v1 --because "..."` and `facecard.py run <goal>@vN` | His head on another man's photo keeps that man's body (silhouette within 2%), about 15% of results were acceptable, and it is catfishing. The skill turns the pin into a structured scene with his own traits; the recipe freezes the method so every run sends the same request. |
 | No source photo, a scene described in words or a style template | scene-prompt-writer (template mode), then `gen --subject <name>` | Draws a new image. Everything is regenerated, so expect drift outside the face. |
 
 `gen --scene-image` now just runs `replicate`; the prompt text is ignored, because the photo is the scene. Leave it off for
@@ -26,22 +26,52 @@ someone else's photo. The subject's own photo is always redone with `replicate`:
 redrew the whole frame, changed the pose, clothes, background and physique, and dropped glasses (measured 2026-09-19/20).
 For someone else's photo, scene-prompt-writer's spec and its drift-five check exist to close exactly those gaps.
 
+## Consistency: recipes and staged runs (the user, 2026-10-07)
+
+Every goal picture is made from a **recipe** version (the frozen method: inputs + a locked request) through the **8 fixed stages** of
+`facecard.py run`, each leaving its evidence in the run folder and on one report page in `D:\FacecardReview`. The rules, the stages, the
+commands and where things live are in the repo's `AGENTS.md`: read it before generating. In short: change the method only with
+`recipe bump --because "<the user's words / the failed item>"`, prove a version with `run --dry-run`, debug with `facecard.py diff <runA> <runB>`.
+`gen --goal ...` still works for exploration (it runs as an ad-hoc recipe through the same stages); adopt a good run with `recipe import-run`.
+
+**The same man in every picture (the user, 2026-10-08):** every new recipe takes `--character me@vN` (`characters/me/`): the same face and body photos for every goal and a description read from them (AGENTS.md, "The same man in every picture"). Before it, 79 runs used 11 face sets, a January arms photo with fuller arms beside the slim September body photo, and a text that called his face leaner than his photos show. Stage 06 records his face-fullness and build measures against the character's band (record-only); checklist items 31 and 32 are judged on the stage-07 character sheet.
+
 ## Loop until perfect (the user, 2026-10-01: "when you already know exactly which one is failing, then why did you stop?")
 
-**Never stop at a failed attempt. A goal is finished only when a picture of it passes all 30 items of BEST_CHECKLIST.md (or the user accepts one with
+**Never stop at a failed attempt. A goal is finished only when a picture of it passes all 35 items of BEST_CHECKLIST.md (or the user accepts one with
 `best_check.py --user-approved`).** Knowing which items fail is the start of the next attempt, not a reason to report and wait. The loop, per goal and
 for all open goals at once (parallel processes, one per goal; `tools\goal_status.py --open` lists them and exits 1 while any is open):
 
-1. **Generate** (`gen --goal ... --replace-subject --inventory ...`, several samples; Flash and Pro both).
-2. **Audit every picture that passed the pose gate** against all 30 items at full zoom (`toolsudit_views.py`, `body_sheet.py`, the pose json numbers);
+0. **Ask what is wrong, in the user's own words, before optimising any number** (when a picture of the goal was rejected). Pin 5 cost about 10 attempts and 3,000
+   credits chasing the identity score when the complaint was lighting ("face seems lasso-ed in"); the best-ArcFace sample (0.73) was the rejected one. Record the
+   words in the ledger (`best_check.py --note`). `tools\goal_status.py --open --next` then shows, per open goal, the lint of its newest inventory, the model that
+   really passed the pose gate most and the canary command.
+1. **Freeze, prove, canary, production.**
+   - `tools\inventory_lint.py <inventory or recipe>` (free): errors on a missing photo to edit or more than 10 files; warns on a cropped goal with no FRAMING keep
+     line, a keep line saying "exactly as in the PHOTO TO EDIT" about the head or arms of the goal's own photo, a build item with no measure, a steeply bowed head
+     with no "deeper than the goal" line.
+   - **Freeze** the method: `facecard.py recipe new --goal ... --prompt ... --inventory ... --replace-subject --character me@v1 --samples 2 --because "..."` (or
+     `recipe bump <goal>@vN --<what changes> --because "..."`); **prove** it free with `facecard.py run <goal>@vN --dry-run` (stage 03: request = lock).
+   - **Canary = 2 samples on the production model** (`facecard.py run <goal>@vN --samples 2`), only for a NEW version. The pose gate passes about 25-35% of
+     samples, so one sample fails a good recipe about 70% of the time, and a Flash canary does not predict Pro (pin 6: Flash returned the pin man, Pro replaced
+     him). Scale up only after at least one pose pass.
+   - **Production** = more runs of the SAME version: `tools\wave.py <spec.json>` with `{"recipe": "<goal>@vN", "samples": 2, "repeat": N}` jobs (`--dry-run`
+     first; `--after-reset` or `--at HH:MM` to wait). `--face-refs @clean_studio` (or `@clean_profile_right`) in a bump selects a named reference set from
+     `facecard.json` for one goal; it is an A/B judged by the user's eye, never a global change, and the ArcFace pool (`refs`) is not touched.
+2. **Audit every picture that passed the pose gate** against all 35 items at full zoom (`tools\audit_views.py`, `body_sheet.py`, the pose json numbers);
    record it with `tools\best_check.py ... --fail ... --note "what was wrong" --right "what went right"`. A pass is exported automatically.
 3. **Diagnose** with `tools\goal_status.py`: it prints the items that failed most, what was already tried (model and inventory variant) and the fix the
    ledger's lessons attach to each failed item. Read the goal's section of `FEEDBACK_LEDGER.md` first: **never repeat a fix that already failed**.
-4. **Change only the request section that controls the failed item** (a new inventory variant `..._vN.json`; never edit the one that produced a result),
-   switch model when two variants on one model failed the same item, and go back to 1. Several variants of one goal run in parallel.
-5. **Pace by credits, never by giving up.** Check `tools\quota.py` before a wave and size the wave to the credits left (about 60-200 per image).
-   When the window is empty, schedule the next wave right after its reset (`.cache\waveN.sh` waits until the reset time, runs all open goals in
-   parallel, touches a done-file; arm a Monitor on it) and keep auditing in the meantime. Credits run out; the loop does not end.
+4. **Change only the request section that controls the failed item**, as a new recipe version: a new inventory variant `..._vN.json`, then
+   `recipe bump <goal>@vN --inventory <it> --because "<failed item + the user's words>"` (it prints exactly what changed in the request). Switch model when two
+   versions on one model failed the same item, and go back to 1. Several versions of one goal run in parallel; `facecard.py diff` compares their runs.
+5. **Pace by credits, never by giving up.** The credit guard (`credit_guard.py`, stage 04 of every run) does the sizing: before a run spends anything it reads a FRESH meter
+   (the cached reading lags: it once said 1,141 left when 96 were), subtracts what the other runs in flight have reserved (`.cache\inflight\<pid>.json`; 120 per Flash
+   image, 150 per Pro image (260 until 2026-10-08: both chat models now hand the picture to the same image tool), `credit_guard` in `facecard.json`) and waits until the images fit with a margin of 150. At most 4 generations run at once (a burst of 6
+   returned no image for 5 of them and was charged ~160 credits anyway). `--wait-max SECONDS` (default 21600) bounds the wait, `--no-wait` exits with code 3 and
+   generates nothing, `--no-guard` skips the check (use it only when the user said to). When the window is empty, `tools\wave.py <spec> --after-reset` waits for the
+   reset and starts all open goals in parallel (arm a Monitor on `.cache\wave_<tag>.done`); keep auditing in the meantime. Credits run out; the loop does not end.
+   A run's own credit total is exact only for a run that was alone: overlapping runs share the account-wide meter.
 
 **The only reasons to stop:** every goal is DONE; the user says stop; or a blocker only the user can clear (Gemini cookies expired: give the YOUR TURN
 vault block; a request Gemini refuses on every sample; a checklist item the user must rule on, such as identity in the 0.20-0.52 gray zone after at
@@ -54,7 +84,7 @@ least three Pro samples at different seeds, shown with the compare sheet). In al
 - **Hidden or bowed faces cannot be scored** (ArcFace 0.0-0.3 on a face that is his): judge hair, beard, jaw, nose against his references at zoom, report the number, pass item 21 only by eye, and flag it for the user to confirm.
 - **Parallel runs of the same goal** are safe now (unique run folders, atomic mkdir); give each run its own log tag.
 
-**The user's verdict on pin 5 and pin 6 (2026-10-01) and what it changed in the audit:** both pictures passed 30/30 by my eye and the user called both wrong. Cause, measured: (1) the hair and beard were the pin man's (long loose curls, patchy stubble) instead of his references' (tight curls, SHORT FADED SIDES with ear and scalp visible, a FULL DENSE beard); (2) pin 5's face was lit 1.7x brighter than the pin's (103 vs 61: in the pin the hair shades the whole upper face). A profile or bowed face cannot be scored by ArcFace, so these were passed by eye, loosely. From now on every audit runs `toolsudit_views.py <label> <goal> <render> <run folder>`: it puts the render's head beside ALL his reference heads (black and white when the goal is), and prints FACE LIGHT (render vs goal, limit 0.77-1.30): judge items 19 and 28 on that head row, hair and beard separately, and never pass them from the whole-picture view. Write his haircut and beard into every inventory as explicit geometry (tight curls ~6-8 cm on top, sides short and faded, ear and scalp visible; full dense beard from the sideburns along the whole jaw, neat edges), and for a goal whose face is shaded, name the shade as a keep line (the hair falls forward over the brow, the face is not brighter than the white tee).
+**The user's verdict on pin 5 and pin 6 (2026-10-01) and what it changed in the audit:** both pictures passed 30/30 by my eye and the user called both wrong. Cause, measured: (1) the hair and beard were the pin man's (long loose curls, patchy stubble) instead of his references' (tight curls, SHORT FADED SIDES with ear and scalp visible, a FULL DENSE beard); (2) pin 5's face was lit 1.7x brighter than the pin's (103 vs 61: in the pin the hair shades the whole upper face). A profile or bowed face cannot be scored by ArcFace, so these were passed by eye, loosely. From now on every audit runs `tools\audit_views.py <label> <goal> <render> <run folder>`: it puts the render's head beside ALL his reference heads (black and white when the goal is), and prints FACE LIGHT (render vs goal, limit 0.77-1.30) and FACE vs NECK (face brightness over neck brightness against the goal's, tolerance 0.12: the old pin 5 picture read 1.20 against the pin's 0.82, the "lasso-ed in" signature; `gen` computes the same numbers into `run.json` as `light` and ranks the pose-gate passers with the light in range first, never rejecting on it): judge items 19 and 28 on that head row, hair and beard separately, and never pass them from the whole-picture view. Write his haircut and beard into every inventory as explicit geometry (tight curls ~6-8 cm on top, sides short and faded, ear and scalp visible; full dense beard from the sideburns along the whole jaw, neat edges), and for a goal whose face is shaded, name the shade as a keep line (the hair falls forward over the brow, the face is not brighter than the white tee).
 
 **What the loop may never do to finish faster:** loosen a gate, a limit or a checklist item; call a picture best that failed an item; count a picture the
 pose gate passed only because the pin's own man came back unchanged (diff to the goal under about 10, face still the pin man's) as a result; skip the
@@ -316,15 +346,16 @@ The user rolled the code back to round 7 (commit `7fd3ebc`): attractiveness and 
 
 The rule that follows from the review: a rendered head is never a result; it is always merged into the complete picture, and only a complete picture that passes the gates can be `best`.
 
-## Scorer and pool (identity.py, scorer.py, landmarks.py, calibrate.py)
+## Scorer and pool (identity.py, scorer.py, landmarks.py)
 
 - Pool = every photo of the user (FaceCard_Originals + `.cache/super_favs`), derived files (mirrored, headless) excluded,
   near-duplicates of the photo being scored excluded (leave-one-out). Never add a mirrored copy: faces are not symmetric.
 - Score = mean of the 3 most similar pool photos (was: max over all, which one lucky photo could decide).
 - Embedding = ArcFace `w600k_r50` on an upscaled head crop aligned with FaceFusion's 2dfan4 68 landmarks.
 - Pose = landmark SHAPE distance. Yaw from a generic 3D model was measured unreliable (a frontal photo read +132 degrees).
-- `python calibrate.py` reprints all of the above from real photos and known-good/bad outputs. Re-run it after any
-  change to the pool or scorer.
+- `calibrate.py`, which reprinted these numbers from known-good/bad outputs, was archived on 2026-10-07 (its 22 run paths had gone stale):
+  `D:\FacecardArchive\cleanup-2026-10-07\calibrate.py`, or git history. Every staged run now records the identity rule and the gate limits it
+  applied (`01_method/env.json`), and `facecard.py run <recipe> --remeasure <run>` re-measures saved pictures for free.
 
 ## gen (from scratch) and restore
 
@@ -360,14 +391,17 @@ back-to-back, from a freshly reloaded tab.
 
 ## Models
 
-`facecard.py models` lists what the account can use (2026-09-20: 3.1 Pro `e6fa609c3fa255c0` pinned in
-`facecard.json`, 3.8 Flash, 3.5 Flash-Lite). Run it if a run fails with an unknown-model error.
+`facecard.py models` lists what the account can use (2026-10-08: 3.1 Pro `e6fa609c3fa255c0`, 3.8 Flash `56fdd199312815e2` = `facecard.json`
+`model`, 3.5 Flash-Lite). The chat model is all the library chooses; the image model is the app's (Nano Banana 2.1 for AI Pro since 2026-10-06, per
+Google; `tools\model_probe.py` finds the same `imagen_default` tool behind Flash and Pro). Flash is the default for new recipes and finals. Run it if a run fails with an unknown-model error.
 
 ## Ground rules
 
-- **The subject's own photo -> `replicate`. Anyone else's photo -> scene-prompt-writer, then `gen --subject <name>`.**
+- **The subject's own photo -> a `replicate/1` recipe (`recipe new --method replicate`). Anyone else's photo -> scene-prompt-writer, an inventory, then a Route G recipe (`recipe new --character me@v1` + `run`).**
 - **NEVER judge identity by eye.** Read and report the numbers, and show the compare sheets.
-- **NEVER feed generated images back into the reference set,** and never add a mirrored photo to it.
+- **NEVER feed generated images back into the reference set,** and never add a mirrored photo to it. The one exception is the user's own
+  request of 2026-10-10 (an approved ideal smile, head-angle references and a next-cut physique), under the guards in AGENTS.md "The
+  reference-set upgrade": nothing generated is a reference until the user approves it, and the real photos stay the identity pool and band.
 - **Never change a threshold quietly.** Thresholds live in `facecard.json`; changing one needs the user's approval.
 - From-scratch scenes follow scene-prompt-writer: the reference decides pose, light and expression; attractiveness levers
   fill only what the reference leaves open.

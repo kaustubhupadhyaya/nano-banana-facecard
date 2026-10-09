@@ -1,0 +1,184 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "v1_eyeband_send",
+ "version": 1,
+ "created": "2026-10-10T02:40:15",
+ "because": "the user, 2026-10-10: '_v1 - complete face perfect, except eyes, take eyes from v2_0r ... create this 3rd as said'. Objects-mode region edit of _v1's eye band with v2_0r's eyes as the reference; tools/region_edit.py pastes it back into v1_0r",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "v1_eyeband_send",
+  "path": ".cache/region_edits/pizza_v3_eyes/v1_eyeband_send.jpg",
+  "sha256": "9607bdeb7eada3a75b69c5e6b779eb24bb9513a77a58ac259750e13c229e8fef",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pizza_v3_eyes/v1_eyeband_send.jpg",
+   "prompt": ".cache/loop_prompts/pizza_v3_eyes_route.txt",
+   "inventory": ".cache/inventories/pizza_v3_eyes.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-09T20:55:39"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Close crop of his eyes and brows from his own finished picture (objects-mode region edit): only his eyes change, as the inventory says.",
+   "from": ".cache/loop_prompts/pizza_v3_eyes_route.txt",
+   "sha256": "2291d5a37a17bbe0d380ae52c024b887bc894749bb64f693218df4e1d84f6db5",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pizza_v3_eyes.json",
+   "sha256": "4fb3bf0f1af212adfb2945c08a3411c965eb8ac9c026eb6476c5492808a7e7bb",
+   "data": {
+    "mode": "objects",
+    "goal": ".cache/region_edits/pizza_v3_eyes/v1_eyeband_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pizza_v3_eyes/v1_eyeband_send.jpg",
+    "written": "2026-10-10, the user on the pizza results: '_v1 - complete face perfect, except eyes, take eyes from v2_0r (outputs/20261009_204403_goal-pin-783485666540141628/v2_0r.jpg). keep both images - create this 3rd as said and on approval of 3rd as best you can remove the 2'. The photo to edit is the eye band of _v1's source v1_0r (brows to cheekbones, box [238, 394, 480, 504] of 928x1142, sent 4x larger); the EYES image is v2_0r's eye band at the same eye distance. Only his eyes change; tools/region_edit.py pastes the band back into v1_0r, so the rest of the picture stays byte-identical.",
+    "refs": [
+     {
+      "key": "eyes",
+      "path": ".cache/region_edits/pizza_v3_eyes/v2_eyes_ref.jpg",
+      "label": "THE EYES: the same man's eyes in another photo of this same moment, at the same scale. Take from it only his eyes: the shape of his eyelids, the slight amused narrowing of a light smirk, where his eyes look (into the camera) and their catchlights. Nothing else from this image: not its brows, skin, hair, hand or light."
+     }
+    ],
+    "change": [
+     {
+      "item": "his eyes",
+      "goal": "his calm, open eyes looking at the camera",
+      "his": "his eyes exactly as in THE EYES image: the same eyelid shape and the same slight amused narrowing of a light smirk, looking into the camera with the same catchlights, at exactly the size and the position his eyes have in the PHOTO TO EDIT",
+      "ref": "eyes"
+     }
+    ],
+    "keep": [
+     "his eyebrows, the skin of his forehead, temples and cheeks, the top of his nose, the curls along the top edge, and the fingers and ring of his hand at picture-left, exactly as they are",
+     "the light, colour, grain and softness of the PHOTO TO EDIT",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "v2_eyes_ref.jpg",
+    "sha256": "1eda39b752b5d2d6b8b80e8c8d15ea43110982ac14dda32e9c332a1619f55a71",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pizza_v3_eyes/v2_eyes_ref.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "THE EYES: the same man's eyes in another photo of this same moment, at the same scale. Take from it only his eyes: the shape of his eyelids, the slight amused narrowing of a light smirk, where his eyes look (into the camera) and their catchlights. Nothing else from this image: not its brows, skin, hair, hand or light.",
+    "key": "eyes"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "v1_eyeband_send.jpg",
+    "sha256": "3c4b52ad625652fff475629a7ea944e3039e2a32f89a2cb67d574eb7f66915af",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pizza_v3_eyes/v1_eyeband_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is THE EYES: the same man's eyes in another photo of this same moment, at the same scale. Take from it only his eyes: the shape of his eyelids, the slight amused narrowing of a light smirk, where his eyes look (into the camera) and their catchlights. Nothing else from this image: not its brows, skin, hair, hand or light.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his eyes: the PHOTO TO EDIT shows his calm, open eyes looking at the camera; make it his eyes exactly as in THE EYES image: the same eyelid shape and the same slight amused narrowing of a light smirk, looking into the camera with the same catchlights, at exactly the size and the position his eyes have in the PHOTO TO EDIT (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his eyebrows, the skin of his forehead, temples and cheeks, the top of his nose, the curls along the top edge, and the fingers and ring of his hand at picture-left, exactly as they are.\n- the light, colour, grain and softness of the PHOTO TO EDIT.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "ca604c1ade741d6fcf6b92d32a2468259c16c21deb5896befc5a081f469f2170",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "1eda39b752b5d2d6b8b80e8c8d15ea43110982ac14dda32e9c332a1619f55a71",
+    "upload_name": "v2_eyes_ref.jpg",
+    "bytes": 72476,
+    "px": [
+     968,
+     443
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "3c4b52ad625652fff475629a7ea944e3039e2a32f89a2cb67d574eb7f66915af",
+    "upload_name": "v1_eyeband_send.jpg",
+    "bytes": 73574,
+    "px": [
+     968,
+     440
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "f9fa4426004a333e711b434449141a79f2ccb237c2c76c1a90ba788175212a6e"
+ }
+}
