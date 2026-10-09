@@ -1,0 +1,298 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666540141619",
+ "version": 6,
+ "created": "2026-10-09T20:56:58",
+ "because": "STAGE 2 of the two-stage plan: v5 v1_0r has him in the pin man's place and size (body checks PASS, torso x1.05); v6 edits that render and turns only his head and neck about 50 degrees toward picture-right with a natural smile, the user's request ('looking to right smiling, making slight side profile visible')",
+ "parent": "v5",
+ "origin": {
+  "kind": "bump",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666540141619",
+  "path": ".cache/pin_783485666540141619.jpg",
+  "sha256": "40ac1b7113d6b10ec285dc4320af8a58b3898c51a325a4c54ba19b475b76a2d3",
+  "pose": {
+   "path": ".cache/poses/pin_783485666540141619.json",
+   "sha256": "d006a3eb8545b6288f122adab133465efd5ce91c1a7b1894a044d65fd64e028f"
+  },
+  "layout": {
+   "path": ".cache/layouts/pin_783485666540141619.json",
+   "sha256": "91ad7cc0436aaf49330ccd9ce1ca43446af5f8efb18458e9c44cb03406f6e3ac"
+  },
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666540141619.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666540141619_route.txt",
+   "inventory": ".cache/inventories/pin_783485666540141619_v6.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "restore_background": true
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-09T20:55:39"
+  },
+  "samples": 1,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His head is turned about 60 degrees toward picture-right over his shoulder, smiling, a slight side profile of the right side of his face visible from behind.",
+   "from": ".cache/loop_prompts/pin_783485666540141619_route.txt",
+   "sha256": "d2f66189e60f3783211dbc04d72945afc5fcdf28abe058cf6554b6bb7496394b",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666540141619_v6.json",
+   "sha256": "73e77dd0dfdd0c72629e4626b40451f501387bdfc78331523380e3c1ba7560fd",
+   "data": {
+    "goal": ".cache/pin_783485666540141619.jpg",
+    "photo_to_edit": "outputs/20261009_205207_goal-pin-783485666540141619/v1_0r.jpg",
+    "written": "2026-10-09 STAGE 2 = v6. The photo to edit is the stage-1 render outputs/20261009_205207_goal-pin-783485666540141619/v1_0r.jpg (recipe v5): him already in the pin man's place and size (pose gate body PASS, torso x1.05, only the head position 0.050 over 0.04 because the head had begun to turn right), the screens, people and lanes copied back from the pin. The user's request for this pin: looking to the right, smiling, a slight side profile visible. v6 changes only his head and neck (the v2 wording, which turned the head well but let the whole body grow and move when it was the only edit).",
+    "refs": [],
+    "change": [
+     {
+      "item": "head turn and smile",
+      "goal": "his head facing down the lane away from the camera, only the back of his head, a sliver of beard at picture-right and the back of his neck showing",
+      "his": "his head and neck turned about 50 degrees toward picture-right, looking to the right over his right shoulder, with a relaxed natural smile: the camera still sees mostly the back of his head, and in a slight side profile the right side of his face shows past the ear: the cheekbone with the cheek lifted by the smile, the line of his dark beard along the jaw, the corner of his smiling mouth and the edge of his nose; his right ear shows with the short tapered hair above it. Only his head and neck turn: his shoulders, back, hips and legs stay turned away from the camera, square to the lane, exactly as the PHOTO TO EDIT's man has them, and his torso is not rotated toward the camera"
+     },
+     {
+      "item": "beard",
+      "goal": "only a sliver of his beard at the jaw",
+      "his": "his own beard exactly as in the FACE references"
+     }
+    ],
+    "keep": [
+     "his exact posture: walking away from the camera along the approach toward the lane, his torso and legs turned away from the camera, the weight on the foot at picture-left with the heel of the other foot lifted; the arm at picture-right hanging with the hand gripping a red-and-magenta marbled bowling ball against his thigh, a black-and-silver beaded bracelet on that wrist; the arm at picture-left hanging at his side with the hand relaxed and a black band bracelet on that wrist",
+     "the washed taupe-grey short-sleeve crew-neck tee with its boxy cut, and a thin chain at the back of his neck",
+     "the very baggy dark-indigo denim jeans with their wide folds at the hip, bunched at the ankles over the brown shoes",
+     "the background people exactly as in the PHOTO TO EDIT, in the same place, size and pose and no sharper than there: the one other person cut by the picture-left edge (a black tee, light-blue jeans and white sneakers, the face not visible); no person is added, removed or moved",
+     "the lettering exactly as in the PHOTO TO EDIT, with the same words, digits and typefaces: the three overhead score screens (the left one ending in 'Team 10' and 'Mummy', the middle one with the names Jeff, Oliver and Diana and 'Team 11' and 'Oliver', the right one with the names Flynn and Maisy and 'Flynn'), the scrolling line 'Simply scan the star to view our menu, ord...' cut off at the screens' edges, and the lane numbers 12, 13, 14 and 15; no other text, caption or logo anywhere in the picture",
+     "the whole bowling alley: the lanes of blond polished wood with dark gutters and the pins glowing in neon purple and blue at the far end, the white star decals on the black wall and on the curved arches at picture-right, the black ball-return hood at the bottom-right with a red ball in it, the wooden approach floor with its yellow dots",
+     "the dark purple-blue ambient light with warm golden light on the lanes, and the soft, slightly blurred phone-photo look, his size and position in the frame and the camera distance",
+     "the FRAMING and his SIZE exactly: his body fills the same part of the frame as the man in the PHOTO TO EDIT: his shoulders at about 31 percent of the frame height, his belt at about 50 percent and his heels at about 80 percent, his body between 11 and 38 percent of the frame width; he is not larger, not closer and not further right than that man, and the picture is never zoomed in or out or re-cropped",
+     "everything below his neck exactly as in the PHOTO TO EDIT, pixel for pixel: his shoulders, back, both arms and hands, the red ball, the tee, the jeans, the shoes, where he stands and his size in the frame; only his head and neck move"
+    ]
+   }
+  },
+  "layout": {
+   "person": [
+    178,
+    110,
+    894,
+    381
+   ],
+   "head": [
+    181,
+    215,
+    274,
+    321
+   ],
+   "objects": [
+    {
+     "name": "bowling ball",
+     "box": [
+      566,
+      287,
+      646,
+      396
+     ]
+    }
+   ]
+  },
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": false
+   },
+   "angle_routed_would_have_been": [
+    "IMG_4861_fav_right.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: his true build"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "v1_0r.jpg",
+    "sha256": "5c914a27d82f10be6f28dde652772bdff61b7ab5fbbc078e58c2ff84bf44e7fd",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/outputs/20261009_205207_goal-pin-783485666540141619/v1_0r.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImage 4 is the BODY reference — his true build and proportion.\nImage 5 is the PHOTO TO EDIT.\n\nEdit image 5, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-3), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: Match image 4 precisely. A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner. His whole body is his own, from image 4: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- head turn and smile: the PHOTO TO EDIT shows his head facing down the lane away from the camera, only the back of his head, a sliver of beard at picture-right and the back of his neck showing; make it his head and neck turned about 50 degrees toward picture-right, looking to the right over his right shoulder, with a relaxed natural smile: the camera still sees mostly the back of his head, and in a slight side profile the right side of his face shows past the ear: the cheekbone with the cheek lifted by the smile, the line of his dark beard along the jaw, the corner of his smiling mouth and the edge of his nose; his right ear shows with the short tapered hair above it. Only his head and neck turn: his shoulders, back, hips and legs stay turned away from the camera, square to the lane, exactly as the PHOTO TO EDIT's man has them, and his torso is not rotated toward the camera.\n- beard: the PHOTO TO EDIT shows only a sliver of his beard at the jaw; make it his own beard exactly as in the FACE references (images 1-3): His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his exact posture: walking away from the camera along the approach toward the lane, his torso and legs turned away from the camera, the weight on the foot at picture-left with the heel of the other foot lifted; the arm at picture-right hanging with the hand gripping a red-and-magenta marbled bowling ball against his thigh, a black-and-silver beaded bracelet on that wrist; the arm at picture-left hanging at his side with the hand relaxed and a black band bracelet on that wrist.\n- the washed taupe-grey short-sleeve crew-neck tee with its boxy cut, and a thin chain at the back of his neck.\n- the very baggy dark-indigo denim jeans with their wide folds at the hip, bunched at the ankles over the brown shoes.\n- the background people exactly as in the PHOTO TO EDIT, in the same place, size and pose and no sharper than there: the one other person cut by the picture-left edge (a black tee, light-blue jeans and white sneakers, the face not visible); no person is added, removed or moved.\n- the lettering exactly as in the PHOTO TO EDIT, with the same words, digits and typefaces: the three overhead score screens (the left one ending in 'Team 10' and 'Mummy', the middle one with the names Jeff, Oliver and Diana and 'Team 11' and 'Oliver', the right one with the names Flynn and Maisy and 'Flynn'), the scrolling line 'Simply scan the star to view our menu, ord...' cut off at the screens' edges, and the lane numbers 12, 13, 14 and 15; no other text, caption or logo anywhere in the picture.\n- the whole bowling alley: the lanes of blond polished wood with dark gutters and the pins glowing in neon purple and blue at the far end, the white star decals on the black wall and on the curved arches at picture-right, the black ball-return hood at the bottom-right with a red ball in it, the wooden approach floor with its yellow dots.\n- the dark purple-blue ambient light with warm golden light on the lanes, and the soft, slightly blurred phone-photo look, his size and position in the frame and the camera distance.\n- the FRAMING and his SIZE exactly: his body fills the same part of the frame as the man in the PHOTO TO EDIT: his shoulders at about 31 percent of the frame height, his belt at about 50 percent and his heels at about 80 percent, his body between 11 and 38 percent of the frame width; he is not larger, not closer and not further right than that man, and the picture is never zoomed in or out or re-cropped.\n- everything below his neck exactly as in the PHOTO TO EDIT, pixel for pixel: his shoulders, back, both arms and hands, the red ball, the tee, the jeans, the shoes, where he stands and his size in the frame; only his head and neck move.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "bb1132f1c2fb24a06aef52dd1463e1fe290fea1aa6946cfc3b1b7d892d18fb62",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "5c914a27d82f10be6f28dde652772bdff61b7ab5fbbc078e58c2ff84bf44e7fd",
+    "upload_name": "v1_0r.jpg",
+    "bytes": 265273,
+    "px": [
+     896,
+     1200
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "7eac7865ae11e6cdb7bb17a10b1c1fc37d6693e24d36d6f96659f95ca37501ea"
+ }
+}
