@@ -1,0 +1,312 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "IMG_3929_half",
+ "version": 1,
+ "created": "2026-10-10T11:44:52",
+ "because": "Ideal smile E3 (laughing, looking down), again from the user's full original: IMG_3929.HEIC from the google-2 Takeout (the user, 2026-10-10: 'you can get it yourself from the Google Takeout'), at half size (1512x2016) so the face detector finds the big face. IMG_3929_Original@v1 (a tight crop of it) went 0 of 6: the head filled 84% of its crop and every return was re-composed (head 1.15-1.16, moved 0.18-0.32, background redrawn); --loose-crop frames the head at 62% as zone expression does",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "freeze_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\replicate_freeze\\20261010_114322_IMG_3929_half",
+  "notices": []
+ },
+ "goal": {
+  "key": "IMG_3929_half",
+  "path": "D:/FacecardData/smile_study/originals/IMG_3929_half.jpg",
+  "sha256": "2882bbc66eeec6df1fce41d5a74ebde414b6f64ff08a58f5e3d31437ce77599e",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "replicate",
+  "compiler": "replicate/1",
+  "subject": "me",
+  "args": {
+   "goal": "D:/FacecardData/smile_study/originals/IMG_3929_half.jpg",
+   "zone": "face",
+   "source": "own",
+   "glasses": "same",
+   "look": "any",
+   "expression": "same",
+   "character": "me@v2",
+   "current_look": true,
+   "from_picture": null,
+   "rank": "smile",
+   "loose_crop": true
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "text_models": [
+   "56fdd199312815e2",
+   "e6fa609c3fa255c0"
+  ],
+  "samples": 2,
+  "max_attempts": 6,
+  "stop": {
+   "after_pose_fails": 0,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {},
+  "own": true,
+  "own_score": 0.594,
+  "source_kind": "own",
+  "duplicates_excluded": [],
+  "zone": "face",
+  "kind": "face",
+  "expression": "same",
+  "glasses": "same",
+  "look": "any",
+  "far": false,
+  "face_share": null,
+  "crop": [
+   18,
+   86,
+   1128,
+   1128
+  ],
+  "crop_before_head_fit": [
+   191,
+   236,
+   948,
+   948
+  ],
+  "head_boxes": [
+   [
+    469,
+    512,
+    392,
+    395
+   ]
+  ],
+  "copies_left_unedited": [],
+  "main_box": [
+   469,
+   512,
+   392,
+   395
+  ],
+  "main_in_crop": [
+   451,
+   426,
+   392,
+   395
+  ],
+  "source_size": [
+   1512,
+   2016
+  ],
+  "source_face": {
+   "box": [
+    475,
+    440,
+    364,
+    390
+   ],
+   "score": 0.581,
+   "face_w": 392
+  },
+  "readings": {
+   "head_box": {
+    "prompt_sha256": "c8f22d67b9e1aa5ea7ed6a2536464167daa4ac32bc58376f03b6bd2426d541b9",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "box": [
+     305,
+     221,
+     859,
+     920
+    ],
+    "skipped": null
+   },
+   "describe": {
+    "prompt_sha256": "d14a6c159796543406a3bc171ab3cb99b83682f24921905cf2efc8043928c8a3",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "file": "photo_to_edit.png",
+    "reply": {
+     "head_turn": "turned about 45 to 50 degrees to the left of the picture (three-quarters view)",
+     "head_tilt": "chin is noticeably dropped downward, with a slight tilt toward his left shoulder",
+     "gaze": "looking downward and squinting/nearly closed",
+     "expression": "smiling broadly with teeth showing slightly, eyes crinkled and almost closed in a laugh or squint, relaxed brows",
+     "glasses": "none",
+     "hair": "thick, curly/wavy dark black hair, short on the sides and fuller on top with a few strands resting on the forehead",
+     "light": "diffused natural daylight coming primarily from above and slightly to the right, neutral cool-to-ambient cast, moderately soft and bright with gentle highlights on the forehead and bridge of the nose",
+     "face_exposure": "similar exposure to the background, skin appears naturally smooth with subtle real-life texture and minor blemishes typical of a phone portrait",
+     "reflection_present": false,
+     "reflection_where": "",
+     "other_people": false
+    }
+   }
+  },
+  "attractiveness": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
+  "thresholds": {
+   "hard_reject": 0.2,
+   "accept": 0.52,
+   "own_min": 0.4,
+   "approved": true
+  },
+  "gates": {
+   "light_de_max": 14.0,
+   "size_own": [
+    0.94,
+    1.1
+   ],
+   "size_foreign": [
+    0.94,
+    1.04
+   ],
+   "light_de_max_foreign": 20.0,
+   "unchanged_gt_sim": 0.9,
+   "neck_gap_max": 10.0,
+   "rescue_attempts": 3,
+   "sharp_max": 6.0
+  },
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e"
+  },
+  "face_choice": {
+   "decided_by": "character me@v2",
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg",
+    "IMG_6863.jpg"
+   ],
+   "count": 4
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "face_front.jpg",
+    "sha256": "e2106185088b395632868bb47c93463cd00a5810cceb578f76da5bcec5b4de9d",
+    "from": "IMG_6858.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "face_three_quarter_left.jpg",
+    "sha256": "bb9d1c692760e1c9a420059bfa6b6cea8d685976b285613d659c3398c4dbe995",
+    "from": "IMG_6868.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "face_three_quarter_right.jpg",
+    "sha256": "b56638a1789bb32dc74afb95c417cf2d7db96ed6fa28c52ce3cc677669382819",
+    "from": "IMG_6861.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "face_profile.jpg",
+    "sha256": "9611caa7ac60c0c5ad28780b5214c4a6c25ed03fed80da7c64d565b8444cc808",
+    "from": "IMG_6863.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: profile"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "photo_to_edit.png",
+    "sha256": "9fbc116cd10a393bafa3018d3b0c9508b1d6556e947e438fd8a435b9aaaf4840",
+    "from": "D:/FacecardData/smile_study/originals/IMG_3929_half.jpg",
+    "prep": "crop [18, 86, 1128, 1128] of the 1512x2016 original, long side 1024 px",
+    "why": "the crop of his photo that is edited and pasted back into the untouched original"
+   }
+  ],
+  "rank": "smile",
+  "hair_note": "His hair is his CURRENT cut, from the reference photos, not the cut of the man in the last image: dense tight black curls on top, the sides above and in front of his ears tapered short and close to the scalp so that his ears and temples show, and the curls longer at the back toward the nape. So the hair outline changes at the sides; on top it stays within the size it has in the last image.",
+  "current_look": true,
+  "face_note": "His face is his CURRENT face from the reference photos: lean, with low facial fat, never fuller than in the reference photos. Only his full dense beard may make his jaw outline a little wider than in the last image; the rest of his head keeps its size."
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "replicate/1",
+   "template_sha256": "5f7be3521647c9a0d4ffe504735fbe869e94682b989e302f41ef60dba047d4da",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "The first 4 images are photos of the same man: the identity reference. The last image is the photo to edit.\n\nEdit the last image so that the man in it has this exact man's face: his face structure, jawline, nose, eyes, brows, lips, skin tone and beard exactly as in the reference photos. The man in the last image is only a look-alike: do not keep his face, render this man's own face from the reference photos in its place. Redraw his whole head as one, the hair included: his hair, beard and moustache exactly as in the reference photos (his own tight curly black hair), so that hair, face, ears and neck belong together like one real photograph. If the man in the last image wears glasses, he keeps wearing the same glasses. Give him exactly the expression of the man in the last image: the same mouth, eyes and brows at the same strength, but natural and relaxed on his face, never tense or forced.\n\nThis is what the last image shows before the edit. The head angle, gaze, glasses and light must stay exactly as they are:\n- head: turned about 45 to 50 degrees to the left of the picture (three-quarters view)\n- chin: chin is noticeably dropped downward, with a slight tilt toward his left shoulder\n- eyes: looking downward and squinting/nearly closed\n- glasses: none\n- hair: thick, curly/wavy dark black hair, short on the sides and fuller on top with a few strands resting on the forehead\n- light on his face: diffused natural daylight coming primarily from above and slightly to the right, neutral cool-to-ambient cast, moderately soft and bright with gentle highlights on the forehead and bridge of the nose\n- how bright his face is: similar exposure to the background, skin appears naturally smooth with subtle real-life texture and minor blemishes typical of a phone portrait\n\nKeep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it belongs in the picture like a real phone photo and not a studio portrait.\nKeep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.\n\nHis hair is his CURRENT cut, from the reference photos, not the cut of the man in the last image: dense tight black curls on top, the sides above and in front of his ears tapered short and close to the scalp so that his ears and temples show, and the curls longer at the back toward the nape. So the hair outline changes at the sides; on top it stays within the size it has in the last image.\n\nHis face is his CURRENT face from the reference photos: lean, with low facial fat, never fuller than in the reference photos. Only his full dense beard may make his jaw outline a little wider than in the last image; the rest of his head keeps its size.",
+  "prompt_sha256": "f77e12f188047172313cf85232b16546d5f238d0d541e6cda40f7d1b5f93f4a7",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "e2106185088b395632868bb47c93463cd00a5810cceb578f76da5bcec5b4de9d",
+    "upload_name": "face_front.jpg",
+    "bytes": 151235,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "bb9d1c692760e1c9a420059bfa6b6cea8d685976b285613d659c3398c4dbe995",
+    "upload_name": "face_three_quarter_left.jpg",
+    "bytes": 133701,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "b56638a1789bb32dc74afb95c417cf2d7db96ed6fa28c52ce3cc677669382819",
+    "upload_name": "face_three_quarter_right.jpg",
+    "bytes": 134170,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "9611caa7ac60c0c5ad28780b5214c4a6c25ed03fed80da7c64d565b8444cc808",
+    "upload_name": "face_profile.jpg",
+    "bytes": 186432,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "9fbc116cd10a393bafa3018d3b0c9508b1d6556e947e438fd8a435b9aaaf4840",
+    "upload_name": "photo_to_edit.png",
+    "bytes": 1327089,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "f4a01b383df6d29cb1dab15589de3763f8a50a0d3c1f81346fbaafe2191fa645"
+ }
+}

@@ -1,0 +1,194 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "v2_beard_send",
+ "version": 5,
+ "created": "2026-10-10T11:38:55",
+ "because": "the user, 2026-10-10: 'V2 is perfect. V2 just has a little more beard than what I would expect. Let's try to fix that, and the rest of everything in V2 is perfect.' Objects-mode region edit of v2_0r's head (run 20261009_204403) with his own beard (his_beard.jpg) as the reference; tools/region_edit.py pastes back only below a line under his eyes",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "v2_beard_send",
+  "path": ".cache/region_edits/pizza_v4_beard/v2_beard_send.jpg",
+  "sha256": "f284e5f86067a91372a706ee957d64d844907cc925509894042c3f3af63892d5",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pizza_v4_beard/v2_beard_send.jpg",
+   "prompt": ".cache/loop_prompts/pizza_v4_beard_route.txt",
+   "inventory": ".cache/inventories/pizza_v4_beard.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T09:27:10"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Close crop of his head, hand and collar from his own finished picture (objects-mode region edit): only his beard changes, as the inventory says.",
+   "from": ".cache/loop_prompts/pizza_v4_beard_route.txt",
+   "sha256": "a0d9792b7ad661b9686d41e276a2ad2d024a0aab15497d3cbbb19484338ecfb9",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pizza_v4_beard.json",
+   "sha256": "6cf6a4121bffd1fa6aa7922d7c93f8636154a3b4d02d22bf3fd1abd01ce43cbe",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pizza_v4_beard/v2_beard_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pizza_v4_beard/v2_beard_send.jpg",
+    "written": "2026-10-10, the user on the pizza results: 'V2 is perfect. V2 just has a little more beard than what I would expect. Let's try to fix that, and the rest of everything in V2 is perfect. It was a misdiagnosis from my end on the first read of V1 and V2.' V2 = v2_0r of run 20261009_204403. The photo to edit is v2_0r's head, hand and collar (box [164, 272, 580, 688] of 928x1142, sent 2.46x larger); THE BEARD is his_beard.jpg (IMG_6858's lower face, his current beard). Only his beard changes; tools/region_edit.py pastes back only the part below a line 0.25 eye distances under his eyes, so his eyes and everything above stay v2_0r's own pixels.",
+    "refs": [
+     {
+      "key": "beard",
+      "path": ".cache/inventories/pin_refs/his_beard.jpg",
+      "label": "THE BEARD: this same man's own beard as he keeps it now, from his front photo. Take from it only how his beard grows: short and sparse on his upper cheeks with skin showing through, the cheek line low, full on his jaw and his chin, and a thin moustache. Nothing else from this image: not its light, angle, lips, skin colour, neck or chain."
+     }
+    ],
+    "change": [
+     {
+      "item": "his beard and moustache",
+      "goal": "his full, dark beard and moustache",
+      "his": "his own beard as in THE BEARD image, a little less dense than in the PHOTO TO EDIT: on his upper cheeks shorter and sparser, with skin showing through and the cheek line lower; still full and dark along his jaw and on his chin; his moustache a little thinner, as in THE BEARD image. The same black colour and the same length on his chin, a real beard of this man in this light and at this angle",
+      "ref": "beard"
+     }
+    ],
+    "keep": [
+     "his eyes, his lower eyelids and the skin just under them, exactly as they are",
+     "his lips and his light smirk exactly: closed lips, the corner at picture-right slightly lifted",
+     "his nose, his skin tone and the skin of his cheeks",
+     "his hand at picture-left with its fingers and ring, his curls, the collar and zip of his navy sweater and the window behind him, exactly as they are",
+     "the light, colour, grain and softness of the PHOTO TO EDIT",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "three_quarter_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.01",
+   "measured": {
+    "detected": true,
+    "yaw": -8.2,
+    "pitch": -8.8,
+    "roll": -28.3,
+    "side": "frontal",
+    "score": 0.8,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_beard.jpg",
+    "sha256": "d6a8d92211ec6ef9d26adf5c6e587a79c98ae2ff6f14f512ba4f2af1e51e0299",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/inventories/pin_refs/his_beard.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "THE BEARD: this same man's own beard as he keeps it now, from his front photo. Take from it only how his beard grows: short and sparse on his upper cheeks with skin showing through, the cheek line low, full on his jaw and his chin, and a thin moustache. Nothing else from this image: not its light, angle, lips, skin colour, neck or chain.",
+    "key": "beard"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "v2_beard_send.jpg",
+    "sha256": "93ec3a3997a3d938485bad6405a706b0e1c05ce03b8d64f264650d342a72836a",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pizza_v4_beard/v2_beard_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is THE BEARD: this same man's own beard as he keeps it now, from his front photo. Take from it only how his beard grows: short and sparse on his upper cheeks with skin showing through, the cheek line low, full on his jaw and his chin, and a thin moustache. Nothing else from this image: not its light, angle, lips, skin colour, neck or chain.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his beard and moustache: the PHOTO TO EDIT shows his full, dark beard and moustache; make it his own beard as in THE BEARD image, a little less dense than in the PHOTO TO EDIT: on his upper cheeks shorter and sparser, with skin showing through and the cheek line lower; still full and dark along his jaw and on his chin; his moustache a little thinner, as in THE BEARD image. The same black colour and the same length on his chin, a real beard of this man in this light and at this angle (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his eyes, his lower eyelids and the skin just under them, exactly as they are.\n- his lips and his light smirk exactly: closed lips, the corner at picture-right slightly lifted.\n- his nose, his skin tone and the skin of his cheeks.\n- his hand at picture-left with its fingers and ring, his curls, the collar and zip of his navy sweater and the window behind him, exactly as they are.\n- the light, colour, grain and softness of the PHOTO TO EDIT.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "7e1fbfb615cc106915a7103e0f5ca4616366dbbefa229374769ccc43f4155289",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "d6a8d92211ec6ef9d26adf5c6e587a79c98ae2ff6f14f512ba4f2af1e51e0299",
+    "upload_name": "his_beard.jpg",
+    "bytes": 160273,
+    "px": [
+     707,
+     639
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "93ec3a3997a3d938485bad6405a706b0e1c05ce03b8d64f264650d342a72836a",
+    "upload_name": "v2_beard_send.jpg",
+    "bytes": 251976,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "98f0af689f9046c92753ddf853d77ba8dcec372faeac2bb386216b2d6c9743c7"
+ }
+}
