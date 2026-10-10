@@ -1,0 +1,192 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14s2_send",
+ "version": 1,
+ "created": "2026-10-11T04:21:25",
+ "because": "pin 14 stage 2 of 2 (FAILURE_LOG F11, F20): stage 1 v1_0r holds the pin's framing; only the scene behind him becomes the Gokarna beach trek (the user's location links), pasted back outside his outline",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14s2_send",
+  "path": ".cache/region_edits/pin14_s2/pin14s2_send.jpg",
+  "sha256": "a0301cac9cead100de25ee6c5b46dbab1f4d083f329bc67b6bad8a9e54cdd208",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_s2/pin14s2_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14s2_background_route.txt",
+   "inventory": ".cache/inventories/pin14s2_background.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-11T04:03:52"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "The scene behind a shirtless man in a backward maroon cap on a clifftop path: the Gokarna beach trek on the Arabian Sea coast, red laterite slopes, a palm-lined beach below, the open sea and a clear blue sky. Vertical 3:4 frame.",
+   "from": ".cache/loop_prompts/pin14s2_background_route.txt",
+   "sha256": "0bf04bb2ad82005bca98f22559a8ec18c9c3bc584cdbb03bed8693329045e335",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14s2_background.json",
+   "sha256": "587b7d046457552604823e5c870af5d1101e6a4e6778fa9db8773bd22c84a535",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_s2/pin14s2_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_s2/pin14s2_send.jpg",
+    "written": "2026-10-11 04:30, pin 14 stage 2 of 2 (FAILURE_LOG F11, F20): stage 1 (v2 v1_0r, run 20261011_033245) holds the pin's framing; this edit turns only the scene behind him into the Gokarna beach trek, the user's location links (bmcindia Instagram post DDXVTAVyqOk, the Togedr Facebook photo; not readable without a login, so written from the cliff path between Kudle and Om beach, as in v1). tools/region_edit.py pastes back only the background outside his outline (the restore's own person mask, 4 px into its edge).",
+    "refs": [],
+    "change": [
+     {
+      "item": "the place",
+      "goal": "a mountain coast: a steep green mountainside, a road winding along the shore and the open ocean",
+      "his": "the Gokarna beach trek on the Arabian Sea coast of Karnataka, India, seen from its cliff path above the beaches between Kudle beach and Om beach: everything behind and around him becomes this place, as the next items say, while the composition, the horizon and the light stay as they are"
+     },
+     {
+      "item": "the hillside at picture-left",
+      "goal": "a steep mountainside rising to the left edge, dark green with dense trees and grey-green scrub, with shaded gullies",
+      "his": "a steep Gokarna headland with the same outline and ridge line: rust-red laterite soil and pitted red-brown laterite rock showing through dry golden grass and low green scrub, with a few small bushy trees in its folds"
+     },
+     {
+      "item": "the coast and the sea at picture-right",
+      "goal": "an ocean coast: green-brown slopes falling steeply to the water, small rocks offshore, white surf along a narrow shore and distant headlands at the horizon",
+      "his": "the Gokarna coast: the deep-blue Arabian Sea out to the horizon, turquoise-green over the shallows of the bay, dark grey-black rock outcrops at the water's edge with white surf breaking on them, and further along the coast the next headlands of red-brown laterite cliffs with green scrub on top, paler with distance"
+     },
+     {
+      "item": "the road",
+      "goal": "a grey two-lane road winding along the slope above the shore, from beside his arm at picture-right down to the bottom-right corner",
+      "his": "the beach trek's own narrow footpath of red earth, following the same winding line down the slope to the beach, with dry grass on both sides of it"
+     },
+     {
+      "item": "the beach at the bottom-right",
+      "goal": "a narrow strip of grey-beige sand below the road, with a single dark tree and white surf",
+      "his": "a curving bay of pale golden sand, with gentle white surf at the water's edge and a dense belt of tall coconut palms along the back of the beach"
+     },
+     {
+      "item": "the ground he stands on",
+      "goal": "light grey-brown rocky soil with gravel, dry twigs and small grey-green dry shrubs across the bottom of the frame",
+      "his": "the cliff path's rust-red laterite soil and loose red gravel with pitted laterite stones, dry golden grass tufts, dry twigs and small dry shrubs across the bottom of the frame"
+     }
+    ],
+    "keep": [
+     "the man exactly as he is, pixel for pixel: his head, backward maroon cap, face, beard, curls, ear, chain with its pendant, janeu, torso, arms, hands, the white waistband strip and his faded black jeans, his posture, his size and his position in the frame",
+     "the FRAMING exactly: he stands a little left of centre, his body between about 22 and 59 percent of the frame width, the top of his cap at about 45 percent of the frame height, his jaw at about 58 percent, his shoulders at about 61 percent, his elbows at about 76 percent and his hands at about 87 percent, with the bottom edge cutting across his thighs; he is never re-centred, the picture is never zoomed in or out and the crop never changes",
+     "the composition of the scene behind him: the slope rising to the left edge at picture-left, its ridge line running down from about a third of the frame height at the left edge to just behind his cap; the sea filling picture-right from behind his head to the right edge; the coast curving from behind his head down to the bottom-right corner; the straight, level horizon at about 53 percent of the frame height, at the height of his eyes",
+     "the clear, cloudless deep-blue sky over the top half of the frame, darkest at the top edge and paler toward the horizon",
+     "the tall dry grass with pale, feathery beige plumes at the bottom-left, in the same place, size and shape, lit by the sun",
+     "the bright, hard midday sunlight from high up in front of him and a little from picture-left: bright highlights on his chest, stomach, shoulders and the fronts of his arms, short crisp shadows under each muscle, the side of his turned face in light shade, and the same sun on the new slopes, rocks, beach and sea",
+     "no person, boat, building, sign or text anywhere in the new scene; the slopes, the footpath, the beach and the sea stay empty",
+     "the crisp, natural-colour phone photograph: the camera at about his eye height and about two metres away, with a phone's normal wide lens, everything sharp from him to the horizon, rich saturated blue in the sky and the sea, and fine phone grain"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.42",
+   "measured": {
+    "detected": true,
+    "yaw": -39.3,
+    "pitch": -41.2,
+    "roll": 46.1,
+    "side": "picture-right",
+    "score": 0.8,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin14s2_send.jpg",
+    "sha256": "58480c5a5a43d1ea35c08adf8d6c3d5deb1109d3c01ae2b899520d3dd5f870fa",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_s2/pin14s2_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the place: the PHOTO TO EDIT shows a mountain coast: a steep green mountainside, a road winding along the shore and the open ocean; make it the Gokarna beach trek on the Arabian Sea coast of Karnataka, India, seen from its cliff path above the beaches between Kudle beach and Om beach: everything behind and around him becomes this place, as the next items say, while the composition, the horizon and the light stay as they are.\n- the hillside at picture-left: the PHOTO TO EDIT shows a steep mountainside rising to the left edge, dark green with dense trees and grey-green scrub, with shaded gullies; make it a steep Gokarna headland with the same outline and ridge line: rust-red laterite soil and pitted red-brown laterite rock showing through dry golden grass and low green scrub, with a few small bushy trees in its folds.\n- the coast and the sea at picture-right: the PHOTO TO EDIT shows an ocean coast: green-brown slopes falling steeply to the water, small rocks offshore, white surf along a narrow shore and distant headlands at the horizon; make it the Gokarna coast: the deep-blue Arabian Sea out to the horizon, turquoise-green over the shallows of the bay, dark grey-black rock outcrops at the water's edge with white surf breaking on them, and further along the coast the next headlands of red-brown laterite cliffs with green scrub on top, paler with distance.\n- the road: the PHOTO TO EDIT shows a grey two-lane road winding along the slope above the shore, from beside his arm at picture-right down to the bottom-right corner; make it the beach trek's own narrow footpath of red earth, following the same winding line down the slope to the beach, with dry grass on both sides of it.\n- the beach at the bottom-right: the PHOTO TO EDIT shows a narrow strip of grey-beige sand below the road, with a single dark tree and white surf; make it a curving bay of pale golden sand, with gentle white surf at the water's edge and a dense belt of tall coconut palms along the back of the beach.\n- the ground he stands on: the PHOTO TO EDIT shows light grey-brown rocky soil with gravel, dry twigs and small grey-green dry shrubs across the bottom of the frame; make it the cliff path's rust-red laterite soil and loose red gravel with pitted laterite stones, dry golden grass tufts, dry twigs and small dry shrubs across the bottom of the frame.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the man exactly as he is, pixel for pixel: his head, backward maroon cap, face, beard, curls, ear, chain with its pendant, janeu, torso, arms, hands, the white waistband strip and his faded black jeans, his posture, his size and his position in the frame.\n- the FRAMING exactly: he stands a little left of centre, his body between about 22 and 59 percent of the frame width, the top of his cap at about 45 percent of the frame height, his jaw at about 58 percent, his shoulders at about 61 percent, his elbows at about 76 percent and his hands at about 87 percent, with the bottom edge cutting across his thighs; he is never re-centred, the picture is never zoomed in or out and the crop never changes.\n- the composition of the scene behind him: the slope rising to the left edge at picture-left, its ridge line running down from about a third of the frame height at the left edge to just behind his cap; the sea filling picture-right from behind his head to the right edge; the coast curving from behind his head down to the bottom-right corner; the straight, level horizon at about 53 percent of the frame height, at the height of his eyes.\n- the clear, cloudless deep-blue sky over the top half of the frame, darkest at the top edge and paler toward the horizon.\n- the tall dry grass with pale, feathery beige plumes at the bottom-left, in the same place, size and shape, lit by the sun.\n- the bright, hard midday sunlight from high up in front of him and a little from picture-left: bright highlights on his chest, stomach, shoulders and the fronts of his arms, short crisp shadows under each muscle, the side of his turned face in light shade, and the same sun on the new slopes, rocks, beach and sea.\n- no person, boat, building, sign or text anywhere in the new scene; the slopes, the footpath, the beach and the sea stay empty.\n- the crisp, natural-colour phone photograph: the camera at about his eye height and about two metres away, with a phone's normal wide lens, everything sharp from him to the horizon, rich saturated blue in the sky and the sea, and fine phone grain.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "bda4ae859d5c5ef3c0e2e2f4526736362340b7687697a070385b99bf353f4114",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "58480c5a5a43d1ea35c08adf8d6c3d5deb1109d3c01ae2b899520d3dd5f870fa",
+    "upload_name": "pin14s2_send.jpg",
+    "bytes": 300952,
+    "px": [
+     896,
+     1200
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "773a415735515f1aa9b1f7c4375ca27f69e460ab2ffff8858aa16d6999560ac3"
+ }
+}
