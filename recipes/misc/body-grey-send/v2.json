@@ -1,0 +1,273 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "body_grey_send",
+ "version": 2,
+ "created": "2026-10-10T16:37:42",
+ "because": "physique round 2, full grey-out again (the user's choice): round 1 kept the waist fat (+1%), shrank the arms (-2%), lost both veins and dropped the janeu ('not an earphone wire ... the holy thread that Brahmins wear, called jenu'); now three of his side-lit 2026-10-10 photos are references for his real definition, arm size and veins, the waist is asked noticeably leaner, the arms never thinner, the janeu drawn where it runs",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "body_grey_send",
+  "path": ".cache/region_edits/physique_front_a/body_grey_send.jpg",
+  "sha256": "69571f5b69787b49ac0acd8b9f2497deb1186818be199fca13500a8c8d228d31",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/physique_front_a/body_grey_send.jpg",
+   "prompt": ".cache/loop_prompts/physique_front_a_route.txt",
+   "inventory": ".cache/inventories/physique_front_a2.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T13:21:19"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Close crop of his own full-length front photo with his torso and upper arms painted grey (objects-mode region edit): only the grey area is redrawn, as the inventory says.",
+   "from": ".cache/loop_prompts/physique_front_a_route.txt",
+   "sha256": "84d17659f06f84b9b057a27243def51b12a24532f3f7cf63988f92f0ddacd7f7",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/physique_front_a2.json",
+   "sha256": "1e6cb9e64ef0935dd3199b3f930a907c6fea0cc740683f7dea5fd9f0d2bd717f",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/physique_front_a/body_grey_send.jpg",
+    "photo_to_edit": ".cache/region_edits/physique_front_a/body_grey_send.jpg",
+    "written": "2026-10-10, physique round 2 (full grey-out again, the user's choice). The user on round 1: 'the fat around the waist even got increased further in the after photo, when I have specifically mentioned reducing my body fat percentage by nearly 5%. Yes, the chest got firmer, and the obliques may be looking better, but it doesn't look natural if the waist fat is still there or even more increased. The deltoids also look improved, but you shrank the arm size and have reduced my vascularity. I have a visible bicep vein and good forearm veins'; 'The thing that you're calling an earphone wire is not an earphone wire. It is the holy thread that Brahmins wear, called jenu.' Round 1 measured: waist +1%, arms -2%, the AI found the waist, belly and arms the same, both veins and the janeu missing. New references: three of his 2026-10-10 side-lit photos (D:\\FacecardData\\body_refs\\2026-10-10).",
+    "refs": [
+     {
+      "key": "body",
+      "path": ".cache/region_edits/physique_front_a/his_body_ref.jpg",
+      "label": "THE BODY: this same man in this same photo before the grey was painted. Take from it only his frame and proportions: his bones, the width of his shoulders, the shape of his chest and nipples, his navel, his skin tone, his neck chain and his janeu (the thin white sacred thread he always wears, from his left shoulder diagonally across his chest and stomach to his right hip) exactly where they hang. His waist must come out with less fat than here."
+     },
+     {
+      "key": "side1",
+      "path": ".cache/region_edits/physique_front_a2/side_IMG_7008.jpg",
+      "label": "HIS BODY IN SIDE LIGHT 1: the same man today, relaxed, in window light that shows his real definition: his abs, obliques and waist."
+     },
+     {
+      "key": "side2",
+      "path": ".cache/region_edits/physique_front_a2/side_IMG_7006.jpg",
+      "label": "HIS BODY IN SIDE LIGHT 2: the same man today holding dumbbells: the real size of his arms and the veins on his forearms."
+     },
+     {
+      "key": "side3",
+      "path": ".cache/region_edits/physique_front_a2/side_IMG_7005.jpg",
+      "label": "HIS BODY IN SIDE LIGHT 3: the same man today curling a dumbbell: the vein along his biceps, his forearm veins and their faint green tint."
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey area: his torso and upper arms",
+      "goal": "a flat grey area where his torso and upper arms are",
+      "his": "his own torso and upper arms, the body of THE BODY and of HIS BODY IN SIDE LIGHT, a few weeks further into his cutting phase: about five points of body fat lower. Noticeably less fat at his waist: the love handles above his hips gone flat, the lower belly under his navel flat and tight, his waist narrower than in THE BODY and with less fat than in any of his side-light photos; his abs and obliques as clear as in his side-light photos; his chest firm with a clear lower edge; his shoulders round. His upper arms exactly his real size from HIS BODY IN SIDE LIGHT or a touch fuller, never thinner, with the visible vein along his biceps as in HIS BODY IN SIDE LIGHT 3. His janeu drawn exactly where it runs in THE BODY, and his neck chain as there. The same skin tone and the same light as the PHOTO TO EDIT, a real photo of this man",
+      "ref": "body"
+     }
+    ],
+    "keep": [
+     "his head, face, hair, beard and neck, and the tops of his shoulders where they are not grey, exactly as they are",
+     "his forearms with their veins, his hands and fingers, and his trousers with their black waistband, exactly as they are",
+     "the door, the wall, the switchboard and the light of the PHOTO TO EDIT",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "yunet+text",
+   "evidence": "YuNet found the goal's face: Frontal, yaw ratio 1.04; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": true,
+    "yaw": 0.8,
+    "pitch": 13.0,
+    "roll": 0.6,
+    "side": "frontal",
+    "score": 0.78,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_body_ref.jpg",
+    "sha256": "e5fdd15197de5a04dd5f48f79ffae39ef769c6a90a3cd72fdf7d5f826f798bf2",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a/his_body_ref.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "THE BODY: this same man in this same photo before the grey was painted. Take from it only his frame and proportions: his bones, the width of his shoulders, the shape of his chest and nipples, his navel, his skin tone, his neck chain and his janeu (the thin white sacred thread he always wears, from his left shoulder diagonally across his chest and stomach to his right hip) exactly where they hang. His waist must come out with less fat than here.",
+    "key": "body"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "side_IMG_7008.jpg",
+    "sha256": "a0f31607a2262db837bf060409face63028782133b8b8f862ec9ca058da974c8",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a2/side_IMG_7008.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BODY IN SIDE LIGHT 1: the same man today, relaxed, in window light that shows his real definition: his abs, obliques and waist.",
+    "key": "side1"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "side_IMG_7006.jpg",
+    "sha256": "86447090260dad9b52834c4a6e45060e1fac0eeb35898625718cc3066317e63c",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a2/side_IMG_7006.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BODY IN SIDE LIGHT 2: the same man today holding dumbbells: the real size of his arms and the veins on his forearms.",
+    "key": "side2"
+   },
+   {
+    "n": 4,
+    "role": "inv_ref",
+    "name": "side_IMG_7005.jpg",
+    "sha256": "3afe7e35aba15444ec38d58d17492eebaf1748213c3fc6e2b42931ec9858c94d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a2/side_IMG_7005.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BODY IN SIDE LIGHT 3: the same man today curling a dumbbell: the vein along his biceps, his forearm veins and their faint green tint.",
+    "key": "side3"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "body_grey_send.jpg",
+    "sha256": "85d8b5dceb0272d84f4c430beeac8080ca04c7893bcf5e680775fd9c15c7ec31",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a/body_grey_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is THE BODY: this same man in this same photo before the grey was painted. Take from it only his frame and proportions: his bones, the width of his shoulders, the shape of his chest and nipples, his navel, his skin tone, his neck chain and his janeu (the thin white sacred thread he always wears, from his left shoulder diagonally across his chest and stomach to his right hip) exactly where they hang. His waist must come out with less fat than here.\nImage 2 is HIS BODY IN SIDE LIGHT 1: the same man today, relaxed, in window light that shows his real definition: his abs, obliques and waist.\nImage 3 is HIS BODY IN SIDE LIGHT 2: the same man today holding dumbbells: the real size of his arms and the veins on his forearms.\nImage 4 is HIS BODY IN SIDE LIGHT 3: the same man today curling a dumbbell: the vein along his biceps, his forearm veins and their faint green tint.\nImage 5 is the PHOTO TO EDIT.\n\nEdit image 5, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey area: his torso and upper arms: the PHOTO TO EDIT shows a flat grey area where his torso and upper arms are; make it his own torso and upper arms, the body of THE BODY and of HIS BODY IN SIDE LIGHT, a few weeks further into his cutting phase: about five points of body fat lower. Noticeably less fat at his waist: the love handles above his hips gone flat, the lower belly under his navel flat and tight, his waist narrower than in THE BODY and with less fat than in any of his side-light photos; his abs and obliques as clear as in his side-light photos; his chest firm with a clear lower edge; his shoulders round. His upper arms exactly his real size from HIS BODY IN SIDE LIGHT or a touch fuller, never thinner, with the visible vein along his biceps as in HIS BODY IN SIDE LIGHT 3. His janeu drawn exactly where it runs in THE BODY, and his neck chain as there. The same skin tone and the same light as the PHOTO TO EDIT, a real photo of this man (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his head, face, hair, beard and neck, and the tops of his shoulders where they are not grey, exactly as they are.\n- his forearms with their veins, his hands and fingers, and his trousers with their black waistband, exactly as they are.\n- the door, the wall, the switchboard and the light of the PHOTO TO EDIT.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "3f6dd76df8dfd9c20baa2c0fdfc7b9ecb7b1363b29d2e6e2f43677828892f718",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "e5fdd15197de5a04dd5f48f79ffae39ef769c6a90a3cd72fdf7d5f826f798bf2",
+    "upload_name": "his_body_ref.jpg",
+    "bytes": 148163,
+    "px": [
+     630,
+     1024
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "a0f31607a2262db837bf060409face63028782133b8b8f862ec9ca058da974c8",
+    "upload_name": "side_IMG_7008.jpg",
+    "bytes": 125888,
+    "px": [
+     749,
+     1024
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "86447090260dad9b52834c4a6e45060e1fac0eeb35898625718cc3066317e63c",
+    "upload_name": "side_IMG_7006.jpg",
+    "bytes": 134241,
+    "px": [
+     833,
+     1024
+    ]
+   },
+   {
+    "n": 4,
+    "role": "inv_ref",
+    "sha256": "3afe7e35aba15444ec38d58d17492eebaf1748213c3fc6e2b42931ec9858c94d",
+    "upload_name": "side_IMG_7005.jpg",
+    "bytes": 150561,
+    "px": [
+     887,
+     1024
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "85d8b5dceb0272d84f4c430beeac8080ca04c7893bcf5e680775fd9c15c7ec31",
+    "upload_name": "body_grey_send.jpg",
+    "bytes": 116379,
+    "px": [
+     630,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "8e270df02e3e07e749f1221c68df6d3aec3ec49beb3c0e74cb883d4bb737534c"
+ }
+}

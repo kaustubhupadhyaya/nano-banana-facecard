@@ -1,11 +1,16 @@
-# Exact versions from the working .venv (Python 3.14). The ArcFace threshold of 0.60 was calibrated
-# with these builds of onnxruntime and opencv; changing them can move scores, so re-run calibrate.py
-# after any upgrade.
+# Exact versions from the working .venv (Python 3.14). The ArcFace threshold of 0.60 was calibrated with these builds of onnxruntime and
+# opencv; changing them can move scores. Every staged run records the versions it ran with (01_method/env.json), and `facecard.py diff`
+# shows a version change between two runs.
 #
-# FaceFusion is NOT installed here. It runs from its own clone and its own Python 3.12 venv.
-# See paths.py, or run `python paths.py` to check it.
+# FaceFusion is NOT installed here. It runs from its own clone and its own Python 3.12 venv (restore.py).
+# The pose gate (tools/pose_compare.py) runs in its own YOLO venv (paths.yolo_python()).
+# See paths.py, or run `python paths.py` to check both.
 gemini_webapi==2.1.1
 Pillow==12.3.0
 numpy==2.5.3
 onnxruntime==1.30.0
 opencv-python==5.0.0.93
+openpyxl==3.1.5        # research/feedback_matrix/build_feedback_matrix.py (FEEDBACK_MATRIX.xlsx)
+c2pa-python==0.38.0    # record-only: reads the C2PA manifest Google signs into every picture (06_measure); optional, runs without it
+psutil==7.2.2          # tools/room.py: process trees, command lines and memory for the overnight local run's room (PowerShell took minutes under pressure)
+# headpose.py uses vendor/head_pose (yakhyo/head-pose-estimation, MIT) with onnxruntime and opencv above; its weights go in models/head_pose/

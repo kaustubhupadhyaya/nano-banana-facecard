@@ -72,6 +72,49 @@ def vault_dir() -> Path:
     return _resolve("SECURE_VAULT_DIR", "vault_dir", Path.home() / ".agents" / "skills" / "secure-vault")
 
 
+def blobs_dir() -> Path:
+    """The content-addressed store of every byte a recipe sends (provenance.py). Outside the repo on purpose: the repo is public, and a
+    `git clean` must never be able to take the method's inputs with it."""
+    return _resolve("FACECARD_BLOBS_DIR", "blobs_dir", Path(r"D:\FacecardData\blobs"))
+
+
+def review_dir() -> Path:
+    """Where every run's self-contained report.html is published, one flat folder (the user, 2026-10-06: the review images must be easy to find)."""
+    return _resolve("FACECARD_REVIEW_DIR", "review_dir", Path(r"D:\FacecardReview"))
+
+
+def yolo_python() -> Path:
+    """The YOLO environment's interpreter (torch + ultralytics) that runs tools/pose_compare.py, the pose gate."""
+    return _resolve("FACECARD_YOLO_PYTHON", "yolo_python", Path(r"D:\VisionModels\yolo\.venv\Scripts\python.exe"))
+
+
+def yolo_models_dir() -> Path:
+    """Folder of yolo11m-pose.pt and yolo11m.pt (read by tools/pose_compare.py)."""
+    return _resolve("FACECARD_YOLO_MODELS", "yolo_models_dir", Path(r"D:\VisionModels\yolo"))
+
+
+# ---- the local overnight system (local_gen.py, tools/overnight.py; 2026-10-09). Separate from the Gemini pipeline: nothing above uses these.
+def sdcpp_dir() -> Path:
+    """stable-diffusion.cpp builds (sd-cli.exe), one folder per release. Outside the repo: an external MIT program, never vendored."""
+    return _resolve("FACECARD_SDCPP_DIR", "sdcpp_dir", Path(r"C:\LocalGen\sd.cpp"))
+
+
+def localgen_models_dir() -> Path:
+    """Qwen-Image-2.1 model files for the local system (on the NVMe: stable-diffusion.cpp reads weights from disk when RAM runs short)."""
+    return _resolve("FACECARD_LOCALGEN_MODELS", "localgen_models_dir", Path(r"C:\LocalGen\models\qwen-image-2.1"))
+
+
+def local_dir() -> Path:
+    """The local system's runs, queue, state, logs and morning summaries (never under outputs/, which the Gemini tools scan)."""
+    return _resolve("FACECARD_LOCAL_DIR", "local_dir", Path(r"D:\FacecardLocal"))
+
+
+def room_dir() -> Path:
+    """tools/room.py's record of what the night closed and how it comes back. On the NVMe, not D: (a USB disk): putting things back must
+    never depend on a disk that can go away."""
+    return _resolve("FACECARD_ROOM_DIR", "room_dir", Path(r"C:\LocalGen\room"))
+
+
 def _python_version(exe: Path) -> str | None:
     try:
         out = subprocess.run([str(exe), "--version"], capture_output=True, text=True, timeout=30)
@@ -128,6 +171,19 @@ def report() -> int:
     if not vault_ok:
         problems += 1
         print("      Set the SECURE_VAULT_DIR env var or a vault_dir key in facecard.json.")
+
+    yp = yolo_python()
+    yp_ok = yp.exists() and (yolo_models_dir() / "yolo11m-pose.pt").exists()
+    line(yp_ok, "YOLO pose gate", f"{yp} + {yolo_models_dir() / 'yolo11m-pose.pt'}")
+    if not yp_ok:
+        problems += 1
+        print("      The pose gate cannot run without it: set FACECARD_YOLO_PYTHON / FACECARD_YOLO_MODELS or yolo_python / yolo_models_dir in facecard.json.")
+
+    blobs = blobs_dir()
+    n_blobs = sum(1 for _ in blobs.rglob("*") if _.is_file()) if blobs.exists() else 0
+    line(blobs.parent.exists(), "Blob store (exact bytes of every recipe)", f"{blobs} ({n_blobs} files)")
+    line(True, "Review reports", str(review_dir()))
+    line(True, "Results (passed pictures only)", str(results_dir()))
 
     print("Ready." if problems == 0 else f"{problems} required item(s) missing.")
     return 0 if problems == 0 else 1
