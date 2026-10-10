@@ -1,0 +1,167 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin16fix_marks_send",
+ "version": 1,
+ "created": "2026-10-11T01:28:59",
+ "because": "pin 16 v2_0r: checklist item 32 failed on the pin man's ring, forearm mark and calf tattoo that Gemini kept; the user: 'needs fixing'",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin16fix_marks_send",
+  "path": ".cache/region_edits/pin16_fix/pin16fix_marks_send.jpg",
+  "sha256": "3cffd2e02debcbc6f496095af8db1511c62a3a7923f742f72f97bc704deab6b8",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin16_fix/pin16fix_marks_send.jpg",
+   "prompt": ".cache/loop_prompts/pin16fix_marks_route.txt",
+   "inventory": ".cache/inventories/pin16fix_marks.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T21:33:29"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of his hand holding the pink fin of a white surfboard, his forearm, his board shorts and his calf on a sandy path: his own unmarked skin, bare fingers. Vertical frame.",
+   "from": ".cache/loop_prompts/pin16fix_marks_route.txt",
+   "sha256": "7c0d43cdadb0642763e85e838f80b106acc45d8f3f82006cfdd00e6334d25646",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin16fix_marks.json",
+   "sha256": "4d0e109ddd63556cf9e983555bc88314f0ba160f0263fb76fb41c9c763566fb4",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin16_fix/pin16fix_marks_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin16_fix/pin16fix_marks_send.jpg",
+    "written": "2026-10-11 01:40, pin 16 v2_0r (run 20261010_210305), the user: 'face almost there but still not accurate, needs fixing'; checklist item 32 failed on marks of the pin man that Gemini kept: his silver ring on the finger holding the fin, a small ink mark on the forearm near the elbow and the tattoo on the calf. The photo to edit is the crop [224, 597, 555, 1194] of v2_0r sent 2x larger; tools/region_edit.py pastes back only the masked hand, elbow mark and calf (pin16fix_marks_mask.png), so the board's lettering and the shorts' emblem stay as they are. The face is fixed separately (replicate, pin16fix_face).",
+    "refs": [],
+    "change": [
+     {
+      "item": "the ring",
+      "goal": "a silver ring on a finger of the hand holding the pink fin",
+      "his": "his bare fingers with no ring, holding the pink fin exactly as they do: the same grip, the same finger positions and the same skin tone and light"
+     },
+     {
+      "item": "the small mark on his forearm",
+      "goal": "a small dark ink mark on the forearm near the elbow",
+      "his": "his own unmarked skin there, the same tone, light and veins as the rest of his forearm"
+     },
+     {
+      "item": "the tattoo on his calf",
+      "goal": "a dark tattoo on the outer side of the calf at the bottom of the image",
+      "his": "his own bare calf, the skin unmarked, with the same tone, light and shadow as his leg above it"
+     }
+    ],
+    "keep": [
+     "his hand's grip on the fin and every finger exactly where it is",
+     "the pink fin, the white surfboard with its lettering and its blue leash, exactly as they are",
+     "the board shorts with their emblem and colours, the wooden post, the sand and the thin fence lines, exactly as they are",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin16fix_marks_send.jpg",
+    "sha256": "f0adbe2eb7c7faa936916fde499e13759beedb319629432e18ebea80833da3d2",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin16_fix/pin16fix_marks_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the ring: the PHOTO TO EDIT shows a silver ring on a finger of the hand holding the pink fin; make it his bare fingers with no ring, holding the pink fin exactly as they do: the same grip, the same finger positions and the same skin tone and light.\n- the small mark on his forearm: the PHOTO TO EDIT shows a small dark ink mark on the forearm near the elbow; make it his own unmarked skin there, the same tone, light and veins as the rest of his forearm.\n- the tattoo on his calf: the PHOTO TO EDIT shows a dark tattoo on the outer side of the calf at the bottom of the image; make it his own bare calf, the skin unmarked, with the same tone, light and shadow as his leg above it.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his hand's grip on the fin and every finger exactly where it is.\n- the pink fin, the white surfboard with its lettering and its blue leash, exactly as they are.\n- the board shorts with their emblem and colours, the wooden post, the sand and the thin fence lines, exactly as they are.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "7a38c115d9f20d59249a9420d343ff9017ace72071c1488b2c31b5b9643a69e9",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "f0adbe2eb7c7faa936916fde499e13759beedb319629432e18ebea80833da3d2",
+    "upload_name": "pin16fix_marks_send.jpg",
+    "bytes": 224163,
+    "px": [
+     662,
+     1194
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "76c66dc7351b8d6c4a49e62d08a466ad561d3bd131298340cb6bf8ebbe02ad65"
+ }
+}
