@@ -1,0 +1,341 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "IMG_3931_half",
+ "version": 2,
+ "created": "2026-10-10T12:30:22",
+ "because": "IMG_3931 with the 'until it matches' method (the user, 2026-10-10, about IMG_3884: 'the smile itself is perfect ... it's the other facial expressions that are not matching'): v1 (the 'same, but natural and relaxed' wording) passed its gates 2 of 2 but tools/smile_match.py --ai found both unmatched (cheeks, smile lines and brows weaker). The expression is spelled out part by part and his own face crop is the expression reference.",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "freeze_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\replicate_freeze\\20261010_122943_IMG_3931_half",
+  "notices": []
+ },
+ "goal": {
+  "key": "IMG_3931_half",
+  "path": "D:/FacecardData/smile_study/originals/IMG_3931_half.jpg",
+  "sha256": "ecd989edd7f04fcda63712535be14d10eb4f81fdb69d714cedb3066893a17fc6",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "replicate",
+  "compiler": "replicate/1",
+  "subject": "me",
+  "args": {
+   "goal": "D:/FacecardData/smile_study/originals/IMG_3931_half.jpg",
+   "zone": "face",
+   "source": "auto",
+   "glasses": "same",
+   "look": "any",
+   "expression": "exactly his own expression in the last image, at full strength and in every part of his face: a wide, playful grin with his upper teeth showing as there; deep creases from his nose to the corners of his mouth, with his cheeks bunched up into them (even with his lean current face, a grin this big bunches his cheeks like this); his eyes open and bright, looking straight into the camera, exactly as open as there; his brows as there",
+   "character": "me@v2",
+   "current_look": true,
+   "from_picture": null,
+   "expression_ref": [
+    ".cache/inventories/pin_refs/his_smile_3931_face.jpg::It shows how his whole face smiles. Keep exactly this in the result: how open his eyes are, how high his cheeks bunch, the creases beside his nose and mouth, and his brows. His face shape, hair and beard still come from the reference photos (his current look)."
+   ],
+   "rank": "smile",
+   "loose_crop": true,
+   "expression_ref_intro": "a close crop of his face in the last image itself: this very smile."
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "text_models": [
+   "56fdd199312815e2",
+   "e6fa609c3fa255c0"
+  ],
+  "samples": 2,
+  "max_attempts": 6,
+  "stop": {
+   "after_pose_fails": 0,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {},
+  "own": true,
+  "own_score": 0.691,
+  "source_kind": "own",
+  "duplicates_excluded": [],
+  "zone": "face",
+  "kind": "face",
+  "expression": "exactly his own expression in the last image, at full strength and in every part of his face: a wide, playful grin with his upper teeth showing as there; deep creases from his nose to the corners of his mouth, with his cheeks bunched up into them (even with his lean current face, a grin this big bunches his cheeks like this); his eyes open and bright, looking straight into the camera, exactly as open as there; his brows as there",
+  "glasses": "same",
+  "look": "any",
+  "far": false,
+  "face_share": null,
+  "crop": [
+   67,
+   0,
+   1145,
+   1145
+  ],
+  "crop_before_head_fit": [
+   208,
+   12,
+   1024,
+   1024
+  ],
+  "head_boxes": [
+   [
+    510,
+    277,
+    419,
+    493
+   ]
+  ],
+  "copies_left_unedited": [],
+  "main_box": [
+   510,
+   277,
+   419,
+   493
+  ],
+  "main_in_crop": [
+   443,
+   277,
+   419,
+   493
+  ],
+  "source_size": [
+   1512,
+   2016
+  ],
+  "source_face": {
+   "box": [
+    462,
+    301,
+    403,
+    500
+   ],
+   "score": 0.686,
+   "face_w": 419
+  },
+  "readings": {
+   "head_box": {
+    "prompt_sha256": "c8f22d67b9e1aa5ea7ed6a2536464167daa4ac32bc58376f03b6bd2426d541b9",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "box": [
+     364,
+     60,
+     915,
+     770
+    ],
+    "skipped": null
+   },
+   "describe": {
+    "prompt_sha256": "d14a6c159796543406a3bc171ab3cb99b83682f24921905cf2efc8043928c8a3",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "file": "photo_to_edit.png",
+    "reply": {
+     "head_turn": "turned roughly 20 to 25 degrees toward the right of the frame (his left)",
+     "head_tilt": "chin slightly dropped and head tilted slightly to the right of the picture (toward his left shoulder)",
+     "gaze": "looking directly forward into the camera lens",
+     "expression": "broad open-mouth smile showing upper teeth, relaxed eyes with slight crinkles, and naturally relaxed dark eyebrows",
+     "glasses": "none",
+     "hair": "short, wavy to curly dark black hair with slightly lighter or textured graying tips on top and cropped sides",
+     "light": "diffused natural daylight coming from the upper right and front, neutral to slightly warm, moderately bright",
+     "face_exposure": "brighter than the blurred background, with natural skin texture showing fine pores and subtle blemishes typical of a phone portrait mode photo",
+     "reflection_present": false,
+     "reflection_where": "",
+     "other_people": false
+    }
+   }
+  },
+  "attractiveness": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
+  "thresholds": {
+   "hard_reject": 0.2,
+   "accept": 0.52,
+   "own_min": 0.4,
+   "approved": true
+  },
+  "gates": {
+   "light_de_max": 14.0,
+   "size_own": [
+    0.94,
+    1.1
+   ],
+   "size_foreign": [
+    0.94,
+    1.04
+   ],
+   "light_de_max_foreign": 20.0,
+   "unchanged_gt_sim": 0.9,
+   "neck_gap_max": 10.0,
+   "rescue_attempts": 3,
+   "sharp_max": 6.0
+  },
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e"
+  },
+  "face_choice": {
+   "decided_by": "character me@v2",
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg",
+    "IMG_6863.jpg"
+   ],
+   "count": 4
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "face_front.jpg",
+    "sha256": "e2106185088b395632868bb47c93463cd00a5810cceb578f76da5bcec5b4de9d",
+    "from": "IMG_6858.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "face_three_quarter_left.jpg",
+    "sha256": "bb9d1c692760e1c9a420059bfa6b6cea8d685976b285613d659c3398c4dbe995",
+    "from": "IMG_6868.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "face_three_quarter_right.jpg",
+    "sha256": "b56638a1789bb32dc74afb95c417cf2d7db96ed6fa28c52ce3cc677669382819",
+    "from": "IMG_6861.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "name": "face_profile.jpg",
+    "sha256": "9611caa7ac60c0c5ad28780b5214c4a6c25ed03fed80da7c64d565b8444cc808",
+    "from": "IMG_6863.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me@v2: profile"
+   },
+   {
+    "n": 5,
+    "role": "expression",
+    "name": "expression_1.jpg",
+    "sha256": "32bff7ce4e139209d77ae5b00b2789ca96c8909bb5765d263c76787439c978e3",
+    "from": ".cache/inventories/pin_refs/his_smile_3931_face.jpg",
+    "prep": "resized_for_send q95",
+    "why": "his own candid smile, chosen by the user (2026-10-10)"
+   },
+   {
+    "n": 6,
+    "role": "photo_to_edit",
+    "name": "photo_to_edit.png",
+    "sha256": "f3d56dd22b1596b276e4f211aeab1b92f57dc7719c41cab082dcee6c7bb85e73",
+    "from": "D:/FacecardData/smile_study/originals/IMG_3931_half.jpg",
+    "prep": "crop [67, 0, 1145, 1145] of the 1512x2016 original, long side 1024 px",
+    "why": "the crop of his photo that is edited and pasted back into the untouched original"
+   }
+  ],
+  "expression_refs": [
+   ".cache/inventories/pin_refs/his_smile_3931_face.jpg"
+  ],
+  "expression_ref_label": "It shows how his whole face smiles. Keep exactly this in the result: how open his eyes are, how high his cheeks bunch, the creases beside his nose and mouth, and his brows. His face shape, hair and beard still come from the reference photos (his current look).",
+  "expression_ref_intro": "a close crop of his face in the last image itself: this very smile.",
+  "rank": "smile",
+  "hair_note": "His hair is his CURRENT cut, from the reference photos, not the cut of the man in the last image: dense tight black curls on top, the sides above and in front of his ears tapered short and close to the scalp so that his ears and temples show, and the curls longer at the back toward the nape. So the hair outline changes at the sides; on top it stays within the size it has in the last image.",
+  "current_look": true,
+  "face_note": "His face is his CURRENT face from the reference photos: lean, with low facial fat, never fuller than in the reference photos. Only his full dense beard may make his jaw outline a little wider than in the last image; the rest of his head keeps its size."
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "replicate/1",
+   "template_sha256": "5f7be3521647c9a0d4ffe504735fbe869e94682b989e302f41ef60dba047d4da",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "The first 5 images are photos of the same man: the identity reference. The last image is the photo to edit.\n\nEdit the last image so that the man in it has this exact man's face: his face structure, jawline, nose, eyes, brows, lips, skin tone and beard exactly as in the reference photos. The man in the last image is only a look-alike: do not keep his face, render this man's own face from the reference photos in its place. Redraw his whole head as one, the hair included: his hair, beard and moustache exactly as in the reference photos (his own tight curly black hair), so that hair, face, ears and neck belong together like one real photograph. If the man in the last image wears glasses, he keeps wearing the same glasses. His expression: exactly his own expression in the last image, at full strength and in every part of his face: a wide, playful grin with his upper teeth showing as there; deep creases from his nose to the corners of his mouth, with his cheeks bunched up into them (even with his lean current face, a grin this big bunches his cheeks like this); his eyes open and bright, looking straight into the camera, exactly as open as there; his brows as there.\n\nThis is what the last image shows before the edit. The head angle, gaze, glasses and light must stay exactly as they are:\n- head: turned roughly 20 to 25 degrees toward the right of the frame (his left)\n- chin: chin slightly dropped and head tilted slightly to the right of the picture (toward his left shoulder)\n- eyes: looking directly forward into the camera lens\n- glasses: none\n- hair: short, wavy to curly dark black hair with slightly lighter or textured graying tips on top and cropped sides\n- light on his face: diffused natural daylight coming from the upper right and front, neutral to slightly warm, moderately bright\n- how bright his face is: brighter than the blurred background, with natural skin texture showing fine pores and subtle blemishes typical of a phone portrait mode photo\n\nKeep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it belongs in the picture like a real phone photo and not a studio portrait.\nKeep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.\n\nHis hair is his CURRENT cut, from the reference photos, not the cut of the man in the last image: dense tight black curls on top, the sides above and in front of his ears tapered short and close to the scalp so that his ears and temples show, and the curls longer at the back toward the nape. So the hair outline changes at the sides; on top it stays within the size it has in the last image.\n\nHis face is his CURRENT face from the reference photos: lean, with low facial fat, never fuller than in the reference photos. Only his full dense beard may make his jaw outline a little wider than in the last image; the rest of his head keeps its size.\n\nImage 5 shows a close crop of his face in the last image itself: this very smile. It shows how his whole face smiles. Keep exactly this in the result: how open his eyes are, how high his cheeks bunch, the creases beside his nose and mouth, and his brows. His face shape, hair and beard still come from the reference photos (his current look).",
+  "prompt_sha256": "f49c4c99ad6539abdfbaea8331c32a280141c98ac16718cf1325029f7bb2803f",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "e2106185088b395632868bb47c93463cd00a5810cceb578f76da5bcec5b4de9d",
+    "upload_name": "face_front.jpg",
+    "bytes": 151235,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "bb9d1c692760e1c9a420059bfa6b6cea8d685976b285613d659c3398c4dbe995",
+    "upload_name": "face_three_quarter_left.jpg",
+    "bytes": 133701,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "b56638a1789bb32dc74afb95c417cf2d7db96ed6fa28c52ce3cc677669382819",
+    "upload_name": "face_three_quarter_right.jpg",
+    "bytes": 134170,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "face",
+    "sha256": "9611caa7ac60c0c5ad28780b5214c4a6c25ed03fed80da7c64d565b8444cc808",
+    "upload_name": "face_profile.jpg",
+    "bytes": 186432,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 5,
+    "role": "expression",
+    "sha256": "32bff7ce4e139209d77ae5b00b2789ca96c8909bb5765d263c76787439c978e3",
+    "upload_name": "expression_1.jpg",
+    "bytes": 276614,
+    "px": [
+     1024,
+     1024
+    ]
+   },
+   {
+    "n": 6,
+    "role": "photo_to_edit",
+    "sha256": "f3d56dd22b1596b276e4f211aeab1b92f57dc7719c41cab082dcee6c7bb85e73",
+    "upload_name": "photo_to_edit.png",
+    "bytes": 1260454,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "e6c6c773c181c623af189d145b3248034effd0ff9a715c908b3db9748e57027d"
+ }
+}

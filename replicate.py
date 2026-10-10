@@ -47,7 +47,7 @@ from PIL import Image, ImageOps
 import composite
 import identity
 import segment
-from gemini_webapi.exceptions import GeminiError, ImageGenerationError, UsageLimitExceededError
+from gemini_webapi.exceptions import APIError, GeminiError, ImageGenerationError, UsageLimitExceededError
 from scorer import DETECTOR_PATH, ArcFaceScorer, analyze_face
 from session import AuthError, CreditMeter, authenticated_client, describe_usage
 
@@ -136,7 +136,12 @@ POSE_PROMPT = (
 # crop that cuts it is grown until the head sits HEAD_MARGIN inside every edge. A crop that already holds the whole head is left exactly as it was.
 HEAD_MARGIN = 0.08       # of the crop side, kept free around the whole head when the crop has to grow (the soft paste border is 0.10)
 HEAD_CUT_TOL = 0.02      # of the crop side: the AI's box may poke out this much before the crop counts as cutting the head
-TEXT_TIMEOUT = 150       # seconds per text call; a stalled answer stream (2026-09-23) otherwise waits forever
+# An expression edit (zone expression, 2026-10-10): on his front photo IMG_6858 the whole head filled 84% of the crop height and Gemini zoomed out
+# in all 8 returns (5 to scale 0.76, past the alignment limit; the other 3, once aligned, held the head 4-5% too big). Its own re-framed returns
+# put the whole head at about 62-65% of the height with the hair top near 12%, so an expression crop is framed that way from the start.
+EXPR_HEAD_SHARE = 0.62   # the whole head (the AI's box, hair included) as a fraction of the expression crop's side
+EXPR_HEAD_TOP = 0.12     # the top of his hair, as a fraction of the side from the crop's top edge
+TEXT_TIMEOUT = 150      # seconds per text call; a stalled answer stream (2026-09-23) otherwise waits forever
 HEAD_BOX_PROMPT = (
     "Find the head of the man in the middle of this image. Reply with ONLY a JSON object, no other text: "
     "{\"box_2d\": [ymin, xmin, ymax, xmax]}, the tightest box around his whole head: from the top of his hair, across both sides of his hair "
@@ -318,6 +323,15 @@ FACE_PAIR_PROMPT = (
     "proportion with his body; and no sign that the head was pasted in. Reply with ONLY a JSON object: "
     "{\"better\": 1 or 2, \"why\": one short sentence}")
 
+# The user, 2026-10-10: "smile always is turning out bad ... when captured in candid it can look different". FACE_PAIR_PROMPT rewards a
+# closed-lip smile and calls any smirk a fault, so an open smile with teeth always lost; ranking smile candidates asks about the smile itself.
+SMILE_PAIR_PROMPT = (
+    "Both images are the same photo of the same man, with two different renderings of his smile. Which image shows the better smile of HIM: "
+    "a genuine candid smile, the kind a friend's camera catches when he is really amused, with the cheeks lifted, the eyes crinkled and alive, "
+    "the upper teeth showing naturally (his own teeth exactly as they are: their shape, size and colour), relaxed lips and no forced grin or "
+    "squint that closes the eyes, while his face stays clearly the same man as in the photo and the head is lit and sized like the rest of "
+    "the picture? Reply with ONLY a JSON object: {\"better\": 1 or 2, \"why\": one short sentence}")
+
 # The same question about the FACE alone. Used to decide whether a return whose framing failed still carries a face worth keeping: measured 2026-09-21,
 # the general question preferred the source over the night-out return the user liked, because it also weighs head angle, posture and blending.
 FACE_ONLY_PAIR_PROMPT = (
@@ -352,7 +366,7 @@ async def gemini_text(client, models: list[str | None], prompt: str, files: list
                                              TEXT_TIMEOUT)
             except UsageLimitExceededError:
                 raise
-            except (ImageGenerationError, GeminiError, asyncio.TimeoutError) as e:
+            except (APIError, GeminiError, asyncio.TimeoutError) as e:
                 log.say(f"    [{tag}] text call failed on model {model}: {type(e).__name__}: {e}")
                 break
             data = parse_json_reply(out.candidates[out.chosen].text)
@@ -463,6 +477,11 @@ def build_prompt(n_refs: int, strength: str = "normal") -> str:
 async def gemini_edit(client, model: str | None, prompt: str, files: list[Path], run_dir: Path, tag: str, verbose: bool,
                       log: RunLog, retries: int = 2) -> tuple[Path, str]:
     last = "unknown"
+    # The exact request of every edit call (2026-10-07, consistency): the prompt text and each file sent by name and sha256. The run used to keep
+    # only the crops; the prompt (which carries the random scene reading) was lost.
+    import provenance
+    log.data.setdefault("edit_calls", []).append({"tag": tag, "model": model, "prompt": prompt, "prompt_sha256": provenance.sha256_text(prompt),
+                                                  "sent": [{"name": Path(f).name, "sha256": provenance.sha256_file(Path(f))} for f in files]})
     for attempt in range(retries + 1):
         try:
             out = await client.generate_content(prompt, files=[str(f) for f in files], model=model, temporary=True)
@@ -562,7 +581,7 @@ async def read_head_box(client, text_models: list[str | None], src: np.ndarray, 
             out = await asyncio.wait_for(client.generate_content(HEAD_BOX_PROMPT, files=[str(p)], model=model, temporary=True), TEXT_TIMEOUT)
         except UsageLimitExceededError:
             raise
-        except (asyncio.TimeoutError, ImageGenerationError, GeminiError) as e:
+        except (asyncio.TimeoutError, APIError, GeminiError) as e:
             log.say(f"    [head box] no answer from model {model}: {type(e).__name__}: {e}")
             continue
         b = (parse_json_reply(out.candidates[out.chosen].text) or {}).get("box_2d")
@@ -589,6 +608,13 @@ def fit_whole_head(shape: tuple[int, ...], rect: composite.Rect, head: tuple[flo
         return None
     side = max(rect[2], max(x1 - x0, y1 - y0) / (1 - 2 * HEAD_MARGIN))
     return composite.rect_crop(shape, (x0 + x1) / 2, (y0 + y1) / 2, side, side)
+
+
+def expression_crop(shape: tuple[int, ...], head: tuple[float, float, float, float]) -> composite.Rect:
+    """The crop for an expression edit: his whole head at EXPR_HEAD_SHARE of the side, the hair top EXPR_HEAD_TOP below the crop's top edge."""
+    x0, y0, x1, y1 = head
+    side = max(x1 - x0, y1 - y0) / EXPR_HEAD_SHARE
+    return composite.rect_crop(shape, (x0 + x1) / 2, y0 - EXPR_HEAD_TOP * side + side / 2, side, side)
 
 
 def union_rect(rects: list[composite.Rect]) -> composite.Rect:
@@ -638,10 +664,17 @@ async def edit_stage(client, model, log: RunLog, run_dir: Path, tag: str, base: 
     ever passed, and every best version came from a return whose ring matched (ECC >= 0.90, scale <= 1.048, shift <= 0.092).
     """
     crop = composite.take(base, rect)
-    h, w = crop.shape[:2]
     send_p = run_dir / f"{tag}_send.png"
     cv2.imwrite(str(send_p), resized_for_send(crop))
     raw_p, txt = await gemini_edit(client, model, prompt, ref_files + [send_p], run_dir, tag, verbose, log)
+    return paste_return(base, rect, raw_p, txt, tag)
+
+
+def paste_return(base: np.ndarray, rect: composite.Rect, raw_p: Path, txt: str, tag: str) -> tuple[np.ndarray, np.ndarray | None, dict]:
+    """The returned crop merged into the picture, only when its outer ring matches the crop sent (edit_stage's rule, moved here unchanged on
+    2026-10-08 so the recipe method replicate/1 pastes exactly the same way). Returns (image, zone, meta); meta['failed'] says why it was not merged."""
+    crop = composite.take(base, rect)
+    h, w = crop.shape[:2]
     edit = cv2.imread(str(raw_p))
     eh, ew = edit.shape[:2]
     dev = abs((ew / eh) / (w / h) - 1)
@@ -891,7 +924,8 @@ def retry_note_from(problems: list[str], judge: dict | None) -> str | None:
     return "; ".join(dict.fromkeys(bits)) or None
 
 
-def judge_failures(judge: dict | None, expression_must_match: bool = False) -> tuple[list[str], list[str]]:
+def judge_failures(judge: dict | None, expression_must_match: bool = False, glasses_policy: str = "same",
+                   expression_edit: bool = False, source_glasses: bool | None = None) -> tuple[list[str], list[str]]:
     """Split the AI judge's answer into (hard failures, warnings)."""
     if not judge:
         return [], ["the AI judge gave no usable answer, so the visual checks were skipped"]
@@ -903,6 +937,20 @@ def judge_failures(judge: dict | None, expression_must_match: bool = False) -> t
               ("seam_visible", False, "a seam or cut-out edge is visible"), ("lighting_consistent", True, "lighting does not match the picture"),
               ("anything_else_changed", False, "clothes, body, hands or background changed")]
     for key, want, msg in checks:
+        if key == "glasses_preserved" and glasses_policy in ("yes", "no"):
+            # --glasses no|yes (2026-10-10): the glasses change on purpose, so the check asks for the change. Skipping it let both DSC07985
+            # pictures pass with his glasses still on under --glasses no.
+            if source_glasses is None:
+                soft.append(f"glasses check skipped: --glasses {glasses_policy}, and the source's glasses were not read")
+                continue
+            want = source_glasses == (glasses_policy == "yes")      # nothing to change: the same in both; a change: they must differ
+            v = judge.get(key)
+            if v is None:
+                soft.append(f"judge did not answer {key}")
+            elif bool(v) != want:
+                hard.append("AI judge: " + ("glasses not removed (--glasses no)" if glasses_policy == "no" else "glasses not added (--glasses yes)")
+                            if not want else "AI judge: glasses changed though the photo already matches --glasses " + glasses_policy)
+            continue
         v = judge.get(key)
         if v is None:
             soft.append(f"judge did not answer {key}")
@@ -913,12 +961,122 @@ def judge_failures(judge: dict | None, expression_must_match: bool = False) -> t
         soft.append("AI judge: a fold or double chin may have appeared under the chin (unvalidated question)")
     if judge.get("reflection_matches") is False:
         soft.append("AI judge: the reflection does not clearly show the same man as his real face")
-    if judge.get("same_expression") is False:
+    if expression_edit:
+        # zone expression (2026-10-10): the edit exists to change his expression, so an unchanged one is the failure
+        if judge.get("same_expression") is not False:
+            hard.append("AI judge: the expression did not change (an expression edit must change it)")
+    elif judge.get("same_expression") is False:
         if expression_must_match:
             hard.append("AI judge: expression differs from the source (it must match under the same-expression policy)")
         else:
             soft.append("AI judge: expression differs from the source (by design, see the attractiveness policy)")
     return hard, soft
+
+
+def measure_candidate(src: np.ndarray, base: np.ndarray, rect: composite.Rect, union: np.ndarray, src_crop: np.ndarray, src_eval: dict, pool: list,
+                      scorer: ArcFaceScorer, dups: set, gates: dict, source_kind: str, far: bool, head_boxes: list, src_gap: float | None,
+                      zone_mode: str, main_in_crop: tuple, png: Path, crop_jpg: Path, t0: float, expression_edit: bool = False
+                      ) -> tuple[dict, list[str], list[str], dict, np.ndarray, np.ndarray]:
+    """Save the complete picture lossless, verify it on the saved file, and measure it against the source: identity, head size and position,
+    light, neck gap, sharpness (far faces), drift inside the crop, pixels changed outside the crop. Deterministic measurements: they measure, they
+    do not interpret. Moved unchanged out of run() on 2026-10-08, so the recipe method replicate/1 measures exactly the same way.
+    Returns (metrics, problems, warnings, outside check, saved picture, output crop)."""
+    problems: list[str] = []
+    warnings: list[str] = []
+    cv2.imwrite(str(png), base, [cv2.IMWRITE_PNG_COMPRESSION, 3])
+    saved = cv2.imread(str(png))
+    ver = composite.verify_outside(src, saved, union)
+    out_crop = composite.take(saved, rect)
+    cv2.imwrite(str(crop_jpg), resized_for_send(out_crop), [cv2.IMWRITE_JPEG_QUALITY, 95])
+    res = identity.score_image(out_crop, pool, scorer, exclude_names=dups, expect_box=main_in_crop)
+    m: dict = {"file": png.name, "elapsed_sec": round(time.time() - t0, 1)}
+    if res.get("detected"):
+        fs_s = max(src_eval["box"][2:])
+        m.update({"score": round(res["score"], 3), "top": res["top"], "face_w": res["face_w"],
+                  "gt_sim": round(float(np.dot(src_eval["emb"], res["emb"])), 3),
+                  "shape_dist": round(identity.shape_distance(src_eval["shape"], res["shape"]), 3),
+                  "face_shift_frac": round(float(np.hypot(res["box"][0] + res["box"][2] / 2 - (src_eval["box"][0] + src_eval["box"][2] / 2),
+                                                          res["box"][1] + res["box"][3] / 2 - (src_eval["box"][1] + src_eval["box"][3] / 2))) / fs_s, 3),
+                  "size_ratio": round(res["box"][2] / max(1, src_eval["box"][2]), 3),
+                  "sharp_ratio": round(res["sharpness"] / max(1.0, src_eval["sharpness"]), 3),
+                  "source_score": round(src_eval["score"], 3)})
+    if zone_mode != "head+build":
+        m["drift"] = composite.inside_drift(src, saved, rect, [tuple(b) for b in head_boxes])
+        dr = m["drift"]
+        if dr["mean_abs_diff"] is not None and (dr["mean_abs_diff"] > DRIFT_MAD_MAX or dr["ssim"] < DRIFT_SSIM_MIN):
+            problems.append(f"clothes or background inside the crop were redrawn (mean diff {dr['mean_abs_diff']}, SSIM {dr['ssim']})")
+    if not ver["same_size"] or ver["changed_outside"] != 0:
+        problems.append(f"{ver['changed_outside']} px changed outside the crop")
+    if "score" not in m:
+        problems.append("no face detected in the output crop")
+    else:
+        lo, hi = gates["size_own"] if source_kind == "own" else gates["size_foreign"]
+        if not (lo <= m["size_ratio"] <= hi):
+            problems.append(f"head size changed (size_ratio {m['size_ratio']}, allowed {lo}-{hi})")
+        if m["face_shift_frac"] > SHIFT_MAX:
+            problems.append(f"head moved (face_shift {m['face_shift_frac']} > {SHIFT_MAX})")
+        # Light on the face vs the source face. The limit is looser for another man's photo, because his skin legitimately
+        # differs from the user's (14 for his own photos, 20 for another man's).
+        m["light"] = composite.light_delta(src_crop, out_crop, src_eval["box"])
+        lt = m["light"]
+        light_max = gates["light_de_max"] if source_kind == "own" else gates["light_de_max_foreign"]
+        if lt["dE"] > light_max:
+            problems.append(f"face is lit differently from the source (light dE {lt['dE']} > {light_max}, dL {lt['dL']:+}: "
+                            "rendered brighter and cleaner than the photo)")
+        # far faces only: a kayak picture the user called perfect (P-06, 219 px face) measures 8.3x; every table-tennis render 7-60x
+        if far and m.get("sharp_ratio") is not None and m["sharp_ratio"] > gates["sharp_max"]:
+            problems.append(f"face is much sharper than the photo (sharpness x{m['sharp_ratio']} > {gates['sharp_max']:g}): it reads as pasted in")
+        # Neck gap: the face must not be brighter than its own neck by more than in the source (the cut-and-paste look).
+        gap_out = face_neck_gap(out_crop, res["box"]) if src_gap is not None else None
+        if gap_out is not None:
+            m["neck_gap"] = round(gap_out - src_gap, 1)
+            if m["neck_gap"] > gates["neck_gap_max"]:
+                problems.append(f"face is brighter than the neck ({m['neck_gap']:+} more than in the source, limit {gates['neck_gap_max']:g}): "
+                                "the head reads as pasted in")
+        else:
+            warnings.append("face and neck lightness could not be measured, so the neck-gap check was skipped")
+        # Unchanged: a look-alike source returned as it is (gt_sim 0.93-0.99 for what the user called "as it is", 0.23-0.75 for what he approved).
+        if expression_edit:
+            # zone expression (the user's approval, 2026-10-10): his own photo keeps his own face by design, so the 'returned unchanged' gate
+            # is replaced by the judge's 'expression changed' check (judge_failures)
+            m["unchanged_gate"] = "skipped: expression edit"
+        elif source_kind == "own" and m["gt_sim"] > gates["unchanged_gt_sim"]:
+            problems.append(f"face returned unchanged (similarity to the source face {m['gt_sim']} > {gates['unchanged_gt_sim']:g})")
+    return m, problems, warnings, ver, saved, out_crop
+
+
+async def judge_candidate(client, text_models: list, source_file: Path, cand_file: Path, log, cand: dict, problems: list[str], warnings: list[str],
+                          m: dict, thr: dict, expression: str, source_kind: str, glasses: str = "same", expression_edit: bool = False,
+                          source_glasses: bool | None = None) -> dict | None:
+    """The AI judges what code cannot (angle, glasses, seam, lighting, anything else changed); for his own photo it also compares the face with the
+    source face in both orders (ranking only). Appends to problems / warnings in place and records both on the candidate. Moved out of run()
+    unchanged on 2026-10-08."""
+    judge = await gemini_text(client, text_models, JUDGE_PROMPT, [source_file, cand_file], log, "judge")
+    cand["judge"] = judge
+    hard, soft = judge_failures(judge, expression_must_match=(expression == "same" and not expression_edit), glasses_policy=glasses,
+                                expression_edit=expression_edit, source_glasses=source_glasses)
+    problems += hard
+    warnings += soft
+    # His own or look-alike photo: the AI compares the rendering with the SOURCE face, both orders. A candidate the AI prefers the source over is
+    # no improvement. Asked only when everything else passed, so the text calls are not spent on candidates that are rejected anyway.
+    if source_kind == "own" and not problems and m.get("score", 0) >= thr["hard_reject"]:
+        who, whys = await face_pair(client, text_models, source_file, cand_file, log)
+        cand["face_vs_source"] = {"winner": {"a": "source", "b": "candidate", "tie": "tie"}[who], "why": whys}
+        log.say(f"  face comparison against the source: {cand['face_vs_source']['winner']} ({'; '.join(w_ for w_ in whys if w_)})")
+        if who == "a":
+            # Ranking only (2026-09-21): as a veto it rejected car2 attempt 1, whose face the user rated an improvement in both
+            # attractiveness and identity, and the probe showed this question agrees with the user in 1 of 3 cases.
+            warnings.append("AI: the source rendering looked better than this face (ranking only, not a gate)")
+    cand["problems"], cand["warnings"] = problems, warnings
+    return judge
+
+
+def verdict_of(problems: list[str], m: dict, thr: dict) -> str:
+    if problems:
+        return "invalid"
+    if m["score"] >= thr["accept"]:
+        return "accept"
+    return "uncertain" if m["score"] >= thr["hard_reject"] else "reject"
 
 
 # ---------------------------------------------------------------------------------------------- main
@@ -934,7 +1092,7 @@ async def face_pair(client, models: list[str | None], file_a: Path, file_b: Path
     return (first if first is not None and first == second else "tie"), whys
 
 
-async def rank_by_face(client, models: list[str | None], run_dir: Path, cands: list[dict], log: RunLog) -> dict[int, float]:
+async def rank_by_face(client, models: list[str | None], run_dir: Path, cands: list[dict], log: RunLog, prompt: str | None = None) -> dict[int, float]:
     """Score the passing candidates by the AI's pairwise choice of the better face (wins per attempt index).
 
     Every pair is asked in BOTH orders (position bias cancels; a split answer counts as a tie). Wins decide, ties fall back to the
@@ -946,8 +1104,8 @@ async def rank_by_face(client, models: list[str | None], run_dir: Path, cands: l
         for b in range(a + 1, len(cands)):
             ca, cb = cands[a], cands[b]
             fa, fb = run_dir / f"cand{ca['index']}_crop.jpg", run_dir / f"cand{cb['index']}_crop.jpg"
-            r1 = await gemini_text(client, models, FACE_PAIR_PROMPT, [fa, fb], log, "pair")
-            r2 = await gemini_text(client, models, FACE_PAIR_PROMPT, [fb, fa], log, "pair")
+            r1 = await gemini_text(client, models, prompt or FACE_PAIR_PROMPT, [fa, fb], log, "pair")
+            r2 = await gemini_text(client, models, prompt or FACE_PAIR_PROMPT, [fb, fa], log, "pair")
             v1 = (r1 or {}).get("better")
             v2 = (r2 or {}).get("better")
             first = ca["index"] if v1 == 1 else cb["index"] if v1 == 2 else None      # order (a, b)
@@ -987,6 +1145,12 @@ async def run(args) -> int:
     log = RunLog(run_dir, {"timestamp": stamp, "scene": str(src_path), "size": [W, H], "args": vars(args) | {"func": None},
                            "thresholds": thr, "gates": gates, "text_models": text_models, "candidates": [], "status": "started"})
     log.say(f"run dir: {run_dir}")
+    try:      # what the run ran with (code, packages, models, gate limits): the same env record the staged runner keeps (2026-10-07)
+        import provenance
+        log.data["env"] = provenance.env_snapshot(config)[0]
+        log.save()
+    except Exception as exc:
+        log.say(f"  [env] not recorded: {exc}")
     if best_version and not args.force:
         # The user (2026-09-23) on beach.jpg: "it was already perfect and was being used as reference, hence it wasn't required to change again".
         cv2.imwrite(str(run_dir / "best.png"), src, [cv2.IMWRITE_PNG_COMPRESSION, 3])
@@ -1275,95 +1439,19 @@ async def run(args) -> int:
                     log.save()
                     continue
 
-                # ---- save lossless, then verify on the saved file
+                # ---- save lossless, verify on the saved file, measure (measure_candidate: the same code the recipe method replicate/1 uses)
                 png = run_dir / f"cand{i}.png"
-                cv2.imwrite(str(png), base, [cv2.IMWRITE_PNG_COMPRESSION, 3])
-                saved = cv2.imread(str(png))
-                ver = composite.verify_outside(src, saved, union)
+                m, more, warnings, ver, saved, out_crop = measure_candidate(src, base, rect, union, src_crop, src_eval, pool, scorer, dups, gates,
+                                                                            source_kind, far, head_boxes, src_gap, zone_mode, main_in_crop, png,
+                                                                            run_dir / f"cand{i}_crop.jpg", t0)
+                problems += more
                 cand["outside_check"] = ver
-                out_crop = composite.take(saved, rect)
-                cv2.imwrite(str(run_dir / f"cand{i}_crop.jpg"), resized_for_send(out_crop), [cv2.IMWRITE_JPEG_QUALITY, 95])
-
-                # ---- deterministic measurements: they measure, they do not interpret
-                res = identity.score_image(out_crop, pool, scorer, exclude_names=dups, expect_box=main_in_crop)
-                m: dict = {"file": png.name, "elapsed_sec": round(time.time() - t0, 1)}
-                if res.get("detected"):
-                    fs_s = max(src_eval["box"][2:])
-                    m.update({"score": round(res["score"], 3), "top": res["top"], "face_w": res["face_w"],
-                              "gt_sim": round(float(np.dot(src_eval["emb"], res["emb"])), 3),
-                              "shape_dist": round(identity.shape_distance(src_eval["shape"], res["shape"]), 3),
-                              "face_shift_frac": round(float(np.hypot(res["box"][0] + res["box"][2] / 2 - (src_eval["box"][0] + src_eval["box"][2] / 2),
-                                                                      res["box"][1] + res["box"][3] / 2 - (src_eval["box"][1] + src_eval["box"][3] / 2))) / fs_s, 3),
-                              "size_ratio": round(res["box"][2] / max(1, src_eval["box"][2]), 3),
-                              "sharp_ratio": round(res["sharpness"] / max(1.0, src_eval["sharpness"]), 3),
-                              "source_score": round(src_eval["score"], 3)})
-                if zone_mode != "head+build":
-                    m["drift"] = composite.inside_drift(src, saved, rect, [tuple(b) for b in head_boxes])
-                    dr = m["drift"]
-                    if dr["mean_abs_diff"] is not None and (dr["mean_abs_diff"] > DRIFT_MAD_MAX or dr["ssim"] < DRIFT_SSIM_MIN):
-                        problems.append(f"clothes or background inside the crop were redrawn (mean diff {dr['mean_abs_diff']}, SSIM {dr['ssim']})")
                 cand["metrics"] = m
 
-                if not ver["same_size"] or ver["changed_outside"] != 0:
-                    problems.append(f"{ver['changed_outside']} px changed outside the crop")
-                if "score" not in m:
-                    problems.append("no face detected in the output crop")
-                else:
-                    lo, hi = gates["size_own"] if source_kind == "own" else gates["size_foreign"]
-                    if not (lo <= m["size_ratio"] <= hi):
-                        problems.append(f"head size changed (size_ratio {m['size_ratio']}, allowed {lo}-{hi})")
-                    if m["face_shift_frac"] > SHIFT_MAX:
-                        problems.append(f"head moved (face_shift {m['face_shift_frac']} > {SHIFT_MAX})")
-                    # Light on the face vs the source face. The limit is looser for another man's photo, because his skin legitimately
-                    # differs from the user's (14 for his own photos, 20 for another man's).
-                    m["light"] = composite.light_delta(src_crop, out_crop, src_eval["box"])
-                    lt = m["light"]
-                    light_max = gates["light_de_max"] if source_kind == "own" else gates["light_de_max_foreign"]
-                    if lt["dE"] > light_max:
-                        problems.append(f"face is lit differently from the source (light dE {lt['dE']} > {light_max}, dL {lt['dL']:+}: "
-                                        "rendered brighter and cleaner than the photo)")
-                    # far faces only: a kayak picture the user called perfect (P-06, 219 px face) measures 8.3x; every table-tennis render 7-60x
-                    if far and m.get("sharp_ratio") is not None and m["sharp_ratio"] > gates["sharp_max"]:
-                        problems.append(f"face is much sharper than the photo (sharpness x{m['sharp_ratio']} > {gates['sharp_max']:g}): it reads as pasted in")
-                    # Neck gap: the face must not be brighter than its own neck by more than in the source (the cut-and-paste look).
-                    gap_out = face_neck_gap(out_crop, res["box"]) if src_gap is not None else None
-                    if gap_out is not None:
-                        m["neck_gap"] = round(gap_out - src_gap, 1)
-                        if m["neck_gap"] > gates["neck_gap_max"]:
-                            problems.append(f"face is brighter than the neck ({m['neck_gap']:+} more than in the source, limit {gates['neck_gap_max']:g}): "
-                                            "the head reads as pasted in")
-                    else:
-                        warnings.append("face and neck lightness could not be measured, so the neck-gap check was skipped")
-                    # Unchanged: a look-alike source returned as it is (gt_sim 0.93-0.99 for what the user called "as it is", 0.23-0.75 for what he approved).
-                    if source_kind == "own" and m["gt_sim"] > gates["unchanged_gt_sim"]:
-                        problems.append(f"face returned unchanged (similarity to the source face {m['gt_sim']} > {gates['unchanged_gt_sim']:g})")
-
                 # ---- the AI judges what code cannot: angle, glasses, seam, lighting, anything else changed
-                judge = await gemini_text(client, text_models, JUDGE_PROMPT, [run_dir / "source_crop.png", run_dir / f"cand{i}_crop.jpg"], log, "judge")
-                cand["judge"] = judge
-                hard, soft = judge_failures(judge, expression_must_match=(expression == "same"))
-                problems += hard
-                warnings += soft
-                # His own or look-alike photo: the AI compares the rendering with the SOURCE face, both orders. A candidate the AI prefers the source over is
-                # no improvement. Asked only when everything else passed, so the text calls are not spent on candidates that are rejected anyway.
-                if source_kind == "own" and not problems and m.get("score", 0) >= thr["hard_reject"]:
-                    who, whys = await face_pair(client, text_models, run_dir / "source_crop.png", run_dir / f"cand{i}_crop.jpg", log)
-                    cand["face_vs_source"] = {"winner": {"a": "source", "b": "candidate", "tie": "tie"}[who], "why": whys}
-                    log.say(f"  face comparison against the source: {cand['face_vs_source']['winner']} ({'; '.join(w_ for w_ in whys if w_)})")
-                    if who == "a":
-                        # Ranking only (2026-09-21): as a veto it rejected car2 attempt 1, whose face the user rated an improvement in both
-                        # attractiveness and identity, and the probe showed this question agrees with the user in 1 of 3 cases.
-                        warnings.append("AI: the source rendering looked better than this face (ranking only, not a gate)")
-                cand["problems"], cand["warnings"] = problems, warnings
-
-                if problems:
-                    cand["verdict"] = "invalid"
-                elif m["score"] >= thr["accept"]:
-                    cand["verdict"] = "accept"
-                elif m["score"] >= thr["hard_reject"]:
-                    cand["verdict"] = "uncertain"
-                else:
-                    cand["verdict"] = "reject"
+                judge = await judge_candidate(client, text_models, run_dir / "source_crop.png", run_dir / f"cand{i}_crop.jpg", log, cand, problems,
+                                              warnings, m, thr, expression, source_kind)
+                cand["verdict"] = verdict_of(problems, m, thr)
                 if cand["verdict"] in ("accept", "uncertain"):
                     passing += 1
                 else:
