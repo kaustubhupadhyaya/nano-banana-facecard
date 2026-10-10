@@ -1,0 +1,186 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "back_wrist_send",
+ "version": 1,
+ "created": "2026-10-10T18:19:21",
+ "because": "the back physique picture 1's left-wrist ledge, fixed by a region edit as the front's was",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "back_wrist_send",
+  "path": ".cache/region_edits/physique_back_wrist/back_wrist_send.jpg",
+  "sha256": "23adc8bf28fdbe585dc5aa96076692d479f7beb3eefa2f919045268799854329",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/physique_back_wrist/back_wrist_send.jpg",
+   "prompt": ".cache/loop_prompts/physique_back_wrist_route.txt",
+   "inventory": ".cache/inventories/physique_back_wrist.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T18:09:46"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Close crop of his own finished picture (objects-mode region edit): only the forearm is fixed, as the inventory says.",
+   "from": ".cache/loop_prompts/physique_back_wrist_route.txt",
+   "sha256": "3b337e64b559e4ffcfb2386fcfb56c0199478c578898da4db98e6217795c8d96",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/physique_back_wrist.json",
+   "sha256": "cbabe5461eed35f7e2a3a641e5c9a6d0d905b546852a0b80684e90616fa98ec7",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/physique_back_wrist/back_wrist_send.jpg",
+    "photo_to_edit": ".cache/region_edits/physique_back_wrist/back_wrist_send.jpg",
+    "written": "2026-10-10: the back physique picture 1 (body_grey_send@v5 v1_0r, love handles -4.2%) has the same seam as the front had: just above his left wrist (on the picture's left) the redrawn forearm ends in a ledge over his real, narrower wrist. The photo to edit is that patch (box [830, 2180, 1250, 2720], sent 1.9x larger); tools/region_edit.py pastes it back.",
+    "refs": [
+     {
+      "key": "forearm",
+      "path": ".cache/region_edits/physique_front_a2/side_IMG_7006.jpg",
+      "label": "HIS FOREARMS: the same man today: how his forearms taper smoothly from the elbow to the wrist, with their veins."
+     }
+    ],
+    "change": [
+     {
+      "item": "his forearm",
+      "goal": "a forearm whose upper part ends in a ledge over a narrower lower part, with a straight vertical cut along its outer edge",
+      "his": "one continuous forearm from the top of the image down to the wrist and the hand: its edges natural smooth curves tapering evenly toward the wrist as in HIS FOREARMS, with no ledge, step or straight cut; the veins on it as they are",
+      "ref": "forearm"
+     }
+    ],
+    "keep": [
+     "the hand and the bottom of the wrist, exactly as they are",
+     "the grey trousers on the right, the wall and its light, exactly as they are",
+     "the skin tone, the light and the softness of the PHOTO TO EDIT",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "side_IMG_7006.jpg",
+    "sha256": "86447090260dad9b52834c4a6e45060e1fac0eeb35898625718cc3066317e63c",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a2/side_IMG_7006.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FOREARMS: the same man today: how his forearms taper smoothly from the elbow to the wrist, with their veins.",
+    "key": "forearm"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "back_wrist_send.jpg",
+    "sha256": "8c11056346b9ee306aca1a30fdfdf7cc607e71d3df5b58f961716ef65f4a094f",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_back_wrist/back_wrist_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS FOREARMS: the same man today: how his forearms taper smoothly from the elbow to the wrist, with their veins.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his forearm: the PHOTO TO EDIT shows a forearm whose upper part ends in a ledge over a narrower lower part, with a straight vertical cut along its outer edge; make it one continuous forearm from the top of the image down to the wrist and the hand: its edges natural smooth curves tapering evenly toward the wrist as in HIS FOREARMS, with no ledge, step or straight cut; the veins on it as they are (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the hand and the bottom of the wrist, exactly as they are.\n- the grey trousers on the right, the wall and its light, exactly as they are.\n- the skin tone, the light and the softness of the PHOTO TO EDIT.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "f63fb2e1b097a6912cfad5299e2c9cbc1627209eb44ff794f08fcfa0e8c230e8",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "86447090260dad9b52834c4a6e45060e1fac0eeb35898625718cc3066317e63c",
+    "upload_name": "side_IMG_7006.jpg",
+    "bytes": 134241,
+    "px": [
+     833,
+     1024
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "8c11056346b9ee306aca1a30fdfdf7cc607e71d3df5b58f961716ef65f4a094f",
+    "upload_name": "back_wrist_send.jpg",
+    "bytes": 103329,
+    "px": [
+     796,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "2ae2efb883fb4ae03fdb46b7cb6f5194919084756db8a5dd7052fa68b96b6fe1"
+ }
+}
