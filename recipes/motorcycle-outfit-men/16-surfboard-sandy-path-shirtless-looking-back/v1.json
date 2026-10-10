@@ -1,0 +1,389 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666540168242",
+ "version": 1,
+ "created": "2026-10-10T20:03:09",
+ "because": "the user, 2026-10-10: '783485666540168242 - create a side body pose if required or utilise the back pose itself'; shirtless, so the pumped front and back as the side view's references",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666540168242",
+  "path": ".cache/pin_783485666540168242.jpg",
+  "sha256": "3d3ce9ab415cb295fccd137a900d633b0e87b95340412f1f8f56109b3d7e0f0d",
+  "pose": {
+   "path": ".cache/poses/pin_783485666540168242.json",
+   "sha256": "958ed604db6c59a180589d1f1b21da41eecd276f6ebee886ac0324759c8dbabb"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666540168242.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666540168242_route.txt",
+   "inventory": ".cache/inventories/pin_783485666540168242.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "restore_background": true,
+   "physique": "pumped-side"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T18:52:12"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Three-quarter-length candid photograph of him caught mid-step on a sandy beach path, side-on with his chest facing picture-left and his left leg forward, a white surfboard held against his far side. His face is turned about 30 degrees toward picture-left, glancing back over his left shoulder, chin level, eyes into the lens, a slight closed-mouth smirk lifting the mouth corner at picture-right. His left forearm lies level across his stomach, the hand holding the board's tail at its lower pink fin; a blue-green leash loops below the tail and a soft black jacket hangs over the rail behind his hips. He wears knee-length navy board shorts with a light-grey panel, a white stripe and a black drawstring waistband, with his dark curly hair, full dark beard, janeu (a thin white thread from his left shoulder across his chest) and a silver chain. Leafy coastal trees arch over grassy sand banks, a weathered wooden post and thin white rope fence lines. Soft bright daylight from a hazy sky, dappled sun on the sand. Camera at shoulder height, two metres away, phone 1x. Handheld phone grain, a slight tilt, the board's nose cut by the right edge. Vertical 3:4 frame.",
+   "from": ".cache/loop_prompts/pin_783485666540168242_route.txt",
+   "sha256": "b1e5a15a7943a8ebfc597a434d2eb18a6255ab264fc995b8da8304005fa85bfe",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666540168242.json",
+   "sha256": "b8093f544c9fecd26bccad61320be8468235c03c168bfac31b192a988023e017",
+   "data": {
+    "goal": ".cache/pin_783485666540168242.jpg",
+    "photo_to_edit": ".cache/pin_783485666540168242.jpg",
+    "written": "2026-10-10, by eye from the pin (Pinterest pin 783485666540168242, number 16, 'surfboard sandy path shirtless looking back'), with the pin man's head pose measured by headpose.py (yaw +31 = face turned about 30 degrees toward picture-left, pitch -4, roll -4) and his keypoints and person mask by YOLO (tools/body_measure_yolo.py, output kept out of the repo): both shoulders fall on one point (a side view), the visible eye and ear are his LEFT ones and his left knee is forward at picture-left, so his chest faces picture-LEFT and his left side is toward the camera (not picture-right). The user's words for this pin: 'create a side body pose if required or utilise the back pose itself'; decision: --physique pumped-side (his pumped front and back as the BODY references, 'here seen from the side'), a separate side reference only if this run's body fails. The user's yardstick (2026-10-10): 'any shirtless picture will get the fully pumped version of mine'. build, hair and beard: their 'his' is replaced by the compiler with the physique and character text; the arms and torso items follow the physique text (full arms with the biceps vein and forearm veins, lean torso with upper abs and obliques, tight waist with flat love handles); the 'slimmer arms / smooth forearms / a third thinner / light muscle tone' lines of older inventories were withdrawn by the user on 2026-10-10. janeu and neck chain: checklist item 36 (the user, 2026-10-10: 'It is the holy thread that Brahmins wear, called jenu'); the path is read from the BODY references, IMG_7002/IMG_7005 and his_back.jpg: the thread's shoulder (his left) is the one nearer the camera here, so its top lies on the visible shoulder, the front run shows just inside the front edge of his torso and the back run just inside its back edge. Calf tattoo, the tiny ink mark on the forearm and the silver ring are the pin man's (his marks: none; jewellery that is not his goes). HIS BEARD is sent because a clean-shaven pin man came back with a light stubble on pin 11 v1 (FEEDBACK_LOG section 19), without pin 11's strong density item (the pizza beard then came out heavier than he expects, 2026-10-10). The expression is the pin's own slight closed-mouth smirk, written in muscle terms (the brief: as shown in the pin). The lettering line names RDS-2, DAHLBERG, the board's round logo and the shorts' emblem and label (item 34); no other person (item 33); the pin's own background is copied back after the edit (--restore-background) and its candid phone-snapshot look is kept (item 35).",
+    "refs": [
+     {
+      "key": "his_beard",
+      "path": ".cache/inventories/pin_refs/his_beard.jpg",
+      "label": "HIS BEARD, a close-up of the lower half of his face from his own photo. Take the beard from this image only: its length, its density, how dark it is, its outline along the jaw and chin, and the moustache. Nothing of the mouth, nose or expression in it."
+     }
+    ],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "a lean, muscular young man with thick dark-brown hair in a heavy fringe, a smooth clean-shaven face and light tanned skin",
+      "his": "him: the man of the references, a different person, with his own face, hair, beard, skin and his own pumped lean body"
+     },
+     {
+      "item": "hair",
+      "goal": "thick, straight-to-wavy dark-brown hair: a heavy fringe falling over the forehead to the eyebrows, the sides falling over the top of the ear, and longer tousled hair over the nape down to the jaw line",
+      "his": "his own hair exactly as in the FACE references"
+     },
+     {
+      "item": "beard",
+      "goal": "a clean-shaven face with smooth skin on the jaw, the chin and the upper lip",
+      "his": "his own beard exactly as in the FACE references",
+      "ref": "his_beard"
+     },
+     {
+      "item": "skin tone",
+      "goal": "light, sun-tanned olive skin, smooth and young",
+      "his": "his own warm medium-brown South Asian skin tone of the references, never lightened, on his face, neck, chest, back, arm, hand and legs, with real skin texture and visible pores, as crisp as the rest of the photo, in the same soft daylight"
+     },
+     {
+      "item": "build",
+      "goal": "a lean, muscular build with a big rounded shoulder, a thick upper arm, a deep full chest and a flat stomach",
+      "his": "his own build from the BODY references, with the tight narrow waist and flat love handles"
+     },
+     {
+      "item": "arms",
+      "goal": "a thick, round upper arm under a big rounded shoulder cap and a smooth forearm, with smooth skin and no veins showing",
+      "his": "his own full left arm (the one in view) at its real size from the BODY references, pumped as right after a workout: the round shoulder cap, the full biceps with its vein visible along the outer side, the triceps behind it, and the clear raised veins visible along the top of his forearm and over the back of his hand, with their faint green tint; never bulkier and never thinner than in the BODY references"
+     },
+     {
+      "item": "torso",
+      "goal": "a lean, muscular torso seen from the side: a full, deep, rounded chest, a flat stomach and smooth hairless skin",
+      "his": "his own lean torso from the BODY references, seen from the side and pumped as right after a workout: his firm chest, the upper abs and the obliques visible along his side down to the waistband, the tight narrow waist with flat love handles, and in the strip of his upper back at picture-right behind his upper arm the edge of his lat, as defined as in the BODY reference from behind"
+     },
+     {
+      "item": "janeu",
+      "goal": "a bare shoulder, chest and back with no thread on them",
+      "his": "his janeu, the thin off-white cotton thread he always wears, running on his bare body the way it runs in the BODY references: it lies over the top of his left shoulder, the shoulder nearer the camera, close to the base of his neck; in front it goes down across the inner part of his left chest, between the nipple and the breastbone, and on down his stomach beside the navel, a line just inside the front edge of his torso at picture-left, passing behind his forearm and meeting the waistband of the shorts at the front beside the drawstring, where it goes out of sight toward his right hip on the far side; behind, it goes from the same shoulder down the left half of his back, just inside the back edge of his torso at picture-right, until his upper arm and the jacket hide it; one thin unbroken thread lying flat on his skin"
+     },
+     {
+      "item": "neck chain",
+      "goal": "a bare neck with no chain",
+      "his": "his own thin silver link chain with a small round pendant, as in the BODY references: it runs from the back of his neck, under the curls at his nape, around the side of his neck and down to the top of his breastbone at the front of his chest at picture-left, where the small pendant rests"
+     },
+     {
+      "item": "calf tattoo",
+      "goal": "a black-ink tattoo of a long feather-like design down the back of the calf of his forward leg at picture-left",
+      "his": "the bare skin of his own calf in his warm medium-brown skin tone, with no tattoo or ink anywhere on his legs"
+     },
+     {
+      "item": "forearm mark",
+      "goal": "a tiny dark fine-line ink mark on the underside of the forearm, just in front of the elbow",
+      "his": "bare skin there, with no mark"
+     },
+     {
+      "item": "ring",
+      "goal": "a thick silver ring on one of the fingers of the hand holding the board",
+      "his": "his fingers bare, with no ring"
+     }
+    ],
+    "keep": [
+     "the FRAMING and his SIZE exactly: the vertical frame cuts his legs at mid-calf at the bottom edge; his body fills the same outline as the man in the PHOTO TO EDIT, in the same place and at the same size: his eyes at about 38 percent of the frame height from the top, his chin at about 44 percent, the top of his shoulder at about 46 percent, his elbow at about 61 percent, the waistband at about 66 percent and the hem of the shorts at about 89 percent; his body between about 35 and 66 percent of the frame width, his face at about 50 to 62 percent; he is not larger, not closer and not moved left or right, and the picture is never zoomed in or out or re-cropped",
+     "his exact posture: standing side-on to the camera on the sandy path, caught mid-step, his chest and hips facing picture-left so that his left side is toward the camera; his left leg stepped forward toward picture-left and his right leg straight under his hips, both knees nearly straight; his left upper arm hangs straight down along his side at picture-right with the elbow bent at a right angle at the height of his lower ribs, the forearm level across the front of his stomach toward picture-left, and the hand holding the board's tail at the base of the lower pink fin, the back of the hand toward the camera and the fingers over the fin; his other arm is hidden behind his body, holding the board against his far side",
+     "his head turned back toward the camera over his left shoulder: the face turned about 30 degrees toward picture-left of the lens, so the camera sees it in three-quarter view with the nose tip just inside the cheek line at picture-left and his left ear fully visible at picture-right; the chin level, the head upright, his eyes looking straight into the lens",
+     "his expression: a slight closed-mouth smirk: the lips together with no teeth showing, the corner of the mouth at picture-right drawn up a little into the cheek and the other corner level; the eyes looking straight into the lens, a little narrowed, with the lower lids slightly raised; the brows level and relaxed; calm and faintly amused",
+     "he stays shirtless in the board shorts: bare shoulders, chest, back, arms and legs, with nothing on his body but the shorts, his janeu and his chain",
+     "the board shorts: knee-length, a navy-blue body with a light-grey side panel and a wide white stripe between them down the front of the leg at picture-left, a black waistband with a black drawstring tied at the front, the hem ending just above his knees",
+     "the white shortboard where it is: its tail with three pink fins in black fin boxes at the upper left beside his hand, the thin dark stringer down its middle, the board passing behind his body and coming out behind his hips at picture-right, down to its nose cut by the picture-right edge at the bottom-right; the thin blue-green leash cord hanging from the tail in a long loop down to the level of his hips",
+     "the soft matte black jacket folded over the board's upper rail just behind his hips at picture-right, its folds hanging down over the board",
+     "the lettering exactly as in the PHOTO TO EDIT, letter for letter and in the same black typefaces: RDS-2 in bold black italic capitals across the stringer between the fins at the tail; DAHLBERG in black capitals, upside down, along the board just below the jacket, its last letter G at the jacket's edge; the round black logo of three rings around a pointed emblem near the nose; on the shorts the small black sun-and-wave emblem on the white stripe at mid-thigh and the tiny pale label on the navy just below the waistband at his hip; no other text, caption or logo anywhere in the picture",
+     "no other person in the frame: the path, the sand banks and the bushes stay as empty as in the PHOTO TO EDIT",
+     "the whole scene: the sandy beach path with dappled sun patches and scattered dry leaves, the grassy sand bank at picture-left, the weathered wooden post beside the board's tail, the thin white rope fence lines along the path and the one crossing the frame behind him at the height of his chest, the leafy coastal trees arching overhead with bright hazy white sky between them, and the dense green bushes at picture-right",
+     "the soft, bright daylight from a hazy sky above, a little from picture-left, with gentle highlights on the top of his shoulder and upper arm and soft shadows under his chest and arm; the natural, slightly warm colour and vivid greens; and the candid handheld phone-snapshot character of the PHOTO TO EDIT: caught mid-step, its slight softness, fine grain and slight tilt, the camera a little below his eye level at about his shoulder height, about two metres away"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": 31.0,
+    "pitch": -3.6,
+    "roll": -3.8,
+    "side": "picture-left",
+    "score": 0.86,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left.jpg",
+    "IMG_6868.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "pumped_front.jpg",
+    "sha256": "c1a996b3e442db6e1753186a08163a51b845aad1f6e4c79f050abdb2cf1fb14e",
+    "from": "D:/FacecardData/physique/standard/pumped_front.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique pumped-side: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "name": "pumped_back.jpg",
+    "sha256": "228e5f560d8878e6823b68c7981ba1d91e6763da4ee16802adb9456e77e47b8a",
+    "from": "D:/FacecardData/physique/standard/pumped_back.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique pumped-side: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 6,
+    "role": "inv_ref",
+    "name": "his_beard.jpg",
+    "sha256": "d6a8d92211ec6ef9d26adf5c6e587a79c98ae2ff6f14f512ba4f2af1e51e0299",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/inventories/pin_refs/his_beard.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BEARD, a close-up of the lower half of his face from his own photo. Take the beard from this image only: its length, its density, how dark it is, its outline along the jaw and chin, and the moustache. Nothing of the mouth, nose or expression in it.",
+    "key": "his_beard"
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "name": "pin_783485666540168242.jpg",
+    "sha256": "51652a4cae110e81ba2389a4df6bdfbc77505890a739d9d1cb82dbd49b3ab226",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666540168242.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  },
+  "physique": {
+   "name": "pumped-side",
+   "files": [
+    "pumped_front.jpg",
+    "pumped_back.jpg"
+   ],
+   "label": "BODY references — his body today from the front and from behind, right after a workout: his true build and proportion for a shirtless picture.",
+   "build": "His body exactly as in images {BODY}, right after a workout, here seen from the side: from the front his lean torso with the upper abs and obliques, the firm chest and the round shoulder caps; from behind his defined back and lats; in both the tight narrow waist with flat love handles and his full arms with the vein along each biceps and the clear veins on his forearms. Never broader, bulkier or heavier than in images {BODY}, never thinner or softer."
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImages 4-5 are BODY references — his body today from the front and from behind, right after a workout: his true build and proportion for a shirtless picture.\nImage 6 is HIS BEARD, a close-up of the lower half of his face from his own photo. Take the beard from this image only: its length, its density, how dark it is, its outline along the jaw and chin, and the moustache. Nothing of the mouth, nose or expression in it.\nImage 7 is the PHOTO TO EDIT.\n\nEdit image 7, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-3), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: His body exactly as in images 4-5, right after a workout, here seen from the side: from the front his lean torso with the upper abs and obliques, the firm chest and the round shoulder caps; from behind his defined back and lats; in both the tight narrow waist with flat love handles and his full arms with the vein along each biceps and the clear veins on his forearms. Never broader, bulkier or heavier than in images 4-5, never thinner or softer. His whole body is his own, from images 4-5: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows a lean, muscular young man with thick dark-brown hair in a heavy fringe, a smooth clean-shaven face and light tanned skin; make it him: the man of the references, a different person, with his own face, hair, beard, skin and his own pumped lean body.\n- hair: the PHOTO TO EDIT shows thick, straight-to-wavy dark-brown hair: a heavy fringe falling over the forehead to the eyebrows, the sides falling over the top of the ear, and longer tousled hair over the nape down to the jaw line; make it his own hair exactly as in the FACE references (images 1-3): His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.\n- beard: the PHOTO TO EDIT shows a clean-shaven face with smooth skin on the jaw, the chin and the upper lip; make it his own beard exactly as in the FACE references (images 1-3): His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip (image 6).\n- skin tone: the PHOTO TO EDIT shows light, sun-tanned olive skin, smooth and young; make it his own warm medium-brown South Asian skin tone of the references, never lightened, on his face, neck, chest, back, arm, hand and legs, with real skin texture and visible pores, as crisp as the rest of the photo, in the same soft daylight.\n- build: the PHOTO TO EDIT shows a lean, muscular build with a big rounded shoulder, a thick upper arm, a deep full chest and a flat stomach; make it his own build exactly as in the BODY references (images 4-5): His body exactly as in images 4-5, right after a workout, here seen from the side: from the front his lean torso with the upper abs and obliques, the firm chest and the round shoulder caps; from behind his defined back and lats; in both the tight narrow waist with flat love handles and his full arms with the vein along each biceps and the clear veins on his forearms. Never broader, bulkier or heavier than in images 4-5, never thinner or softer.\n- arms: the PHOTO TO EDIT shows a thick, round upper arm under a big rounded shoulder cap and a smooth forearm, with smooth skin and no veins showing; make it his own full left arm (the one in view) at its real size from the BODY references, pumped as right after a workout: the round shoulder cap, the full biceps with its vein visible along the outer side, the triceps behind it, and the clear raised veins visible along the top of his forearm and over the back of his hand, with their faint green tint; never bulkier and never thinner than in the BODY references.\n- torso: the PHOTO TO EDIT shows a lean, muscular torso seen from the side: a full, deep, rounded chest, a flat stomach and smooth hairless skin; make it his own lean torso from the BODY references, seen from the side and pumped as right after a workout: his firm chest, the upper abs and the obliques visible along his side down to the waistband, the tight narrow waist with flat love handles, and in the strip of his upper back at picture-right behind his upper arm the edge of his lat, as defined as in the BODY reference from behind.\n- janeu: the PHOTO TO EDIT shows a bare shoulder, chest and back with no thread on them; make it his janeu, the thin off-white cotton thread he always wears, running on his bare body the way it runs in the BODY references: it lies over the top of his left shoulder, the shoulder nearer the camera, close to the base of his neck; in front it goes down across the inner part of his left chest, between the nipple and the breastbone, and on down his stomach beside the navel, a line just inside the front edge of his torso at picture-left, passing behind his forearm and meeting the waistband of the shorts at the front beside the drawstring, where it goes out of sight toward his right hip on the far side; behind, it goes from the same shoulder down the left half of his back, just inside the back edge of his torso at picture-right, until his upper arm and the jacket hide it; one thin unbroken thread lying flat on his skin.\n- neck chain: the PHOTO TO EDIT shows a bare neck with no chain; make it his own thin silver link chain with a small round pendant, as in the BODY references: it runs from the back of his neck, under the curls at his nape, around the side of his neck and down to the top of his breastbone at the front of his chest at picture-left, where the small pendant rests.\n- calf tattoo: the PHOTO TO EDIT shows a black-ink tattoo of a long feather-like design down the back of the calf of his forward leg at picture-left; make it the bare skin of his own calf in his warm medium-brown skin tone, with no tattoo or ink anywhere on his legs.\n- forearm mark: the PHOTO TO EDIT shows a tiny dark fine-line ink mark on the underside of the forearm, just in front of the elbow; make it bare skin there, with no mark.\n- ring: the PHOTO TO EDIT shows a thick silver ring on one of the fingers of the hand holding the board; make it his fingers bare, with no ring.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the FRAMING and his SIZE exactly: the vertical frame cuts his legs at mid-calf at the bottom edge; his body fills the same outline as the man in the PHOTO TO EDIT, in the same place and at the same size: his eyes at about 38 percent of the frame height from the top, his chin at about 44 percent, the top of his shoulder at about 46 percent, his elbow at about 61 percent, the waistband at about 66 percent and the hem of the shorts at about 89 percent; his body between about 35 and 66 percent of the frame width, his face at about 50 to 62 percent; he is not larger, not closer and not moved left or right, and the picture is never zoomed in or out or re-cropped.\n- his exact posture: standing side-on to the camera on the sandy path, caught mid-step, his chest and hips facing picture-left so that his left side is toward the camera; his left leg stepped forward toward picture-left and his right leg straight under his hips, both knees nearly straight; his left upper arm hangs straight down along his side at picture-right with the elbow bent at a right angle at the height of his lower ribs, the forearm level across the front of his stomach toward picture-left, and the hand holding the board's tail at the base of the lower pink fin, the back of the hand toward the camera and the fingers over the fin; his other arm is hidden behind his body, holding the board against his far side.\n- his head turned back toward the camera over his left shoulder: the face turned about 30 degrees toward picture-left of the lens, so the camera sees it in three-quarter view with the nose tip just inside the cheek line at picture-left and his left ear fully visible at picture-right; the chin level, the head upright, his eyes looking straight into the lens.\n- his expression: a slight closed-mouth smirk: the lips together with no teeth showing, the corner of the mouth at picture-right drawn up a little into the cheek and the other corner level; the eyes looking straight into the lens, a little narrowed, with the lower lids slightly raised; the brows level and relaxed; calm and faintly amused.\n- he stays shirtless in the board shorts: bare shoulders, chest, back, arms and legs, with nothing on his body but the shorts, his janeu and his chain.\n- the board shorts: knee-length, a navy-blue body with a light-grey side panel and a wide white stripe between them down the front of the leg at picture-left, a black waistband with a black drawstring tied at the front, the hem ending just above his knees.\n- the white shortboard where it is: its tail with three pink fins in black fin boxes at the upper left beside his hand, the thin dark stringer down its middle, the board passing behind his body and coming out behind his hips at picture-right, down to its nose cut by the picture-right edge at the bottom-right; the thin blue-green leash cord hanging from the tail in a long loop down to the level of his hips.\n- the soft matte black jacket folded over the board's upper rail just behind his hips at picture-right, its folds hanging down over the board.\n- the lettering exactly as in the PHOTO TO EDIT, letter for letter and in the same black typefaces: RDS-2 in bold black italic capitals across the stringer between the fins at the tail; DAHLBERG in black capitals, upside down, along the board just below the jacket, its last letter G at the jacket's edge; the round black logo of three rings around a pointed emblem near the nose; on the shorts the small black sun-and-wave emblem on the white stripe at mid-thigh and the tiny pale label on the navy just below the waistband at his hip; no other text, caption or logo anywhere in the picture.\n- no other person in the frame: the path, the sand banks and the bushes stay as empty as in the PHOTO TO EDIT.\n- the whole scene: the sandy beach path with dappled sun patches and scattered dry leaves, the grassy sand bank at picture-left, the weathered wooden post beside the board's tail, the thin white rope fence lines along the path and the one crossing the frame behind him at the height of his chest, the leafy coastal trees arching overhead with bright hazy white sky between them, and the dense green bushes at picture-right.\n- the soft, bright daylight from a hazy sky above, a little from picture-left, with gentle highlights on the top of his shoulder and upper arm and soft shadows under his chest and arm; the natural, slightly warm colour and vivid greens; and the candid handheld phone-snapshot character of the PHOTO TO EDIT: caught mid-step, its slight softness, fine grain and slight tilt, the camera a little below his eye level at about his shoulder height, about two metres away.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "6a7f77564fdf83bbbe6ea6b974b8db50950682537b506378e848e83328157fc4",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "c1a996b3e442db6e1753186a08163a51b845aad1f6e4c79f050abdb2cf1fb14e",
+    "upload_name": "pumped_front.jpg",
+    "bytes": 633813,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "sha256": "228e5f560d8878e6823b68c7981ba1d91e6763da4ee16802adb9456e77e47b8a",
+    "upload_name": "pumped_back.jpg",
+    "bytes": 590633,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 6,
+    "role": "inv_ref",
+    "sha256": "d6a8d92211ec6ef9d26adf5c6e587a79c98ae2ff6f14f512ba4f2af1e51e0299",
+    "upload_name": "his_beard.jpg",
+    "bytes": 160273,
+    "px": [
+     707,
+     639
+    ]
+   },
+   {
+    "n": 7,
+    "role": "photo_to_edit",
+    "sha256": "51652a4cae110e81ba2389a4df6bdfbc77505890a739d9d1cb82dbd49b3ab226",
+    "upload_name": "pin_783485666540168242.jpg",
+    "bytes": 435406,
+    "px": [
+     736,
+     981
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "22dd03316f44c5362d0c26253b2435965952e5101e9058868c31ed4efc0deddc"
+ }
+}
