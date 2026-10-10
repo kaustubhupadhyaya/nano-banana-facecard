@@ -1,0 +1,219 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "body_grey_send",
+ "version": 5,
+ "created": "2026-10-10T17:39:11",
+ "because": "the next-cut physique, the back (the user: 'Yes, do the back next'): IMG_6929 with his back and arms grey in the target outline (make-target --back), his_back.jpg (janeu kept) and IMG_7006 as references; the front approved is round 3 (pumped)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "body_grey_send",
+  "path": ".cache/region_edits/physique_back_b1/body_grey_send.jpg",
+  "sha256": "ffea2722be368fdad1a0665f8004c4923687247c6083640ba8e0f21d9af2bfc2",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/physique_back_b1/body_grey_send.jpg",
+   "prompt": ".cache/loop_prompts/physique_back_b1_route.txt",
+   "inventory": ".cache/inventories/physique_back_b1.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T17:35:27"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Close crop of his own full-length back photo with his back and arms painted grey (objects-mode region edit): only the grey area is redrawn, as the inventory says.",
+   "from": ".cache/loop_prompts/physique_back_b1_route.txt",
+   "sha256": "af354eb87e16c624da5656fc0b6f599405cf65083c1c4b8e18b8ce4d7c1782ef",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/physique_back_b1.json",
+   "sha256": "88e609dfa6fde44ea53f3d2d44afe45c348898e57bd5f3e5a3d67ab593d36fac",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/physique_back_b1/body_grey_send.jpg",
+    "photo_to_edit": ".cache/region_edits/physique_back_b1/body_grey_send.jpg",
+    "written": "2026-10-10, the next-cut physique, the back (the user: 'Yes, do the back next'). The photo to edit is his full-length back photo IMG_6929 (D:\\FacecardData\\body_refs\\2026-10-10), his back and whole arms painted grey in the target outline (tools/physique_greyout.py make-target --back: his silhouette with the love handles 6% narrower, shoulder caps and arms a touch fuller; the grey's top follows his hairline). The approved front is round 3 (pumped, veins); this back is the same pumped state. References: his back from his own video (his_back.jpg, frames 54/74, janeu kept) and his arms (IMG_7006).",
+    "refs": [
+     {
+      "key": "back",
+      "path": ".cache/inventories/pin_refs/his_back.jpg",
+      "label": "HIS BACK: the same man's back today, in window light, from his own video: the real definition of his back (shoulder-blade edges, the spine groove, the outline of his lats, his rear shoulders) and his janeu, the thin white sacred thread across his back."
+     },
+     {
+      "key": "arms",
+      "path": ".cache/region_edits/physique_front_a2/side_IMG_7006.jpg",
+      "label": "HIS ARMS: the same man today from the front: the real size of his shoulders and arms and the veins on his forearms."
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey area: his back and his whole arms down to the wrists, in exactly the outline he must have",
+      "goal": "a flat grey area in exactly the outline of his back and arms",
+      "his": "his own back and arms as in HIS BACK and HIS ARMS, filling the grey area exactly, edge to edge: its outline is his outline (his waist where the grey narrows, his shoulders and arms where the grey is), standing as in the PHOTO TO EDIT, seen from behind, looking back over his left shoulder, arms hanging at his sides. Inside it, a few weeks further into his cutting phase: the love handles flat and the lower back tight above the waistband; his back definition as clear as in HIS BACK (shoulder-blade edges, spine groove, lat outline, rear shoulders), his lats wide so his back tapers to the waist; his arms as thick as the grey, the triceps and forearms as in HIS ARMS, with the veins on his forearms. His janeu as in HIS BACK: one thin off-white thread from his left shoulder (on the picture's left) diagonally across his back to his right hip (on the picture's right); his neck chain where it shows at the back of his neck. The same skin tone, the same flat ceiling light and the same softness as the PHOTO TO EDIT around the grey, a real photo of this man",
+      "ref": "back"
+     }
+    ],
+    "keep": [
+     "his head, curly hair, face, beard, ear and the earbud in it, exactly as they are",
+     "the wall, the door and the floor everywhere outside the grey, including beside his waist, exactly as they are",
+     "his hands and fingers, and his grey trousers with their black waistband, exactly as they are",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_left",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Left, yaw ratio 0.83",
+   "measured": {
+    "detected": true,
+    "yaw": 63.1,
+    "pitch": -22.2,
+    "roll": -36.7,
+    "side": "picture-left",
+    "score": 0.73,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left_head768_1789837650.jpg",
+    "IMG_6868.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_back.jpg",
+    "sha256": "ca995c11d95bc7abe7e98fbe370864df4a18b0ca9a9a2c8e53cb0dd54de6bcf5",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/inventories/pin_refs/his_back.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BACK: the same man's back today, in window light, from his own video: the real definition of his back (shoulder-blade edges, the spine groove, the outline of his lats, his rear shoulders) and his janeu, the thin white sacred thread across his back.",
+    "key": "back"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "side_IMG_7006.jpg",
+    "sha256": "86447090260dad9b52834c4a6e45060e1fac0eeb35898625718cc3066317e63c",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_a2/side_IMG_7006.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS ARMS: the same man today from the front: the real size of his shoulders and arms and the veins on his forearms.",
+    "key": "arms"
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "name": "body_grey_send.jpg",
+    "sha256": "50fc7404745b1cf77f3283a7b0c0d198a9860294c56f9b5bd8445a2bec69209f",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_back_b1/body_grey_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS BACK: the same man's back today, in window light, from his own video: the real definition of his back (shoulder-blade edges, the spine groove, the outline of his lats, his rear shoulders) and his janeu, the thin white sacred thread across his back.\nImage 2 is HIS ARMS: the same man today from the front: the real size of his shoulders and arms and the veins on his forearms.\nImage 3 is the PHOTO TO EDIT.\n\nEdit image 3, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey area: his back and his whole arms down to the wrists, in exactly the outline he must have: the PHOTO TO EDIT shows a flat grey area in exactly the outline of his back and arms; make it his own back and arms as in HIS BACK and HIS ARMS, filling the grey area exactly, edge to edge: its outline is his outline (his waist where the grey narrows, his shoulders and arms where the grey is), standing as in the PHOTO TO EDIT, seen from behind, looking back over his left shoulder, arms hanging at his sides. Inside it, a few weeks further into his cutting phase: the love handles flat and the lower back tight above the waistband; his back definition as clear as in HIS BACK (shoulder-blade edges, spine groove, lat outline, rear shoulders), his lats wide so his back tapers to the waist; his arms as thick as the grey, the triceps and forearms as in HIS ARMS, with the veins on his forearms. His janeu as in HIS BACK: one thin off-white thread from his left shoulder (on the picture's left) diagonally across his back to his right hip (on the picture's right); his neck chain where it shows at the back of his neck. The same skin tone, the same flat ceiling light and the same softness as the PHOTO TO EDIT around the grey, a real photo of this man (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his head, curly hair, face, beard, ear and the earbud in it, exactly as they are.\n- the wall, the door and the floor everywhere outside the grey, including beside his waist, exactly as they are.\n- his hands and fingers, and his grey trousers with their black waistband, exactly as they are.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "4bf537e041363bf3a4b7c1d628d021047a693856b0a253f15385bd31b41a4d00",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "ca995c11d95bc7abe7e98fbe370864df4a18b0ca9a9a2c8e53cb0dd54de6bcf5",
+    "upload_name": "his_back.jpg",
+    "bytes": 328449,
+    "px": [
+     1572,
+     1150
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "86447090260dad9b52834c4a6e45060e1fac0eeb35898625718cc3066317e63c",
+    "upload_name": "side_IMG_7006.jpg",
+    "bytes": 134241,
+    "px": [
+     833,
+     1024
+    ]
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "sha256": "50fc7404745b1cf77f3283a7b0c0d198a9860294c56f9b5bd8445a2bec69209f",
+    "upload_name": "body_grey_send.jpg",
+    "bytes": 100293,
+    "px": [
+     669,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "82864cf90f129b122ebe6cd96746d0ba893d6c7d85b864c62be2cbdd1e15f524"
+ }
+}

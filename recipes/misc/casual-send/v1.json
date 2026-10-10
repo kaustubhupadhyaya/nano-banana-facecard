@@ -1,0 +1,193 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "casual_send",
+ "version": 1,
+ "created": "2026-10-10T17:40:49",
+ "because": "the in-between (casual) next-cut physique the user asked for ('Somewhere in between ... Let's create one such'): the approved round 3 relaxed, veins faint, the same leanness",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "casual_send",
+  "path": ".cache/region_edits/physique_front_casual/casual_send.jpg",
+  "sha256": "73786ab55f5c6ae5601ac3a41bdec213263f8f8c9cff9b1d6bfad3a4a56c0f5b",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/physique_front_casual/casual_send.jpg",
+   "prompt": ".cache/loop_prompts/physique_front_casual_route.txt",
+   "inventory": ".cache/inventories/physique_front_casual.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-10T17:35:27"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Crop of his own finished physique picture (objects-mode region edit): only how pumped his body looks changes, as the inventory says.",
+   "from": ".cache/loop_prompts/physique_front_casual_route.txt",
+   "sha256": "44e0d32afc9716264ee3923b03c20784ea572378753d3578b1ea1c68a08a724c",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/physique_front_casual.json",
+   "sha256": "49b6cddb15f23c19c52d288f2f6690f14fda8b2e7cbf89d2c9a444df31b4be04",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/physique_front_casual/casual_send.jpg",
+    "photo_to_edit": ".cache/region_edits/physique_front_casual/casual_send.jpg",
+    "written": "2026-10-10, the in-between (casual) next-cut physique. The user, on the approved round 3: 'this should actually be the new standard everywhere, but only for shirtless pictures, because this assumes that I am in a pumped state and not in a relaxed state, hence all the veins popping out. In a casual setting, with me outdoors, I should never have so many veins coming out, but still not as relaxed as the original photo looks. Somewhere in between ... Let's create one such.' The photo to edit is the approved round 3 (forearm fixed), box [858, 290, 2322, 2603]; only his body is pasted back (round 3's grey mask).",
+    "refs": [
+     {
+      "key": "relaxed",
+      "path": ".cache/region_edits/physique_front_casual/relaxed_ref_IMG_6923.jpg",
+      "label": "HIM RELAXED: the same man at rest in this same room, before the cutting phase: how his arms and forearms look when relaxed and not pumped, with the veins only faintly visible. Take from it only that relaxed state: never its softer waist or its body fat."
+     }
+    ],
+    "change": [
+     {
+      "item": "his torso and arms",
+      "goal": "his lean torso and arms in a pumped state, with prominent veins on his biceps and forearms",
+      "his": "the same lean body, the same abs, obliques, waist and frame, but relaxed as on a casual day outdoors, halfway between the PHOTO TO EDIT and HIM RELAXED: his arms relaxed, not pumped, a touch less full than in the PHOTO TO EDIT; the veins on his biceps and forearms faint, a few just visible under the skin, never popping out; his chest and shoulders relaxed. The same skin tone, light and softness",
+      "ref": "relaxed"
+     }
+    ],
+    "keep": [
+     "his head, face, hair, beard and neck, exactly as they are",
+     "his janeu (the thin white thread across his chest) and his neck chain, exactly where they are",
+     "his hands and fingers, his trousers with their black waistband, the door, the wall and the switchboard, exactly as they are",
+     "his waist, abs and obliques as lean as in the PHOTO TO EDIT",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "yunet+text",
+   "evidence": "YuNet found the goal's face: Frontal, yaw ratio 1.07; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": true,
+    "yaw": 1.3,
+    "pitch": 12.6,
+    "roll": 0.1,
+    "side": "frontal",
+    "score": 0.8,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "relaxed_ref_IMG_6923.jpg",
+    "sha256": "54a33cc818a3ede43ef06158919bc6111b98721c7315124074560ca93055f983",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_casual/relaxed_ref_IMG_6923.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIM RELAXED: the same man at rest in this same room, before the cutting phase: how his arms and forearms look when relaxed and not pumped, with the veins only faintly visible. Take from it only that relaxed state: never its softer waist or its body fat.",
+    "key": "relaxed"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "casual_send.jpg",
+    "sha256": "c0dffa558b256f02accf6f0a79ef9330e760c767516b1359285c47d3fe986fcd",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/physique_front_casual/casual_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIM RELAXED: the same man at rest in this same room, before the cutting phase: how his arms and forearms look when relaxed and not pumped, with the veins only faintly visible. Take from it only that relaxed state: never its softer waist or its body fat.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his torso and arms: the PHOTO TO EDIT shows his lean torso and arms in a pumped state, with prominent veins on his biceps and forearms; make it the same lean body, the same abs, obliques, waist and frame, but relaxed as on a casual day outdoors, halfway between the PHOTO TO EDIT and HIM RELAXED: his arms relaxed, not pumped, a touch less full than in the PHOTO TO EDIT; the veins on his biceps and forearms faint, a few just visible under the skin, never popping out; his chest and shoulders relaxed. The same skin tone, light and softness (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his head, face, hair, beard and neck, exactly as they are.\n- his janeu (the thin white thread across his chest) and his neck chain, exactly where they are.\n- his hands and fingers, his trousers with their black waistband, the door, the wall and the switchboard, exactly as they are.\n- his waist, abs and obliques as lean as in the PHOTO TO EDIT.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "4d43d3950e4e9eaef1dd3493ea25b848264ea6f2c48a28f0ff5e4038e3e34604",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "54a33cc818a3ede43ef06158919bc6111b98721c7315124074560ca93055f983",
+    "upload_name": "relaxed_ref_IMG_6923.jpg",
+    "bytes": 148308,
+    "px": [
+     630,
+     1024
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "c0dffa558b256f02accf6f0a79ef9330e760c767516b1359285c47d3fe986fcd",
+    "upload_name": "casual_send.jpg",
+    "bytes": 148098,
+    "px": [
+     648,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "50740f79e51c1c15d8fa5d95778fb64cf57c1bcafa45a8ff66a8ee8b48c0ef5d"
+ }
+}
