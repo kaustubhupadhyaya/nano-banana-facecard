@@ -1,0 +1,291 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin17v2_body",
+ "version": 1,
+ "created": "2026-10-11T22:45:34",
+ "because": "pin 17 v2, the user on v1 v2_0r: 'not exactly the same pose, but plus points for making the face visible in the right amount'; v2 keeps that head (pasted on the pin man's neck at its own proportions) and redraws only the body in the pin's outline (FAILURE_LOG F14; body only held the posture on pins 15 and 16)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin17v2_body",
+  "path": ".cache/region_edits/pin17_v2/pin17v2_body.jpg",
+  "sha256": "00db6f4c9f512701f0077103faeaf7f0ef2658805be0a723d4e4a92550f16b4c",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin17_v2/pin17v2_body.jpg",
+   "prompt": ".cache/loop_prompts/pin17v2_body_route.txt",
+   "inventory": ".cache/inventories/pin17v2_body.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": true,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "restore_background": true,
+   "physique": "pumped-back"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-11T16:47:53"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": true,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Candid handheld phone snapshot taken indoors from behind him at shoulder height two metres away: he stands shirtless in an open balcony doorway, both hands on a black wrought-iron railing, arms reaching down and slightly outward, the hand at picture-left curled over the top rail, the other draped over it with the wrist bent. His head is turned toward picture-left into profile, chin level, so the line of his nose, his left eye and his full beard show past his left ear. He wears a black baseball cap backwards, its brim over his nape at picture-right, and wide heather-grey fleece sweatpants with a gathered waistband and back patch pockets; his janeu crosses his bare back from his left shoulder to his right hip, his silver chain at his nape. The open glass doors at both edges faintly reflect his forearms; a grey-taupe curtain hangs at the right edge. Opposite: a salmon tiled facade, grey stucco, closed white louvred shutters and an iron balcony; a small white bistro table with trailing plants at picture-right. Soft overcast daylight, muted natural colour, the facade softly blurred, fine grain, slightly off-centre. Square 1:1 frame.",
+   "from": ".cache/loop_prompts/pin17v2_body_route.txt",
+   "sha256": "a684cae82ef40e06a6ab721ca7bc19ae649d9927f1240f625daa8c4addacf335",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin17v2_body.json",
+   "sha256": "aac2ef12860bb6e8934fd281eb05d6195524832e14434767bd9ded3fbab7aafe",
+   "data": {
+    "goal": ".cache/region_edits/pin17_v2/pin17v2_body.jpg",
+    "photo_to_edit": ".cache/region_edits/pin17_v2/pin17v2_body.jpg",
+    "written": "2026-10-11 23:20, pin 17 v2 (TODO 2; FAILURE_LOG F14). The user on v1's v2_0r: 'not exactly the same pose, but plus points for making the face visible in the right amount'. Measured on v2_0r against the pin: his whole figure sits 0.04 of the frame to picture-right of the pin man's (shoulder midpoint x 0.36 against 0.32, item 14 fails by 0.002) and is 0.935 of the pin man's size (torso 0.936, shoulders 0.934); the head is in profile where the pin shows only the ear (the part he liked). A plain re-run re-rolls the pose (do-not-retry), so v2 keeps v2_0r's own head pixels and redraws only the body: the PHOTO TO EDIT is a composite made by code (scratchpad p17_composite.py): the pin at 1024 px with v2_0r's head (cap, curls, ear, face in profile, beard; GrabCut mask, ending above v2_0r's gold chain, which fails item 36) scaled by 1/0.935 about v2_0r's shoulder midpoint and moved onto the pin man's, so the head sits on the pin man's neck at his own proportions. --body-only sends no face photos and keeps the head; the body is his pumped back (--physique pumped-back, shirtless by the yardstick) inside the pin man's outline, the method that held the posture on pins 15 and 16 (F25, F26). Seen in the composite and named for that reason: the pale neck under his beard, and a strip of the pin man's own lower cap brim with a few straight brown strands showing below his brim at picture-right; restore exclude boxes keep Gemini's pixels there and in the two glass-door reflections (.cache/restore_exclude/pin17v2_body.json). The janeu item uses the wording that drew the thickness the user approved on pin 15 v3 ('This image shows the right thickness for jenu'); v2_0r's janeu was a thick tan strap. The chain is asked silver (item 36). After the run the head is compared with the composite's; if it drifted, the composite's head is pasted back (code copies pixels).",
+    "refs": [],
+    "change": [
+     {
+      "item": "skin tone",
+      "goal": "fair, pinkish-beige skin on the neck, shoulders, back, arms and hands",
+      "his": "his own warm medium-brown skin tone, never lightened, on his neck, shoulders, back, arms and hands, exactly the tone of his face and ear in the PHOTO TO EDIT, with real skin texture and pores, in the same soft daylight"
+     },
+     {
+      "item": "the neck",
+      "goal": "a pale, slim neck under his head and beard, a different tone from his face",
+      "his": "his own neck, as thick as his build and the same warm medium-brown as his face, running smoothly from under his beard and the back of his head down into his shoulders, with no seam, step or change of tone where it meets his head"
+     },
+     {
+      "item": "the strip below the cap brim at picture-right",
+      "goal": "a second, lower cap brim and a few straight brown strands showing below and behind his cap's brim at picture-right, beside the white drainpipe",
+      "his": "only his one cap with its single brim; below and behind it the light grey wall and the white drainpipe continue exactly as they do around it"
+     },
+     {
+      "item": "build",
+      "goal": "a lean, wiry build with low body fat, a narrow waist and long, lean arms",
+      "his": "his own build from the BODY reference: the tight waist with flat love handles and his full arms"
+     },
+     {
+      "item": "back and shoulders",
+      "goal": "a lean back with sharply drawn shoulder blades, a deep groove down the spine and lats tapering to a narrow waist, the rear shoulders and the trapezius clearly shaped",
+      "his": "his own back exactly as in the BODY reference, right after a workout: the edges of his shoulder blades and the gap between them, the groove down his spine, the outline of his lats tapering to his tight waist with flat love handles, his rear shoulders and his trapezius, each as clearly defined as there, with real skin texture, in this soft daylight"
+     },
+     {
+      "item": "arms",
+      "goal": "long, lean arms reaching down to the railing, with defined triceps and lean forearms showing their tendons",
+      "his": "his own full arms at their real size, exactly as in the BODY reference: rounded rear shoulders, defined triceps and full forearms with the veins on them clearly visible in this pumped state, reaching down to the railing at the same angle and with the same slight bend at the elbows"
+     },
+     {
+      "item": "tattoo on the forearm at picture-left",
+      "goal": "a fine-line black tattoo running down the back of the forearm at picture-left, from below the elbow to the wrist",
+      "his": "his own clear skin on that forearm: he has no tattoo or mark anywhere"
+     },
+     {
+      "item": "bracelet",
+      "goal": "a thin black braided cord bracelet on the wrist at picture-right",
+      "his": "his bare wrist at picture-right, with no bracelet"
+     },
+     {
+      "item": "janeu",
+      "goal": "a bare back with nothing across it",
+      "his": "his janeu, the thin off-white sacred thread he always wears, unbroken and lying flat on his skin, as thin as in the BODY reference: from the top of his left shoulder beside the base of his neck, on the picture's left, running in one diagonal line down across his back, over the groove of his spine at about the height of the lower tips of his shoulder blades, to his right hip, where it goes under the waistband of the sweatpants on the picture's right"
+     },
+     {
+      "item": "neck chain",
+      "goal": "a bare neck with no chain",
+      "his": "his thin silver neck chain, which he always wears, silver and never gold: from behind, a short arc of it shows across the back of his neck just below his curls and runs round the side of his neck at picture-left; its small pendant hangs at the front, out of sight"
+     },
+     {
+      "item": "reflection in the open glass door at the left edge",
+      "goal": "a faint, pale reflection of the man's forearm at picture-left in the glass, mirrored, with the same fine-line tattoo, reaching down from about elbow height to meet his hand on the railing",
+      "his": "the reflection of his own forearm at picture-left at this same moment, mirrored as glass mirrors it: his warm medium-brown forearm at its real full size with no tattoo and the veins on it faint, reaching down to meet his real hand on the railing at the same place; as faint and soft as a reflection in glass, with the grey wall still showing through it"
+     },
+     {
+      "item": "reflection in the open glass door at the right edge",
+      "goal": "a faint, pale reflection of the man's forearm and elbow at picture-right in the glass beside the curtain, mirrored, slanting down toward picture-left",
+      "his": "the reflection of his own forearm and elbow at picture-right at this same moment, mirrored as glass mirrors it: his warm medium-brown skin at the same place, size and slant, as faint as a reflection, with the salmon wall and the black railing still showing through it"
+     }
+    ],
+    "keep": [
+     "his whole head exactly as in the PHOTO TO EDIT, pixel for pixel: the black cap worn backwards with its curved brim at picture-right over his nape and the small white embroidered logo, his tight black curls below it, his left ear, his face in profile turned toward picture-left with the line of his nose, his left eye and his full beard, the turn and tilt of his head, and where all of it sits in the frame",
+     "the FRAMING exactly: the square frame seen from inside the room, the figure a little left of centre; the top of the cap at about 10 percent of the frame height, the shoulders at about 27 percent, the waistband at about 55 percent and both hands on the top rail at about 60 to 66 percent, the hand at picture-left at about 8 to 18 percent of the frame width and the hand at picture-right at about 54 to 62 percent; the sweatpants run off the bottom edge; never re-centred, never zoomed in or out, and the crop never changes",
+     "his place, posture and size: he stands where the man in the PHOTO TO EDIT stands, at the same size and seen from straight behind, upright and square to the open doorway with his weight on both legs, both arms reaching down and a little outward to the railing with the elbows slightly bent; at picture-left his hand rests on the top rail near its ornate end with the fingers curled over it; at picture-right his hand rests on the top rail with the wrist bent and the fingers draped over it; his outline follows that man's outline, never larger, closer or moved, with only his arms and back at his own real build",
+     "the wide, heather-grey cotton-fleece sweatpants with their gathered grey elastic waistband sitting at his waist against his skin, the two square patch pockets on the back and the deep loose folds running off the bottom edge",
+     "he stays shirtless: bare shoulders, back and arms above the sweatpants",
+     "the open balcony doorway: at the left edge the dark-brown wooden frame of the open glass door, with the grey wall showing in its glass; at the right edge the other open glass door with its dark frame, and the long grey-taupe curtain hanging in soft vertical folds down the right edge",
+     "the black wrought-iron balcony railing across the doorway at his hip height: the thin flat top rail, the round turned balusters with their knobs and collars, and the ornate scrolled end panel at picture-left",
+     "the thin brown cord hanging straight down from the top of the frame just right of the cap, seen in the gap between his torso and his arm at picture-right, and tied in a knot around the top rail beside his hip at picture-right, its loose end hanging below the knot",
+     "the small round white-painted metal bistro table at picture-right in front of the railing, with a pale sage-grey bowl planter and a cream ceramic pot on it, both full of long, thin trailing green leaves hanging over the table's edge",
+     "the building across the street: the salmon-peach tiled wall with white mouldings at picture-left, the light grey stucco wall in the middle with its white drainpipe, the window with closed white louvred shutters in a white frame at picture-right, the black iron balcony with a scrolled railing at the top right, and the black ornamental iron grille seen below the table",
+     "the light and the look of the photograph: soft, even overcast daylight coming in through the open doorway and falling softly on his back, shoulders and arms with gentle shadows in the grooves, the room around the doorway darker; muted natural colours, the building opposite in soft focus, and the slightly soft, grainy look of a quick handheld phone snapshot",
+     "no other person anywhere in the picture: the only figure is him, with his own forearms reflected in the two glass doors",
+     "the lettering as it is: the only mark in the picture is the small white embroidered outline logo on the cap; no other text, sign, caption or logo anywhere in the picture"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": 78.3,
+    "pitch": -148.5,
+    "roll": -153.4,
+    "side": "picture-left",
+    "score": 0.73,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left.jpg",
+    "IMG_6868.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "body",
+    "name": "pumped_back.jpg",
+    "sha256": "228e5f560d8878e6823b68c7981ba1d91e6763da4ee16802adb9456e77e47b8a",
+    "from": "D:/FacecardData/physique/standard/pumped_back.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique pumped-back: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin17v2_body.jpg",
+    "sha256": "adeda946a82a2a7375dcd38dfd9ee81a08fc5b7324cb741a59c197352cefceb9",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin17_v2/pin17v2_body.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "scoring_faces": [
+   {
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd"
+   },
+   {
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192"
+   },
+   {
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  },
+  "physique": {
+   "name": "pumped-back",
+   "files": [
+    "pumped_back.jpg"
+   ],
+   "label": "the BODY reference — his body today from behind, right after a workout: his true build and proportion for a shirtless picture.",
+   "build": "His body exactly as in image {BODY}, right after a workout: his defined back with the edges of his shoulder blades, the groove down his spine and the outline of his lats tapering to a tight waist with flat love handles, his rear shoulders, and his full arms with the veins on his forearms. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the BODY reference — his body today from behind, right after a workout: his true build and proportion for a shirtless picture.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: change ONLY his body below the neck (shoulders, arms, chest, waist) to his own build from the BODY references. Everything else in the PHOTO TO EDIT stays exactly as it is: his whole head, his exact posture, both hands, the clothes (refitted to his build), every object, the background, the framing and the light.\n\nFACE: Do not redraw his head. His head stays exactly as it is in the PHOTO TO EDIT, pixel for pixel: the same face, hair, beard, eyewear, head tilt and bow, and the same gaze direction.\n\nBUILD: His body exactly as in image 1, right after a workout: his defined back with the edges of his shoulder blades, the groove down his spine and the outline of his lats tapering to a tight waist with flat love handles, his rear shoulders, and his full arms with the veins on his forearms. Never broader, bulkier or heavier than in image 1, never thinner or softer. His whole body is his own, from image 1: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- skin tone: the PHOTO TO EDIT shows fair, pinkish-beige skin on the neck, shoulders, back, arms and hands; make it his own warm medium-brown skin tone, never lightened, on his neck, shoulders, back, arms and hands, exactly the tone of his face and ear in the PHOTO TO EDIT, with real skin texture and pores, in the same soft daylight.\n- the neck: the PHOTO TO EDIT shows a pale, slim neck under his head and beard, a different tone from his face; make it his own neck, as thick as his build and the same warm medium-brown as his face, running smoothly from under his beard and the back of his head down into his shoulders, with no seam, step or change of tone where it meets his head.\n- the strip below the cap brim at picture-right: the PHOTO TO EDIT shows a second, lower cap brim and a few straight brown strands showing below and behind his cap's brim at picture-right, beside the white drainpipe; make it only his one cap with its single brim; below and behind it the light grey wall and the white drainpipe continue exactly as they do around it.\n- build: the PHOTO TO EDIT shows a lean, wiry build with low body fat, a narrow waist and long, lean arms; make it his own build exactly as in the BODY reference (image 1): His body exactly as in image 1, right after a workout: his defined back with the edges of his shoulder blades, the groove down his spine and the outline of his lats tapering to a tight waist with flat love handles, his rear shoulders, and his full arms with the veins on his forearms. Never broader, bulkier or heavier than in image 1, never thinner or softer.\n- back and shoulders: the PHOTO TO EDIT shows a lean back with sharply drawn shoulder blades, a deep groove down the spine and lats tapering to a narrow waist, the rear shoulders and the trapezius clearly shaped; make it his own back exactly as in the BODY reference, right after a workout: the edges of his shoulder blades and the gap between them, the groove down his spine, the outline of his lats tapering to his tight waist with flat love handles, his rear shoulders and his trapezius, each as clearly defined as there, with real skin texture, in this soft daylight.\n- arms: the PHOTO TO EDIT shows long, lean arms reaching down to the railing, with defined triceps and lean forearms showing their tendons; make it his own full arms at their real size, exactly as in the BODY reference: rounded rear shoulders, defined triceps and full forearms with the veins on them clearly visible in this pumped state, reaching down to the railing at the same angle and with the same slight bend at the elbows.\n- tattoo on the forearm at picture-left: the PHOTO TO EDIT shows a fine-line black tattoo running down the back of the forearm at picture-left, from below the elbow to the wrist; make it his own clear skin on that forearm: he has no tattoo or mark anywhere.\n- bracelet: the PHOTO TO EDIT shows a thin black braided cord bracelet on the wrist at picture-right; make it his bare wrist at picture-right, with no bracelet.\n- janeu: the PHOTO TO EDIT shows a bare back with nothing across it; make it his janeu, the thin off-white sacred thread he always wears, unbroken and lying flat on his skin, as thin as in the BODY reference: from the top of his left shoulder beside the base of his neck, on the picture's left, running in one diagonal line down across his back, over the groove of his spine at about the height of the lower tips of his shoulder blades, to his right hip, where it goes under the waistband of the sweatpants on the picture's right.\n- neck chain: the PHOTO TO EDIT shows a bare neck with no chain; make it his thin silver neck chain, which he always wears, silver and never gold: from behind, a short arc of it shows across the back of his neck just below his curls and runs round the side of his neck at picture-left; its small pendant hangs at the front, out of sight.\n- reflection in the open glass door at the left edge: the PHOTO TO EDIT shows a faint, pale reflection of the man's forearm at picture-left in the glass, mirrored, with the same fine-line tattoo, reaching down from about elbow height to meet his hand on the railing; make it the reflection of his own forearm at picture-left at this same moment, mirrored as glass mirrors it: his warm medium-brown forearm at its real full size with no tattoo and the veins on it faint, reaching down to meet his real hand on the railing at the same place; as faint and soft as a reflection in glass, with the grey wall still showing through it.\n- reflection in the open glass door at the right edge: the PHOTO TO EDIT shows a faint, pale reflection of the man's forearm and elbow at picture-right in the glass beside the curtain, mirrored, slanting down toward picture-left; make it the reflection of his own forearm and elbow at picture-right at this same moment, mirrored as glass mirrors it: his warm medium-brown skin at the same place, size and slant, as faint as a reflection, with the salmon wall and the black railing still showing through it.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his whole head exactly as in the PHOTO TO EDIT, pixel for pixel: the black cap worn backwards with its curved brim at picture-right over his nape and the small white embroidered logo, his tight black curls below it, his left ear, his face in profile turned toward picture-left with the line of his nose, his left eye and his full beard, the turn and tilt of his head, and where all of it sits in the frame.\n- the FRAMING exactly: the square frame seen from inside the room, the figure a little left of centre; the top of the cap at about 10 percent of the frame height, the shoulders at about 27 percent, the waistband at about 55 percent and both hands on the top rail at about 60 to 66 percent, the hand at picture-left at about 8 to 18 percent of the frame width and the hand at picture-right at about 54 to 62 percent; the sweatpants run off the bottom edge; never re-centred, never zoomed in or out, and the crop never changes.\n- his place, posture and size: he stands where the man in the PHOTO TO EDIT stands, at the same size and seen from straight behind, upright and square to the open doorway with his weight on both legs, both arms reaching down and a little outward to the railing with the elbows slightly bent; at picture-left his hand rests on the top rail near its ornate end with the fingers curled over it; at picture-right his hand rests on the top rail with the wrist bent and the fingers draped over it; his outline follows that man's outline, never larger, closer or moved, with only his arms and back at his own real build.\n- the wide, heather-grey cotton-fleece sweatpants with their gathered grey elastic waistband sitting at his waist against his skin, the two square patch pockets on the back and the deep loose folds running off the bottom edge.\n- he stays shirtless: bare shoulders, back and arms above the sweatpants.\n- the open balcony doorway: at the left edge the dark-brown wooden frame of the open glass door, with the grey wall showing in its glass; at the right edge the other open glass door with its dark frame, and the long grey-taupe curtain hanging in soft vertical folds down the right edge.\n- the black wrought-iron balcony railing across the doorway at his hip height: the thin flat top rail, the round turned balusters with their knobs and collars, and the ornate scrolled end panel at picture-left.\n- the thin brown cord hanging straight down from the top of the frame just right of the cap, seen in the gap between his torso and his arm at picture-right, and tied in a knot around the top rail beside his hip at picture-right, its loose end hanging below the knot.\n- the small round white-painted metal bistro table at picture-right in front of the railing, with a pale sage-grey bowl planter and a cream ceramic pot on it, both full of long, thin trailing green leaves hanging over the table's edge.\n- the building across the street: the salmon-peach tiled wall with white mouldings at picture-left, the light grey stucco wall in the middle with its white drainpipe, the window with closed white louvred shutters in a white frame at picture-right, the black iron balcony with a scrolled railing at the top right, and the black ornamental iron grille seen below the table.\n- the light and the look of the photograph: soft, even overcast daylight coming in through the open doorway and falling softly on his back, shoulders and arms with gentle shadows in the grooves, the room around the doorway darker; muted natural colours, the building opposite in soft focus, and the slightly soft, grainy look of a quick handheld phone snapshot.\n- no other person anywhere in the picture: the only figure is him, with his own forearms reflected in the two glass doors.\n- the lettering as it is: the only mark in the picture is the small white embroidered outline logo on the cap; no other text, sign, caption or logo anywhere in the picture.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "df9165014107208ab87b5ed656a1fbe74cccc8f1b2a6bacd56cf6239b0f5d066",
+  "files": [
+   {
+    "n": 1,
+    "role": "body",
+    "sha256": "228e5f560d8878e6823b68c7981ba1d91e6763da4ee16802adb9456e77e47b8a",
+    "upload_name": "pumped_back.jpg",
+    "bytes": 590633,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "adeda946a82a2a7375dcd38dfd9ee81a08fc5b7324cb741a59c197352cefceb9",
+    "upload_name": "pin17v2_body.jpg",
+    "bytes": 310436,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "3be38d4cf722e309863053ce3a8fa2ee5d4edbd0dc38069818793717849a6d6f"
+ }
+}
