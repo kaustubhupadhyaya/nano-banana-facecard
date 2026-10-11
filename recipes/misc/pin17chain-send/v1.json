@@ -1,0 +1,191 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin17chain_send",
+ "version": 1,
+ "created": "2026-10-12T01:47:16",
+ "because": "pin 17 v2 v2_0r: his neck chain came out gold again (F14 flaw back, items 27 and 36; his is silver) despite the words and a silver BODY reference; region edit of the neck with his real chain (IMG_7002) as the reference, pasted back along the chain only",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin17chain_send",
+  "path": ".cache/region_edits/pin17_chain/pin17chain_send.jpg",
+  "sha256": "bb5ba97a7560c7e7f2da0514eca75bb2aa4d60f01fbdaea4ce7a453c5b7f8c69",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin17_chain/pin17chain_send.jpg",
+   "prompt": ".cache/loop_prompts/pin17chain_route.txt",
+   "inventory": ".cache/inventories/pin17chain.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-11T23:47:02"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a bearded man's neck and shoulders from behind in soft daylight, a thin chain around his neck. Close frame.",
+   "from": ".cache/loop_prompts/pin17chain_route.txt",
+   "sha256": "e120c404f12f69125acfc12d9d972ec042aff3e79e0dc6c8e9efc171e34e6963",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin17chain.json",
+   "sha256": "1e7811befed5378deecfaf028b646ffdac9d73416a71ff9e4c9b785ee5ddf146",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin17_chain/pin17chain_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin17_chain/pin17chain_send.jpg",
+    "written": "2026-10-12 02:0x, pin 17 v2 v2_0r (run 20261011_225040): his neck chain came out gold again (F14's flaw, items 27 and 36), though the prompt said 'silver, never gold' and the BODY reference shows it silver: Gemini's own habit (P4), so words are not repeated; the method changes to a region edit of his neck (box 0.22-0.48 x 0.12-0.34, sent 2x) with a close crop of his real chain from IMG_7002 (2026-10-10, his own photo, no face). Only a narrow band over the chain is pasted back, so his skin, beard and janeu keep their own pixels (the pin 15 rule, F30).",
+    "refs": [
+     {
+      "key": "chain",
+      "path": ".cache/region_edits/pin17_chain/his_chain_IMG_7002.jpg",
+      "label": "HIS CHAIN: the same man's own neck chain today, in his own photo: a thin chain of cool grey-white SILVER metal with small links and a small pendant. Only its metal, colour and link size matter; not its pose or the light"
+     }
+    ],
+    "change": [
+     {
+      "item": "the neck chain",
+      "goal": "a thin gold chain lying around the back and the side of his neck, just below his curls",
+      "his": "his own thin silver chain exactly as in HIS CHAIN: the same cool grey-white silver metal with the same small links, lying in the very same place around the back and the side of his neck, exactly as thin as it is now, catching the same soft daylight"
+     }
+    ],
+    "keep": [
+     "his head, beard, curls, cap, ear and skin exactly as they are",
+     "the thin off-white thread that starts at his shoulder exactly as it is, the same thickness and place",
+     "the framing exactly: nothing is zoomed, shifted or re-centred",
+     "the soft daylight, the colours and the fine grain of the photo"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_left",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Left, yaw ratio 1.12",
+   "measured": {
+    "detected": true,
+    "yaw": 78.6,
+    "pitch": -71.4,
+    "roll": -84.3,
+    "side": "picture-left",
+    "score": 0.65,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left_head768_1789837650.jpg",
+    "IMG_6868.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_chain_IMG_7002.jpg",
+    "sha256": "cb2eb71857926675a1b61052f5598fcc1676cece2baad994df8ba634e97d2054",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin17_chain/his_chain_IMG_7002.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS CHAIN: the same man's own neck chain today, in his own photo: a thin chain of cool grey-white SILVER metal with small links and a small pendant. Only its metal, colour and link size matter; not its pose or the light",
+    "key": "chain"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin17chain_send.jpg",
+    "sha256": "ad873289fbf601e50057706abcebd0549c9aaf524e9b1e63659ccdccc6d6b7fb",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin17_chain/pin17chain_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS CHAIN: the same man's own neck chain today, in his own photo: a thin chain of cool grey-white SILVER metal with small links and a small pendant. Only its metal, colour and link size matter; not its pose or the light\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the neck chain: the PHOTO TO EDIT shows a thin gold chain lying around the back and the side of his neck, just below his curls; make it his own thin silver chain exactly as in HIS CHAIN: the same cool grey-white silver metal with the same small links, lying in the very same place around the back and the side of his neck, exactly as thin as it is now, catching the same soft daylight.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his head, beard, curls, cap, ear and skin exactly as they are.\n- the thin off-white thread that starts at his shoulder exactly as it is, the same thickness and place.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n- the soft daylight, the colours and the fine grain of the photo.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "3d4a83007cdb7751d74be1ccaa2cb350b858756de56bf443995d060d71c312dc",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "cb2eb71857926675a1b61052f5598fcc1676cece2baad994df8ba634e97d2054",
+    "upload_name": "his_chain_IMG_7002.jpg",
+    "bytes": 28474,
+    "px": [
+     700,
+     300
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "ad873289fbf601e50057706abcebd0549c9aaf524e9b1e63659ccdccc6d6b7fb",
+    "upload_name": "pin17chain_send.jpg",
+    "bytes": 54214,
+    "px": [
+     532,
+     452
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "000e952f0e52a305e488f36c22819880b191e8a2a64a38d6e7974f8538d855d7"
+ }
+}

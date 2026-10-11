@@ -1,0 +1,330 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14v4_send",
+ "version": 1,
+ "created": "2026-10-12T01:59:37",
+ "because": "FAILURE_LOG F33: pin 14 v3 stage A (body only on the whole pin) failed the pose gate in both pictures: v1_0r moved the arms, drew his skin light peach and the janeu hanging straight down; v2_0r re-framed and zoomed in. On this pin the head is small and the torso large, so v4 is a region edit of the torso and arms only, sent at 2x, pasted back inside the pin man's outline below the neck (the head, cap, neck, sky, coast and frame keep the pin's pixels); his pumped front torso and three side-lit crops of his own photos as references. The user's words that started it (F28): 'the physique that it is giving me is not looking like mine'.",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14v4_send",
+  "path": ".cache/region_edits/pin14_v4/pin14v4_send.jpg",
+  "sha256": "4087038e43a0a7a9c61c91114bb2a75d0ab539c208515fa1e37a3fd263d213e8",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_v4/pin14v4_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14v4_body_route.txt",
+   "inventory": ".cache/inventories/pin14v4_body.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-12T01:49:24"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's torso and arms on a sunny clifftop above the sea, both hands at the waistband of dark jeans, his turned-away head cut by the top edge. Close frame.",
+   "from": ".cache/loop_prompts/pin14v4_body_route.txt",
+   "sha256": "dfc789f7b4fe51a6ac74090da7c6334175f42091f44b8cbf6b9c29e0e84cac07",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14v4_body.json",
+   "sha256": "1f93192c8d6aae92c589b557d9848d91787f7f7e5d755dc6d6bfde89d6e9dece",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_v4/pin14v4_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_v4/pin14v4_send.jpg",
+    "written": "2026-10-12, pin 14 v4 stage A (FAILURE_LOG F33): v3's whole-frame body-only edit failed the pose gate in both pictures (v1_0r moved the arms and drew his skin light peach and the janeu hanging straight down; v2_0r re-framed and zoomed in): on this pin the head is small and the torso large, so Gemini had the whole frame to redraw. v4 is a region edit of the torso and arms only: the crop of the pin (box 0.163-0.645 x 0.535-0.925, pin pixels 119-474 x 519-898, from above the trapezius at picture-left to below the hands) is sent at 2x (710x758; in v2's whole-frame return his torso was 365 px tall and read smooth). tools/region_edit.py pastes the return back only inside the pin man's YOLO person mask (tools/background_restore.yolo_masks, grown 10 px) below the neck line, with a soft mask that is 0 above the neck line and ramps to 1 over 10 px below it, so the head, the cap, the neck, the sky, the coast and the frame keep the pin's pixels exactly; the lower half of the pin man's face at the crop's top-right (jaw, cheek, nose tip) is never pasted. References: HIS BODY (pumped_front.jpg, the user's approved pumped front, cut to the torso below the beard and above the waistband logo) and v3's three crops of his own side-lit photos (arm and veins IMG_7005, chest/waist/janeu/chain IMG_7008, skin and body hair IMG_7002), each labelled for what it shows, never for pose. No face word: the paste never reaches his head; stage B swaps the head. The pin is a direct front view, not a mirror: his left shoulder is at picture-right, his right hip at picture-left, so the janeu runs from upper picture-right to lower picture-left (F33: Gemini drew it hanging straight down, so the item says once that it is never that). The tattoos, the bangle and the rings are the pin man's (his marks: none). After the run: paste each return (tools/region_edit.py paste-run with this crop), a difference map against the pin (only his body below the neck changed), the pose gate, and his body beside pumped_front and his side-lit photos at one scale.",
+    "refs": [
+     {
+      "key": "body",
+      "path": ".cache/region_edits/pin14_v4/pumped_front_torso_noface.jpg",
+      "label": "HIS BODY: the same man's own body today from the front, right after a workout, cut at the neck and above the waist: his true build for a shirtless picture (his shoulders, chest, stomach, waist and arms), his skin, his janeu and his chain. Take from it only his body; never his pose, the room or the light."
+     },
+     {
+      "key": "arm",
+      "path": ".cache/region_edits/pin14_v3/torso_IMG_7005.jpg",
+      "label": "HIS ARM: a crop of the same man's own photo today, in side window light: his right arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin; never his pose, the room or the light."
+     },
+     {
+      "key": "chest",
+      "path": ".cache/region_edits/pin14_v3/torso_IMG_7008.jpg",
+      "label": "HIS CHEST AND WAIST: a crop of the same man's own photo today, from his collarbones to the top of his waistband: the shape of his chest with the crisp lower edge of each pec, his flat stomach, his tight waist with flat love handles, his janeu (the thin off-white thread from his left shoulder) and his fine silver chain with its small pendant. Take from it only these; never his pose, the room or the light."
+     },
+     {
+      "key": "skin",
+      "path": ".cache/region_edits/pin14_v3/torso_IMG_7002.jpg",
+      "label": "HIS SKIN AND BODY HAIR: a crop of the same man's own photo today: the real texture and warm brown tone of his skin, the few short dark hairs between his pecs, the thin line of short dark hair below his navel and the fine hair on his forearms. Take from it only these; never his pose, the room or the light."
+     }
+    ],
+    "change": [
+     {
+      "item": "skin tone",
+      "goal": "light, sun-tanned skin on the man's shoulders, chest, stomach, arms and hands",
+      "his": "his own warm medium-brown South Asian skin as in HIS BODY and HIS SKIN AND BODY HAIR, in this same bright midday sun: a warm golden brown where the sun falls on his chest, his shoulders and the fronts of his arms and a deeper brown in the shade at his sides, with real skin texture and visible pores, the same tone on his shoulders, chest, stomach, arms and hands; never lightened, never a light peach",
+      "ref": "skin"
+     },
+     {
+      "item": "build",
+      "goal": "a heavily muscled, very lean build: broad shoulders, big square pecs, a deeply carved six-pack and big arms",
+      "his": "his own build exactly as in HIS BODY: less massive than the man's and a little narrower across the shoulders, with a tight narrow waist and flat love handles, his whole body inside the man's outline",
+      "ref": "body"
+     },
+     {
+      "item": "chest",
+      "goal": "a broad, full chest with big, heavy pecs, deeply cut along their lower edge",
+      "his": "his own chest as in HIS BODY and HIS CHEST AND WAIST: his squarer pecs, flatter and less massive than the man's, each with its crisp lower edge throwing a short shadow in this hard sun, and the groove down his breastbone; firm, never soft or rounded",
+      "ref": "chest"
+     },
+     {
+      "item": "stomach, waist and love handles",
+      "goal": "a deeply carved six-pack, every row of abs and the serratus sharply cut, above a narrow waist",
+      "his": "his own stomach and waist as in HIS BODY and HIS CHEST AND WAIST: a flat stomach with the outline of his upper abs and the line down its middle, his obliques showing at the sides, never the six deep separate blocks of the man's; his tight waist with flat love handles, its sides tapering from his ribs to the waistband, with nothing spilling over the jeans",
+      "ref": "body"
+     },
+     {
+      "item": "shoulders",
+      "goal": "thick, round, heavily muscled shoulders",
+      "his": "his own shoulders as in HIS BODY: round shoulder caps with a clear line where each shoulder meets his chest and his upper arm, his trapezius low and flat from his neck to his shoulders, a little narrower than the man's",
+      "ref": "body"
+     },
+     {
+      "item": "arms",
+      "goal": "big, hard arms: full biceps and triceps and ropy forearms with raised veins",
+      "his": "his own full arms at their real size as in HIS BODY and HIS ARM: a little narrower than the man's but never thinner than in HIS ARM, pumped right after a workout, with the vein running along each biceps and the clear raised veins on his forearms visible, with their faint green tint, sharp in this hard sun",
+      "ref": "arm"
+     },
+     {
+      "item": "body hair",
+      "goal": "hardly any hair on the chest, stomach or forearms",
+      "his": "his own body hair, as sparse as in HIS SKIN AND BODY HAIR: a thin line of short dark hair from his navel down into the waistband, a few short dark hairs between his pecs and fine dark hair on his forearms; never a hairy chest",
+      "ref": "skin"
+     },
+     {
+      "item": "tattoos",
+      "goal": "fine-line black tattoos on both arms: a small figure on the outer upper arm at picture-left, a thin black band around that arm above the elbow, a round medallion on that forearm below the elbow and a small mark near that wrist; a thin black band around the forearm at picture-right just below the elbow, with a small mark under it",
+      "his": "his own bare, unmarked skin on both arms and hands"
+     },
+     {
+      "item": "bangle and rings",
+      "goal": "a thin flat silver bangle on the wrist at picture-left and silver rings on fingers of both hands",
+      "his": "his bare wrists and bare fingers, with nothing on them"
+     },
+     {
+      "item": "janeu",
+      "goal": "nothing across the chest and stomach",
+      "his": "his janeu, the thin off-white cotton sacred thread he always wears, about 2 mm thick as in HIS CHEST AND WAIST, unbroken and lying flat on his skin; this is a direct front view, not a mirror, so his left shoulder is at picture-right and his right hip at picture-left: the thread comes over his left shoulder at picture-right, right next to his neck at the top of the picture, and runs in one diagonal line down across his chest between his breastbone and his left nipple, across his stomach past his navel on its picture-right side and on to his right hip at picture-left, where it goes under the waistband behind his hand at picture-left; from upper picture-right to lower picture-left, never hanging straight down from his neck",
+      "ref": "chest"
+     },
+     {
+      "item": "neck chain",
+      "goal": "a thin silver chain with a tiny two-piece pendant at the base of the man's throat",
+      "his": "his own fine silver neck chain as in HIS CHEST AND WAIST: a thin figaro chain of small flat links lying on his skin just below his neck and down to the top of his breastbone, with his small dark square pendant on a little silver loop at its lowest point; as fine and small as in his photo, never a heavy chain",
+      "ref": "chest"
+     }
+    ],
+    "keep": [
+     "the man's head, ear, jaw, neck and the hair at his nape at the top of the picture exactly as they are, the same pixels: nothing above the base of his neck changes",
+     "the posture of both arms and hands exactly as they are: the arm at picture-left bent at the elbow, the elbow held out from his side and the forearm angled down and in to the front of the waistband; the arm at picture-right close to his side, bent at the elbow, its forearm angled down and in; the hand at picture-left holding the waistband's edge with its fingers curled over it, the hand at picture-right pinching the edge on the other side of the fly; every finger where it is",
+     "his outline inside the man's outline: his shoulders, arms, hands and waist where the man's are and no larger, his torso turned toward picture-right exactly as far as the man's, never squarer to the camera",
+     "the near-black denim jeans with a topstitched fly, as dark as they are and never faded to grey, open a little at the button so that a narrow strip of plain white elastic waistband shows between his hands, exactly as wide as it is",
+     "the background around him exactly as it is: the dark green mountainside behind him, the coast and the white surf at the top-right corner, the pale feathery grass plumes at the left edge and the dry brush and shrubs at the bottom",
+     "no other person anywhere in the picture",
+     "no text, letters, sign or logo anywhere in the picture",
+     "the bright, hard midday sunlight from high up in front of him and a little from picture-left: bright highlights on his chest, stomach, shoulders and the fronts of his arms, short crisp shadows under each muscle, the same contrast, colour and fine grain",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.74",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "pumped_front_torso_noface.jpg",
+    "sha256": "9c353c007d26daea5643cc14d208ddb8c6e63658f0d97999ed3c615cf0a5d23d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v4/pumped_front_torso_noface.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BODY: the same man's own body today from the front, right after a workout, cut at the neck and above the waist: his true build for a shirtless picture (his shoulders, chest, stomach, waist and arms), his skin, his janeu and his chain. Take from it only his body; never his pose, the room or the light.",
+    "key": "body"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "torso_IMG_7005.jpg",
+    "sha256": "e9ca5543422c7d2aa80db9528f6153fa89d5234bed76882aeeb975b13623dec2",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v3/torso_IMG_7005.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS ARM: a crop of the same man's own photo today, in side window light: his right arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin; never his pose, the room or the light.",
+    "key": "arm"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "torso_IMG_7008.jpg",
+    "sha256": "06babd8725dd2115f0923e5eed8454ea5f05fba8f27a7169eb7d97c2fec62dd0",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v3/torso_IMG_7008.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS CHEST AND WAIST: a crop of the same man's own photo today, from his collarbones to the top of his waistband: the shape of his chest with the crisp lower edge of each pec, his flat stomach, his tight waist with flat love handles, his janeu (the thin off-white thread from his left shoulder) and his fine silver chain with its small pendant. Take from it only these; never his pose, the room or the light.",
+    "key": "chest"
+   },
+   {
+    "n": 4,
+    "role": "inv_ref",
+    "name": "torso_IMG_7002.jpg",
+    "sha256": "cc8c63303391552f67fcf517677c6a355f018edb3d88ab944464cc4becb754fb",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v3/torso_IMG_7002.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS SKIN AND BODY HAIR: a crop of the same man's own photo today: the real texture and warm brown tone of his skin, the few short dark hairs between his pecs, the thin line of short dark hair below his navel and the fine hair on his forearms. Take from it only these; never his pose, the room or the light.",
+    "key": "skin"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "pin14v4_send.jpg",
+    "sha256": "bea15ec3d2321613c544e83d1f293495b0d7590d8376f3472ece29c2f415e0b9",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v4/pin14v4_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS BODY: the same man's own body today from the front, right after a workout, cut at the neck and above the waist: his true build for a shirtless picture (his shoulders, chest, stomach, waist and arms), his skin, his janeu and his chain. Take from it only his body; never his pose, the room or the light.\nImage 2 is HIS ARM: a crop of the same man's own photo today, in side window light: his right arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin; never his pose, the room or the light.\nImage 3 is HIS CHEST AND WAIST: a crop of the same man's own photo today, from his collarbones to the top of his waistband: the shape of his chest with the crisp lower edge of each pec, his flat stomach, his tight waist with flat love handles, his janeu (the thin off-white thread from his left shoulder) and his fine silver chain with its small pendant. Take from it only these; never his pose, the room or the light.\nImage 4 is HIS SKIN AND BODY HAIR: a crop of the same man's own photo today: the real texture and warm brown tone of his skin, the few short dark hairs between his pecs, the thin line of short dark hair below his navel and the fine hair on his forearms. Take from it only these; never his pose, the room or the light.\nImage 5 is the PHOTO TO EDIT.\n\nEdit image 5, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- skin tone: the PHOTO TO EDIT shows light, sun-tanned skin on the man's shoulders, chest, stomach, arms and hands; make it his own warm medium-brown South Asian skin as in HIS BODY and HIS SKIN AND BODY HAIR, in this same bright midday sun: a warm golden brown where the sun falls on his chest, his shoulders and the fronts of his arms and a deeper brown in the shade at his sides, with real skin texture and visible pores, the same tone on his shoulders, chest, stomach, arms and hands; never lightened, never a light peach (image 4).\n- build: the PHOTO TO EDIT shows a heavily muscled, very lean build: broad shoulders, big square pecs, a deeply carved six-pack and big arms; make it his own build exactly as in HIS BODY: less massive than the man's and a little narrower across the shoulders, with a tight narrow waist and flat love handles, his whole body inside the man's outline (image 1).\n- chest: the PHOTO TO EDIT shows a broad, full chest with big, heavy pecs, deeply cut along their lower edge; make it his own chest as in HIS BODY and HIS CHEST AND WAIST: his squarer pecs, flatter and less massive than the man's, each with its crisp lower edge throwing a short shadow in this hard sun, and the groove down his breastbone; firm, never soft or rounded (image 3).\n- stomach, waist and love handles: the PHOTO TO EDIT shows a deeply carved six-pack, every row of abs and the serratus sharply cut, above a narrow waist; make it his own stomach and waist as in HIS BODY and HIS CHEST AND WAIST: a flat stomach with the outline of his upper abs and the line down its middle, his obliques showing at the sides, never the six deep separate blocks of the man's; his tight waist with flat love handles, its sides tapering from his ribs to the waistband, with nothing spilling over the jeans (image 1).\n- shoulders: the PHOTO TO EDIT shows thick, round, heavily muscled shoulders; make it his own shoulders as in HIS BODY: round shoulder caps with a clear line where each shoulder meets his chest and his upper arm, his trapezius low and flat from his neck to his shoulders, a little narrower than the man's (image 1).\n- arms: the PHOTO TO EDIT shows big, hard arms: full biceps and triceps and ropy forearms with raised veins; make it his own full arms at their real size as in HIS BODY and HIS ARM: a little narrower than the man's but never thinner than in HIS ARM, pumped right after a workout, with the vein running along each biceps and the clear raised veins on his forearms visible, with their faint green tint, sharp in this hard sun (image 2).\n- body hair: the PHOTO TO EDIT shows hardly any hair on the chest, stomach or forearms; make it his own body hair, as sparse as in HIS SKIN AND BODY HAIR: a thin line of short dark hair from his navel down into the waistband, a few short dark hairs between his pecs and fine dark hair on his forearms; never a hairy chest (image 4).\n- tattoos: the PHOTO TO EDIT shows fine-line black tattoos on both arms: a small figure on the outer upper arm at picture-left, a thin black band around that arm above the elbow, a round medallion on that forearm below the elbow and a small mark near that wrist; a thin black band around the forearm at picture-right just below the elbow, with a small mark under it; make it his own bare, unmarked skin on both arms and hands.\n- bangle and rings: the PHOTO TO EDIT shows a thin flat silver bangle on the wrist at picture-left and silver rings on fingers of both hands; make it his bare wrists and bare fingers, with nothing on them.\n- janeu: the PHOTO TO EDIT shows nothing across the chest and stomach; make it his janeu, the thin off-white cotton sacred thread he always wears, about 2 mm thick as in HIS CHEST AND WAIST, unbroken and lying flat on his skin; this is a direct front view, not a mirror, so his left shoulder is at picture-right and his right hip at picture-left: the thread comes over his left shoulder at picture-right, right next to his neck at the top of the picture, and runs in one diagonal line down across his chest between his breastbone and his left nipple, across his stomach past his navel on its picture-right side and on to his right hip at picture-left, where it goes under the waistband behind his hand at picture-left; from upper picture-right to lower picture-left, never hanging straight down from his neck (image 3).\n- neck chain: the PHOTO TO EDIT shows a thin silver chain with a tiny two-piece pendant at the base of the man's throat; make it his own fine silver neck chain as in HIS CHEST AND WAIST: a thin figaro chain of small flat links lying on his skin just below his neck and down to the top of his breastbone, with his small dark square pendant on a little silver loop at its lowest point; as fine and small as in his photo, never a heavy chain (image 3).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the man's head, ear, jaw, neck and the hair at his nape at the top of the picture exactly as they are, the same pixels: nothing above the base of his neck changes.\n- the posture of both arms and hands exactly as they are: the arm at picture-left bent at the elbow, the elbow held out from his side and the forearm angled down and in to the front of the waistband; the arm at picture-right close to his side, bent at the elbow, its forearm angled down and in; the hand at picture-left holding the waistband's edge with its fingers curled over it, the hand at picture-right pinching the edge on the other side of the fly; every finger where it is.\n- his outline inside the man's outline: his shoulders, arms, hands and waist where the man's are and no larger, his torso turned toward picture-right exactly as far as the man's, never squarer to the camera.\n- the near-black denim jeans with a topstitched fly, as dark as they are and never faded to grey, open a little at the button so that a narrow strip of plain white elastic waistband shows between his hands, exactly as wide as it is.\n- the background around him exactly as it is: the dark green mountainside behind him, the coast and the white surf at the top-right corner, the pale feathery grass plumes at the left edge and the dry brush and shrubs at the bottom.\n- no other person anywhere in the picture.\n- no text, letters, sign or logo anywhere in the picture.\n- the bright, hard midday sunlight from high up in front of him and a little from picture-left: bright highlights on his chest, stomach, shoulders and the fronts of his arms, short crisp shadows under each muscle, the same contrast, colour and fine grain.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "3252e8c2c12a5b567c68cac6340abdbc59467f7aae7dfc8fa21f1d2e237e4ada",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "9c353c007d26daea5643cc14d208ddb8c6e63658f0d97999ed3c615cf0a5d23d",
+    "upload_name": "pumped_front_torso_noface.jpg",
+    "bytes": 178753,
+    "px": [
+     1200,
+     945
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "e9ca5543422c7d2aa80db9528f6153fa89d5234bed76882aeeb975b13623dec2",
+    "upload_name": "torso_IMG_7005.jpg",
+    "bytes": 73035,
+    "px": [
+     456,
+     780
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "06babd8725dd2115f0923e5eed8454ea5f05fba8f27a7169eb7d97c2fec62dd0",
+    "upload_name": "torso_IMG_7008.jpg",
+    "bytes": 82603,
+    "px": [
+     1006,
+     603
+    ]
+   },
+   {
+    "n": 4,
+    "role": "inv_ref",
+    "sha256": "cc8c63303391552f67fcf517677c6a355f018edb3d88ab944464cc4becb754fb",
+    "upload_name": "torso_IMG_7002.jpg",
+    "bytes": 88090,
+    "px": [
+     936,
+     527
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "bea15ec3d2321613c544e83d1f293495b0d7590d8376f3472ece29c2f415e0b9",
+    "upload_name": "pin14v4_send.jpg",
+    "bytes": 161843,
+    "px": [
+     710,
+     758
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "8454b7d9bb9b8f819ce43ee2c84a3df8eda2c0a0409109a2a9a4c2e197ef0350"
+ }
+}
