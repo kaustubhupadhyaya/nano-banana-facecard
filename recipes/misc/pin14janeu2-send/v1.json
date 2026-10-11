@@ -1,0 +1,194 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14janeu2_send",
+ "version": 1,
+ "created": "2026-10-12T03:13:14",
+ "because": "FAILURE_LOG F37: pin 14 v4 v1_0r passes the pose gate in full, but the janeu is a cord hanging straight down from his neck to the waistband, the second time (F33) despite the words, so the method is pin 15's narrow-band fix (F30): a 2x region edit of his chest and stomach with his own photo of the diagonal janeu (IMG_7002) as the reference, pasted back along the old cord and the new thread only",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14janeu2_send",
+  "path": ".cache/region_edits/pin14_janeu2/pin14janeu2_send.jpg",
+  "sha256": "322c10f82e42e9f3a1def13cf2bd2f0babd590789b51280dc3c0d343477a67cd",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_janeu2/pin14janeu2_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14janeu2_route.txt",
+   "inventory": ".cache/inventories/pin14janeu2.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-12T02:18:03"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's chest and stomach in bright sun, a thin off-white thread across his chest, his hands at the waistband of dark jeans. Close frame.",
+   "from": ".cache/loop_prompts/pin14janeu2_route.txt",
+   "sha256": "63f4c5584d25fed7814b034bf84b7f965e0205c40935d79dd626d42f08035a64",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14janeu2.json",
+   "sha256": "6b62d5e736aa6891cc4d8f7b965d4068a58618e26cdf245a03ed23a97e996714",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_janeu2/pin14janeu2_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_janeu2/pin14janeu2_send.jpg",
+    "written": "2026-10-12, pin 14 v4 v1_0r (run 20261012_020337, FAILURE_LOG F37): the picture passes the pose gate in full, but the janeu is drawn as a pale cord hanging from beside his neck straight down his chest and curving across his stomach to the waistband, the second time (F33), though the item said one diagonal: Gemini's habit (P4), so the words are not repeated and the method is pin 15's (F30). The photo to edit is his chest and stomach on v1_0r (box 0.29-0.59 x 0.575-0.875, pixels 213-434 x 558-849, from his shoulders to the waistband), sent at 2x. The reference is his own photo IMG_7002, where the thread runs in one diagonal from beside his neck at picture-right across his chest and stomach to his right hip at picture-left (IMG_7008's thread hangs nearly straight down his chest, the very shape being fixed), cut below his beard and labelled for the thread's path and thickness only. The pin is a direct front view, so his left shoulder is at picture-right. After the run, the better return is pasted back only along narrow bands over the old cord and the new thread (pin 15's band paste), inside pin14janeu2_body_mask.png (his body below the neck line, the v4 paste region), and checked with a difference map against v1_0r.",
+    "refs": [
+     {
+      "key": "janeu",
+      "path": ".cache/region_edits/pin14_janeu2/his_janeu_IMG_7002.jpg",
+      "label": "HIS JANEU: a crop of the same man's own photo today: his janeu, one thin off-white thread from the top of his left shoulder beside his neck, at picture-right, in one diagonal line down across his chest and stomach to his right hip at picture-left, where it goes under the waistband. Take from it only the thread's path and its thickness; nothing of his skin, his body, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "his janeu",
+      "goal": "a thin cord hanging straight down from his neck to his waistband",
+      "his": "his janeu as in HIS JANEU: one thin off-white thread, about 2 mm thick and lying flat on his skin, from the top of his left shoulder (at picture-right, beside his neck) running in one diagonal line down across his chest and stomach to his right hip (at picture-left), where it goes under the waistband",
+      "ref": "janeu"
+     },
+     {
+      "item": "the old cord",
+      "goal": "that pale cord, from beside his neck down the picture-right side of his chest and across his stomach to the waistband",
+      "his": "gone: his skin there exactly as around it, with the same tone, light, shadows, pores and fine hair"
+     }
+    ],
+    "keep": [
+     "his skin and his muscles with their light and shadows everywhere but along the old cord and the new thread, exactly as they are",
+     "his silver neck chain and its small pendant exactly where they are",
+     "his arms and hands, the white waistband strip and the near-black jeans exactly as they are",
+     "the man's jaw and neck at the top edge exactly as they are",
+     "the background at the edges exactly as it is; no other person and no text anywhere",
+     "the same bright, hard sunlight, colour, contrast and fine grain",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_janeu_IMG_7002.jpg",
+    "sha256": "5e9b0f7f01eba3128c46a4b7adeb6cc9cad67d7984d4dc30201641099320e417",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_janeu2/his_janeu_IMG_7002.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS JANEU: a crop of the same man's own photo today: his janeu, one thin off-white thread from the top of his left shoulder beside his neck, at picture-right, in one diagonal line down across his chest and stomach to his right hip at picture-left, where it goes under the waistband. Take from it only the thread's path and its thickness; nothing of his skin, his body, the light or the room",
+    "key": "janeu"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin14janeu2_send.jpg",
+    "sha256": "a6aedc2ad7b535e6a19780a8923eb7550f70ad787f46d0dfc71306d777b13307",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_janeu2/pin14janeu2_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS JANEU: a crop of the same man's own photo today: his janeu, one thin off-white thread from the top of his left shoulder beside his neck, at picture-right, in one diagonal line down across his chest and stomach to his right hip at picture-left, where it goes under the waistband. Take from it only the thread's path and its thickness; nothing of his skin, his body, the light or the room\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his janeu: the PHOTO TO EDIT shows a thin cord hanging straight down from his neck to his waistband; make it his janeu as in HIS JANEU: one thin off-white thread, about 2 mm thick and lying flat on his skin, from the top of his left shoulder (at picture-right, beside his neck) running in one diagonal line down across his chest and stomach to his right hip (at picture-left), where it goes under the waistband (image 1).\n- the old cord: the PHOTO TO EDIT shows that pale cord, from beside his neck down the picture-right side of his chest and across his stomach to the waistband; make it gone: his skin there exactly as around it, with the same tone, light, shadows, pores and fine hair.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his skin and his muscles with their light and shadows everywhere but along the old cord and the new thread, exactly as they are.\n- his silver neck chain and its small pendant exactly where they are.\n- his arms and hands, the white waistband strip and the near-black jeans exactly as they are.\n- the man's jaw and neck at the top edge exactly as they are.\n- the background at the edges exactly as it is; no other person and no text anywhere.\n- the same bright, hard sunlight, colour, contrast and fine grain.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "57a7336db68c1c69f50b4a40735bee6cf6a2d8109f7509c99b04dd17d1c8637b",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "5e9b0f7f01eba3128c46a4b7adeb6cc9cad67d7984d4dc30201641099320e417",
+    "upload_name": "his_janeu_IMG_7002.jpg",
+    "bytes": 61108,
+    "px": [
+     550,
+     615
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "a6aedc2ad7b535e6a19780a8923eb7550f70ad787f46d0dfc71306d777b13307",
+    "upload_name": "pin14janeu2_send.jpg",
+    "bytes": 74338,
+    "px": [
+     442,
+     582
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "21834342744ac73a7ed0828af9277f85bcfc66fea3252bcbfdb3ab67a20518d5"
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin16fix_face",
+ "version": 2,
+ "created": "2026-10-12T03:14:50",
+ "because": "F36 route change: zone face on pin 16's Route G picture with the marks fix (F15, run 20261011_013419 v1_0r; his head already at the pin's size; the user on v2_0r: 'face almost there but still not accurate, needs fixing'), with his daylight faces me-day@v1 (F34 fixed the light); v1's method otherwise; own-photo gates (pool 0.594), no looser size gate",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "freeze_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\replicate_freeze\\20261012_031259_pin16fix_face",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin16fix_face",
+  "path": ".cache/region_edits/pin16_fix/pin16fix_face.jpg",
+  "sha256": "3cb407a3ac6fce83960fe86d7ee3a8da4c04e6e09a61fb8993c5307b387a1a34",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "replicate",
+  "compiler": "replicate/1",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin16_fix/pin16fix_face.jpg",
+   "zone": "face",
+   "source": "own",
+   "glasses": "same",
+   "look": "any",
+   "expression": "same",
+   "character": "me-day@v1",
+   "current_look": false,
+   "from_picture": "outputs/20261011_013419_goal-pin16fix-marks-send/v1_0r.jpg"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "text_models": [
+   "56fdd199312815e2",
+   "e6fa609c3fa255c0"
+  ],
+  "samples": 2,
+  "max_attempts": 4,
+  "stop": {
+   "after_pose_fails": 0,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {},
+  "own": true,
+  "own_score": 0.594,
+  "source_kind": "own",
+  "duplicates_excluded": [],
+  "zone": "face",
+  "kind": "face",
+  "expression": "same",
+  "glasses": "same",
+  "look": "any",
+  "far": true,
+  "face_share": 0.1464,
+  "crop": [
+   150,
+   265,
+   683,
+   683
+  ],
+  "crop_before_head_fit": null,
+  "head_boxes": [
+   [
+    453,
+    420,
+    77,
+    100
+   ]
+  ],
+  "copies_left_unedited": [],
+  "main_box": [
+   453,
+   420,
+   77,
+   100
+  ],
+  "main_in_crop": [
+   303,
+   155,
+   77,
+   100
+  ],
+  "source_size": [
+   896,
+   1194
+  ],
+  "source_face": {
+   "box": [
+    301,
+    155,
+    79,
+    102
+   ],
+   "score": 0.592,
+   "face_w": 77
+  },
+  "readings": {
+   "head_box": {
+    "prompt_sha256": "c8f22d67b9e1aa5ea7ed6a2536464167daa4ac32bc58376f03b6bd2426d541b9",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "box": null,
+    "skipped": "far face"
+   },
+   "describe": {
+    "prompt_sha256": "d14a6c159796543406a3bc171ab3cb99b83682f24921905cf2efc8043928c8a3",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "file": "photo_to_edit.png",
+    "reply": {
+     "head_turn": "turned about 25 to 30 degrees to the left of the picture (three-quarter view)",
+     "head_tilt": "chin is level with no noticeable sideways tilt",
+     "gaze": "looking directly at the camera",
+     "expression": "neutral and calm, mouth closed, brows and eyes relaxed",
+     "glasses": "none",
+     "hair": "curly, voluminous short-to-medium black hair, with a trimmed full beard and mustache",
+     "light": "soft diffused outdoor daylight filtering through trees from above and the right, neutral colour cast, moderately bright",
+     "face_exposure": "slightly darker than the bright sky and surfboard, similar to the surrounding shaded greenery, with natural smooth skin texture typical of a phone photo",
+     "reflection_present": false,
+     "reflection_where": "",
+     "other_people": false
+    }
+   }
+  },
+  "attractiveness": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
+  "thresholds": {
+   "hard_reject": 0.2,
+   "accept": 0.52,
+   "own_min": 0.4,
+   "approved": true
+  },
+  "gates": {
+   "light_de_max": 14.0,
+   "size_own": [
+    0.94,
+    1.04
+   ],
+   "size_foreign": [
+    0.94,
+    1.04
+   ],
+   "light_de_max_foreign": 20.0,
+   "unchanged_gt_sim": 0.9,
+   "neck_gap_max": 10.0,
+   "rescue_attempts": 3,
+   "sharp_max": 6.0
+  },
+  "character": {
+   "ref": "me-day@v1",
+   "sha256": "435b5cac30d6a38e93954247eb63ad577de8039edc747236fdbeccecb3eb168c"
+  },
+  "face_choice": {
+   "decided_by": "character me-day@v1",
+   "names": [
+    "IMG_6844.jpg",
+    "IMG_6846.jpg",
+    "IMG_6845.jpg"
+   ],
+   "count": 3
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "face_front.jpg",
+    "sha256": "fcb4688c420c0f72550c50655a4369ac1af42b597737f294a16257152d4434f8",
+    "from": "IMG_6844.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me-day@v1: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "face_three_quarter_left.jpg",
+    "sha256": "c7cc4183568eb4511f4b2c7e56c3faaa28a57a309275757bf1b254dd8b940468",
+    "from": "IMG_6846.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me-day@v1: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "face_three_quarter_right.jpg",
+    "sha256": "0fe4f21e82aae365ca2deab7bbb14054fc661b9e284aeede78d1f27ba9f1cbc4",
+    "from": "IMG_6845.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me-day@v1: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "photo_to_edit.png",
+    "sha256": "23cb334913417a9a64e83083860248caf92181f60dd28dbb7e71f5b9b8e7ab50",
+    "from": "outputs/20261011_013419_goal-pin16fix-marks-send/v1_0r.jpg",
+    "prep": "crop [150, 265, 683, 683] of the 896x1194 original, long side 1024 px",
+    "why": "the crop of his photo that is edited and pasted back into the untouched original"
+   }
+  ],
+  "from_picture": {
+   "path": "outputs/20261011_013419_goal-pin16fix-marks-send/v1_0r.jpg",
+   "sha256": "017e004c86369f7dd624ed4460c4bdd776d04e565831ca13878764c2df24c413",
+   "run": "20261011_013419_goal-pin16fix-marks-send",
+   "file": "v1_0r.jpg",
+   "recipe": "pin16fix_marks_send@v1",
+   "zone": null
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "replicate/1",
+   "template_sha256": "5f7be3521647c9a0d4ffe504735fbe869e94682b989e302f41ef60dba047d4da",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "The first 3 images are photos of the same man: the identity reference. The last image is the photo to edit.\n\nEdit the last image so that the man in it has this exact man's face: his face structure, jawline, nose, eyes, brows, lips, skin tone and beard exactly as in the reference photos. The man in the last image is only a look-alike: do not keep his face, render this man's own face from the reference photos in its place. Redraw his whole head as one, the hair included: his hair, beard and moustache exactly as in the reference photos (his own tight curly black hair), so that hair, face, ears and neck belong together like one real photograph. If the man in the last image wears glasses, he keeps wearing the same glasses. Give him exactly the expression of the man in the last image: the same mouth, eyes and brows at the same strength, but natural and relaxed on his face, never tense or forced.\n\nThis is what the last image shows before the edit. The head angle, gaze, glasses and light must stay exactly as they are:\n- head: turned about 25 to 30 degrees to the left of the picture (three-quarter view)\n- chin: chin is level with no noticeable sideways tilt\n- eyes: looking directly at the camera\n- glasses: none\n- hair: curly, voluminous short-to-medium black hair, with a trimmed full beard and mustache\n- light on his face: soft diffused outdoor daylight filtering through trees from above and the right, neutral colour cast, moderately bright\n- how bright his face is: slightly darker than the bright sky and surfboard, similar to the surrounding shaded greenery, with natural smooth skin texture typical of a phone photo\n\nHe is far from the camera: his head is small in the last image and exactly as soft and grainy as the rest of the photo. Keep it that small and that soft. His face, from the top of his forehead to his chin, is 15 percent of the image height in the last image and stays exactly that.\n\nKeep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it belongs in the picture like a real phone photo and not a studio portrait.\nKeep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.",
+  "prompt_sha256": "09fed788c9a3d94f3ed33a5de04a907f57ca90358e33e7d60f509cc96c9f52e3",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "fcb4688c420c0f72550c50655a4369ac1af42b597737f294a16257152d4434f8",
+    "upload_name": "face_front.jpg",
+    "bytes": 136081,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "c7cc4183568eb4511f4b2c7e56c3faaa28a57a309275757bf1b254dd8b940468",
+    "upload_name": "face_three_quarter_left.jpg",
+    "bytes": 313931,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "0fe4f21e82aae365ca2deab7bbb14054fc661b9e284aeede78d1f27ba9f1cbc4",
+    "upload_name": "face_three_quarter_right.jpg",
+    "bytes": 152449,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "23cb334913417a9a64e83083860248caf92181f60dd28dbb7e71f5b9b8e7ab50",
+    "upload_name": "photo_to_edit.png",
+    "bytes": 2179479,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "f2263022a77870d43fb9e612f7c03e3bb9238f1d7cb36c31fa274fd8fea3b15d"
+ }
+}
