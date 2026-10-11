@@ -1,0 +1,161 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin15stub_send",
+ "version": 1,
+ "created": "2026-10-11T16:32:33",
+ "because": "the user, 2026-10-11 on pin 15's export: 'visibly shows erase and drag tool usage'; after the narrow-band re-paste a thread stub is left and the janeu stops short",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin15stub_send",
+  "path": ".cache/region_edits/pin15_stub/pin15stub_send.jpg",
+  "sha256": "a45ad478499fcd150eb8b3c0cbeb17eac8754e562c74997abf52356d00e7efd4",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin15_stub/pin15stub_send.jpg",
+   "prompt": ".cache/loop_prompts/pin15stub_route.txt",
+   "inventory": ".cache/inventories/pin15stub.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-11T12:32:30"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a man's bare lower back in dim warm light, a thin off-white thread crossing it diagonally. Vertical frame.",
+   "from": ".cache/loop_prompts/pin15stub_route.txt",
+   "sha256": "62b00dd2bd503955451bf793dfb5006dad511249d3a76ad4c24a490837cd8832",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin15stub.json",
+   "sha256": "8b8a8192c0541ffb95945526ea105319777e27353bcf2d8d45da39f4d143aa3e",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin15_stub/pin15stub_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin15_stub/pin15stub_send.jpg",
+    "written": "2026-10-11 16:50, pin 15 (FAILURE_LOG F30): on the narrow-band re-paste of the janeu fix, a short separate thread stub is left below the janeu's end, and the janeu itself stops short; the photo to edit is his lower back (box 0.50-0.80 x 0.40-0.78, sent 2x); only bands over the stub and the janeu's path are pasted back, so his skin elsewhere keeps its own pixels.",
+    "refs": [],
+    "change": [
+     {
+      "item": "the short separate thread",
+      "goal": "a short, separate piece of thin off-white thread lying on his lower back below the end of the long thread",
+      "his": "his bare skin there, with the same tone, texture and light as the skin right around it, and no thread"
+     },
+     {
+      "item": "the end of the long thread",
+      "goal": "the long thin off-white thread coming down from the upper right and stopping abruptly in the middle of his back",
+      "his": "the same thread continuing smoothly from there, exactly as thin and as pale as above it, diagonally down toward his side at picture-left, where it passes out of view under his arm"
+     }
+    ],
+    "keep": [
+     "his skin, its texture, the muscles, light and shadows everywhere else exactly as they are",
+     "the long thread's upper part exactly as it is, the same thickness",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin15stub_send.jpg",
+    "sha256": "ee1398f0bc4997a45a4868e8ca6abbc9851a3dfaa8a3d137f53f64d9c791ff76",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin15_stub/pin15stub_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the short separate thread: the PHOTO TO EDIT shows a short, separate piece of thin off-white thread lying on his lower back below the end of the long thread; make it his bare skin there, with the same tone, texture and light as the skin right around it, and no thread.\n- the end of the long thread: the PHOTO TO EDIT shows the long thin off-white thread coming down from the upper right and stopping abruptly in the middle of his back; make it the same thread continuing smoothly from there, exactly as thin and as pale as above it, diagonally down toward his side at picture-left, where it passes out of view under his arm.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his skin, its texture, the muscles, light and shadows everywhere else exactly as they are.\n- the long thread's upper part exactly as it is, the same thickness.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "8ef99247bbc1ac5e17abbdf32395b555074fe364ea72a44282fecda5b74cac2c",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "ee1398f0bc4997a45a4868e8ca6abbc9851a3dfaa8a3d137f53f64d9c791ff76",
+    "upload_name": "pin15stub_send.jpg",
+    "bytes": 64134,
+    "px": [
+     584,
+     840
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "e4a6e7d7ddd13ff22fca50d3fe8a5d38643f722ab96ce78c72cb89e825966e8f"
+ }
+}
