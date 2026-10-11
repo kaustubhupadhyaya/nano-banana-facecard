@@ -1,0 +1,191 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14janeu_send",
+ "version": 1,
+ "created": "2026-10-11T10:50:55",
+ "because": "pin 14 stage 2 pictures pass 30 items and fail only item 36: the janeu runs straight down the picture-right side instead of crossing to his right hip at picture-left",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14janeu_send",
+  "path": ".cache/region_edits/pin14_janeu/pin14janeu_send.jpg",
+  "sha256": "4d566cfc02648c58684f675d8c498fd5841f2158231cda51d111e40e034675a1",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_janeu/pin14janeu_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14janeu_route.txt",
+   "inventory": ".cache/inventories/pin14janeu.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-11T10:48:03"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's chest and stomach in bright sun, his hands at the waistband: his janeu, a thin off-white thread, runs across his chest. Vertical frame.",
+   "from": ".cache/loop_prompts/pin14janeu_route.txt",
+   "sha256": "145489ca9ffb9d3d1c33809913ff3ee2a24f7873727ade61ba88fdc92b394e66",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14janeu.json",
+   "sha256": "d14d9ef67a7fc0f30d1507dbd09427f8b7a2d843629613e13bfefbc4424347aa",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_janeu/pin14janeu_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_janeu/pin14janeu_send.jpg",
+    "written": "2026-10-11 10:55, pin 14 (FAILURE_LOG F20): stage 1's janeu ran straight down the picture-right side of his chest to the waistband (checklist item 36); in his own photos it crosses from his left shoulder (picture-right) to his right hip (picture-left). The photo to edit is his chest and stomach from stage 2's v1_0r (box 0.34-0.68 x 0.44-0.86, sent 2x); tools/region_edit.py pastes back only his skin below the chin. His figure is the same pixels in v2_0r, so the result serves both.",
+    "refs": [
+     {
+      "key": "janeu",
+      "path": "D:/FacecardData/physique/standard/pumped_front_torso.jpg",
+      "label": "HIS JANEU: his own chest in his own photo; take from it only the path of the thin off-white thread across his chest and stomach, nothing of the light, the skin or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "his janeu",
+      "goal": "a thin off-white thread running straight down the picture-right side of his chest and stomach to the waistband",
+      "his": "his janeu, the thin off-white cotton thread, about 2 mm thick, lying flat and unbroken on his skin: from the top of his left shoulder beside his neck, at picture-right, it runs down across his chest between his breastbone and his left nipple, crosses his stomach just beside the navel and reaches his right hip at picture-left, where it goes under the waistband behind his hand, as in HIS JANEU",
+      "ref": "janeu"
+     }
+    ],
+    "keep": [
+     "his skin, muscles, chain and pendant, hands, the white waistband strip and his jeans exactly as they are",
+     "the light and shadows on his body and the background at the edges exactly as they are",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.46",
+   "measured": {
+    "detected": true,
+    "yaw": -38.7,
+    "pitch": -39.9,
+    "roll": 50.0,
+    "side": "picture-right",
+    "score": 0.61,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "pumped_front_torso.jpg",
+    "sha256": "9ffb4b15044e50a0ce4f017f8ee3f6617ad355e0128201c7c727457d016b2b92",
+    "from": "D:/FacecardData/physique/standard/pumped_front_torso.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS JANEU: his own chest in his own photo; take from it only the path of the thin off-white thread across his chest and stomach, nothing of the light, the skin or the room",
+    "key": "janeu"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin14janeu_send.jpg",
+    "sha256": "8394268ef3f1c45eeb6534ef9f9c33130cb44504b8062dd196e70c0aa2944ef9",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_janeu/pin14janeu_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS JANEU: his own chest in his own photo; take from it only the path of the thin off-white thread across his chest and stomach, nothing of the light, the skin or the room\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his janeu: the PHOTO TO EDIT shows a thin off-white thread running straight down the picture-right side of his chest and stomach to the waistband; make it his janeu, the thin off-white cotton thread, about 2 mm thick, lying flat and unbroken on his skin: from the top of his left shoulder beside his neck, at picture-right, it runs down across his chest between his breastbone and his left nipple, crosses his stomach just beside the navel and reaches his right hip at picture-left, where it goes under the waistband behind his hand, as in HIS JANEU (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his skin, muscles, chain and pendant, hands, the white waistband strip and his jeans exactly as they are.\n- the light and shadows on his body and the background at the edges exactly as they are.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "3d6dc163c24d25585397a9b79e8716e781d82c5b1ebe6ddc1e5dabdc8a69dbf5",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "9ffb4b15044e50a0ce4f017f8ee3f6617ad355e0128201c7c727457d016b2b92",
+    "upload_name": "pumped_front_torso.jpg",
+    "bytes": 268731,
+    "px": [
+     1512,
+     1129
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "8394268ef3f1c45eeb6534ef9f9c33130cb44504b8062dd196e70c0aa2944ef9",
+    "upload_name": "pin14janeu_send.jpg",
+    "bytes": 171702,
+    "px": [
+     610,
+     1008
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "86e43402438c531cce09948438fc1c9c96022f3ceb336a1521dcca7a7a54cc50"
+ }
+}
