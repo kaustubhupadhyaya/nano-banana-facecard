@@ -1,0 +1,156 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin15janeu_send",
+ "version": 1,
+ "created": "2026-10-11T11:21:37",
+ "because": "pin 15 v3 v1_0r (closest pin 15 picture: his head and pumped back in the pin's frame) fails item 36: the janeu slants as on his back seen directly, not mirrored",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin15janeu_send",
+  "path": ".cache/region_edits/pin15_janeu/pin15janeu_send.jpg",
+  "sha256": "c816b0892d94eabbf46f82d84fce9d5d9d2dd1275b8e55fc0d7e9b62badd6411",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin15_janeu/pin15janeu_send.jpg",
+   "prompt": ".cache/loop_prompts/pin15janeu_route.txt",
+   "inventory": ".cache/inventories/pin15janeu.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-11T11:03:20"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A man's bare back in a dim bathroom mirror selfie, a thin off-white thread across his back from the shoulder at picture-right to the hip at picture-left. Vertical frame.",
+   "from": ".cache/loop_prompts/pin15janeu_route.txt",
+   "sha256": "e8ac957d5011582ade531278d2e819cc51c72a7bf89fb3838ee1108b303aa690",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin15janeu.json",
+   "sha256": "979e52fba3f4095bcdfc04f59ae98ff6df2d4851cd1f1dc71cfd4a83da974226",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin15_janeu/pin15janeu_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin15_janeu/pin15janeu_send.jpg",
+    "written": "2026-10-11 11:45, pin 15 v3 v1_0r (FAILURE_LOG F25): a mirror selfie, so his left shoulder is at picture-right; his janeu must run from there down to his right hip at picture-left. It slants the other way (as on his real back seen directly). The photo to edit is his back below the neck; tools/region_edit.py pastes back only his skin inside his outline.",
+    "refs": [],
+    "change": [
+     {
+      "item": "his janeu",
+      "goal": "a thin off-white thread running from the base of his neck down his back toward picture-right",
+      "his": "his janeu, the thin off-white cotton thread, about 2 mm thick, lying flat and unbroken on his skin: from the top of the shoulder at picture-right, beside his neck, diagonally down across his back to his hip at picture-left, where it goes under the waistband of the sweatpants"
+     }
+    ],
+    "keep": [
+     "his back muscles, skin, light and shadows, his arms, the hand behind his neck, the phone, the sweatpants and the bathroom exactly as they are",
+     "his neck chain exactly where it is",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin15janeu_send.jpg",
+    "sha256": "b3432948aa843af7d9cc21a047291f3a7bc3b5d4c4d3e99ad9bee7549286c691",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin15_janeu/pin15janeu_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- his janeu: the PHOTO TO EDIT shows a thin off-white thread running from the base of his neck down his back toward picture-right; make it his janeu, the thin off-white cotton thread, about 2 mm thick, lying flat and unbroken on his skin: from the top of the shoulder at picture-right, beside his neck, diagonally down across his back to his hip at picture-left, where it goes under the waistband of the sweatpants.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his back muscles, skin, light and shadows, his arms, the hand behind his neck, the phone, the sweatpants and the bathroom exactly as they are.\n- his neck chain exactly where it is.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "e1c9f70b28dd4b6413baa95ee6778f7b3537b8b31778badf1162a55cd9cd4664",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "b3432948aa843af7d9cc21a047291f3a7bc3b5d4c4d3e99ad9bee7549286c691",
+    "upload_name": "pin15janeu_send.jpg",
+    "bytes": 122958,
+    "px": [
+     759,
+     773
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "f1c1db0b87b05d765429e1a7e0166f8b28dce44511681410b18cc94027821673"
+ }
+}
