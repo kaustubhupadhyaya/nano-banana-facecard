@@ -1,0 +1,187 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14janeu3_send",
+ "version": 1,
+ "created": "2026-10-12T05:19:17",
+ "because": "FAILURE_LOG F39: the janeu2 edit kept the old cord where it was in both returns, so Gemini gets no line to keep: the old cord and a thin band along the target diagonal (his left shoulder at picture-right beside the neck to his right hip at the waistband, as in IMG_7002) are painted flat grey in a 2x crop of his chest on pin 14 v4 v1_0r; his own diagonal janeu (IMG_7002) as the reference; only the grey is pasted back",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14janeu3_send",
+  "path": ".cache/region_edits/pin14_janeu3/pin14janeu3_send.jpg",
+  "sha256": "b2f581d18810a35c919ed7ac31219e8313d4cfb86039ac18a5deede0eaaf9114",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_janeu3/pin14janeu3_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14janeu3_route.txt",
+   "inventory": ".cache/inventories/pin14janeu3.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-12T04:02:13"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's chest and stomach in bright sun, with two narrow flat grey bands on his skin, his hands at the waistband of dark jeans. Close frame.",
+   "from": ".cache/loop_prompts/pin14janeu3_route.txt",
+   "sha256": "8d618a6f761290f71ca0a85b1338ad5e1b4f9789532931e328b8a6ba20c8b2d2",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14janeu3.json",
+   "sha256": "951eda658e8a29da120fa5818fba12eb51196ae894a24b5e285b9e92f5792166",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_janeu3/pin14janeu3_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_janeu3/pin14janeu3_send.jpg",
+    "written": "2026-10-12, pin 14 v4 v1_0r (run 20261012_020337): the janeu fix by grey-out (FAILURE_LOG F39). janeu2 (an edit of the chest that asked for the diagonal) came back with the old cord where it was, so here Gemini has no line to keep: in the same chest-and-stomach crop (box 213-434 x 558-849, sent at 2x), flat grey 128 (tools/physique_greyout.py's grey) covers (a) the old cord, traced row by row as the brightest thin line inside a corridor around its path and fitted smooth, +-5 px, and (b) a 5 px band (about 3x his thread, which is about 1.7 px at this scale) along the target: a gentle diagonal from the top of his left shoulder beside his neck (picture-right) over his left pec between his breastbone and his left nipple, across his midline at the upper abs, to his right hip at the waistband at the top of his hand (picture-left), as IMG_7002 shows it. Both bands lie inside his body below the neck line (the v4 paste region), so the neck and head are never touched. The check sheet: scratchpad pin14_probe/janeu3_grey_bands.jpg. After the run: only the grey bands are pasted back (tools/region_edit.py paste with this crop .json, whose mask is the grey), a difference map against v1_0r, and the janeu at 100% beside IMG_7002.",
+    "refs": [
+     {
+      "key": "janeu",
+      "path": ".cache/region_edits/pin14_janeu2/his_janeu_IMG_7002.jpg",
+      "label": "HIS JANEU: a crop of the same man's own photo today: his janeu, one thin off-white thread from the top of his left shoulder beside his neck, at picture-right, in one diagonal line down across his chest and stomach to his right hip at picture-left, where it goes under the waistband. Take from it only the thread's path and its thickness; nothing of his skin, his body, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey bands",
+      "goal": "two narrow flat grey bands on his skin: a wider one hanging from beside his neck down the picture-right side of his chest and curving across his stomach to the waistband, and a thin diagonal one from the top of his left shoulder beside his neck (picture-right) across his chest and stomach to his right hip at the waistband (picture-left)",
+      "his": "his skin there, exactly as around them, with the same tone, light, shadows, pores and fine hair; and along the thin diagonal grey band only, his janeu: one thin off-white thread lying flat on his skin, as thin as in HIS JANEU, from the top of his left shoulder beside his neck to his right hip, where it goes under the waistband behind his hand",
+      "ref": "janeu"
+     }
+    ],
+    "keep": [
+     "everything outside the grey bands exactly as it is: his skin, his muscles and their light and shadows, his silver neck chain and its pendant, his arms and hands, the white waistband strip and the near-black jeans",
+     "the man's jaw and neck at the top edge exactly as they are",
+     "the background at the edges exactly as it is; no other person and no text anywhere",
+     "the same bright, hard sunlight, colour, contrast and fine grain",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_janeu_IMG_7002.jpg",
+    "sha256": "5e9b0f7f01eba3128c46a4b7adeb6cc9cad67d7984d4dc30201641099320e417",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_janeu2/his_janeu_IMG_7002.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS JANEU: a crop of the same man's own photo today: his janeu, one thin off-white thread from the top of his left shoulder beside his neck, at picture-right, in one diagonal line down across his chest and stomach to his right hip at picture-left, where it goes under the waistband. Take from it only the thread's path and its thickness; nothing of his skin, his body, the light or the room",
+    "key": "janeu"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin14janeu3_send.jpg",
+    "sha256": "f88e25b367d797f8c8295f532a0a1cfed681e2609392eda26eaba78bfd10bbb4",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_janeu3/pin14janeu3_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS JANEU: a crop of the same man's own photo today: his janeu, one thin off-white thread from the top of his left shoulder beside his neck, at picture-right, in one diagonal line down across his chest and stomach to his right hip at picture-left, where it goes under the waistband. Take from it only the thread's path and its thickness; nothing of his skin, his body, the light or the room\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey bands: the PHOTO TO EDIT shows two narrow flat grey bands on his skin: a wider one hanging from beside his neck down the picture-right side of his chest and curving across his stomach to the waistband, and a thin diagonal one from the top of his left shoulder beside his neck (picture-right) across his chest and stomach to his right hip at the waistband (picture-left); make it his skin there, exactly as around them, with the same tone, light, shadows, pores and fine hair; and along the thin diagonal grey band only, his janeu: one thin off-white thread lying flat on his skin, as thin as in HIS JANEU, from the top of his left shoulder beside his neck to his right hip, where it goes under the waistband behind his hand (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- everything outside the grey bands exactly as it is: his skin, his muscles and their light and shadows, his silver neck chain and its pendant, his arms and hands, the white waistband strip and the near-black jeans.\n- the man's jaw and neck at the top edge exactly as they are.\n- the background at the edges exactly as it is; no other person and no text anywhere.\n- the same bright, hard sunlight, colour, contrast and fine grain.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "ec6e65e8ec1091e2cfbecc5b0d5625b8350e1ec951c3ef7fda18750845575ab7",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "5e9b0f7f01eba3128c46a4b7adeb6cc9cad67d7984d4dc30201641099320e417",
+    "upload_name": "his_janeu_IMG_7002.jpg",
+    "bytes": 61108,
+    "px": [
+     550,
+     615
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "f88e25b367d797f8c8295f532a0a1cfed681e2609392eda26eaba78bfd10bbb4",
+    "upload_name": "pin14janeu3_send.jpg",
+    "bytes": 75427,
+    "px": [
+     442,
+     582
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "0457b7da9b2981c3d97df4e1033ae86f70aca87a85ad64822d9b337fa986c127"
+ }
+}
