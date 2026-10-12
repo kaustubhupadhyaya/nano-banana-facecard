@@ -1,0 +1,211 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14head3_send",
+ "version": 1,
+ "created": "2026-10-13T03:40:01",
+ "because": "FAILURE_LOG F45: pin14head@v2 (replicate head swap) gave 0 of 6: the far face (55 px, turned about 80 degrees away) came back x1.04-1.47 and moved 0.13-0.30, as on pin 16; v3 changes the head in place as a region edit of the ghost-fix v1_0r at 4x (his curls under the cap, his beard on the jaw edge, his ear and neck skin; the cap, the turn, the size and the place kept), with his real profile IMG_6864 (turned toward picture-right like this head) for hair, beard and ear only",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14head3_send",
+  "path": ".cache/region_edits/pin14_head3/pin14head3_send.jpg",
+  "sha256": "a5d035f6f2996bf35c6ff1ae09899ecdfd98842a60b38d0f60e548b944cfd2a7",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_head3/pin14head3_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14head3_route.txt",
+   "inventory": ".cache/inventories/pin14head3.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-12T17:17:13"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's head and neck from the side in bright sun, a maroon cap worn backwards, his head turned far away toward the sea. Close frame.",
+   "from": ".cache/loop_prompts/pin14head3_route.txt",
+   "sha256": "1713365316e0b7400ba99fb466730974529997c3790fa7f5edccfc2b4c52502e",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14head3.json",
+   "sha256": "279915d1786dd1c52e756a39e66fc84531372bf47e840f933308f0aee53e4805",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_head3/pin14head3_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_head3/pin14head3_send.jpg",
+    "written": "2026-10-13, pin 14 stage B v3 (FAILURE_LOG F45): the replicate head swap (pin14head@v2) gave 0 of 6 usable pictures: the far face (55 px, turned about 80 degrees away) came back x1.04-1.47 and moved 0.13-0.30, as on pin 16. So the head is changed in place as a region edit of the ghost-fix v1_0r (run 20261012_163848): the crop of his head and neck (box 0.36-0.64 x 0.4305-0.65, pixels 264-471 x 418-631) is sent at 4x (828x852); only the pin man's hair under the cap, his ear, the cheek and jaw edge that shows and the neck change to his, and tools/region_edit.py pastes back only that area (the pin's YOLO person mask, 7 px more below the cap's rim for his curls, down to 12 px below the neck line), with the cap kept exactly (its outline traced, soft mask 0) and the sky around the cap left out, so the head keeps the pin's size, turn and place. Reference: his real profile IMG_6864, turned toward picture-right like this head (headpose yaw -70; the pin's head -42; IMG_6862 and IMG_6863 face picture-left), not mirrored, cut to his head, for his hair, beard and ear only. No earring or other jewellery shows on the head, so none is named. Check sheet: scratchpad pin14_probe/head3_mask.jpg.",
+    "refs": [
+     {
+      "key": "profile",
+      "path": ".cache/region_edits/pin14_head3/his_profile_IMG_6864.jpg",
+      "label": "HIS PROFILE: a crop of the same man's own photo today, his head turned toward picture-right: take from it only his hair (dense tight black curls, tapered short at the side above the ear, longer at the back), his beard along the jaw and his ear; nothing of his turn, his expression, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the hair under the cap",
+      "goal": "short, straight dark-brown hair under the cap: at the nape below the rim, above and behind the ear and at the temple",
+      "his": "his own hair as in HIS PROFILE: dense, tight black curls of his current cut pressed under the cap, the side above his ear tapered short and close to the scalp so that his ear shows, a few curls pushing out under the rim at the temple, and his longer curls at the back curling out below the rim onto his nape; nothing of the brown hair is left",
+      "ref": "profile"
+     },
+     {
+      "item": "the cheek and jaw edge",
+      "goal": "the smooth, clean-shaven edge of the cheek and jaw that shows on the turned-away head, down to the chin",
+      "his": "his own full, dense, short dark beard along that edge as in HIS PROFILE: along his jaw from below the ear to the chin and under it, a little lighter high on the cheek, the corner of his dark moustache where the outline ends; the outline of the cheek, the jaw and the tip of the nose stay in the same place",
+      "ref": "profile"
+     },
+     {
+      "item": "the ear",
+      "goal": "the man's ear, half under his hair",
+      "his": "his own ear as in HIS PROFILE, standing slightly out from his head, in the same place and at the same size",
+      "ref": "profile"
+     },
+     {
+      "item": "the skin of the ear, cheek and neck",
+      "goal": "light, sun-tanned skin",
+      "his": "his own warm medium-brown skin in this same bright sun and light shade, blending evenly into the warm brown of his shoulders and chest below"
+     }
+    ],
+    "keep": [
+     "the cap exactly as it is, every pixel: the faded maroon cap worn backwards, its brim, its rim and its faint lettering",
+     "the head's turn, tilt, size and place exactly as they are: turned about 80 degrees away toward the coast at picture-right with the face hidden, bowed as it is; nothing grows, shrinks, lifts or turns toward the camera",
+     "his silver chain and pendant, his shoulders and his chest exactly as they are",
+     "the sky, the hill and the sea around him exactly as they are; no other person and no text anywhere",
+     "the bright midday light from in front of him and a little from picture-left, the side of the face in light shade, the colour and the fine grain",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.26",
+   "measured": {
+    "detected": true,
+    "yaw": -75.7,
+    "pitch": -110.1,
+    "roll": 95.0,
+    "side": "picture-right",
+    "score": 0.61,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_profile_IMG_6864.jpg",
+    "sha256": "d853af79fba8d75a0ac69487873a648acce78c8cdd9ed79948131fa5ba65b7ce",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_head3/his_profile_IMG_6864.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS PROFILE: a crop of the same man's own photo today, his head turned toward picture-right: take from it only his hair (dense tight black curls, tapered short at the side above the ear, longer at the back), his beard along the jaw and his ear; nothing of his turn, his expression, the light or the room",
+    "key": "profile"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin14head3_send.jpg",
+    "sha256": "4b42b2f0a903d57d054c741867bb0866a81a8a8f0ee6985cb71ccf517e30773d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_head3/pin14head3_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS PROFILE: a crop of the same man's own photo today, his head turned toward picture-right: take from it only his hair (dense tight black curls, tapered short at the side above the ear, longer at the back), his beard along the jaw and his ear; nothing of his turn, his expression, the light or the room\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the hair under the cap: the PHOTO TO EDIT shows short, straight dark-brown hair under the cap: at the nape below the rim, above and behind the ear and at the temple; make it his own hair as in HIS PROFILE: dense, tight black curls of his current cut pressed under the cap, the side above his ear tapered short and close to the scalp so that his ear shows, a few curls pushing out under the rim at the temple, and his longer curls at the back curling out below the rim onto his nape; nothing of the brown hair is left (image 1).\n- the cheek and jaw edge: the PHOTO TO EDIT shows the smooth, clean-shaven edge of the cheek and jaw that shows on the turned-away head, down to the chin; make it his own full, dense, short dark beard along that edge as in HIS PROFILE: along his jaw from below the ear to the chin and under it, a little lighter high on the cheek, the corner of his dark moustache where the outline ends; the outline of the cheek, the jaw and the tip of the nose stay in the same place (image 1).\n- the ear: the PHOTO TO EDIT shows the man's ear, half under his hair; make it his own ear as in HIS PROFILE, standing slightly out from his head, in the same place and at the same size (image 1).\n- the skin of the ear, cheek and neck: the PHOTO TO EDIT shows light, sun-tanned skin; make it his own warm medium-brown skin in this same bright sun and light shade, blending evenly into the warm brown of his shoulders and chest below.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the cap exactly as it is, every pixel: the faded maroon cap worn backwards, its brim, its rim and its faint lettering.\n- the head's turn, tilt, size and place exactly as they are: turned about 80 degrees away toward the coast at picture-right with the face hidden, bowed as it is; nothing grows, shrinks, lifts or turns toward the camera.\n- his silver chain and pendant, his shoulders and his chest exactly as they are.\n- the sky, the hill and the sea around him exactly as they are; no other person and no text anywhere.\n- the bright midday light from in front of him and a little from picture-left, the side of the face in light shade, the colour and the fine grain.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "22f63dce1e1287a8a2d8400e347f5572dbea44e8e7ca75bd34b4859e23d83b84",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "d853af79fba8d75a0ac69487873a648acce78c8cdd9ed79948131fa5ba65b7ce",
+    "upload_name": "his_profile_IMG_6864.jpg",
+    "bytes": 619020,
+    "px": [
+     1250,
+     1400
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "4b42b2f0a903d57d054c741867bb0866a81a8a8f0ee6985cb71ccf517e30773d",
+    "upload_name": "pin14head3_send.jpg",
+    "bytes": 112249,
+    "px": [
+     828,
+     852
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "c4b852c15f330ca2a65070bc7d76e6c379c8faeb6a77c2185f77f24bad0fb186"
+ }
+}
