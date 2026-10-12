@@ -1,0 +1,157 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14ghost_send",
+ "version": 1,
+ "created": "2026-10-12T16:36:21",
+ "because": "FAILURE_LOG F41: janeu3 v1_0r has the new diagonal janeu but a faint ghost of the old cord beside it; only a band over the ghost (at least 4 px from the new thread) is greyed in a 2x crop of his lower chest and redrawn as his bare skin; only the grey is pasted back",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14ghost_send",
+  "path": ".cache/region_edits/pin14_ghost/pin14ghost_send.jpg",
+  "sha256": "169d54848c0f9631e127becb575177941e336bff66a63b549724a32e78196414",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_ghost/pin14ghost_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14ghost_route.txt",
+   "inventory": ".cache/inventories/pin14ghost.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-12T06:15:29"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's chest and stomach in bright sun, a thin off-white thread across them and a narrow flat grey band beside it, his hand at the waistband. Close frame.",
+   "from": ".cache/loop_prompts/pin14ghost_route.txt",
+   "sha256": "f2a725e68e41ccb13c50dbfffc72fa7112bd93073fb3bfe40c510bfc94aaf4c3",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14ghost.json",
+   "sha256": "da4ce5b1a99d128e7765f4cbd9a08ffd7686cceb859dea2670cca6bb1fa8e70e",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_ghost/pin14ghost_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_ghost/pin14ghost_send.jpg",
+    "written": "2026-10-12, pin 14 ghost cleanup (FAILURE_LOG F41): janeu3's v1_0r (run 20261012_061458) has the new diagonal thread, but a faint ghost of the old cord runs beside it. The crop is his lower chest to the waistband (box 0.35-0.58 x 0.612-0.865, pixels 257-426 x 594-839), sent at 2x; flat grey 128 covers only the ghost: the old cord's path where the line reads above bare skin (rows 604-637 near the pendant and 728-827 down to his hand; white top-hat at least 1.8x the skin beside it), a band of +-4 px (about 3x the ghost's visible width with its soft edge and shadow), and nowhere within 4 px of the new thread (between rows about 640 and 725 the two run within 2-3 px, so the grey stops there). The check sheet is ghost_band_sheet.jpg in that run folder. No reference: the grey becomes his own skin from the skin around it. After the run only the grey is pasted back (tools/region_edit.py paste with this crop .json).",
+    "refs": [],
+    "change": [
+     {
+      "item": "the grey band",
+      "goal": "a narrow flat grey band on his skin beside the thin thread",
+      "his": "his bare skin there, exactly as around it: the same tone, light, texture and body hair"
+     }
+    ],
+    "keep": [
+     "the thin off-white diagonal thread exactly as it is, every pixel of it",
+     "everything else exactly as it is: his skin and muscles with their light and shadows, his navel, his hand, the white waistband strip and the jeans",
+     "the background at the edges exactly as it is; no other person and no text anywhere",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin14ghost_send.jpg",
+    "sha256": "227e5c87747148f8b9bd2891cfb5c1e7ea97f330174fec7dfb9f9b47dffd128d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_ghost/pin14ghost_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey band: the PHOTO TO EDIT shows a narrow flat grey band on his skin beside the thin thread; make it his bare skin there, exactly as around it: the same tone, light, texture and body hair.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the thin off-white diagonal thread exactly as it is, every pixel of it.\n- everything else exactly as it is: his skin and muscles with their light and shadows, his navel, his hand, the white waistband strip and the jeans.\n- the background at the edges exactly as it is; no other person and no text anywhere.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "1fcadada65431245d675bc1a79adf5a6793c63c0ff202f08e022cddfd1fffd1b",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "227e5c87747148f8b9bd2891cfb5c1e7ea97f330174fec7dfb9f9b47dffd128d",
+    "upload_name": "pin14ghost_send.jpg",
+    "bytes": 46844,
+    "px": [
+     338,
+     490
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "ab36c9b0751e5e83956a132a05226100a510d231031c4703f6b221011a9435fb"
+ }
+}
