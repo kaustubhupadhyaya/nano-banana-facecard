@@ -1,0 +1,293 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14head",
+ "version": 2,
+ "created": "2026-10-12T17:03:20",
+ "because": "pin 14 stage B (FAILURE_LOG F28/F33/F37/F39/F41/F43): the v4 body in the pin's exact frame with the janeu fixed and the old cord's ghost removed (ghost-fix v1_0r, run 20261012_163848, byte copy); his head onto the pin man's turned-away head (zone head, foreign photo, his curls and current cut) with his daylight faces me-day@v1 (F34; me-mix@v1's three-quarter IMG_6868 turns to picture-left, this head to picture-right). --head-region around the real head (cap, hair, beard, neck), because v1 froze on a face the detector read on his torso (F43): v1 stays frozen and is never queued",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "freeze_dir": "C:\\Users\\Admin\\GitHub\\nano-banana-facecard\\.cache\\replicate_freeze\\20261012_170243_pin14head",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14head",
+  "path": ".cache/region_edits/pin14_head/pin14head.jpg",
+  "sha256": "580d9944503a70e72a162791a02c6df519c36cb2e0313e894807bdd5242dcf8b",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "replicate",
+  "compiler": "replicate/1",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_head/pin14head.jpg",
+   "zone": "head",
+   "source": "foreign",
+   "glasses": "same",
+   "look": "curly",
+   "expression": null,
+   "character": "me-day@v1",
+   "current_look": false,
+   "from_picture": null,
+   "head_region": "0.36,0.42,0.66,0.62"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash"
+  },
+  "text_models": [
+   "56fdd199312815e2",
+   "e6fa609c3fa255c0"
+  ],
+  "samples": 2,
+  "max_attempts": 6,
+  "stop": {
+   "after_pose_fails": 0,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {},
+  "own": false,
+  "own_score": 0.36,
+  "source_kind": "foreign",
+  "duplicates_excluded": [],
+  "zone": "head",
+  "kind": "head",
+  "expression": "same",
+  "glasses": "same",
+  "look": "curly",
+  "far": true,
+  "face_share": 0.1201,
+  "crop": [
+   48,
+   288,
+   683,
+   683
+  ],
+  "crop_before_head_fit": null,
+  "head_boxes": [
+   [
+    362,
+    485,
+    55,
+    82
+   ]
+  ],
+  "copies_left_unedited": [],
+  "main_box": [
+   362,
+   485,
+   55,
+   82
+  ],
+  "main_in_crop": [
+   314,
+   197,
+   55,
+   82
+  ],
+  "source_size": [
+   736,
+   971
+  ],
+  "source_face": {
+   "box": [
+    316,
+    197,
+    53,
+    79
+   ],
+   "score": 0.306,
+   "face_w": 55
+  },
+  "readings": {
+   "head_box": {
+    "prompt_sha256": "c8f22d67b9e1aa5ea7ed6a2536464167daa4ac32bc58376f03b6bd2426d541b9",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "box": null,
+    "skipped": "far face"
+   },
+   "describe": {
+    "prompt_sha256": "d14a6c159796543406a3bc171ab3cb99b83682f24921905cf2efc8043928c8a3",
+    "models": [
+     "56fdd199312815e2",
+     "e6fa609c3fa255c0"
+    ],
+    "file": "photo_to_edit.png",
+    "reply": {
+     "head_turn": "turned roughly 80 to 85 degrees to the right of the picture, nearly in full profile facing away from the camera",
+     "head_tilt": "chin is dropped slightly downward, no noticeable sideways tilt",
+     "gaze": "looking downward toward the lower right foreground/coastline",
+     "expression": "neutral and relaxed with mouth closed and brow resting",
+     "glasses": "none",
+     "hair": "short to medium wavy brown hair visible around the sides and nape beneath a baseball cap",
+     "light": "bright overhead sunlight coming from the upper left, leaving the front of his face mostly in soft shadow with neutral-to-warm ambient fill",
+     "face_exposure": "noticeably darker than his sunlit back and the sky, with slightly grainy phone-photo compression texture",
+     "reflection_present": false,
+     "reflection_where": "",
+     "other_people": false
+    }
+   }
+  },
+  "attractiveness": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
+  "thresholds": {
+   "hard_reject": 0.2,
+   "accept": 0.52,
+   "own_min": 0.4,
+   "approved": true
+  },
+  "gates": {
+   "light_de_max": 14.0,
+   "size_own": [
+    0.94,
+    1.04
+   ],
+   "size_foreign": [
+    0.94,
+    1.04
+   ],
+   "light_de_max_foreign": 20.0,
+   "unchanged_gt_sim": 0.9,
+   "neck_gap_max": 10.0,
+   "rescue_attempts": 3,
+   "sharp_max": 6.0
+  },
+  "character": {
+   "ref": "me-day@v1",
+   "sha256": "435b5cac30d6a38e93954247eb63ad577de8039edc747236fdbeccecb3eb168c"
+  },
+  "face_choice": {
+   "decided_by": "character me-day@v1",
+   "names": [
+    "IMG_6844.jpg",
+    "IMG_6846.jpg",
+    "IMG_6845.jpg"
+   ],
+   "count": 3
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "face_front.jpg",
+    "sha256": "fcb4688c420c0f72550c50655a4369ac1af42b597737f294a16257152d4434f8",
+    "from": "IMG_6844.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me-day@v1: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "face_three_quarter_left.jpg",
+    "sha256": "c7cc4183568eb4511f4b2c7e56c3faaa28a57a309275757bf1b254dd8b940468",
+    "from": "IMG_6846.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me-day@v1: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "face_three_quarter_right.jpg",
+    "sha256": "0fe4f21e82aae365ca2deab7bbb14054fc661b9e284aeede78d1f27ba9f1cbc4",
+    "from": "IMG_6845.jpg",
+    "prep": "head768_q95 (replicate.head_ref_crop)",
+    "why": "character me-day@v1: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "photo_to_edit.png",
+    "sha256": "951e880cf982856ce012a16dc705661c4da6c2c6c1c6573a2d55d4fea17fa035",
+    "from": ".cache/region_edits/pin14_head/pin14head.jpg",
+    "prep": "crop [48, 288, 683, 683] of the 736x971 original, long side 1024 px",
+    "why": "the crop of his photo that is edited and pasted back into the untouched original"
+   }
+  ],
+  "hair_note": "His hair is his CURRENT cut, from the reference photos, not the cut of the man in the last image: dense tight black curls on top, the sides above and in front of his ears tapered short and close to the scalp so that his ears and temples show, and the curls longer at the back toward the nape. So the hair outline changes at the sides; on top it stays within the size it has in the last image.",
+  "head_region": {
+   "spec": "0.36,0.42,0.66,0.62",
+   "box_px": [
+    265,
+    408,
+    486,
+    602
+   ],
+   "face": [
+    362,
+    485,
+    55,
+    82
+   ],
+   "why": "only faces whose box centre lies inside this part of the frame count as the subject or a copy"
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "replicate/1",
+   "template_sha256": "5f7be3521647c9a0d4ffe504735fbe869e94682b989e302f41ef60dba047d4da",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "The first 3 images are photos of the same man: the identity reference. The last image is the photo to edit.\n\nEdit the last image so that the man in it has this exact man's head: his face structure, jawline, nose, eyes, brows, lips, natural complexion and beard as in the reference photos. Use the reference photos only for who he is: ignore their lighting, exposure, colour cast and head angle; those come from the last image. His hair is his own tight dark curls, at exactly the same size and volume as the hair in the last image. If the man in the last image wears glasses, he keeps wearing the same glasses. Give him exactly the expression of the man in the last image: the same mouth, eyes and brows at the same strength, but natural and relaxed on his face, never tense or forced.\n\nThis is what the last image shows before the edit. The head angle, gaze, glasses and light must stay exactly as they are:\n- head: turned roughly 80 to 85 degrees to the right of the picture, nearly in full profile facing away from the camera\n- chin: chin is dropped slightly downward, no noticeable sideways tilt\n- eyes: looking downward toward the lower right foreground/coastline\n- glasses: none\n- light on his face: bright overhead sunlight coming from the upper left, leaving the front of his face mostly in soft shadow with neutral-to-warm ambient fill\n- how bright his face is: noticeably darker than his sunlit back and the sky, with slightly grainy phone-photo compression texture\n\nHe is far from the camera: his head is small in the last image and exactly as soft and grainy as the rest of the photo. Keep it that small and that soft. His face, from the top of his forehead to his chin, is 12 percent of the image height in the last image and stays exactly that.\n\nKeep his head at the same position, turn and tilt as in the last image, and the head, including the hair, exactly the same size as there, never larger. Keep his jaw, chin and neck exactly as clean as in the last image: no extra fold or double chin. The face has exactly the exposure, colour, contrast and grain of the photo around it, lit from the same direction, so it belongs in the picture like a real phone photo and not a studio portrait.\nKeep everything else in the last image exactly as it is: neck, clothing, body, hands, pose, background and framing.\n\nHis hair is his CURRENT cut, from the reference photos, not the cut of the man in the last image: dense tight black curls on top, the sides above and in front of his ears tapered short and close to the scalp so that his ears and temples show, and the curls longer at the back toward the nape. So the hair outline changes at the sides; on top it stays within the size it has in the last image.",
+  "prompt_sha256": "bdc39f4ffb4cf9be8da288365ade503c992a60a41c4fcfa369fcc4d15d184cc5",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "fcb4688c420c0f72550c50655a4369ac1af42b597737f294a16257152d4434f8",
+    "upload_name": "face_front.jpg",
+    "bytes": 136081,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "c7cc4183568eb4511f4b2c7e56c3faaa28a57a309275757bf1b254dd8b940468",
+    "upload_name": "face_three_quarter_left.jpg",
+    "bytes": 313931,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "0fe4f21e82aae365ca2deab7bbb14054fc661b9e284aeede78d1f27ba9f1cbc4",
+    "upload_name": "face_three_quarter_right.jpg",
+    "bytes": 152449,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "951e880cf982856ce012a16dc705661c4da6c2c6c1c6573a2d55d4fea17fa035",
+    "upload_name": "photo_to_edit.png",
+    "bytes": 1515171,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "1f6e2f98b3b2dd88f354be9f5c61465caebc21ce7d9a25ac704b324179ea0224"
+ }
+}

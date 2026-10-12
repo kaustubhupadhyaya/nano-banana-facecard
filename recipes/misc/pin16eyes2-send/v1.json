@@ -1,0 +1,186 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin16eyes2_send",
+ "version": 1,
+ "created": "2026-10-12T17:10:05",
+ "because": "FAILURE_LOG F44: the eyes-only edit kept the far eye's gaze in 4 of 4 (agreement -0.02 to -0.06, his -0.32 to -0.20); the grey-out method that moved the janeu (F39): the far eye's opening greyed so it must be redrawn, his real eyes at this turn (IMG_6868) as the gaze reference, only that opening pasted back; 4 samples for the eye check",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin16eyes2_send",
+  "path": ".cache/region_edits/pin16_eyes2/pin16eyes2_send.jpg",
+  "sha256": "d11ffbf06a0dbe8a08a0d248e1cdd0a464db42f90ccfa21b9295e5c34d89420e",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin16_eyes2/pin16eyes2_send.jpg",
+   "prompt": ".cache/loop_prompts/pin16eyes2_route.txt",
+   "inventory": ".cache/inventories/pin16eyes2.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-12T17:06:23"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a bearded man's eyes and nose in soft outdoor daylight under trees, his head turned about 27 degrees to the left of the picture, looking at the camera. Close frame.",
+   "from": ".cache/loop_prompts/pin16eyes2_route.txt",
+   "sha256": "2549043f9a884ac48b3ea629f50f1d91ba21342e1caf553e99e9d665db45e6cd",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin16eyes2.json",
+   "sha256": "e60569a63ab2b1e7010a17b5fd7f5535032998b8a12a022d1f2b5f3d7e2112d1",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin16_eyes2/pin16eyes2_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin16_eyes2/pin16eyes2_send.jpg",
+    "written": "2026-10-12, pin 16 (FAILURE_LOG F44): the eyes-only edit that asked both eyes to look the same way kept the far eye's gaze in 4 of 4 (eye agreement -0.02 to -0.06 at 4x; his photos -0.32 to -0.20). The method that moved the janeu (F39) is used: the far (picture-left) eye's opening, inside the lid line from the 2dfan4 outline fitted at 4x, is painted flat grey (128) in the same crop of the base (box 423-541 x 426-505, sent 4x), so it must be redrawn; only that opening is pasted back (mask pin16eyes2_mask.png, feather 1 px). Reference: his real eyes at the same turn and side (IMG_6868).",
+    "refs": [
+     {
+      "key": "his_eyes",
+      "path": ".cache/region_edits/pin16_eyes2/his_eyes_IMG_6868.jpg",
+      "label": "HIS EYES AT THIS TURN: the same man's own eyes in his own photo, his head turned about 30 degrees to the left of the picture as here. Only the gaze matters: how his far eye's iris sits between its corners when both his eyes look the same way; not the light, the skin, the colour, the lids or the angle"
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey inside the far eye's lids (the eye on the left of the picture)",
+      "goal": "a flat grey patch filling the opening of the far eye, between its lids",
+      "his": "his eye, the same dark brown iris and white as his other eye, looking the same way as his other eye (toward the camera), its iris sitting as far toward the outer corner as in HIS EYES AT THIS TURN"
+     }
+    ],
+    "keep": [
+     "the lids, the lashes and the brows of both eyes exactly as they are",
+     "the near eye on the right of the picture exactly as it is",
+     "the skin, the light, the colour and the grain exactly as they are",
+     "the head angle and the framing exactly: nothing is zoomed, shifted or re-centred",
+     "no other person and no lettering in the frame"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_left",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Left, yaw ratio 0.71",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left_head768_1789837650.jpg",
+    "IMG_6868.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_eyes_IMG_6868.jpg",
+    "sha256": "c771a28af6f5108ae2b17ef090fc3a91c28d0f01e8a944a754b01a6e0ebe39ec",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin16_eyes2/his_eyes_IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS EYES AT THIS TURN: the same man's own eyes in his own photo, his head turned about 30 degrees to the left of the picture as here. Only the gaze matters: how his far eye's iris sits between its corners when both his eyes look the same way; not the light, the skin, the colour, the lids or the angle",
+    "key": "his_eyes"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin16eyes2_send.jpg",
+    "sha256": "677f034dc7847790a9fc0e17738a7452d251aed594392e6f311ac23239620975",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin16_eyes2/pin16eyes2_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS EYES AT THIS TURN: the same man's own eyes in his own photo, his head turned about 30 degrees to the left of the picture as here. Only the gaze matters: how his far eye's iris sits between its corners when both his eyes look the same way; not the light, the skin, the colour, the lids or the angle\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey inside the far eye's lids (the eye on the left of the picture): the PHOTO TO EDIT shows a flat grey patch filling the opening of the far eye, between its lids; make it his eye, the same dark brown iris and white as his other eye, looking the same way as his other eye (toward the camera), its iris sitting as far toward the outer corner as in HIS EYES AT THIS TURN.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the lids, the lashes and the brows of both eyes exactly as they are.\n- the near eye on the right of the picture exactly as it is.\n- the skin, the light, the colour and the grain exactly as they are.\n- the head angle and the framing exactly: nothing is zoomed, shifted or re-centred.\n- no other person and no lettering in the frame.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "d1adf20427fd8ae195b3aea10ead86fdd43b1c8a8b15f878e96fb5274d8a233a",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "c771a28af6f5108ae2b17ef090fc3a91c28d0f01e8a944a754b01a6e0ebe39ec",
+    "upload_name": "his_eyes_IMG_6868.jpg",
+    "bytes": 16881,
+    "px": [
+     246,
+     160
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "677f034dc7847790a9fc0e17738a7452d251aed594392e6f311ac23239620975",
+    "upload_name": "pin16eyes2_send.jpg",
+    "bytes": 34402,
+    "px": [
+     472,
+     316
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "b10b193b3642cf3ea9de9f383209c3afa423d6a6935d5d18d176862b0b00fd54"
+ }
+}
