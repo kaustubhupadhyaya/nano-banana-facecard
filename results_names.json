@@ -30,6 +30,18 @@
   "number": 6,
   "title": "shirtless pencil in mouth bw"
  },
+ "pin6head2_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 6,
+  "title": "shirtless pencil in mouth bw",
+  "note": "2026-10-14: stage 2 v2 of pin 6, his head drawn in place inside a grey-out of the pin man's head and paintbrush (the ear kept; FAILURE_LOG F48), a region edit of the stage 1 v1_0r, run 20261013_193206; its pictures are pin 6 pictures"
+ },
+ "pin6head_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 6,
+  "title": "shirtless pencil in mouth bw",
+  "note": "2026-10-13: stage 2 of pin 6 v3, his hair, face, beard, ear and neck drawn in place on the pin man's bowed head (region edit of the stage 1 v1_0r, run 20261013_193206; replicate finds no face on this profile); its pictures are pin 6 pictures"
+ },
  "pin_783485666539777115": {
   "collection": "motorcycle-outfit-men",
   "number": 7,
@@ -40,9 +52,210 @@
   "number": 8,
   "title": "mirror selfie cat shirtless"
  },
+ "pin8head_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 8,
+  "title": "mirror selfie cat shirtless",
+  "note": "2026-10-13: pin 8 v7's v2_0r (run 20261013_190541): the pin man's straight swept hair and bangs redrawn as his curls in a 4x region edit of the head, only the hair area pasted back (items 19, 28; FAILURE_LOG F46/F47 method); its pictures are pin 8 pictures"
+ },
+ "pin8janeu_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 8,
+  "title": "mirror selfie cat shirtless",
+  "note": "2026-10-13: pin 8 v7's v2_0r (run 20261013_190541): the vertical cord and the target diagonal (a mirror picture: his left shoulder at picture-left to his right hip at picture-right) painted grey in a 2x crop of his chest, only the grey bands pasted back (item 36; FAILURE_LOG F39/F41); its pictures are pin 8 pictures"
+ },
+ "pin8build_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 8,
+  "title": "mirror selfie cat shirtless",
+  "note": "2026-10-14: pin 8 v3_0r (the 10-01 head on the combined v1_0r): the outer band of both upper arms and the top of both shoulder caps painted grey in a 2x crop, only the grey pasted back, to narrow his build to the pumped_front standard (items 26/32; FAILURE_LOG F52); its pictures are pin 8 pictures"
+ },
  "pin_783485666539779317": {
   "collection": "motorcycle-outfit-men",
   "number": 9,
   "title": "black polo leaning over desk office"
+ },
+ "pin_783485666540141734": {
+  "collection": "motorcycle-outfit-men",
+  "number": 10,
+  "title": "gym mirror back shirtless bw side face"
+ },
+ "pin_783485666540141628": {
+  "collection": "motorcycle-outfit-men",
+  "number": 11,
+  "title": "pizza table head on hand navy zip sweater"
+ },
+ "pin_783485666540141702": {
+  "collection": "motorcycle-outfit-men",
+  "number": 12,
+  "title": "red flags print tee tote front print"
+ },
+ "pin_783485666540141619": {
+  "collection": "motorcycle-outfit-men",
+  "number": 13,
+  "title": "bowling alley red ball looking right smiling"
+ },
+ "google-1__IMG_5549": {
+  "collection": "own-photos",
+  "number": 1,
+  "title": "kayak current look",
+  "target_look": "current"
+ },
+ "google-4__IMG_5850_Original": {
+  "collection": "own-photos",
+  "number": 2,
+  "title": "stained glass mirror current look",
+  "target_look": "current"
+ },
+ "v1_eyeband_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 11,
+  "title": "pizza table head on hand navy zip sweater",
+  "note": "2026-10-10: the region edit of pin 11's _v1 (v2_0r's eyes, the user's request); its pictures are pin 11 pictures"
+ },
+ "v2_beard_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 11,
+  "title": "pizza table head on hand navy zip sweater",
+  "note": "2026-10-10: the beard fix of pin 11's v2_0r (run 20261009_204403), the picture the user called perfect except a little more beard; a region edit pasted back below a line under his eyes (tools/region_edit.py)"
+ },
+ "pin_783485666540168309": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-10 evening (pin.it/XRn1YQBDf): the pin's pose, the background moved to the Gokarna beach trek (the user's location links), the pumped front body",
+  "source": "foreign",
+  "source_why": "Pinterest pin 783485666540168309 (the user's link pin.it/XRn1YQBDf) of another man, his face turned about 80 degrees away; his photo pool scored it 0.461, in the 0.20-0.50 gray zone (2026-10-10)"
+ },
+ "pin14s2_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-11: stage 2 of pin 14, the Gokarna background behind stage 1's v1_0r (run 20261011_033245), pasted outside his outline; its pictures are pin 14 pictures"
+ },
+ "pin14v4_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-12: pin 14 v4 stage A (FAILURE_LOG F33): the pin's torso and arms redrawn as his in a 2x region edit, pasted back inside the pin man's outline below the neck; its pictures are pin 14 pictures"
+ },
+ "pin14janeu2_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-12: the janeu of pin 14 v4 v1_0r (run 20261012_020337) redrawn as one diagonal thread in a 2x region edit of his chest, pasted back along narrow bands only (FAILURE_LOG F37); its pictures are pin 14 pictures"
+ },
+ "pin14janeu3_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-12: the janeu of pin 14 v4 v1_0r (run 20261012_020337) by grey-out: the old cord and the target diagonal painted grey in a 2x crop of his chest, only the grey pasted back (FAILURE_LOG F39); its pictures are pin 14 pictures"
+ },
+ "pin14ghost_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-12: janeu3 v1_0r (run 20261012_061458) with the old cord's faint ghost greyed out and redrawn as bare skin, pasted back on the grey only (FAILURE_LOG F41); its pictures are pin 14 pictures"
+ },
+ "pin14head": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-12: stage B of pin 14, his head swapped onto the v4 body with the janeu fixed (ghost-fix v1_0r, run 20261012_163848; a byte-identical copy); its pictures are pin 14 pictures"
+ },
+ "pin14head3_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-13: stage B v3 of pin 14, his hair, beard, ear and neck drawn in place on the pin man's head (region edit of the ghost-fix v1_0r, run 20261012_163848; FAILURE_LOG F45); its pictures are pin 14 pictures"
+ },
+ "pin14body2_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-13: pin 14 v6, his full build (shoulders, chest, arms) drawn on head3 v2_0r (run 20261013_040232) in a 2x region edit whose paste mask also covers the band where his build is wider than the pin man's (FAILURE_LOG F46); its pictures are pin 14 pictures"
+ },
+ "pin14place_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 14,
+  "title": "gokarna clifftop shirtless cap looking down",
+  "note": "2026-10-13: stage C of pin 14, the Gokarna land and sea below the horizon behind him (region edit of the exported v3_0r, run 20261013_044047); its pictures are pin 14 pictures"
+ },
+ "pin_783485666540141726": {
+  "collection": "motorcycle-outfit-men",
+  "number": 15,
+  "title": "mirror selfie back hand behind neck shirtless"
+ },
+ "pin15janeu_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 15,
+  "title": "mirror selfie back hand behind neck shirtless",
+  "note": "2026-10-11: the janeu fix of pin 15 v3 v1_0r (run 20261011_104706), pasted inside his outline; its pictures are pin 15 pictures"
+ },
+ "pin15stub_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 15,
+  "title": "mirror selfie back hand behind neck shirtless",
+  "note": "2026-10-11: pin 15's janeu with the stub removed and the thread continued, on the narrow-band re-paste (FAILURE_LOG F30); its pictures are pin 15 pictures"
+ },
+ "pin_783485666540168242": {
+  "collection": "motorcycle-outfit-men",
+  "number": 16,
+  "title": "surfboard sandy path shirtless looking back"
+ },
+ "pin16s2_head": {
+  "collection": "motorcycle-outfit-men",
+  "number": 16,
+  "title": "surfboard sandy path shirtless looking back",
+  "note": "2026-10-11: stage 2 of pin 16, his head swapped into v3's body-only v1_0r (run 20261011_120200); its pictures are pin 16 pictures"
+ },
+ "pin16eyes_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 16,
+  "title": "surfboard sandy path shirtless looking back",
+  "note": "2026-10-12: the eyes of pin 16 base (marks-fixed Route G v2_0r, run 20261011_013419 v1_0r) redrawn in a 4x region edit so both look the same way (FAILURE_LOG F42), pasted back over the eyes only; its pictures are pin 16 pictures"
+ },
+ "pin16eyes2_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 16,
+  "title": "surfboard sandy path shirtless looking back",
+  "note": "2026-10-12: pin 16 base (marks-fixed Route G v2_0r, run 20261011_013419 v1_0r) with the far eye greyed inside its lids and redrawn in a 4x region edit (FAILURE_LOG F44), pasted back over that eye opening only; its pictures are pin 16 pictures"
+ },
+ "pin17chain_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 17,
+  "title": "balcony back shirtless cap railing",
+  "note": "2026-10-12: pin 17 v2's v2_0r (run 20261011_225040) with his neck chain redrawn silver in a region edit, pasted back along the chain only; its pictures are pin 17 pictures"
+ },
+ "pin17v2_body": {
+  "collection": "motorcycle-outfit-men",
+  "number": 17,
+  "title": "balcony back shirtless cap railing",
+  "note": "2026-10-11: pin 17 v2, body only on a composite of the pin with v1 v2_0r's head (run 20261010_210811) on the pin man's neck; its pictures are pin 17 pictures",
+  "source": "foreign",
+  "source_why": "the pin (someone else's photo) with his generated head from pin 17 v1's v2_0r pasted on; the photo pool finds his face (0.468) because that head is his render, not his own photo"
+ },
+ "pin_783485666540141762": {
+  "collection": "motorcycle-outfit-men",
+  "number": 17,
+  "title": "balcony back shirtless cap railing"
+ },
+ "pin13head_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 13,
+  "title": "bowling alley red ball looking right smiling",
+  "note": "2026-10-14: stage 2 of pin 13 (v5 base v1_0r, run 20261009_205207): his smile drawn in place on the rear-profile head (region edit of the stage 1 base; the v6 whole-frame head turn never ran); its pictures are pin 13 pictures"
+ },
+ "pin12fix_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 12,
+  "title": "red flags print tee tote front print",
+  "note": "2026-10-14: pin 12 v4 run 20261009_205525 v1_0 with the three person-like smudges behind him greyed out and redrawn as empty bokeh (grey-out region edit, F39-F47 method), only the grey pasted back; its pictures are pin 12 pictures"
+ },
+ "pin9build_send": {
+  "collection": "motorcycle-outfit-men",
+  "number": 9,
+  "title": "black polo leaning over desk office",
+  "note": "2026-10-14: pin 9 v3 (run 20261014_030859) v1_0r with the bands along both bare arms painted grey and repainted so the arms shrink to his casual size (grey-out region edit, F52 method), only the grey pasted back; its pictures are pin 9 pictures"
  }
 }

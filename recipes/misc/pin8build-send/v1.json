@@ -1,0 +1,241 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin8build_send",
+ "version": 1,
+ "created": "2026-10-14T03:06:41",
+ "because": "pin 8 v3_0r fails items 26/32 (FAILURE_LOG F52): the arms and shoulders are the pin man's outline, bulkier than his pumped_front standard (kitten arm about 0.26 of the torso length against 0.19, phone arm 0.211 against 0.189, shoulder caps rounder); the outer band of both upper arms and the top of both shoulder caps is painted grey and repainted as the wall (grey-out method, F39/F41; F46 was the widening case)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin8build_send",
+  "path": ".cache/region_edits/pin8_build/pin8build_send.jpg",
+  "sha256": "d9bf3fd71aa61378f757a7eb8ace04dcad06e312c4d2bb9bfcbf5797e3d3cade",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin8_build/pin8build_send.jpg",
+   "prompt": ".cache/loop_prompts/pin8build_route.txt",
+   "inventory": ".cache/inventories/pin8build.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T23:02:12"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's shoulders, chest and arms in a dim room, holding a phone and a kitten, with flat grey bands along the outside of his shoulders and upper arms. Close frame.",
+   "from": ".cache/loop_prompts/pin8build_route.txt",
+   "sha256": "45607823197adbae7afed1667566b6cedccf68c56f6822492d244df898816661",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin8build.json",
+   "sha256": "6516bd428f4849734e73e5c62443d649ee6c62cd772451e6016cef785baa9691",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin8_build/pin8build_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin8_build/pin8build_send.jpg",
+    "written": "2026-10-13, pin 8 build (TODO 86, FAILURE_LOG F52; FAILURE_LOG F46 was the opposite case, WIDENING): v3_0r (the 10-01 best.jpg head on the combined v1_0r) fails items 26/32: at one scale beside pumped_front the arms and shoulders are bulkier than his standard, the pin man's build leaking through the kept outline. Measured (YOLO11m-seg person mask + keypoints, character.measure, per torso length = shoulder-hip keypoint distance): silhouette width across the torso axis at the shoulder line / 15 / 30 percent down: v3_0r 0.909 / 1.056 / 0.883, the pin man 0.900 / 1.091 / 0.895 (the render's outline IS the pin man's), his standard pumped_front 0.986 / 1.025 / 1.054, his side-lit photos IMG_7002/7005/7006 0.89-0.91 / 0.94-0.98 / 0.97-0.98, IMG_7008 (close) 1.146 / 1.165 / 1.189; upper-arm width (ATR arm labels) per torso length: the render's near (phone) arm 0.211 against the standard's 0.189 / 0.188 and his photos 0.145-0.225, the pin man's 0.235 and 0.263; the render's far (kitten) arm is not measurable by the labels (the cat covers it), by the person mask its upper arm is about 0.26 of the torso length at mid-upper-arm, the pin man's size. The shoulder line is already his (0.909 against his photos 0.89-0.91); the 15-percent-down width is 3 percent over the standard and 8-12 percent over his photos; the near arm is 12 percent over the standard; the kitten arm is about 36 percent over it. The head is small for this body (eye distance per torso length 0.125 against his 0.141), which makes everything look 13 percent bigger when the pictures are set side by side by eye distance. So the narrowing is: the kitten arm's upper arm by about 28 px of 123 (to about 0.19), the phone arm's by 11 px of 100 (to about 0.19), the top of each shoulder cap by 8 px (the 15-percent-down width to about 1.0). Method (F39/F41/F37: Gemini keeps an outline it is given): the crop of his shoulders, chest and arms (picture box 20-690 x 395-880 of the 768x1376 v3_0r, sent at 2x, 1340x970) has the outer band of each upper arm and the top of each shoulder cap painted flat grey (128: the person mask's outline moved in by the shave and out by 10 px, tapered at its ends over 40 px); only the grey is pasted back (tools/region_edit.py paste --affine, feather 3), so the head, neck, chain, thread, cat, phone, hand and chest keep their pixels. The thread's start (285, 405) is 29 px from the nearest band. The sparkle falls on the wall below the elbow. References: his torso at the standard (pumped_front cut at the neck, no face), and his side-lit arm (IMG_7005) and shoulder-and-chest (IMG_7008) crops of 2026-10-10, for the size and shape of his shoulders and arms only.",
+    "refs": [
+     {
+      "key": "body",
+      "path": ".cache/region_edits/pin14_v4/pumped_front_torso_noface.jpg",
+      "label": "HIS BODY: the same man's own body today from the front, right after a workout, cut at the neck and above the waist: the true size of his shoulders, upper arms, chest and waist for a shirtless picture, with his skin. Take from it only the size and shape of his shoulders and upper arms: round shoulder caps that are not massive, upper arms about a fifth of the torso's length across; never his pose, the room or the light"
+     },
+     {
+      "key": "arm",
+      "path": ".cache/region_edits/pin14_v3/torso_IMG_7005.jpg",
+      "label": "HIS ARM: a crop of the same man's own photo today, in side window light: his arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin; never his pose, the room or the light"
+     },
+     {
+      "key": "shoulder",
+      "path": ".cache/region_edits/pin14_v3/torso_IMG_7008.jpg",
+      "label": "HIS SHOULDERS AND CHEST: a crop of the same man's own photo today, from his collarbones to his waistband, in side window light: the shape of his shoulder caps and deltoids, his chest and his stomach. Take from it only the size and shape of his shoulders and deltoids; never his pose, the room or the light"
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey bands along the outside of his shoulders and upper arms",
+      "goal": "flat grey bands: one along the top of each shoulder cap, a wide one down the outside of the upper arm at picture-left (the arm holding the kitten, from the shoulder to the elbow) and a narrower one down the outside of the upper arm at picture-right (the arm holding the phone, from the shoulder to the elbow)",
+      "his": "the plain dark bedroom wall behind him, continuing right up to his new, narrower outline (and at the picture-left edge, where the pale grey panel stands behind the elbow, the same pale grey panel continuing); his shoulder caps and his upper arms end where the grey bands begin, with his skin, his muscle, his light and his shadows continuing to that new edge: a defined, smaller deltoid and not a round massive cap, the upper arms at his real size as in HIS BODY and HIS ARM with the vein along each biceps, each outer edge a clean slightly narrower line; no grey, no ghost of the old outline, no glow or halo is left in the bands",
+      "ref": "body"
+     }
+    ],
+    "keep": [
+     "everything outside the grey bands exactly as it is: his neck and the bottom of his beard, his silver neck chain and its pendant, his chest, his stomach and his waist, his skin and its light and shadows",
+     "his janeu exactly as it is: the thin off-white thread from the top of his picture-left shoulder beside his neck across his chest and stomach to the waistband, unbroken",
+     "the kitten and the black watch, his hand holding the kitten, the black phone and his fingers holding it, the forearms and the elbows where they are, the sweatpants and their waistband",
+     "no other person and no text anywhere; the same dim warm light with the cool blue edge light, the colour, the contrast and the fine grain",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "pumped_front_torso_noface.jpg",
+    "sha256": "9c353c007d26daea5643cc14d208ddb8c6e63658f0d97999ed3c615cf0a5d23d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v4/pumped_front_torso_noface.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS BODY: the same man's own body today from the front, right after a workout, cut at the neck and above the waist: the true size of his shoulders, upper arms, chest and waist for a shirtless picture, with his skin. Take from it only the size and shape of his shoulders and upper arms: round shoulder caps that are not massive, upper arms about a fifth of the torso's length across; never his pose, the room or the light",
+    "key": "body"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "torso_IMG_7005.jpg",
+    "sha256": "e9ca5543422c7d2aa80db9528f6153fa89d5234bed76882aeeb975b13623dec2",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v3/torso_IMG_7005.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS ARM: a crop of the same man's own photo today, in side window light: his arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin; never his pose, the room or the light",
+    "key": "arm"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "torso_IMG_7008.jpg",
+    "sha256": "06babd8725dd2115f0923e5eed8454ea5f05fba8f27a7169eb7d97c2fec62dd0",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v3/torso_IMG_7008.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS SHOULDERS AND CHEST: a crop of the same man's own photo today, from his collarbones to his waistband, in side window light: the shape of his shoulder caps and deltoids, his chest and his stomach. Take from it only the size and shape of his shoulders and deltoids; never his pose, the room or the light",
+    "key": "shoulder"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "pin8build_send.jpg",
+    "sha256": "7d2d8871f21a5cd36eb98b9b9cebd5cde8042dc8fdfe1ba373e88b64ab9e453b",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin8_build/pin8build_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS BODY: the same man's own body today from the front, right after a workout, cut at the neck and above the waist: the true size of his shoulders, upper arms, chest and waist for a shirtless picture, with his skin. Take from it only the size and shape of his shoulders and upper arms: round shoulder caps that are not massive, upper arms about a fifth of the torso's length across; never his pose, the room or the light\nImage 2 is HIS ARM: a crop of the same man's own photo today, in side window light: his arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin; never his pose, the room or the light\nImage 3 is HIS SHOULDERS AND CHEST: a crop of the same man's own photo today, from his collarbones to his waistband, in side window light: the shape of his shoulder caps and deltoids, his chest and his stomach. Take from it only the size and shape of his shoulders and deltoids; never his pose, the room or the light\nImage 4 is the PHOTO TO EDIT.\n\nEdit image 4, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey bands along the outside of his shoulders and upper arms: the PHOTO TO EDIT shows flat grey bands: one along the top of each shoulder cap, a wide one down the outside of the upper arm at picture-left (the arm holding the kitten, from the shoulder to the elbow) and a narrower one down the outside of the upper arm at picture-right (the arm holding the phone, from the shoulder to the elbow); make it the plain dark bedroom wall behind him, continuing right up to his new, narrower outline (and at the picture-left edge, where the pale grey panel stands behind the elbow, the same pale grey panel continuing); his shoulder caps and his upper arms end where the grey bands begin, with his skin, his muscle, his light and his shadows continuing to that new edge: a defined, smaller deltoid and not a round massive cap, the upper arms at his real size as in HIS BODY and HIS ARM with the vein along each biceps, each outer edge a clean slightly narrower line; no grey, no ghost of the old outline, no glow or halo is left in the bands (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- everything outside the grey bands exactly as it is: his neck and the bottom of his beard, his silver neck chain and its pendant, his chest, his stomach and his waist, his skin and its light and shadows.\n- his janeu exactly as it is: the thin off-white thread from the top of his picture-left shoulder beside his neck across his chest and stomach to the waistband, unbroken.\n- the kitten and the black watch, his hand holding the kitten, the black phone and his fingers holding it, the forearms and the elbows where they are, the sweatpants and their waistband.\n- no other person and no text anywhere; the same dim warm light with the cool blue edge light, the colour, the contrast and the fine grain.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "931d4844c84e658fe7e03e261c2c3f0c08d48fd80606f9194ecab3a60aab8de6",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "9c353c007d26daea5643cc14d208ddb8c6e63658f0d97999ed3c615cf0a5d23d",
+    "upload_name": "pumped_front_torso_noface.jpg",
+    "bytes": 178753,
+    "px": [
+     1200,
+     945
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "e9ca5543422c7d2aa80db9528f6153fa89d5234bed76882aeeb975b13623dec2",
+    "upload_name": "torso_IMG_7005.jpg",
+    "bytes": 73035,
+    "px": [
+     456,
+     780
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "06babd8725dd2115f0923e5eed8454ea5f05fba8f27a7169eb7d97c2fec62dd0",
+    "upload_name": "torso_IMG_7008.jpg",
+    "bytes": 82603,
+    "px": [
+     1006,
+     603
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "7d2d8871f21a5cd36eb98b9b9cebd5cde8042dc8fdfe1ba373e88b64ab9e453b",
+    "upload_name": "pin8build_send.jpg",
+    "bytes": 188843,
+    "px": [
+     1340,
+     970
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "ac1ec1ee826c02507fed3199cb8b0a33e57879e018d05a82ced7ab4f43c7b79f"
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin9build_send",
+ "version": 1,
+ "created": "2026-10-14T03:52:24",
+ "because": "pin 9: arms to his size (F52 method). pin9b v1_0r (body only, casual-front) kept the pin man's arm outline: measured by ATR bare-arm thickness per torso length, its near upper arm 0.275 and forearm 0.191 against his casual_front 0.179 / 0.122 and IMG_6923 0.169 / 0.127 (1.5-1.6x), the far forearm about 0.22. A whole-frame edit keeps the outline it is given (pin 9 v1-v3), so the bands along both edges of both arms are painted grey and repainted as the polo, the cabinet and the trousers behind them, the sleeves hang looser; the arm never goes below his real photo (targets 0.19 upper, 0.135 forearm); only the grey is pasted back",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin9build_send",
+  "path": ".cache/region_edits/pin9_build/pin9build_send.jpg",
+  "sha256": "3ba2b89ba99d2022cee2898f55b34b743aa71d45836861f491b276f76dcda4d3",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin9_build/pin9build_send.jpg",
+   "prompt": ".cache/loop_prompts/pin9build_route.txt",
+   "inventory": ".cache/inventories/pin9build.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-14T03:32:34"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A young man in a black polo shirt leaning far forward over a desk in a classroom, both bare forearms on the desk, a phone snapshot. Close frame.",
+   "from": ".cache/loop_prompts/pin9build_route.txt",
+   "sha256": "9ffa2dd538d158519ec615031ccdd8c00ff167ddb3a11dd6bf50eae22ffce525",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin9build.json",
+   "sha256": "b7cdb58118efa2f8a355022b11e18e93e42f7ac5bb3e6f2c7708ac24e268952a",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin9_build/pin9build_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin9_build/pin9build_send.jpg",
+    "written": "2026-10-14 03:5x, pin 9 arms (the coordinator's TODO 79 continued; FAILURE_LOG F52 is the pin 8 case, F46 the widening one). pin9b (recipe pin_783485666539779317 v3, run 20261014_030859) v1_0r passes the pose gate and the restore but its arms keep the pin man's mass (the kept outline: Gemini keeps an outline it is given). MEASURED (scratch pins91213/forearm_atr9.py, forearm9_measures.json: the ATR human-parsing bare-arm labels inside the YOLO11m-seg person mask, thickness across the arm's principal axis per torso length = mid-shoulder to mid-hip keypoints; first half = upper arm and elbow, second half = forearm and hand): the pin man's near arm (his left, at picture-right) 0.301 / 0.211 per torso length (torso 300.5 px), pin9b v1_0r 0.275 / 0.191 (torso 353 px: 97 px and 67 px wide), the 10-09 v1_0 0.279 / 0.201, the 10-01 best 0.248 / 0.176; the far arm (picture-left) in v1_0r by skin colour about 0.21-0.26 at the elbow and 0.22 as the forearm (the labels cover only part of it). HIS arms by the same method: casual_front (the approved in-between standard) 0.179 / 0.122 and 0.169 / 0.125, IMG_6923 Copy (the photo he sent) 0.169 / 0.127 and 0.168 / 0.124, pumped_front 0.183 / 0.125 and 0.166 / 0.125, the side-lit pumped photos IMG_7002 0.22 / 0.159, IMG_7005 0.187 / 0.15 and 0.187 / 0.127, IMG_7006 0.195 / 0.138 and 0.182 / 0.10, IMG_7008 0.21 / 0.149 and 0.185 / 0.142. So v1_0r's near upper arm is 1.5-1.6x his relaxed width and its forearm 1.5x; target by the casual yardstick (never below his real photo, between relaxed and pumped): upper 0.19, forearm 0.135 per torso length = 67 px and 48 px here: shave the near arm by 30 px (upper) and 19 px (forearm), the far arm by 12 px (upper) and 28 px (forearm). METHOD (F39/F41/F52: grey-out): the crop is the arms and the lower polo of v1_0r (picture box 300-900 x 520-980 of 992x1061, sent at 2x, 1200x920); a band along each edge of each bare arm is painted flat grey (128): the arm label's edge moved in by half the shave and out by up to 10 px (tapered), starting 12-16 px up inside each sleeve's hem so the sleeve can hang loose, and ending at the wrist (the hands keep their pixels); the far forearm is shaved from its right edge (the left borders the girl's hair); only the grey is pasted back (tools/region_edit.py paste-run --affine, feather 3), so the head, neck, chain, the polo's body, the trousers, the girl, the calendar, the shelves and the desk keep their pixels. Positions are fractions of the crop (600x460): near sleeve hem at 39-57 / 6, near elbow about 45 / 41, near hand 26 / 90 on the green folder; far sleeve hem 8-24 / 32, far elbow about 16 / 57, the far forearm's lower part hidden by the girl's hair at 3-12 / 70-83. Behind the near arm: above its elbow the black polo (chest on its left, belly on its right), below the elbow the dark red cabinet and the desk on its left and the brown trousers on its right; behind the far arm: the dark red cabinet. Reference: his arms in casual_front cut below the chin to the hips (no face), for the size and shape of his shoulders and arms only. Stage 2 (his head) follows: the 10-01 head (outputs/20261001_170837_goal-pin-783485666539779317/v1_0.jpg, user-approved material with his curls and beard) or a Route G region edit of the head crop. DO NOT RETRY: whole-frame edits with 'slimmer arms' wording in one step (pin 9 v1, v2, v3 all kept the outline), and 'a third thinner' for his whole build (withdrawn on pin 15).",
+    "refs": [
+     {
+      "key": "arms",
+      "path": ".cache/region_edits/pin9_build/casual_front_arms_noface.jpg",
+      "label": "HIS ARMS: the same man's own body today from the front on an ordinary relaxed day, cut below his chin to his hips: the true size of his shoulders and arms for a dressed picture. Take from it only the size and shape of his upper arms and forearms (round, lean and firm, the upper arm about as wide as in this image, the forearm clearly narrower than the upper arm, the veins only faintly visible) and his skin; never his pose, the room or the light"
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey bands along both sides of the near arm",
+      "goal": "two flat grey bands along the bare arm at picture-right, one down its left edge and one down its right edge, from just inside the short black polo sleeve's hem (at about 39 to 57 percent from the left and 6 percent from the top) down past the elbow (about 45 / 41) to the wrist above the hand (about 26 / 90): above the elbow the bands lie against the black polo, below it the left one lies against the dark red cabinet and the desk and the right one against the black polo and then the brown trousers",
+      "his": "the black polo, the dark red cabinet, the desk and the brown trousers continuing right up to his arm's new, narrower edges, and his own arm between them as in HIS ARMS, at its real size and never thinner: the upper arm and the elbow clearly slimmer than in the PHOTO TO EDIT, lean and firm with a small, soft biceps, and the forearm about a third narrower than in the PHOTO TO EDIT, lean, with the veins on its back only faintly visible; the arm keeps its place, its bend at the elbow and its direction down to the hand on the green folder; the short black sleeve hangs a little looser round the slimmer arm, its cuff ending where it ends now with a soft shadow inside it; each edge of the arm a clean, slightly narrower line, with no grey, no ghost of the old edge, no halo and no glow left in the bands",
+      "ref": "arms"
+     },
+     {
+      "item": "the grey bands along the far arm",
+      "goal": "grey bands along the bare arm at picture-left (its left and right edges from just inside the short polo sleeve's hem at about 8 to 24 percent from the left and 32 percent from the top, down past the elbow at about 16 / 57 to the girl's hair at about 12 / 80), the right one wider on the forearm",
+      "his": "the black polo above and the dark red cabinet beside it continuing right up to his arm's new, narrower edges, and his own arm as in HIS ARMS: the upper arm slightly slimmer and the forearm clearly slimmer than in the PHOTO TO EDIT, lean and firm, never thinner than in HIS ARMS, hanging down to the desk in the same place and direction; the short sleeve hangs a little looser round it; no grey, no ghost of the old edge, no halo left",
+      "ref": "arms"
+     }
+    ],
+    "keep": [
+     "everything outside the grey bands exactly as it is: his head (the hair, the bowed face, the glasses), his neck and the fine silver chain, the black polo's body, collar and fabric, the brown trousers, the hand on the green folder and the green folder",
+     "the girl in the foreground at picture-left, seen from behind: her brown hair in the ponytail and her hand at her ear, unchanged in place, size and pose; no other person anywhere",
+     "his exact posture: bent far forward over the desk, the near arm going down and to picture-left to the hand on the folder, the far arm hanging to the desk, each arm's bend and direction as they are",
+     "the room exactly: the dark red cabinet, the desk, the beige cinder-block wall, the bookshelf of binders, the green plant, the whiteboard calendar with its writing and the notice board; no text, sign or logo is added or changed",
+     "the flat indoor snapshot light, the phone-photo softness, the grain and slight blur, and the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": true,
+    "yaw": -52.2,
+    "pitch": 5.9,
+    "roll": -18.0,
+    "side": "picture-right",
+    "score": 0.55,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "warning": "the face references were chosen for a head turned frontal (text), but the goal's measured head turn is 52 degrees toward picture-right (yaw -52, pitch +6)",
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "casual_front_arms_noface.jpg",
+    "sha256": "f84183e321d27ea96d7deb35bf508577aa02344ad430d8ae229e52adc72f7911",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin9_build/casual_front_arms_noface.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS ARMS: the same man's own body today from the front on an ordinary relaxed day, cut below his chin to his hips: the true size of his shoulders and arms for a dressed picture. Take from it only the size and shape of his upper arms and forearms (round, lean and firm, the upper arm about as wide as in this image, the forearm clearly narrower than the upper arm, the veins only faintly visible) and his skin; never his pose, the room or the light",
+    "key": "arms"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin9build_send.jpg",
+    "sha256": "41aabe141c89e2c26d1ea6424184b6bfd08d30baf18a1ba735ca0135edf9027d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin9_build/pin9build_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS ARMS: the same man's own body today from the front on an ordinary relaxed day, cut below his chin to his hips: the true size of his shoulders and arms for a dressed picture. Take from it only the size and shape of his upper arms and forearms (round, lean and firm, the upper arm about as wide as in this image, the forearm clearly narrower than the upper arm, the veins only faintly visible) and his skin; never his pose, the room or the light\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey bands along both sides of the near arm: the PHOTO TO EDIT shows two flat grey bands along the bare arm at picture-right, one down its left edge and one down its right edge, from just inside the short black polo sleeve's hem (at about 39 to 57 percent from the left and 6 percent from the top) down past the elbow (about 45 / 41) to the wrist above the hand (about 26 / 90): above the elbow the bands lie against the black polo, below it the left one lies against the dark red cabinet and the desk and the right one against the black polo and then the brown trousers; make it the black polo, the dark red cabinet, the desk and the brown trousers continuing right up to his arm's new, narrower edges, and his own arm between them as in HIS ARMS, at its real size and never thinner: the upper arm and the elbow clearly slimmer than in the PHOTO TO EDIT, lean and firm with a small, soft biceps, and the forearm about a third narrower than in the PHOTO TO EDIT, lean, with the veins on its back only faintly visible; the arm keeps its place, its bend at the elbow and its direction down to the hand on the green folder; the short black sleeve hangs a little looser round the slimmer arm, its cuff ending where it ends now with a soft shadow inside it; each edge of the arm a clean, slightly narrower line, with no grey, no ghost of the old edge, no halo and no glow left in the bands (image 1).\n- the grey bands along the far arm: the PHOTO TO EDIT shows grey bands along the bare arm at picture-left (its left and right edges from just inside the short polo sleeve's hem at about 8 to 24 percent from the left and 32 percent from the top, down past the elbow at about 16 / 57 to the girl's hair at about 12 / 80), the right one wider on the forearm; make it the black polo above and the dark red cabinet beside it continuing right up to his arm's new, narrower edges, and his own arm as in HIS ARMS: the upper arm slightly slimmer and the forearm clearly slimmer than in the PHOTO TO EDIT, lean and firm, never thinner than in HIS ARMS, hanging down to the desk in the same place and direction; the short sleeve hangs a little looser round it; no grey, no ghost of the old edge, no halo left (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- everything outside the grey bands exactly as it is: his head (the hair, the bowed face, the glasses), his neck and the fine silver chain, the black polo's body, collar and fabric, the brown trousers, the hand on the green folder and the green folder.\n- the girl in the foreground at picture-left, seen from behind: her brown hair in the ponytail and her hand at her ear, unchanged in place, size and pose; no other person anywhere.\n- his exact posture: bent far forward over the desk, the near arm going down and to picture-left to the hand on the folder, the far arm hanging to the desk, each arm's bend and direction as they are.\n- the room exactly: the dark red cabinet, the desk, the beige cinder-block wall, the bookshelf of binders, the green plant, the whiteboard calendar with its writing and the notice board; no text, sign or logo is added or changed.\n- the flat indoor snapshot light, the phone-photo softness, the grain and slight blur, and the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "cd9b3e1c435688c67293401d2cf853c5c85cd86a023c30b064c48126ec141f24",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "f84183e321d27ea96d7deb35bf508577aa02344ad430d8ae229e52adc72f7911",
+    "upload_name": "casual_front_arms_noface.jpg",
+    "bytes": 161027,
+    "px": [
+     1270,
+     900
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "41aabe141c89e2c26d1ea6424184b6bfd08d30baf18a1ba735ca0135edf9027d",
+    "upload_name": "pin9build_send.jpg",
+    "bytes": 152975,
+    "px": [
+     1200,
+     920
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "83288686fff3a0fc6e908dfc2efec322ea201213dc535366caeca0f446feeecc"
+ }
+}
