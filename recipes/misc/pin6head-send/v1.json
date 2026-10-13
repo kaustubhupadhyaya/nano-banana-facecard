@@ -1,0 +1,239 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin6head_send",
+ "version": 1,
+ "created": "2026-10-13T22:23:44",
+ "because": "backlog 3 stage 2: pin 6's head is the pin man's in the pumped body-only picture (run 20261013_193206 v1_0r); replicate finds no face on this bowed profile, so his head is drawn in place as a region edit (pin 14 head3 method, F45/F46)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin6head_send",
+  "path": ".cache/region_edits/pin6_head/pin6head_send.jpg",
+  "sha256": "fef993101920f5ff0585348d423cf54f2d82547a46b604bb507dc87359fc3374",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin6_head/pin6head_send.jpg",
+   "prompt": ".cache/loop_prompts/pin6head_route.txt",
+   "inventory": ".cache/inventories/pin6head.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T19:32:45"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's head and neck in black and white, seen from the side and above: his head bowed far forward and turned toward picture-right, a thin paintbrush clamped in his mouth. Close frame.",
+   "from": ".cache/loop_prompts/pin6head_route.txt",
+   "sha256": "db40b934ae92d3a8423dff6a1b131ffae550d84d8725855059b0980b7544ba8a",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin6head.json",
+   "sha256": "54eb77698381852d612f8137a9cbcd51e7f0531b03239e669e6c12d31d8db45b",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin6_head/pin6head_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin6_head/pin6head_send.jpg",
+    "written": "2026-10-13 22:2x, pin 6 stage 2 (backlog 3): his head, drawn in place on the pumped body-only picture (stage 1: run 20261013_193206, v1_0r, which passed the pose gate and keeps the pin's own head, bowed, with the paintbrush, the cuff, the black-and-white look and the background). Replicate cannot take this head (YuNet finds no face on the bowed profile; checked 2026-10-13), and a whole-frame redraw failed 56 of 56 times (the head x1.11-1.23, bowed lower, the brush held by the chin: FEEDBACK_LEDGER pin 6). So, as on pin 14 (FAILURE_LOG F45, pin14head3): a region edit. The crop of the head and neck (box 240-800 x 0-470 of v1_0r, 922x1152; the head is 560 px wide here, so it is sent at 2x, 1120x940, about 1 MP, the size Gemini returns; pin 14's 55 px head needed 4x) goes to Gemini with two of his real photos in black and white (IMG_6858 front, IMG_6861 three-quarter right: the pin's head faces picture-right, bowed; IMG_6868 faces picture-left); tools/region_edit.py pastes back only the head and neck (the person mask grown 6 px, hair to the top edge, neck down to the beard's lower edge at y 418, cut at x 290 above y 110 and x 262 below, so the shoulder, the arm, the chest, the chain and the wall are not in it) with a 6 px ramp at its edge and weight 0 on the paintbrush's band (9 px wide along its traced path from (340, 298) to (506, 461)), so the brush keeps its pixels, position and angle, and the head keeps the pin's size, bow and turn. The 10-01 approved v1 head is NOT used as a reference: the user withdrew that approval the next day, and a generated face goes in only with his approval (AGENTS.md, the reference-set upgrade). Black and white: the two references are grey copies of his real photos (one grey of the same lightness as his skin), the change and keep items say black and white, and the objects-mode template ends with 'the same light, colour, grain and sharpness as the PHOTO TO EDIT', which for a grey photo means grey. Positions below are fractions of the crop (560x470 px): ear 16-29 / 17-38, closed eye 62 / 50, nose tip 45 / 79, brush's upper end 18 / 63 on the cheek-jaw, its lower end 47 / 98, hair's right edge 95 / 50. The user's words on pin 6 (2026-10-02): 'not me at all, body me, face structurally me but closely not me at all'; FEEDBACK_LOG 11: the pin man's hair is long loose curls hanging over the ear and temple, his is tight with short tapered sides and the ear showing; the pin man's beard is patchy stubble, his is full and dense. DO NOT RETRY (FEEDBACK_LOG 12-16): face-shade lines, 'face exactly as in the references', more face photos; this edit says only that the dim light stays.",
+    "refs": [
+     {
+      "key": "front",
+      "path": ".cache/region_edits/pin6_head/his_front_IMG_6858_bw.jpg",
+      "label": "HIS FRONT: a photo of the same man's own head today, here in black and white, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip), his dense, tight black curls with the short tapered sides, his full dark beard, his ears; nothing of his turn, his expression, the light or the room"
+     },
+     {
+      "key": "right",
+      "path": ".cache/region_edits/pin6_head/his_34right_IMG_6861_bw.jpg",
+      "label": "HIS THREE-QUARTER: a photo of the same man's own head today, here in black and white, turned toward picture-right like the head in the PHOTO TO EDIT: take from it his hair (dense, tight black curls standing up on top, the side above his ear tapered short and close to the scalp so that his ear and temple show, the curls longer toward the nape), his full dark beard along the jaw, his ear and the shape of his nose and lips; nothing of his turn, his expression, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the hair",
+      "goal": "the man's heavy mass of dark curls: longer, loose curls hanging over the temple and in front of the ear and in thick locks at the back of the head",
+      "his": "his own hair as in HIS FRONT and HIS THREE-QUARTER: dense, tight black curls of his current cut, standing up with volume on top and falling a little onto his forehead, the side above and in front of his ear tapered short and close to the scalp so that his ear and his temple show, and the curls longer at the back toward his nape; the mass of hair on top and its outline against the window and the wall stay about as big as they are, and the hair stays black",
+      "ref": "right"
+     },
+     {
+      "item": "the face",
+      "goal": "the man's face with its lowered lids, brow and straight nose, in deep shade",
+      "his": "his own face as in HIS FRONT and HIS THREE-QUARTER, with the same lowered lids (his eyes are cast down at the floor, his upper lids heavy and almost closed), his thick, dark, fairly straight eyebrows, his long straight nose with its rounded tip, and his medium-full lips with the fuller lower lip closed around the paintbrush; a lean face with no puffiness in the cheeks; every feature stays where the man's feature is in the PHOTO TO EDIT (the closed eye at about 62 percent from the left and 50 percent from the top of this picture, the nose tip at about 45 percent from the left and 79 percent from the top)",
+      "ref": "front"
+     },
+     {
+      "item": "the beard and moustache",
+      "goal": "a short, patchy dark stubble on the man's cheek, jaw and throat",
+      "his": "his own full, dense, short dark beard and moustache as in HIS FRONT and HIS THREE-QUARTER: along the whole visible jaw from in front of the ear to the chin and down under it onto the throat, a little lighter high on the cheek, the moustache joining it at the corner of the mouth beside the paintbrush, a small patch under the lower lip; the outline of the jaw, the chin and the nose stays where it is",
+      "ref": "right"
+     },
+     {
+      "item": "the ear",
+      "goal": "the man's ear",
+      "his": "his own ear as in HIS THREE-QUARTER, standing slightly out from his head, in the same place (at about 16 to 29 percent from the left and 17 to 38 percent from the top) and at the same size",
+      "ref": "right"
+     },
+     {
+      "item": "the skin of the face, ear and neck",
+      "goal": "the man's skin, a mid-dark grey in deep shade",
+      "his": "his own warm medium-brown skin, drawn in this same black-and-white grade as a grey of about the same lightness as the man's skin in the PHOTO TO EDIT, never lightened and never given any colour, with real skin texture and visible pores, blending evenly into the grey of his shoulder and arm below"
+     }
+    ],
+    "keep": [
+     "the long thin paintbrush exactly as it is, every pixel: clamped across his teeth with his lips closed around it, from its upper end on the cheek at about 18 percent from the left and 63 percent from the top to its lower end at about 47 percent from the left and 98 percent from the top, at the same angle, length, thickness and shine",
+     "the head's turn, bow, tilt, size and place exactly as they are: bowed far forward and turned toward picture-right, his face pointing down and to the right at the floor; nothing grows, shrinks, lifts, straightens or turns toward the camera",
+     "his fine silver neck chain at the left edge, his shoulder, his arm and his chest below the jaw exactly as they are",
+     "the window, the wall and the marble skirting around his head exactly as they are; no other person and no text anywhere",
+     "the black-and-white photograph exactly: the same grey tones, deep contrast, soft film grain and slight softness; no colour anywhere, not even a tint",
+     "the dim, moody light from behind and above, the face in the same soft shade as in the PHOTO TO EDIT, never brighter than his neck and shoulder",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_front_IMG_6858_bw.jpg",
+    "sha256": "d691bb996e0e1085eb69ed2a4b19bf212f460688c1e4df4ce7d29ac4fb8dffd6",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head/his_front_IMG_6858_bw.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FRONT: a photo of the same man's own head today, here in black and white, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip), his dense, tight black curls with the short tapered sides, his full dark beard, his ears; nothing of his turn, his expression, the light or the room",
+    "key": "front"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_34right_IMG_6861_bw.jpg",
+    "sha256": "f4d77986d911bcf44be945a0045aa5fa9dc9b672386fcde79dc2e593ee8095c4",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head/his_34right_IMG_6861_bw.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS THREE-QUARTER: a photo of the same man's own head today, here in black and white, turned toward picture-right like the head in the PHOTO TO EDIT: take from it his hair (dense, tight black curls standing up on top, the side above his ear tapered short and close to the scalp so that his ear and temple show, the curls longer toward the nape), his full dark beard along the jaw, his ear and the shape of his nose and lips; nothing of his turn, his expression, the light or the room",
+    "key": "right"
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "name": "pin6head_send.jpg",
+    "sha256": "16ec664c31cda05fed566629c1add0efbae93a1dd2dcb772d68aba7430fb300e",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head/pin6head_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS FRONT: a photo of the same man's own head today, here in black and white, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip), his dense, tight black curls with the short tapered sides, his full dark beard, his ears; nothing of his turn, his expression, the light or the room\nImage 2 is HIS THREE-QUARTER: a photo of the same man's own head today, here in black and white, turned toward picture-right like the head in the PHOTO TO EDIT: take from it his hair (dense, tight black curls standing up on top, the side above his ear tapered short and close to the scalp so that his ear and temple show, the curls longer toward the nape), his full dark beard along the jaw, his ear and the shape of his nose and lips; nothing of his turn, his expression, the light or the room\nImage 3 is the PHOTO TO EDIT.\n\nEdit image 3, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the hair: the PHOTO TO EDIT shows the man's heavy mass of dark curls: longer, loose curls hanging over the temple and in front of the ear and in thick locks at the back of the head; make it his own hair as in HIS FRONT and HIS THREE-QUARTER: dense, tight black curls of his current cut, standing up with volume on top and falling a little onto his forehead, the side above and in front of his ear tapered short and close to the scalp so that his ear and his temple show, and the curls longer at the back toward his nape; the mass of hair on top and its outline against the window and the wall stay about as big as they are, and the hair stays black (image 2).\n- the face: the PHOTO TO EDIT shows the man's face with its lowered lids, brow and straight nose, in deep shade; make it his own face as in HIS FRONT and HIS THREE-QUARTER, with the same lowered lids (his eyes are cast down at the floor, his upper lids heavy and almost closed), his thick, dark, fairly straight eyebrows, his long straight nose with its rounded tip, and his medium-full lips with the fuller lower lip closed around the paintbrush; a lean face with no puffiness in the cheeks; every feature stays where the man's feature is in the PHOTO TO EDIT (the closed eye at about 62 percent from the left and 50 percent from the top of this picture, the nose tip at about 45 percent from the left and 79 percent from the top) (image 1).\n- the beard and moustache: the PHOTO TO EDIT shows a short, patchy dark stubble on the man's cheek, jaw and throat; make it his own full, dense, short dark beard and moustache as in HIS FRONT and HIS THREE-QUARTER: along the whole visible jaw from in front of the ear to the chin and down under it onto the throat, a little lighter high on the cheek, the moustache joining it at the corner of the mouth beside the paintbrush, a small patch under the lower lip; the outline of the jaw, the chin and the nose stays where it is (image 2).\n- the ear: the PHOTO TO EDIT shows the man's ear; make it his own ear as in HIS THREE-QUARTER, standing slightly out from his head, in the same place (at about 16 to 29 percent from the left and 17 to 38 percent from the top) and at the same size (image 2).\n- the skin of the face, ear and neck: the PHOTO TO EDIT shows the man's skin, a mid-dark grey in deep shade; make it his own warm medium-brown skin, drawn in this same black-and-white grade as a grey of about the same lightness as the man's skin in the PHOTO TO EDIT, never lightened and never given any colour, with real skin texture and visible pores, blending evenly into the grey of his shoulder and arm below.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the long thin paintbrush exactly as it is, every pixel: clamped across his teeth with his lips closed around it, from its upper end on the cheek at about 18 percent from the left and 63 percent from the top to its lower end at about 47 percent from the left and 98 percent from the top, at the same angle, length, thickness and shine.\n- the head's turn, bow, tilt, size and place exactly as they are: bowed far forward and turned toward picture-right, his face pointing down and to the right at the floor; nothing grows, shrinks, lifts, straightens or turns toward the camera.\n- his fine silver neck chain at the left edge, his shoulder, his arm and his chest below the jaw exactly as they are.\n- the window, the wall and the marble skirting around his head exactly as they are; no other person and no text anywhere.\n- the black-and-white photograph exactly: the same grey tones, deep contrast, soft film grain and slight softness; no colour anywhere, not even a tint.\n- the dim, moody light from behind and above, the face in the same soft shade as in the PHOTO TO EDIT, never brighter than his neck and shoulder.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "a7e2706219403823ffac1473e12c8f50238e33515430155e808c5d7712d561b5",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "d691bb996e0e1085eb69ed2a4b19bf212f460688c1e4df4ce7d29ac4fb8dffd6",
+    "upload_name": "his_front_IMG_6858_bw.jpg",
+    "bytes": 185406,
+    "px": [
+     862,
+     862
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "f4d77986d911bcf44be945a0045aa5fa9dc9b672386fcde79dc2e593ee8095c4",
+    "upload_name": "his_34right_IMG_6861_bw.jpg",
+    "bytes": 214540,
+    "px": [
+     940,
+     940
+    ]
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "sha256": "16ec664c31cda05fed566629c1add0efbae93a1dd2dcb772d68aba7430fb300e",
+    "upload_name": "pin6head_send.jpg",
+    "bytes": 113827,
+    "px": [
+     1120,
+     940
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "75a7d4fa103e768971cf5f93f6306ad8e8b83e78c6b1854fd7e73bb98eaa2519"
+ }
+}

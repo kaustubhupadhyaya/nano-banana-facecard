@@ -1,0 +1,226 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin8head_send",
+ "version": 1,
+ "created": "2026-10-13T22:21:49",
+ "because": "pin 8 review of 2026-10-13 (F46 region-edit method, F47 backlog 2): v7's v2_0r has the pin man's straight swept hair and bangs, not his tight curls (items 19 and 28; the approved 2026-10-01 best.jpg has them); the head is redrawn in place at 4x and only the hair area is pasted back",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin8head_send",
+  "path": ".cache/region_edits/pin8_head/pin8head_send.jpg",
+  "sha256": "6ce9404313151dd70ca91bff58a4917ff9dbef93a5c771688a9c75d980efab6c",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin8_head/pin8head_send.jpg",
+   "prompt": ".cache/loop_prompts/pin8head_route.txt",
+   "inventory": ".cache/inventories/pin8head.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T19:32:45"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a man's head from the front in a dim room, bowed, his eyes looking down at a phone just below the frame, a cool blue edge light on one side of his face. Close frame.",
+   "from": ".cache/loop_prompts/pin8head_route.txt",
+   "sha256": "658ad12c96ceb71e03d5be495c51eac10cb8d8276cb453f3bb2de754d1853e84",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin8head.json",
+   "sha256": "5bf7b94aa15512e931b3cf2e5080dfeb21a575d1e7e0b9e75228ff5a418ba277",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin8_head/pin8head_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin8_head/pin8head_send.jpg",
+    "written": "2026-10-13, pin 8 fix, job 1 of 2 (FAILURE_LOG F46/F47 method, this review): pin 8 v7's v2_0r (run 20261013_190541; pose gate pass, identity 0.71) has his face, beard, build, chain, cat, phone and room, but the head came back with the pin man's straight dark swept hair and heavy bangs, not his tight curls: checklist items 19 and 28 fail (the user-approved 2026-10-01 best.jpg has the curls). As with pin 14's head (F45/F46: a replicate head swap came back too large; the region edit keeps the head's size, turn and place), the head is changed in place: the crop of the head (picture box 280-545 x 70-340 of the 768x1376 v2_0r, sent at 4x, 1060x1080) goes to Gemini, and tools/region_edit.py pastes back only the hair area (a polygon traced on the pin man's hair read at 3x, grown 25-45 px up and out so that his taller curls have room over the wall, its lower edge at y 246-250, above the brows at y 255+; the ear, the face, the beard, the phone and the cat are outside it; an 8 px ramp inside its edge and a blur of 5). The crop ends at y 340 where the phone begins, so the phone, his fingers and the cat are not in it. References for his hair only: the head of the 2026-10-01 approved best.jpg (his curls, the same bowed look down at the phone) and his front photo IMG_6858's hair. The same v2_0r receives the janeu fix (job 2, the chest) afterwards: the two areas do not overlap. No earring or other jewellery shows on the head, so none is named.",
+    "refs": [
+     {
+      "key": "hair1",
+      "path": ".cache/region_edits/pin8_head/his_hair_best_20261001.jpg",
+      "label": "HIS HAIR (1): a crop of the head of the same man's own approved picture, bowed and looking down at a phone like this head: take from it only his hair: dense, tight black curls standing up with volume on top and falling a little onto his forehead; nothing of his face, the light or the room"
+     },
+     {
+      "key": "hair2",
+      "path": ".cache/region_edits/pin8_head/his_hair_IMG_6858.jpg",
+      "label": "HIS HAIR (2): a crop of the top of his head in his own photo today, seen from the front: take from it only the pattern and size of his curls, how they stand up and how they fall onto his forehead; nothing of his face, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the hair",
+      "goal": "short, straight, dark swept hair with heavy bangs falling over the forehead and the temples, the top of the head flat under it",
+      "his": "his own hair as in HIS HAIR (1) and HIS HAIR (2): dense, tight black curls about 6 to 8 cm long, standing up with volume on top and rising a little above the line of the old hair, a few curls falling onto his forehead; the sides above and in front of his ear tapered short and close to the scalp, so that his temple and the top of his ear show; the curls a little longer toward the back of his head; no strand of the straight swept hair or of the bangs is left",
+      "ref": "hair1"
+     },
+     {
+      "item": "the forehead under the hair",
+      "goal": "the forehead half hidden by the straight bangs",
+      "his": "his own forehead skin, in the same warm medium-brown tone and the same light, showing between the curls above his eyebrows; the curls never cover his eyebrows or his eyes",
+      "ref": "hair2"
+     }
+    ],
+    "keep": [
+     "his face exactly as it is, every feature: the eyebrows, the eyes looking down, the nose, the mouth, the full dark beard and moustache, the ear, the skin and its tone; only the hair changes",
+     "the head's size, turn, tilt and place exactly as they are: bowed forward and looking down at a phone just below the frame; nothing grows, shrinks, lifts or turns toward the camera",
+     "the light on his face exactly as it is: the cool blue edge light on the picture-right half of his face and the warm light on the picture-left half, the colour and the fine grain",
+     "the dark wall and the pale grey ceiling edge behind and above him exactly as they are, outside the curls; no other person and no text anywhere",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.47",
+   "measured": {
+    "detected": true,
+    "yaw": -14.3,
+    "pitch": -15.8,
+    "roll": 13.4,
+    "side": "picture-right",
+    "score": 0.62,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_hair_best_20261001.jpg",
+    "sha256": "99a936bea48c58fd4630ab935ab604e8f77b388bfd79a5ec9478a6d4c0739c37",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin8_head/his_hair_best_20261001.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS HAIR (1): a crop of the head of the same man's own approved picture, bowed and looking down at a phone like this head: take from it only his hair: dense, tight black curls standing up with volume on top and falling a little onto his forehead; nothing of his face, the light or the room",
+    "key": "hair1"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_hair_IMG_6858.jpg",
+    "sha256": "a6ac133a46d9b31528cd21455e89630d219cf37e148dbbea4e8c6b089fde5045",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin8_head/his_hair_IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS HAIR (2): a crop of the top of his head in his own photo today, seen from the front: take from it only the pattern and size of his curls, how they stand up and how they fall onto his forehead; nothing of his face, the light or the room",
+    "key": "hair2"
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "name": "pin8head_send.jpg",
+    "sha256": "577fe5ef29fbb967b27eee5f0ce59d9bfe9218d36fa2e2a01e052f06f15c2747",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin8_head/pin8head_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS HAIR (1): a crop of the head of the same man's own approved picture, bowed and looking down at a phone like this head: take from it only his hair: dense, tight black curls standing up with volume on top and falling a little onto his forehead; nothing of his face, the light or the room\nImage 2 is HIS HAIR (2): a crop of the top of his head in his own photo today, seen from the front: take from it only the pattern and size of his curls, how they stand up and how they fall onto his forehead; nothing of his face, the light or the room\nImage 3 is the PHOTO TO EDIT.\n\nEdit image 3, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the hair: the PHOTO TO EDIT shows short, straight, dark swept hair with heavy bangs falling over the forehead and the temples, the top of the head flat under it; make it his own hair as in HIS HAIR (1) and HIS HAIR (2): dense, tight black curls about 6 to 8 cm long, standing up with volume on top and rising a little above the line of the old hair, a few curls falling onto his forehead; the sides above and in front of his ear tapered short and close to the scalp, so that his temple and the top of his ear show; the curls a little longer toward the back of his head; no strand of the straight swept hair or of the bangs is left (image 1).\n- the forehead under the hair: the PHOTO TO EDIT shows the forehead half hidden by the straight bangs; make it his own forehead skin, in the same warm medium-brown tone and the same light, showing between the curls above his eyebrows; the curls never cover his eyebrows or his eyes (image 2).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his face exactly as it is, every feature: the eyebrows, the eyes looking down, the nose, the mouth, the full dark beard and moustache, the ear, the skin and its tone; only the hair changes.\n- the head's size, turn, tilt and place exactly as they are: bowed forward and looking down at a phone just below the frame; nothing grows, shrinks, lifts or turns toward the camera.\n- the light on his face exactly as it is: the cool blue edge light on the picture-right half of his face and the warm light on the picture-left half, the colour and the fine grain.\n- the dark wall and the pale grey ceiling edge behind and above him exactly as they are, outside the curls; no other person and no text anywhere.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "0f9d125236c6e6d03161c50b66def22c4c32d57e5691404764924deb4993633e",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "99a936bea48c58fd4630ab935ab604e8f77b388bfd79a5ec9478a6d4c0739c37",
+    "upload_name": "his_hair_best_20261001.jpg",
+    "bytes": 15390,
+    "px": [
+     290,
+     250
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "a6ac133a46d9b31528cd21455e89630d219cf37e148dbbea4e8c6b089fde5045",
+    "upload_name": "his_hair_IMG_6858.jpg",
+    "bytes": 88270,
+    "px": [
+     570,
+     410
+    ]
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "sha256": "577fe5ef29fbb967b27eee5f0ce59d9bfe9218d36fa2e2a01e052f06f15c2747",
+    "upload_name": "pin8head_send.jpg",
+    "bytes": 87848,
+    "px": [
+     1060,
+     1080
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "6743f6258467b24c24d745602c9f19aa3a04070395a845b0ea14f67930e8cbae"
+ }
+}

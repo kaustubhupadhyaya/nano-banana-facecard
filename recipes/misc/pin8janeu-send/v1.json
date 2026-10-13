@@ -1,0 +1,186 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin8janeu_send",
+ "version": 1,
+ "created": "2026-10-13T22:22:16",
+ "because": "pin 8 review of 2026-10-13 (F46 region-edit method, F47 backlog 2; F39/F41 grey-out): v7's v2_0r has his janeu hanging nearly vertical from the fingertips down the picture-right of the stomach (item 36, the F33/F37 habit); the old cord and the mirror diagonal (picture-left shoulder to picture-right hip) are greyed out and only the grey bands are pasted back",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin8janeu_send",
+  "path": ".cache/region_edits/pin8_janeu/pin8janeu_send.jpg",
+  "sha256": "801366b17fecda7cf33bd8f4be4ad80a5ee36fbce07eba746b017fd57841224b",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin8_janeu/pin8janeu_send.jpg",
+   "prompt": ".cache/loop_prompts/pin8janeu_route.txt",
+   "inventory": ".cache/inventories/pin8janeu.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T19:32:45"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's chest and stomach in a dim room with a cool blue edge light, with two narrow flat grey bands on his skin, a kitten's head at picture-left, a black phone and his fingers at the top. Close frame.",
+   "from": ".cache/loop_prompts/pin8janeu_route.txt",
+   "sha256": "da4e47e09f2aef1e0db845ce44cd6f5d48337d3588bdad9eeead8f8e7bb4b45f",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin8janeu.json",
+   "sha256": "31a5993a90a2f398c52f24ec605b7398cf51778c594bb46e9c907ba3abcedca3",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin8_janeu/pin8janeu_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin8_janeu/pin8janeu_send.jpg",
+    "written": "2026-10-13, pin 8 fix, job 2 of 2 (FAILURE_LOG F39/F41, F37, F33, this review): pin 8 v7's v2_0r (run 20261013_190541) has his janeu drawn as a thread hanging nearly vertically from his fingertips down the picture-right side of his stomach, over the waistband and onto the sweatpants (the habit of F33/F37: Gemini keeps a line it has drawn, so words cannot move it). Item 36 for this MIRROR picture: from his left shoulder at picture-LEFT (the arm holding the kitten) beside his neck, across his chest and stomach, to his right hip at picture-RIGHT (below the arm holding the phone). Pin 14's grey-out method: in the crop of his chest and stomach (picture box 230-540 x 385-870 of the 768x1376 v2_0r, sent at 2x, 620x970), a flat grey (128) is painted over (a) a +-6 px band along the old cord, traced from where it leaves his fingertips (437, 511) by a white top-hat inside a corridor around the path read by eye at 3x, down over the waistband and the sweatpants to (303, 852), and (b) a 5 px band (about 3x the thread) along the target, a quadratic curve from (285, 405) on the top of his picture-left shoulder beside his neck, through (369, 611) in the middle (it sags toward the lower picture-left, as a thread does), to (492, 824) at the top of the waistband at the picture-right hip; it keeps 30 px from the chain's left strand and about 40 px from the kitten's head. Only the grey bands are pasted back (tools/region_edit.py paste --affine, the crop's mask = the grey bands). His own janeu from the front (IMG_7002, direct view, so the thread runs the other way there) is the reference for the thread's thinness only.",
+    "refs": [
+     {
+      "key": "janeu",
+      "path": ".cache/region_edits/pin14_janeu2/his_janeu_IMG_7002.jpg",
+      "label": "HIS JANEU: a crop of the same man's own photo today, seen directly from the front: his janeu, one thin off-white thread lying flat on his skin. Take from it only the thread's thinness, colour and how it lies on his skin; in the PHOTO TO EDIT, a mirror picture, it runs the other way, as the CHANGE LIST says; nothing of his skin, his body, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey bands",
+      "goal": "two narrow flat grey bands: a wider first band running from just below his picture-right fingertips down across his stomach, over the waistband of the sweatpants and over the soft grey fabric below it to the picture-left, and a thin second band running in a diagonal from the top of his picture-left shoulder beside his neck, over his picture-left pec, across the middle of his chest and stomach, to the waistband at his picture-right hip",
+      "his": "his skin there, exactly as around them, with the same tone, light, shadows, pores and fine hair, and where the first band crosses the waistband and the sweatpants the same soft grey fabric and folds as around it: no thread, no cord, no line along the first band at all; and along the thin second band only, his janeu: one thin off-white thread lying flat on his skin, as thin as in HIS JANEU, coming over the top of his picture-left shoulder beside his neck, running down across his picture-left pec, the middle of his chest and his stomach in one gentle diagonal line, and going under the waistband of the sweatpants at his picture-right hip",
+      "ref": "janeu"
+     }
+    ],
+    "keep": [
+     "everything outside the grey bands exactly as it is: his skin, his muscles and their light and shadows, his silver neck chain and its pendant, his arms, the black phone and his fingers, the kitten and the black watch, the sweatpants and their waistband",
+     "the background at the edges exactly as it is; no other person and no text anywhere",
+     "the same dim warm light with the cool blue edge light, the colour, the contrast and the fine grain",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_janeu_IMG_7002.jpg",
+    "sha256": "5e9b0f7f01eba3128c46a4b7adeb6cc9cad67d7984d4dc30201641099320e417",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_janeu2/his_janeu_IMG_7002.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS JANEU: a crop of the same man's own photo today, seen directly from the front: his janeu, one thin off-white thread lying flat on his skin. Take from it only the thread's thinness, colour and how it lies on his skin; in the PHOTO TO EDIT, a mirror picture, it runs the other way, as the CHANGE LIST says; nothing of his skin, his body, the light or the room",
+    "key": "janeu"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin8janeu_send.jpg",
+    "sha256": "6cf959404c3918a8221fed2f8d2dffc8156fd31b62ff24e4a886c90c0bfab213",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin8_janeu/pin8janeu_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS JANEU: a crop of the same man's own photo today, seen directly from the front: his janeu, one thin off-white thread lying flat on his skin. Take from it only the thread's thinness, colour and how it lies on his skin; in the PHOTO TO EDIT, a mirror picture, it runs the other way, as the CHANGE LIST says; nothing of his skin, his body, the light or the room\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey bands: the PHOTO TO EDIT shows two narrow flat grey bands: a wider first band running from just below his picture-right fingertips down across his stomach, over the waistband of the sweatpants and over the soft grey fabric below it to the picture-left, and a thin second band running in a diagonal from the top of his picture-left shoulder beside his neck, over his picture-left pec, across the middle of his chest and stomach, to the waistband at his picture-right hip; make it his skin there, exactly as around them, with the same tone, light, shadows, pores and fine hair, and where the first band crosses the waistband and the sweatpants the same soft grey fabric and folds as around it: no thread, no cord, no line along the first band at all; and along the thin second band only, his janeu: one thin off-white thread lying flat on his skin, as thin as in HIS JANEU, coming over the top of his picture-left shoulder beside his neck, running down across his picture-left pec, the middle of his chest and his stomach in one gentle diagonal line, and going under the waistband of the sweatpants at his picture-right hip (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- everything outside the grey bands exactly as it is: his skin, his muscles and their light and shadows, his silver neck chain and its pendant, his arms, the black phone and his fingers, the kitten and the black watch, the sweatpants and their waistband.\n- the background at the edges exactly as it is; no other person and no text anywhere.\n- the same dim warm light with the cool blue edge light, the colour, the contrast and the fine grain.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "c4ad6e792520ae305fe289294788a4b69633c3374a2286eb6fbec7309d35a06c",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "5e9b0f7f01eba3128c46a4b7adeb6cc9cad67d7984d4dc30201641099320e417",
+    "upload_name": "his_janeu_IMG_7002.jpg",
+    "bytes": 61108,
+    "px": [
+     550,
+     615
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "6cf959404c3918a8221fed2f8d2dffc8156fd31b62ff24e4a886c90c0bfab213",
+    "upload_name": "pin8janeu_send.jpg",
+    "bytes": 117597,
+    "px": [
+     620,
+     970
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "76b0e635aae11c3995500b88e59e596d28fd48230312850baeb9436b759893fc"
+ }
+}
