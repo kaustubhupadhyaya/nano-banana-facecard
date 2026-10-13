@@ -1,0 +1,186 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin14place_send",
+ "version": 1,
+ "created": "2026-10-13T18:18:18",
+ "because": "backlog 1, stage C of pin 14: the Gokarna land and sea behind the approved v3_0r (run 20261013_044047) by a region edit of the lower 70% of the frame at 2x, pasted back only on the land and sea outside him (below the horizon plus the hillside part above it; the sky, ridge line, horizon and he keep the pin's pixels); written from text (no Gokarna photo on disk), colour grade and horizon held by keep lines because the whole-frame stage 2 (pin14s2_send) came back brighter, warmer and hazier with the horizon moved",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin14place_send",
+  "path": ".cache/region_edits/pin14_place/pin14place_send.jpg",
+  "sha256": "4e4d19b64c867a8d6373408e1b45de9b302aaa0193a34d734a01ab582fe56f8d",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin14_place/pin14place_send.jpg",
+   "prompt": ".cache/loop_prompts/pin14place_route.txt",
+   "inventory": ".cache/inventories/pin14place.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T04:41:17"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A shirtless man standing at the edge of a clifftop path in bright midday sun, his head turned away toward a coast far below, a steep hillside at picture-left and the sea at picture-right. Vertical frame.",
+   "from": ".cache/loop_prompts/pin14place_route.txt",
+   "sha256": "ac2b9cba1063af9c1b0f74589f00feaffb0445e7cd7ecc26d918f9c981243d1a",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin14place.json",
+   "sha256": "df3a839f6f3a51277de984fc8c89b1ada39b5b70521c1aefcddb060089584cb6",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin14_place/pin14place_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin14_place/pin14place_send.jpg",
+    "written": "2026-10-13, pin 14 stage C (backlog 1): the exported v3_0r (run 20261013_044047, user-approved) with the place made Gokarna. Stage 2 of 2026-10-11 (pin14s2_send) showed the way and its flaw: a whole-frame background edit drew a scene brighter, warmer and hazier than his figure, and the horizon moved from 0.53 to 0.49-0.47. So this is a region edit: the crop is the lower 70 percent of the frame (pixels 0-736 x 290-971, sent at 2x = 1472x1362) and tools/region_edit.py pastes back only the land and sea outside him: below the horizon (y 516) plus the hillside's part above it at picture-left (land, not sky; its ridge line against the sky keeps the pin's pixels), minus his YOLO person mask (eroded 2 px so the paste reaches his outline). The sky, the horizon strip over the sea and the ridge line are never pasted (soft mask 0, a 6 px ramp into the land and sea); the figure stays his own pixels. His photo of the place is not on disk: the Togedr Facebook photo needs a login and D:\\Downloads has no Gokarna photo; the bmcindia Instagram post (D:\\PinterestBoards\\pins-2026-10-10\\gokarna\\ig_00.jpg) shows trekkers in a palm grove, not the cliff path or the coast, so it is not sent (FAILURE_LOG F11 and pin14s2 inventory). The place is written from text: the Konkan coast near Kudle and Om beach seen from a laterite cliff path. Check sheet: scratchpad pin14_probe/place_mask.jpg. After the run: paste back with tools/region_edit.py (the crop .json), a difference map (only the land and sea outside him changed), the place beside ig_00.jpg for plausibility, all 36 items.",
+    "refs": [],
+    "change": [
+     {
+      "item": "the hillside at picture-left",
+      "goal": "a steep mountainside rising to the left edge, dark green with dense trees and grey-green scrub and shaded gullies, its ridge line running down from the left edge to just behind the man's cap",
+      "his": "a steep Gokarna headland with the same outline and ridge line: rust-red laterite soil and pitted red-brown laterite rock showing through dry golden grass and low green scrub, with groups of coconut palms and a few small bushy trees in its folds, lit by the same hard sun"
+     },
+     {
+      "item": "the coast below the man at picture-right",
+      "goal": "green-brown slopes falling steeply to the water, with the dark rocks, the surf and the headlands along the shore",
+      "his": "the Gokarna coast seen from a laterite cliff path: red-brown laterite cliffs and rock ledges with green coconut-palm slopes falling to a curved bay of pale golden sand, dark grey-black rocks at the water's edge with white surf breaking on them, and further along the coast the next headlands of red-brown laterite with green scrub on top, paler with distance"
+     },
+     {
+      "item": "the road",
+      "goal": "a grey two-lane road winding along the slope above the shore, from beside the man's arm at picture-right down to the bottom-right corner",
+      "his": "the beach trek's own narrow footpath of red earth, following the same winding line down the slope to the beach, with dry grass and low scrub on both sides of it, no road, no cars and no guard rail"
+     },
+     {
+      "item": "the sea and the shore",
+      "goal": "the open dark-blue ocean with pale swirls, white surf along a narrow strip of grey-beige sand at the bottom-right and a single dark tree beside the road",
+      "his": "the Arabian Sea in the same deep blue far out, turquoise-green over the shallows of the bay, white surf lines breaking one behind another along the pale golden sand, coconut palms along the back of the beach, and a few small fishing boats far out on the water, each a few pixels wide and none near the shore; the horizon line stays exactly where it is"
+     },
+     {
+      "item": "the ground at the bottom",
+      "goal": "light grey-brown rocky soil with gravel, dry twigs and small grey-green dry shrubs across the bottom of the frame",
+      "his": "the cliff path's rust-red laterite soil and loose red gravel with pitted laterite stones, dry golden grass tufts, dry twigs and small dry shrubs across the bottom of the frame"
+     }
+    ],
+    "keep": [
+     "the man exactly as he is, pixel for pixel: his head, the backward maroon cap, his hair, beard and ear, his silver chain with its pendant, the thin diagonal janeu, his shoulders, chest, arms and hands, the white waistband strip and his near-black jeans, his posture, his size and his place in the frame; nothing of him is redrawn, re-lit or outlined",
+     "the clear, cloudless deep-blue sky over the top half of the frame, darkest at the top edge and paler toward the horizon, exactly as it is",
+     "the straight, level horizon at about 53 percent of the frame height, exactly as it is, and the ridge line of the hillside against the sky",
+     "the tall dry grass with pale, feathery beige plumes at the bottom-left, in the same place, size and shape, and the dry brush and shrubs right beside his hands",
+     "the colour grade, contrast and light exactly as in the PHOTO TO EDIT: the same deep, slightly cool saturation, the bright hard midday sun from high up in front of him and a little from picture-left, the same shadows on his body; the new land and sea are no brighter, warmer or hazier than the man and the sky",
+     "no person, boat near the camera, building, car, sign or text anywhere in the new scene; the slopes, the footpath, the beach and the sea stay empty apart from a few tiny boats far out",
+     "the framing exactly: nothing is zoomed, shifted or re-centred, and the crop's edges stay where they are"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 1.52",
+   "measured": {
+    "detected": true,
+    "yaw": -54.1,
+    "pitch": -26.8,
+    "roll": 33.5,
+    "side": "picture-right",
+    "score": 0.84,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin14place_send.jpg",
+    "sha256": "3c6d98e664b5c39ca909b80c4431935a4df5bdb7a61d56897ab6dbaaebf1e1bc",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_place/pin14place_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the hillside at picture-left: the PHOTO TO EDIT shows a steep mountainside rising to the left edge, dark green with dense trees and grey-green scrub and shaded gullies, its ridge line running down from the left edge to just behind the man's cap; make it a steep Gokarna headland with the same outline and ridge line: rust-red laterite soil and pitted red-brown laterite rock showing through dry golden grass and low green scrub, with groups of coconut palms and a few small bushy trees in its folds, lit by the same hard sun.\n- the coast below the man at picture-right: the PHOTO TO EDIT shows green-brown slopes falling steeply to the water, with the dark rocks, the surf and the headlands along the shore; make it the Gokarna coast seen from a laterite cliff path: red-brown laterite cliffs and rock ledges with green coconut-palm slopes falling to a curved bay of pale golden sand, dark grey-black rocks at the water's edge with white surf breaking on them, and further along the coast the next headlands of red-brown laterite with green scrub on top, paler with distance.\n- the road: the PHOTO TO EDIT shows a grey two-lane road winding along the slope above the shore, from beside the man's arm at picture-right down to the bottom-right corner; make it the beach trek's own narrow footpath of red earth, following the same winding line down the slope to the beach, with dry grass and low scrub on both sides of it, no road, no cars and no guard rail.\n- the sea and the shore: the PHOTO TO EDIT shows the open dark-blue ocean with pale swirls, white surf along a narrow strip of grey-beige sand at the bottom-right and a single dark tree beside the road; make it the Arabian Sea in the same deep blue far out, turquoise-green over the shallows of the bay, white surf lines breaking one behind another along the pale golden sand, coconut palms along the back of the beach, and a few small fishing boats far out on the water, each a few pixels wide and none near the shore; the horizon line stays exactly where it is.\n- the ground at the bottom: the PHOTO TO EDIT shows light grey-brown rocky soil with gravel, dry twigs and small grey-green dry shrubs across the bottom of the frame; make it the cliff path's rust-red laterite soil and loose red gravel with pitted laterite stones, dry golden grass tufts, dry twigs and small dry shrubs across the bottom of the frame.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the man exactly as he is, pixel for pixel: his head, the backward maroon cap, his hair, beard and ear, his silver chain with its pendant, the thin diagonal janeu, his shoulders, chest, arms and hands, the white waistband strip and his near-black jeans, his posture, his size and his place in the frame; nothing of him is redrawn, re-lit or outlined.\n- the clear, cloudless deep-blue sky over the top half of the frame, darkest at the top edge and paler toward the horizon, exactly as it is.\n- the straight, level horizon at about 53 percent of the frame height, exactly as it is, and the ridge line of the hillside against the sky.\n- the tall dry grass with pale, feathery beige plumes at the bottom-left, in the same place, size and shape, and the dry brush and shrubs right beside his hands.\n- the colour grade, contrast and light exactly as in the PHOTO TO EDIT: the same deep, slightly cool saturation, the bright hard midday sun from high up in front of him and a little from picture-left, the same shadows on his body; the new land and sea are no brighter, warmer or hazier than the man and the sky.\n- no person, boat near the camera, building, car, sign or text anywhere in the new scene; the slopes, the footpath, the beach and the sea stay empty apart from a few tiny boats far out.\n- the framing exactly: nothing is zoomed, shifted or re-centred, and the crop's edges stay where they are.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "79a4d5f564639db03be90e19d7f33c1abfc0ad4491bd15812b0d0c173bbe430e",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "3c6d98e664b5c39ca909b80c4431935a4df5bdb7a61d56897ab6dbaaebf1e1bc",
+    "upload_name": "pin14place_send.jpg",
+    "bytes": 555791,
+    "px": [
+     1472,
+     1362
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "059ebfe2f6fa9659b8add41a6367686156fe8a9653601da33f41788cf22c9725"
+ }
+}

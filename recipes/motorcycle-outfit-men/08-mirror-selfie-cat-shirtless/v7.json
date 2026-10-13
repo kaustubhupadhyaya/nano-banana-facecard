@@ -1,0 +1,329 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539777118",
+ "version": 7,
+ "created": "2026-10-13T18:22:05",
+ "because": "backlog 2: pin 8 redo by the yardstick (pumped, janeu, chain, me@v2); the approved 2026-10-01 version predates them",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539777118",
+  "path": ".cache/pin_783485666539777118.jpg",
+  "sha256": "5e536fc37eb39804f471b942eb1ec99d8d09451cca2ecd127e621419494a5f55",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539777118.json",
+   "sha256": "786f87aacf4e6660f5ec53f861ea62856e5fc458067fffc2085d923db1bf6e15"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666539777118.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539777118_route.txt",
+   "inventory": ".cache/inventories/pin_783485666539777118_v7.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "restore_background": true,
+   "physique": "pumped-front-torso"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T04:41:17"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 15 degrees toward picture-right, eyes down at a phone.",
+   "from": ".cache/loop_prompts/pin_783485666539777118_route.txt",
+   "sha256": "e782147605c5063902fe8bd8fff56da819d61620da48d1779b8abb39ea5b24d1",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666539777118_v7.json",
+   "sha256": "87a2aa066e07a6d8a7261604e117304aff2e5d44dfcf6f5e6832ea102b6d5c3c",
+   "data": {
+    "goal": ".cache/pin_783485666539777118.jpg",
+    "photo_to_edit": ".cache/pin_783485666539777118.jpg",
+    "written": "2026-10-13, pin 8 v7 (backlog 2, the yardstick redo): by eye from the pin (Pinterest pin 783485666539777118, motorcycle-outfit-men board, number 8, 'mirror selfie cat shirtless', 1080x1920) and from the user's approved 2026-10-01 picture (run 20261001_041044 v2_0: 'quite good actually'; inventory pin_783485666539777118_v2.json), whose kept parts are carried over word for word: the kitten, the thin chain, the black smartwatch on the wrist of the kitten arm, the grey sweatpants with the white drawstring, the dark bedroom with its table of clothes, the dim warm light with the cool blue edge on picture-left, the pin's posture. What is new is by the user's yardstick of 2026-10-10 ('any shirtless picture will get the fully pumped version of mine'): the recipe takes --physique pumped-front-torso (pumped_front.jpg cut at the chin and the waistband, so the standard's hanging arms cannot set his pose; this pin's arms are bent: the kitten arm and the phone arm; FAILURE_LOG F19/F22), his janeu and his silver neck chain on the bare torso (checklist item 36), character me@v2 (the lean face), no tattoos or jewellery that are not his (the pin shows none; the black smartwatch stays, as in the approved picture). THE MIRROR: this pin is a true, unflipped reflection: he holds the phone in the hand at picture-right and wears the watch on the wrist at picture-left (the right-handed man's usual way round), and the phone's three-lens module is at the upper RIGHT of its back as seen in the glass (an iPhone Pro's back, seen directly, has it at the upper left). In a direct front photo his left shoulder is at picture-right (the BODY reference, IMG_7002: the thread from picture-right); a mirror flips it, so here his LEFT shoulder is at picture-LEFT (the arm holding the kitten) and his RIGHT hip at picture-RIGHT (below the arm holding the phone). The janeu therefore runs from the top of the picture-left shoulder beside his neck, down across his chest and stomach, to the picture-right hip: upper picture-left to lower picture-right, the mirror image of the BODY reference's thread. The same rule as pin 15's inventory (v3: 'his left side at picture-right' there because that pin shows his back in the glass). Geometry read off the pin (1080x1920): the base of his neck at about (480-600, 590), the kitten's head at x 270-430 and y 765-900, the phone at x 543-660 and y 475-690, the hand at x 525-700 and y 560-770, the waistband top at y 1150, so the thread's straight line from the shoulder-neck point (about x 400, y 590) to the picture-right hip (about x 700, y 1150) passes just right of the kitten's ear (x 444 at y 770), crosses the midline of his torso at the bottom of the pecs (y about 860) and the picture-right side of the lower abs (x 610 at y 1000), clear of the phone hand (it starts at x 525) and of the kitten. Sizes: his pumped torso is 0.987 shoulder-line width per torso length (the standard; FAILURE_LOG F46) against about 1.27 for this pin man (shoulder caps x 150-870 over neck-to-waistband 560 px), so his shoulders are about a fifth narrower and his upper arms (about 0.19 per torso length against about 0.29) about a third narrower, written conservatively as 'about a fifth' and 'about a quarter' (pin 15 withdrew 'a third thinner'). His build is narrower than the pin man's everywhere, so the paste mask (the pin man's outline grown) holds it and the restore fills the freed wall from Gemini's own wall. The old runs (FAILURE_LOG P4, FEEDBACK_LEDGER pin 8 attempts 9-16) show the body following the pin man's (arm width 1.60-1.67 against his 1.30-1.48), so the shoulder and arm items name the size difference. Keep lines name the people (none but him, item 33) and the lettering (none, item 34).",
+    "refs": [],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "a very muscular shirtless man with short straight black hair with a fringe, clean-shaven, fair skin",
+      "his": "him: the man of the references, a different person, with his own face, hair, beard, skin and body"
+     },
+     {
+      "item": "hair",
+      "goal": "short straight black hair with a fringe",
+      "his": "his own tight curly black hair exactly as in the FACE references: the same volume, curl and length, all of it his (front, top, sides, back), never cut shorter or straighter"
+     },
+     {
+      "item": "beard",
+      "goal": "clean-shaven",
+      "his": "his own full dark beard and moustache exactly as in the FACE references: the same length, density and shape"
+     },
+     {
+      "item": "skin tone",
+      "goal": "a fair or lighter skin tone",
+      "his": "his own warm medium-brown skin tone, as in the references, on face, neck, arms, hands and torso, in this same dim warm light with its cool blue edge on picture-left; never lightened"
+     },
+     {
+      "item": "build",
+      "goal": "a very muscular bodybuilder's build: huge capped shoulders, massive arms, a thick chest and a sharply cut eight-pack",
+      "his": "his own build from the BODY reference, clearly narrower across the shoulders, thinner in the arms and less massive in the chest than in the PHOTO TO EDIT"
+     },
+     {
+      "item": "shoulders and chest",
+      "goal": "huge capped shoulders spanning almost the whole width of the frame, a thick trapezius and a massive chest",
+      "his": "his own shoulders and chest exactly as in the BODY reference: round shoulder caps about a fifth narrower across than in the PHOTO TO EDIT, the outer edge of each shoulder well inside the outline of the man who stood here, his trapezius low and flat, sloping from his neck to his shoulders, and his firm chest with the crisp lower edge of each pec and the groove between them, with real skin texture"
+     },
+     {
+      "item": "arms",
+      "goal": "huge bodybuilder's arms: at picture-left a massive upper arm bent so that the forearm holds the kitten against his side, at picture-right a thick upper arm and forearm raised to hold the phone",
+      "his": "his own full arms at their real size, exactly as in the BODY reference: the upper arms about a quarter narrower than in the PHOTO TO EDIT, round and firm, with the vein along each biceps and the clear veins on his forearms with their faint green tint; the elbows, forearms and hands stay where they are in the PHOTO TO EDIT, holding the kitten and the phone the same way"
+     },
+     {
+      "item": "stomach",
+      "goal": "a tight, sharply cut eight-pack of abs and deep obliques",
+      "his": "his own stomach as in the BODY reference: his upper abs and obliques showing, a tight narrow waist with flat love handles, a few fine dark hairs below his navel, real skin texture; less sharply carved than the PHOTO TO EDIT's"
+     },
+     {
+      "item": "janeu",
+      "goal": "a bare chest and stomach with no thread on them",
+      "his": "his janeu, the thin off-white sacred thread he always wears, unbroken and lying flat on his skin, as thin as in the BODY reference. This photo is a MIRROR picture, so the thread is the mirror image of the BODY reference's: his left shoulder is the one at picture-left (the arm holding the kitten) and his right hip is at picture-right (below the arm holding the phone). The thread comes over the top of the picture-left shoulder, close beside the base of his neck, and runs down across his chest and stomach in one long diagonal line from the upper picture-left to the lower picture-right: over the inner part of his picture-left pec just to the right of the kitten's head, across the middle of his chest at the bottom of his pecs, over the picture-right side of his lower abs, and under the waistband of the sweatpants at his picture-right hip, just inside the elbow of the arm holding the phone"
+     },
+     {
+      "item": "neck chain",
+      "goal": "a thin gold chain necklace hanging from his neck onto the top of his chest",
+      "his": "his own fine silver neck chain with its small pendant, as in the BODY reference, hanging from his neck onto the top of his chest where the PHOTO TO EDIT's thin chain hangs, the pendant resting on his upper chest"
+     }
+    ],
+    "keep": [
+     "his head exactly where the PHOTO TO EDIT's head is: the top of his hair at about 10 percent of the frame height, his chin at about 25 percent and the centre of his face at about 53 percent of the width, his face turned about 15 degrees toward picture-right and bowed a little, his eyes looking down at the phone screen, his face calm with a closed mouth",
+     "the FRAMING exactly: a vertical 9:16 mirror shot, the same crop, scale and camera distance as the PHOTO TO EDIT, from the ceiling edge at the top to the sweatpants cut by the bottom edge, with him not re-centred and the picture not zoomed in or out",
+     "his exact posture and position: standing facing the mirror, shirtless; his right hand holding the black iPhone upright at picture-right just below his chin, in front of his upper chest (the phone at about 50 to 61 percent of the width and 25 to 36 percent of the height), the fingers curled around its picture-left edge; his other arm bent at the elbow, its forearm across his stomach holding the kitten against his side, the elbow out near the picture-left edge",
+     "the kitten exactly as it is: its white-and-cream colours with ginger-tan patches on its head, its size, its face looking at the camera, its front paws and hind legs hanging down as they do, and its striped tail hanging down behind his leg; its head at about 25 to 40 percent of the width and 40 to 47 percent of the height",
+     "the black smartwatch on the wrist of his arm holding the kitten",
+     "he stays shirtless: bare shoulders, chest, stomach and arms, with nothing added above the sweatpants",
+     "the loose light heather-grey sweatpants with a wide elastic waistband at about 60 percent of the frame height, the white drawstring with its two cords hanging down the front, and their soft folds down to the bottom edge",
+     "the black iPhone itself: the three-lens camera module at the upper right of its back as seen in the mirror, the black case, held exactly as in the PHOTO TO EDIT",
+     "the whole room: the pale grey ceiling band at the top, the dark bedroom wall with its dark horizontal band, the pale grey panel and the thin pole at the picture-left edge at about 47 to 60 percent of the height, the white wall socket low at picture-left, the dark floor, the dark edges of the mirror at both sides of the frame, the round white table at the bottom right with a book on it, the black bottle beside it and the heap of grey clothes on the table's side",
+     "no other person anywhere in the frame: he is the only person in the picture",
+     "no text, letters, sign or logo anywhere in the picture: none on the phone, the sweatpants, the bottle, the book or the walls",
+     "the light and the photograph: the dim warm light with a cool blue edge light on picture-left, the dark moody low-key colour, the soft grain and the slight softness of a quick handheld phone mirror shot"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -11.9,
+    "pitch": -9.9,
+    "roll": 13.0,
+    "side": "picture-right",
+    "score": 0.86,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_4861_fav_right.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "pumped_front_torso.jpg",
+    "sha256": "9ffb4b15044e50a0ce4f017f8ee3f6617ad355e0128201c7c727457d016b2b92",
+    "from": "D:/FacecardData/physique/standard/pumped_front_torso.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique pumped-front-torso: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "name": "pin_783485666539777118.jpg",
+    "sha256": "a920e7d01aabc69885898414516a3d29817a09fc5179a492c31a7f47978967af",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666539777118.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  },
+  "physique": {
+   "name": "pumped-front-torso",
+   "files": [
+    "pumped_front_torso.jpg"
+   ],
+   "label": "the BODY reference — his torso today from the front, right after a workout, cropped at the chin and the waistband: his true build and proportion for a shirtless picture. It shows only his body; how he stands and holds his arms comes from the PHOTO TO EDIT.",
+   "build": "His body exactly as in image {BODY}, right after a workout: the lean torso with his upper abs and obliques showing, the tight narrow waist with flat love handles, the firm chest, the round shoulder caps, and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImage 4 is the BODY reference — his torso today from the front, right after a workout, cropped at the chin and the waistband: his true build and proportion for a shirtless picture. It shows only his body; how he stands and holds his arms comes from the PHOTO TO EDIT.\nImage 5 is the PHOTO TO EDIT.\n\nEdit image 5, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-3), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: His body exactly as in image 4, right after a workout: the lean torso with his upper abs and obliques showing, the tight narrow waist with flat love handles, the firm chest, the round shoulder caps, and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in image 4, never thinner or softer. His whole body is his own, from image 4: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows a very muscular shirtless man with short straight black hair with a fringe, clean-shaven, fair skin; make it him: the man of the references, a different person, with his own face, hair, beard, skin and body.\n- hair: the PHOTO TO EDIT shows short straight black hair with a fringe; make it his own hair exactly as in the FACE references (images 1-3): His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.\n- beard: the PHOTO TO EDIT shows clean-shaven; make it his own beard exactly as in the FACE references (images 1-3): His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.\n- skin tone: the PHOTO TO EDIT shows a fair or lighter skin tone; make it his own warm medium-brown skin tone, as in the references, on face, neck, arms, hands and torso, in this same dim warm light with its cool blue edge on picture-left; never lightened.\n- build: the PHOTO TO EDIT shows a very muscular bodybuilder's build: huge capped shoulders, massive arms, a thick chest and a sharply cut eight-pack; make it his own build exactly as in the BODY reference (image 4): His body exactly as in image 4, right after a workout: the lean torso with his upper abs and obliques showing, the tight narrow waist with flat love handles, the firm chest, the round shoulder caps, and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in image 4, never thinner or softer.\n- shoulders and chest: the PHOTO TO EDIT shows huge capped shoulders spanning almost the whole width of the frame, a thick trapezius and a massive chest; make it his own shoulders and chest exactly as in the BODY reference: round shoulder caps about a fifth narrower across than in the PHOTO TO EDIT, the outer edge of each shoulder well inside the outline of the man who stood here, his trapezius low and flat, sloping from his neck to his shoulders, and his firm chest with the crisp lower edge of each pec and the groove between them, with real skin texture.\n- arms: the PHOTO TO EDIT shows huge bodybuilder's arms: at picture-left a massive upper arm bent so that the forearm holds the kitten against his side, at picture-right a thick upper arm and forearm raised to hold the phone; make it his own full arms at their real size, exactly as in the BODY reference: the upper arms about a quarter narrower than in the PHOTO TO EDIT, round and firm, with the vein along each biceps and the clear veins on his forearms with their faint green tint; the elbows, forearms and hands stay where they are in the PHOTO TO EDIT, holding the kitten and the phone the same way.\n- stomach: the PHOTO TO EDIT shows a tight, sharply cut eight-pack of abs and deep obliques; make it his own stomach as in the BODY reference: his upper abs and obliques showing, a tight narrow waist with flat love handles, a few fine dark hairs below his navel, real skin texture; less sharply carved than the PHOTO TO EDIT's.\n- janeu: the PHOTO TO EDIT shows a bare chest and stomach with no thread on them; make it his janeu, the thin off-white sacred thread he always wears, unbroken and lying flat on his skin, as thin as in the BODY reference. This photo is a MIRROR picture, so the thread is the mirror image of the BODY reference's: his left shoulder is the one at picture-left (the arm holding the kitten) and his right hip is at picture-right (below the arm holding the phone). The thread comes over the top of the picture-left shoulder, close beside the base of his neck, and runs down across his chest and stomach in one long diagonal line from the upper picture-left to the lower picture-right: over the inner part of his picture-left pec just to the right of the kitten's head, across the middle of his chest at the bottom of his pecs, over the picture-right side of his lower abs, and under the waistband of the sweatpants at his picture-right hip, just inside the elbow of the arm holding the phone.\n- neck chain: the PHOTO TO EDIT shows a thin gold chain necklace hanging from his neck onto the top of his chest; make it his own fine silver neck chain with its small pendant, as in the BODY reference, hanging from his neck onto the top of his chest where the PHOTO TO EDIT's thin chain hangs, the pendant resting on his upper chest.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his head exactly where the PHOTO TO EDIT's head is: the top of his hair at about 10 percent of the frame height, his chin at about 25 percent and the centre of his face at about 53 percent of the width, his face turned about 15 degrees toward picture-right and bowed a little, his eyes looking down at the phone screen, his face calm with a closed mouth.\n- the FRAMING exactly: a vertical 9:16 mirror shot, the same crop, scale and camera distance as the PHOTO TO EDIT, from the ceiling edge at the top to the sweatpants cut by the bottom edge, with him not re-centred and the picture not zoomed in or out.\n- his exact posture and position: standing facing the mirror, shirtless; his right hand holding the black iPhone upright at picture-right just below his chin, in front of his upper chest (the phone at about 50 to 61 percent of the width and 25 to 36 percent of the height), the fingers curled around its picture-left edge; his other arm bent at the elbow, its forearm across his stomach holding the kitten against his side, the elbow out near the picture-left edge.\n- the kitten exactly as it is: its white-and-cream colours with ginger-tan patches on its head, its size, its face looking at the camera, its front paws and hind legs hanging down as they do, and its striped tail hanging down behind his leg; its head at about 25 to 40 percent of the width and 40 to 47 percent of the height.\n- the black smartwatch on the wrist of his arm holding the kitten.\n- he stays shirtless: bare shoulders, chest, stomach and arms, with nothing added above the sweatpants.\n- the loose light heather-grey sweatpants with a wide elastic waistband at about 60 percent of the frame height, the white drawstring with its two cords hanging down the front, and their soft folds down to the bottom edge.\n- the black iPhone itself: the three-lens camera module at the upper right of its back as seen in the mirror, the black case, held exactly as in the PHOTO TO EDIT.\n- the whole room: the pale grey ceiling band at the top, the dark bedroom wall with its dark horizontal band, the pale grey panel and the thin pole at the picture-left edge at about 47 to 60 percent of the height, the white wall socket low at picture-left, the dark floor, the dark edges of the mirror at both sides of the frame, the round white table at the bottom right with a book on it, the black bottle beside it and the heap of grey clothes on the table's side.\n- no other person anywhere in the frame: he is the only person in the picture.\n- no text, letters, sign or logo anywhere in the picture: none on the phone, the sweatpants, the bottle, the book or the walls.\n- the light and the photograph: the dim warm light with a cool blue edge light on picture-left, the dark moody low-key colour, the soft grain and the slight softness of a quick handheld phone mirror shot.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "e867a3975482329bb6324f58a288f90bfe0cd90dd03c611f214f4d18506af49a",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "9ffb4b15044e50a0ce4f017f8ee3f6617ad355e0128201c7c727457d016b2b92",
+    "upload_name": "pumped_front_torso.jpg",
+    "bytes": 268731,
+    "px": [
+     1512,
+     1129
+    ]
+   },
+   {
+    "n": 5,
+    "role": "photo_to_edit",
+    "sha256": "a920e7d01aabc69885898414516a3d29817a09fc5179a492c31a7f47978967af",
+    "upload_name": "pin_783485666539777118.jpg",
+    "bytes": 164103,
+    "px": [
+     1080,
+     1920
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "13c4a251a9bc7f1b90f84e7976a6cbcff2167551066bfb495d3275e460acb019"
+ }
+}
