@@ -1,0 +1,234 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin13head_send",
+ "version": 1,
+ "created": "2026-10-14T02:35:52",
+ "because": "backlog 5, pin 13 stage 2: the user's 'looking to right smiling, making slight side profile visible'. The stage-1 base (v5 v1_0r, run 20261009_205207) already shows his head in a rear profile toward picture-right (ear, cheek strip, beard, nose tip) but no smile; the planned v6 (a whole-frame edit turning the head about 50 degrees) never ran and a head turn by words overshoots (8, 12, 60 degrees all gave profiles). So his smile is drawn in place as a Route G objects-mode region edit of the head crop at 4x (pin 14 head3 / pin 6 head method, F45/F46), with his real profile IMG_6864 and his real smile IMG_6875 as references, pasted back over the face only",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin13head_send",
+  "path": ".cache/region_edits/pin13_head/pin13head_send.jpg",
+  "sha256": "2dbc1f0d744f7df7e7ff4e19d2bb695b47f5b05cded07067b18d9998d72487d2",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin13_head/pin13head_send.jpg",
+   "prompt": ".cache/loop_prompts/pin13head_route.txt",
+   "inventory": ".cache/inventories/pin13head.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T23:02:12"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a man's head and neck seen from behind and the side, his head turned toward picture-right, looking down a bowling lane in dim bluish light. Close frame.",
+   "from": ".cache/loop_prompts/pin13head_route.txt",
+   "sha256": "4e5863ee7e7a507796762e24982eecf341f417f374618bb9d29c414d4a89a7da",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin13head.json",
+   "sha256": "9e88343dc751517652b0bf96917ddf74a3120bc22a72cb2cb6b664b81ffc4595",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin13_head/pin13head_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin13_head/pin13head_send.jpg",
+    "written": "2026-10-14 02:5x, pin 13 stage 2 (backlog 5): his smile on the head of the stage-1 base (recipe pin_783485666540141619 v5, run 20261009_205207, v1_0r: him in the pin man's place and size, every body check PASS, the pin's own screens, person and lanes restored). The user's words (2026-10-09): 'this but the subject looking to right smiling, making slight side profile visible'. WHAT THE BASE SHOWS (measured by eye at 4x, 2026-10-14; the earlier note 'head turning slightly, a sliver of beard' was read at thumbnail size): his head is already in a rear profile toward picture-right, looking down the lane: ear, a strip of cheek, the beard along the jaw and the nose tip show, nothing of a smile (the lips sit behind the beard). So stage 2 is NOT the v6 plan (a whole-frame edit turning the head about 50 degrees: v6 was written for a head facing away; never run: its 10-09 20:58 start stopped at stage 04 on a false sign-in alarm, and the wave pins1013e that should have run it was overwritten by the smile work of 10-10). F34-F47 methods instead: a Route G objects-mode region edit of the head crop (pin 14 head3 / pin 6 head), so the head keeps its size, place and the curls' outline; the paste weight covers only the face (cheek, beard, nose line, mouth corner) and the dark wall beside the nose where the profile may move a few pixels (tools/region_edit.py paste-run --affine); hair, ear, neck, chain and shirt keep the base's pixels. The crop is cut from the 896x1200 base at x 120-400, y 175-400 (280x225 px, sent at 4x = 1120x900, about 1 MP). Positions below are fractions of the crop: ear 46-52 / 45-58, nose tip 62 / 57, mouth corner about 57 / 62, chin bottom 54 / 74, the fringe's lower tip over the forehead 61 / 43, the hair's top 14, the chain at 38 / 70. References: his real profile IMG_6864 (facing picture-right, yaw -72, not mirrored) and his real smile IMG_6875 (open smile, the user's reference for his smile: AGENTS.md G1); no generated face is sent. DO NOT RETRY: whole-frame 'turn his head N degrees' (8, 12 and 60 degrees all gave profiles); 'face exactly as in the references'; face-shade lines (FEEDBACK_LOG 12-16).",
+    "refs": [
+     {
+      "key": "profile",
+      "path": ".cache/region_edits/pin13_head/his_profile_IMG_6864.jpg",
+      "label": "HIS PROFILE: a photo of the same man's own head today, seen from the side and facing picture-right like the head in the PHOTO TO EDIT: take from it the line of his nose (long, straight, with a rounded tip), his full dark beard along the jaw and chin, the shape of his jaw, his ear and his skin; nothing of his light, his expression or the room"
+     },
+     {
+      "key": "smile",
+      "path": ".cache/region_edits/pin13_head/his_smile_IMG_6875.jpg",
+      "label": "HIS SMILE: a photo of the same man's own head today smiling a natural candid smile with his upper teeth showing: take from it only how his smile looks: the cheeks lifted and rounded, the smile lines from the nose to the corners of his mouth, the corners of his mouth lifted, his own teeth, the creases at the outer corners of his eyes; nothing of his turn, the light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the expression",
+      "goal": "the man's calm, neutral face with the lips closed and nothing of a smile showing",
+      "his": "his own natural candid smile as in HIS SMILE, seen from the side: the cheek lifted and rounded under the eye, the smile line from the side of the nose to the corner of the mouth deepened, the corner of his mouth lifted, the lips a little apart with a hint of his own upper teeth at the visible corner of his mouth, and, where his eye shows, a small crease at its outer corner; a warm, easy smile caught mid-conversation, never a smirk, never forced, never a laugh",
+      "ref": "smile"
+     },
+     {
+      "item": "the face's turn",
+      "goal": "the face seen from behind and the side, turned toward picture-right and a little away from the camera, so that only a strip of cheek, the beard along the jaw and the tip of the nose show",
+      "his": "the same face turned a few degrees more toward the camera than it is, so that more of his cheek, the corner of his mouth and the side of his nose show and his smile can be seen, still looking toward picture-right down the lane; the tip of his nose may move toward picture-right by at most about 5 percent of this picture's width and the back and top of his head do not move at all",
+      "ref": "profile"
+     },
+     {
+      "item": "the nose, the beard and the skin",
+      "goal": "the man's nose, short beard and skin in the dim blue light",
+      "his": "his own nose, full dark beard and skin as in HIS PROFILE: the long straight nose with its rounded tip, the dense dark beard along the jaw and chin joining the moustache, his warm medium-brown skin with real texture and fine pores, drawn in the same dim bluish-purple bowling-alley light as the neck below it and never brighter than his neck",
+      "ref": "profile"
+     }
+    ],
+    "keep": [
+     "every curl of his hair exactly as it is, from the top of his head to his nape, and the lower tip of the fringe at about 61 percent from the left and 43 percent from the top, so that his hair does not grow, shrink, lift or change its outline anywhere",
+     "his ear exactly as it is, at about 46 to 52 percent from the left and 45 to 58 percent from the top, at the same size and place",
+     "his neck, his fine neck chain at about 38 percent from the left and 70 percent from the top, and the collar and shoulders of the grey t-shirt exactly as they are",
+     "the head's size and place in the frame, and the direction he looks: toward picture-right, down the lane",
+     "the dark wall, the blue column at the left and the lights behind him exactly as they are; no other person and no text anywhere",
+     "the dim, bluish-purple bowling-alley light and the soft, slightly grainy, slightly blurred look of a quick phone snapshot: the face is never sharper or brighter than the neck and the ear beside it",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "profile_right",
+   "decided_by": "yunet",
+   "evidence": "YuNet found the goal's face: Right, yaw ratio 0.94",
+   "measured": {
+    "detected": true,
+    "yaw": -27.2,
+    "pitch": -12.7,
+    "roll": 10.3,
+    "side": "picture-right",
+    "score": 0.6,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_4861_fav_right_head768_1789837192.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_profile_IMG_6864.jpg",
+    "sha256": "d853af79fba8d75a0ac69487873a648acce78c8cdd9ed79948131fa5ba65b7ce",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin13_head/his_profile_IMG_6864.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS PROFILE: a photo of the same man's own head today, seen from the side and facing picture-right like the head in the PHOTO TO EDIT: take from it the line of his nose (long, straight, with a rounded tip), his full dark beard along the jaw and chin, the shape of his jaw, his ear and his skin; nothing of his light, his expression or the room",
+    "key": "profile"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_smile_IMG_6875.jpg",
+    "sha256": "2d7788823a4af20baeb3469fb08a89240e3e7404cac33d50a525863c1b0afd42",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin13_head/his_smile_IMG_6875.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS SMILE: a photo of the same man's own head today smiling a natural candid smile with his upper teeth showing: take from it only how his smile looks: the cheeks lifted and rounded, the smile lines from the nose to the corners of his mouth, the corners of his mouth lifted, his own teeth, the creases at the outer corners of his eyes; nothing of his turn, the light or the room",
+    "key": "smile"
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "name": "pin13head_send.jpg",
+    "sha256": "2069ed106a9506d85014d2daafbac10bca1f872493e537b5f6f2c9746bcd15ae",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin13_head/pin13head_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS PROFILE: a photo of the same man's own head today, seen from the side and facing picture-right like the head in the PHOTO TO EDIT: take from it the line of his nose (long, straight, with a rounded tip), his full dark beard along the jaw and chin, the shape of his jaw, his ear and his skin; nothing of his light, his expression or the room\nImage 2 is HIS SMILE: a photo of the same man's own head today smiling a natural candid smile with his upper teeth showing: take from it only how his smile looks: the cheeks lifted and rounded, the smile lines from the nose to the corners of his mouth, the corners of his mouth lifted, his own teeth, the creases at the outer corners of his eyes; nothing of his turn, the light or the room\nImage 3 is the PHOTO TO EDIT.\n\nEdit image 3, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the expression: the PHOTO TO EDIT shows the man's calm, neutral face with the lips closed and nothing of a smile showing; make it his own natural candid smile as in HIS SMILE, seen from the side: the cheek lifted and rounded under the eye, the smile line from the side of the nose to the corner of the mouth deepened, the corner of his mouth lifted, the lips a little apart with a hint of his own upper teeth at the visible corner of his mouth, and, where his eye shows, a small crease at its outer corner; a warm, easy smile caught mid-conversation, never a smirk, never forced, never a laugh (image 2).\n- the face's turn: the PHOTO TO EDIT shows the face seen from behind and the side, turned toward picture-right and a little away from the camera, so that only a strip of cheek, the beard along the jaw and the tip of the nose show; make it the same face turned a few degrees more toward the camera than it is, so that more of his cheek, the corner of his mouth and the side of his nose show and his smile can be seen, still looking toward picture-right down the lane; the tip of his nose may move toward picture-right by at most about 5 percent of this picture's width and the back and top of his head do not move at all (image 1).\n- the nose, the beard and the skin: the PHOTO TO EDIT shows the man's nose, short beard and skin in the dim blue light; make it his own nose, full dark beard and skin as in HIS PROFILE: the long straight nose with its rounded tip, the dense dark beard along the jaw and chin joining the moustache, his warm medium-brown skin with real texture and fine pores, drawn in the same dim bluish-purple bowling-alley light as the neck below it and never brighter than his neck (image 1).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- every curl of his hair exactly as it is, from the top of his head to his nape, and the lower tip of the fringe at about 61 percent from the left and 43 percent from the top, so that his hair does not grow, shrink, lift or change its outline anywhere.\n- his ear exactly as it is, at about 46 to 52 percent from the left and 45 to 58 percent from the top, at the same size and place.\n- his neck, his fine neck chain at about 38 percent from the left and 70 percent from the top, and the collar and shoulders of the grey t-shirt exactly as they are.\n- the head's size and place in the frame, and the direction he looks: toward picture-right, down the lane.\n- the dark wall, the blue column at the left and the lights behind him exactly as they are; no other person and no text anywhere.\n- the dim, bluish-purple bowling-alley light and the soft, slightly grainy, slightly blurred look of a quick phone snapshot: the face is never sharper or brighter than the neck and the ear beside it.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "07fc17573bf190c70bde974d0c9cb6c58545e229bede5f6e3ef2cca2cf842429",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "d853af79fba8d75a0ac69487873a648acce78c8cdd9ed79948131fa5ba65b7ce",
+    "upload_name": "his_profile_IMG_6864.jpg",
+    "bytes": 619020,
+    "px": [
+     1250,
+     1400
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "2d7788823a4af20baeb3469fb08a89240e3e7404cac33d50a525863c1b0afd42",
+    "upload_name": "his_smile_IMG_6875.jpg",
+    "bytes": 218583,
+    "px": [
+     938,
+     938
+    ]
+   },
+   {
+    "n": 3,
+    "role": "photo_to_edit",
+    "sha256": "2069ed106a9506d85014d2daafbac10bca1f872493e537b5f6f2c9746bcd15ae",
+    "upload_name": "pin13head_send.jpg",
+    "bytes": 97098,
+    "px": [
+     1120,
+     900
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "eb91da4f9e32c09e42ae6d6a2cfd7f979cbdb45f9e55976fc3e2c5490605abc1"
+ }
+}

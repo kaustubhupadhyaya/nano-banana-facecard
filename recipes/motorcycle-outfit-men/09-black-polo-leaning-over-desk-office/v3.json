@@ -1,0 +1,255 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539779317",
+ "version": 3,
+ "created": "2026-10-14T02:28:35",
+ "because": "backlog 5, the user's concern 'the goal man's heavy arms vs his': items 26 and 32 failed in all earlier runs (10-09 v1_0 arm width 3.09 vs his 1.30-1.48; the 10-01 best fails them under the 36 items); a one-step whole-frame edit keeps the pin man's arm outline (8 of 8). v3 = stage 1 of 2: body only by the yardstick for a dressed picture (--physique casual-front: arms never below his real photo, veins between relaxed and pumped), the pin man's head kept pixel for pixel to pin the frame and the bow, the pin's own background copied back (--restore-background); stage 2 = his head by Route G region edit (pin 6 / pin 14 method)",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539779317",
+  "path": ".cache/pin_783485666539779317.jpg",
+  "sha256": "cfa62c0156df45fc74ab2237020a58d767e7b6df74955460f67c7222c22b2e98",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539779317.json",
+   "sha256": "fdfb4d872e76cb84d6a4cec7a48f56e4fff139482020e464823f04d18a16fe28"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666539779317.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539779317_route_v3.txt",
+   "inventory": ".cache/inventories/pin_783485666539779317_v13.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": true,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "restore_background": true,
+   "physique": "casual-front"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T23:02:12"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": true,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 40 degrees toward picture-left, bowed down.",
+   "from": ".cache/loop_prompts/pin_783485666539779317_route_v3.txt",
+   "sha256": "e3a0053044d49a01b3e7eba8f4ea9e3801e1909c4174cb22e9e8fe37a23c661b",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin_783485666539779317_v13.json",
+   "sha256": "de62fd4cec587150e6ed22c6ad025af808c5658e952efec19256fea9128e8d6a",
+   "data": {
+    "goal": ".cache/pin_783485666539779317.jpg",
+    "photo_to_edit": ".cache/pin_783485666539779317.jpg",
+    "written": "2026-10-14 02:3x, pin 9 v3 = stage 1 of 2 (backlog 5): body only (--body-only), by the user's yardstick for a dressed picture (--physique casual-front: 'the size of the arm shouldn't reduce from the actual photo that I had sent, but the vascularity should lie between the real photo that I shared and the pumped photo'). WHY: the three earlier runs of this pin (10-01 run 20261001_170837, 10-07 run 20261007_032816, 10-09 run 20261009_010202 v1/v2; FEEDBACK_LEDGER pin 9) all kept the pin man's heavy arms: the 10-01 'best' passed the then-30 items but fails 26 and 32 under the 36 (heavy forearms and upper arms, broad shoulders), and the 10-09 v1_0 measured an arm width of 3.09 against his 1.30-1.48 (items 26/32) with 21/31 unjudgeable on the bowed face. The user's concern: 'the goal man's heavy arms vs his'. A one-step whole-frame edit keeps the photo's body outline (AGENTS.md 'Open hypotheses': 8 of 8 attempts), so the method of pins 6, 15 and 16 (FAILURE_LOG F25/F26): a body-only edit that keeps the pin man's own head pixel for pixel, which pins the frame and the bow, with the pin's own background copied back after the run (--restore-background), then stage 2 = his head as a Route G objects-mode region edit of the head crop (pin 14 head3 / pin 6 head method, F45/F46). THE PIN (828x886, colour, a classroom snapshot): the man leans far forward over a desk, his head bowed and turned about 40 degrees toward picture-left, his face in three-quarter view looking down at his hands. Pose keypoints (fractions of width / height, person's left = the near arm at picture-right): near shoulder 54 / 45, near elbow 58 / 67, near wrist 45 / 87; far shoulder 37 / 50, far elbow 40 / 74, far wrist 34 / 87; far hip 62 / 75, near hip 76 / 73; nose 31 / 51, eyes 30-32 / 47-49. A black short-sleeve textured polo with an open collar, brown trousers; the near sleeve hem at about 53-65 / 55-58 and the bare near forearm running down and to picture-left to the hand on the green folder at about 45-51 / 86-89; the far sleeve at about 35-45 / 55-65 and the far forearm hanging to the desk. The girl in the foreground at picture-left (brown hair in a ponytail, a hand at her ear, seen from behind) is another person and stays as the pin has her (item 33, restored). The whiteboard calendar, the notice board with posters and the rainbow border keep the pin's own lettering (item 34, restored). Sizes: the near upper arm is about 150 px wide where it leaves the sleeve and the near forearm about 90 px wide mid-length in the 828 px frame; his own arms at the same camera distance are clearly slimmer (arm width 1.30-1.48 of his eye distance against the pin man's 3.09, character me@v2) but never thinner than the BODY reference, so the arm item says 'about a third narrower' for the forearm and a looser sleeve, never 'a third thinner' for his build (withdrawn on pin 15). His outline stays inside the pin man's, so the restore's paste mask holds it and the wall, the desk and the folder behind are Gemini's own where the pin man's bulk was. DO NOT RETRY: wording variants of 'change his body, keep everything else' in one whole-frame step with the head redrawn (0 of 8), and 'exactly as in the PHOTO TO EDIT' lines about the head (they hand the pin's man back).",
+    "no_face_words": true,
+    "change": [
+     {
+      "item": "skin tone",
+      "goal": "the man's fair, light olive skin on his forearms, hands and the small V of chest the open collar shows",
+      "his": "his own warm medium-brown skin tone as in the BODY reference, on both forearms and hands and the small V of neck and chest at the open collar, with real skin texture and visible fine hair; at the neck it blends evenly into the skin of the head above it"
+     },
+     {
+      "item": "build",
+      "goal": "a very muscular, heavy gym build: thick high shoulders, a big chest, huge round biceps pushing the sleeves out, and thick veined forearms",
+      "his": "his own build from the BODY reference on an ordinary relaxed day: clearly less massive than in the PHOTO TO EDIT, with narrower shoulders, a flatter chest and a narrow waist, so the black polo fits him more loosely at the chest and the sleeves"
+     },
+     {
+      "item": "upper arms and sleeves",
+      "goal": "short polo sleeves stretched tight round huge, round biceps and triceps, the cuffs sunk into the muscle",
+      "his": "his own upper arms at their real size as in the BODY reference (never thinner than there): round and firm but clearly slimmer than the PHOTO TO EDIT's, so the short black sleeves hang a little looser round them and end a little lower on the arm, with a small gap of air between the cuff and his arm"
+     },
+     {
+      "item": "forearms and hands",
+      "goal": "very thick forearms with prominent bulging veins, tendons and cords of muscle, and big hands with raised veins on the back",
+      "his": "his own forearms and hands as in the BODY reference: about a third narrower than the PHOTO TO EDIT's, lean and firm, with the veins on his forearms and the back of his hands only faintly visible, between his relaxed look and a pumped one, never bulging and never smooth; the near forearm still runs from the sleeve down and to picture-left to the hand flat on the green folder, and the far forearm still hangs down to the desk, each in the same place, direction and length as in the PHOTO TO EDIT"
+     },
+     {
+      "item": "neck chain",
+      "goal": "a bare neck and a bare patch of chest in the open collar with no chain",
+      "his": "his own fine silver neck chain, as thin and small as in his photos, lying round his neck and showing only as a short thin bright line where the open collar shows his neck and upper chest, partly in the shadow under the bowed head; never a heavy chain, never gold, never outside the polo"
+     }
+    ],
+    "keep": [
+     "his whole head exactly as in the PHOTO TO EDIT, pixel for pixel: the dark wavy hair, the bowed face in three-quarter view turned toward picture-left with its lowered eyes, the nose at about 31 percent from the left and 51 percent from the top, the ear and the jaw; the head's size, bow, turn and where it sits in the frame do not change, and his neck stays too (except for his chain)",
+     "the FRAMING exactly: the same crop, scale and camera distance as the PHOTO TO EDIT, a portrait frame with him leaning over the desk and the girl's head and shoulder cut by the bottom left corner; he is not re-centred and the picture is not zoomed in or out",
+     "his outline inside the outline of the man in the PHOTO TO EDIT: the same posture, position and size, with his shoulders, chest and arms where that man's are and no larger, so the wall, the desk and the objects around him stay as they are",
+     "his exact posture: bent far forward at the waist over the desk, his back sloping down toward picture-left; the near shoulder at about 54 percent from the left and 45 percent from the top, the near elbow at about 58 / 67, the near hand at about 45 / 87 flat on the green folder; the far shoulder at about 37 / 50, the far elbow at about 40 / 74 and the far hand at about 34 / 87 on the desk; hips at about 62 to 76 / 73 to 75",
+     "the black short-sleeve textured polo shirt with its open collar, its fabric, its fine knit texture and its colour, and the plain brown trousers, exactly as they are, with only the fit changing as the build item says",
+     "the person in the foreground at picture-left, seen from behind: brown hair in a ponytail, a hand raised at her ear, unchanged in place, size and pose; no other person is added anywhere",
+     "the whole classroom scene exactly: the beige cinder-block wall, the bookshelf of binders and papers at picture-left, the green plant behind him, the yellow cable hanging beside the shelf, the whiteboard calendar with its writing, the notice board with its posters and the rainbow border at picture-right, the green folder on the desk, the wire basket and the black backpack edge at the bottom right",
+     "no text, letters, sign or logo is added or changed: the calendar, the posters and the folders keep the lettering they have",
+     "the flat indoor snapshot light, the phone-photo softness, grain and slight blur of the PHOTO TO EDIT, his size and position in the frame and the camera distance"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -11.6,
+    "pitch": -22.2,
+    "roll": -37.8,
+    "side": "picture-right",
+    "score": 0.73,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left.jpg",
+    "IMG_6868.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "body",
+    "name": "casual_front.jpg",
+    "sha256": "ffc44591eb00f53189a9bd1ad7807591d3f9826577acdca9ad53566668d3d65f",
+    "from": "D:/FacecardData/physique/standard/casual_front.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique casual-front: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "name": "pin_783485666539779317.jpg",
+    "sha256": "f67edbd3477aa0ca9e101ea8ca7d60ad3480a543f4fafdb01a0ad7813ea7a94b",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666539779317.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "scoring_faces": [
+   {
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd"
+   },
+   {
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192"
+   },
+   {
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  },
+  "physique": {
+   "name": "casual-front",
+   "files": [
+    "casual_front.jpg"
+   ],
+   "label": "the BODY reference — his body today from the front on an ordinary day, relaxed: his true build and proportion for a dressed picture.",
+   "build": "His body exactly as in image {BODY}, relaxed as on an ordinary day outdoors: the same lean torso and narrow waist, his arms at their full real size, never thinner, relaxed rather than pumped, with the veins on his biceps and forearms only faintly visible. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the BODY reference — his body today from the front on an ordinary day, relaxed: his true build and proportion for a dressed picture.\nImage 2 is the PHOTO TO EDIT.\n\nEdit image 2, the PHOTO TO EDIT: change ONLY his body below the neck (shoulders, arms, chest, waist) to his own build from the BODY references. Everything else in the PHOTO TO EDIT stays exactly as it is: his whole head, his exact posture, both hands, the clothes (refitted to his build), every object, the background, the framing and the light.\n\nFACE: Do not redraw his head. His head stays exactly as it is in the PHOTO TO EDIT, pixel for pixel: the same face, hair, beard, eyewear, head tilt and bow, and the same gaze direction.\n\nBUILD: His body exactly as in image 1, relaxed as on an ordinary day outdoors: the same lean torso and narrow waist, his arms at their full real size, never thinner, relaxed rather than pumped, with the veins on his biceps and forearms only faintly visible. Never broader, bulkier or heavier than in image 1, never thinner or softer. His whole body is his own, from image 1: his shoulders, arms, chest and waist, and how lean or full his body is, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- skin tone: the PHOTO TO EDIT shows the man's fair, light olive skin on his forearms, hands and the small V of chest the open collar shows; make it his own warm medium-brown skin tone as in the BODY reference, on both forearms and hands and the small V of neck and chest at the open collar, with real skin texture and visible fine hair; at the neck it blends evenly into the skin of the head above it.\n- build: the PHOTO TO EDIT shows a very muscular, heavy gym build: thick high shoulders, a big chest, huge round biceps pushing the sleeves out, and thick veined forearms; make it his own build exactly as in the BODY reference (image 1): His body exactly as in image 1, relaxed as on an ordinary day outdoors: the same lean torso and narrow waist, his arms at their full real size, never thinner, relaxed rather than pumped, with the veins on his biceps and forearms only faintly visible. Never broader, bulkier or heavier than in image 1, never thinner or softer.\n- upper arms and sleeves: the PHOTO TO EDIT shows short polo sleeves stretched tight round huge, round biceps and triceps, the cuffs sunk into the muscle; make it his own upper arms at their real size as in the BODY reference (never thinner than there): round and firm but clearly slimmer than the PHOTO TO EDIT's, so the short black sleeves hang a little looser round them and end a little lower on the arm, with a small gap of air between the cuff and his arm.\n- forearms and hands: the PHOTO TO EDIT shows very thick forearms with prominent bulging veins, tendons and cords of muscle, and big hands with raised veins on the back; make it his own forearms and hands as in the BODY reference: about a third narrower than the PHOTO TO EDIT's, lean and firm, with the veins on his forearms and the back of his hands only faintly visible, between his relaxed look and a pumped one, never bulging and never smooth; the near forearm still runs from the sleeve down and to picture-left to the hand flat on the green folder, and the far forearm still hangs down to the desk, each in the same place, direction and length as in the PHOTO TO EDIT.\n- neck chain: the PHOTO TO EDIT shows a bare neck and a bare patch of chest in the open collar with no chain; make it his own fine silver neck chain, as thin and small as in his photos, lying round his neck and showing only as a short thin bright line where the open collar shows his neck and upper chest, partly in the shadow under the bowed head; never a heavy chain, never gold, never outside the polo.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his whole head exactly as in the PHOTO TO EDIT, pixel for pixel: the dark wavy hair, the bowed face in three-quarter view turned toward picture-left with its lowered eyes, the nose at about 31 percent from the left and 51 percent from the top, the ear and the jaw; the head's size, bow, turn and where it sits in the frame do not change, and his neck stays too (except for his chain).\n- the FRAMING exactly: the same crop, scale and camera distance as the PHOTO TO EDIT, a portrait frame with him leaning over the desk and the girl's head and shoulder cut by the bottom left corner; he is not re-centred and the picture is not zoomed in or out.\n- his outline inside the outline of the man in the PHOTO TO EDIT: the same posture, position and size, with his shoulders, chest and arms where that man's are and no larger, so the wall, the desk and the objects around him stay as they are.\n- his exact posture: bent far forward at the waist over the desk, his back sloping down toward picture-left; the near shoulder at about 54 percent from the left and 45 percent from the top, the near elbow at about 58 / 67, the near hand at about 45 / 87 flat on the green folder; the far shoulder at about 37 / 50, the far elbow at about 40 / 74 and the far hand at about 34 / 87 on the desk; hips at about 62 to 76 / 73 to 75.\n- the black short-sleeve textured polo shirt with its open collar, its fabric, its fine knit texture and its colour, and the plain brown trousers, exactly as they are, with only the fit changing as the build item says.\n- the person in the foreground at picture-left, seen from behind: brown hair in a ponytail, a hand raised at her ear, unchanged in place, size and pose; no other person is added anywhere.\n- the whole classroom scene exactly: the beige cinder-block wall, the bookshelf of binders and papers at picture-left, the green plant behind him, the yellow cable hanging beside the shelf, the whiteboard calendar with its writing, the notice board with its posters and the rainbow border at picture-right, the green folder on the desk, the wire basket and the black backpack edge at the bottom right.\n- no text, letters, sign or logo is added or changed: the calendar, the posters and the folders keep the lettering they have.\n- the flat indoor snapshot light, the phone-photo softness, grain and slight blur of the PHOTO TO EDIT, his size and position in the frame and the camera distance.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "088d8dab037559cc861b150b48af5084a9f0cc0b16487c9f188b63a2dce2bc51",
+  "files": [
+   {
+    "n": 1,
+    "role": "body",
+    "sha256": "ffc44591eb00f53189a9bd1ad7807591d3f9826577acdca9ad53566668d3d65f",
+    "upload_name": "casual_front.jpg",
+    "bytes": 630223,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "photo_to_edit",
+    "sha256": "f67edbd3477aa0ca9e101ea8ca7d60ad3480a543f4fafdb01a0ad7813ea7a94b",
+    "upload_name": "pin_783485666539779317.jpg",
+    "bytes": 121236,
+    "px": [
+     828,
+     886
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "08a18fa1568f028b7e0a542bc22df958059a587e87a69c12e8f8d5f0c8060652"
+ }
+}

@@ -1,0 +1,173 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin12fix_send",
+ "version": 1,
+ "created": "2026-10-14T02:53:37",
+ "because": "backlog 5, pin 12: recipe v4's v1_0 (run 20261009_205525: print exact, identity 0.754, signs soft glow) fails item 33 (three blurred person-like smudges behind him) and every re-roll of the mall (v1-v4) brought new people or signs; v5 (camera tipped up) never ran (the wave pins1013e that held it was overwritten on 10-10). So the picture is kept and only the smudges are replaced: Gemini keeps what is drawn, so they are painted grey and redrawn from their surroundings (the grey-out of pin 14 janeu3/ghost, F39-F47), only the grey pasted back, 3 px clear of his shirt",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin12fix_send",
+  "path": ".cache/region_edits/pin12_fix/pin12fix_send.jpg",
+  "sha256": "17b652ffc8d7512092856de29ccf2cd92b3d8df0255b06d0dbc89b5e1ed96de7",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin12_fix/pin12fix_send.jpg",
+   "prompt": ".cache/loop_prompts/pin12fix_route.txt",
+   "inventory": ".cache/inventories/pin12fix.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T23:02:12"
+  },
+  "samples": 3,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A candid phone snapshot of a young man in a cream t-shirt with a red print, walking toward the camera in a mall corridor with a blurred background. Portrait frame.",
+   "from": ".cache/loop_prompts/pin12fix_route.txt",
+   "sha256": "a5722034b0a96c7b91691095c8c2c9d7de88f07a4e0edf5bde53d88d1b049918",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin12fix.json",
+   "sha256": "ba15707684e34da00c9c479ab3f1b77ab9d433953de3aa5119f0b29fc65f8d9d",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin12_fix/pin12fix_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin12_fix/pin12fix_send.jpg",
+    "written": "2026-10-14 02:5x, pin 12 (backlog 5): the best picture of recipe v4, run 20261009_205525 v1_0 (print exact, identity 0.754, every sign a soft unreadable glow) fails 33 only because of three blurred person-like smudges in the mall behind him (the user's rule of 2026-10-09: no background people): a dark head and shoulders behind the shop counter at picture-left (head at about 11 percent from the left, 41 percent from the top), a dark smudge and a dark rim along the edge of his right shoulder, and a red column with a dark body below it in the corridor at picture-right. v1, v2 and v3 and v4 each re-rolled the mall and every re-roll brought new people or signs (FAILURE_LOG: v3 33/34, v4 33), so the picture is kept and only the smudges are replaced: the method of pin 14's janeu3 and ghost fixes (F39-F47): Gemini keeps what is already drawn, so the three smudges are painted flat grey (128) in the picture sent, at its own size (848x1264, about 1 MP, no enlargement needed), and only the grey is pasted back (tools/region_edit.py paste-run --affine; the paste is clipped 3 px away from his shirt, so his shirt, print, face, hands, bag and every other pixel stay v4 v1_0's). The grey patches (fractions of width / height): P1 behind the counter at picture-left: 7.5-13.7 / 39.4-43.7, with the dark counter top below it (from 43.7 down) continuing straight across; P2 beside his right shoulder: 77-85 / 38.8-44.2, the dark rim along the shoulder's edge below it; P3 a tall strip in the corridor at picture-right: 87-92.5 / 34.2-51.1, with a warm brown wood pillar with soft vertical streaks to its right and a soft white glow above it (the lit sign above stays). The fill is only what surrounds each patch, blurred as it is: no person, no sign, no text. Gemini's sparkle at the bottom right of the v4 v1_0 floor is not in the grey (it stays the base's; see the review to-do). DO NOT RETRY (FAILURE_LOG v3/v4, pin 12): describing a mall's shops or its people as glow in the scene paragraph, or tipping the camera up to show only the ceiling (v5, frozen, never run: kept as the fallback).",
+    "refs": [],
+    "change": [
+     {
+      "item": "the grey patch behind the shop counter at picture-left",
+      "goal": "a small flat grey rectangle at picture-left (about 8 to 14 percent from the left and 39 to 44 percent from the top), just above the dark top of the shop counter",
+      "his": "empty out-of-focus background exactly as around it: the same soft warm pink-beige wall of the shop behind the counter, with the same blurred light, grain and tone, the dark counter top continuing straight across directly below it; nobody stands there"
+     },
+     {
+      "item": "the grey patch beside his shoulder",
+      "goal": "a small flat grey patch on the picture-right side of his shoulder (about 77 to 85 percent from the left and 39 to 44 percent from the top) that runs on as a narrow grey strip along the edge of his shoulder",
+      "his": "empty out-of-focus background exactly as around it: the same soft pale beige-cream blurred wall and light of the corridor behind his shoulder, with no dark shape and no dark rim along the edge of his shoulder; his shoulder's outline stays exactly as it is"
+     },
+     {
+      "item": "the tall grey strip in the corridor at picture-right",
+      "goal": "a tall flat grey strip in the corridor at picture-right (about 87 to 92 percent from the left and 34 to 51 percent from the top)",
+      "his": "empty out-of-focus background exactly as around it: the same warm cream-beige blurred corridor wall and soft light, with the same faint vertical streaks as the brown wood pillar to its right and the soft white glow above it continuing down behind it; no red object, no dark body, no person"
+     }
+    ],
+    "keep": [
+     "every pixel that is not flat grey exactly as it is: him, his face, his full dark beard, his curls, his necklace, his cream t-shirt with the red print in the same wide round capital letters (I DON'T CARE / IF SHE GOT / RED FLAGS in bold, I'M A BULL below in the thinner weight), his white tote bag and strap, his hands and his black smartwatch",
+     "the white ring-shaped lights, the lit signs as soft unreadable glow, the glass balustrade with its steel rail and the floor, exactly as they are; no sign, label, logo or text is added anywhere",
+     "no person and nothing that looks like a person in the background: the grey patches become empty blurred background only",
+     "the soft shallow depth of field, grain, warm light and slight tilt of the phone snapshot, and the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "yunet+text",
+   "evidence": "YuNet found the goal's face: Frontal, yaw ratio 0.93; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": true,
+    "yaw": 8.7,
+    "pitch": -2.2,
+    "roll": -9.0,
+    "side": "frontal",
+    "score": 0.83,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin12fix_send.jpg",
+    "sha256": "ec71c0ca54496cd760b17d59e425e6af9069bfb3d8d5f59d9311594555a40075",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin12_fix/pin12fix_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey patch behind the shop counter at picture-left: the PHOTO TO EDIT shows a small flat grey rectangle at picture-left (about 8 to 14 percent from the left and 39 to 44 percent from the top), just above the dark top of the shop counter; make it empty out-of-focus background exactly as around it: the same soft warm pink-beige wall of the shop behind the counter, with the same blurred light, grain and tone, the dark counter top continuing straight across directly below it; nobody stands there.\n- the grey patch beside his shoulder: the PHOTO TO EDIT shows a small flat grey patch on the picture-right side of his shoulder (about 77 to 85 percent from the left and 39 to 44 percent from the top) that runs on as a narrow grey strip along the edge of his shoulder; make it empty out-of-focus background exactly as around it: the same soft pale beige-cream blurred wall and light of the corridor behind his shoulder, with no dark shape and no dark rim along the edge of his shoulder; his shoulder's outline stays exactly as it is.\n- the tall grey strip in the corridor at picture-right: the PHOTO TO EDIT shows a tall flat grey strip in the corridor at picture-right (about 87 to 92 percent from the left and 34 to 51 percent from the top); make it empty out-of-focus background exactly as around it: the same warm cream-beige blurred corridor wall and soft light, with the same faint vertical streaks as the brown wood pillar to its right and the soft white glow above it continuing down behind it; no red object, no dark body, no person.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- every pixel that is not flat grey exactly as it is: him, his face, his full dark beard, his curls, his necklace, his cream t-shirt with the red print in the same wide round capital letters (I DON'T CARE / IF SHE GOT / RED FLAGS in bold, I'M A BULL below in the thinner weight), his white tote bag and strap, his hands and his black smartwatch.\n- the white ring-shaped lights, the lit signs as soft unreadable glow, the glass balustrade with its steel rail and the floor, exactly as they are; no sign, label, logo or text is added anywhere.\n- no person and nothing that looks like a person in the background: the grey patches become empty blurred background only.\n- the soft shallow depth of field, grain, warm light and slight tilt of the phone snapshot, and the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "646a09b84d4d7cabfbeae9fc65e11b8d2336c568f6ee19fc40b4132edc6c7bd9",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "ec71c0ca54496cd760b17d59e425e6af9069bfb3d8d5f59d9311594555a40075",
+    "upload_name": "pin12fix_send.jpg",
+    "bytes": 174629,
+    "px": [
+     848,
+     1264
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "01a424e8288a9abd872bcdeaa107119aaab804b963f46e733db35ceccab1e3af"
+ }
+}

@@ -1,0 +1,260 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin6head2_send",
+ "version": 1,
+ "created": "2026-10-14T02:31:18",
+ "because": "F48: v1 (head redrawn over its own pixels) came back re-posed with two pencils; v2 greys the head and the pencil so one pencil is drawn, keeps the ear as the skull's anchor, and moves the paste edges off the shoulder and the wall",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin6head2_send",
+  "path": ".cache/region_edits/pin6_head2/pin6head2_send.jpg",
+  "sha256": "668777c312e122c74c1d3b533d6a42d0b6a5e28da01c9509e107cf24e53771b6",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin6_head2/pin6head2_send.jpg",
+   "prompt": ".cache/loop_prompts/pin6head2_route.txt",
+   "inventory": ".cache/inventories/pin6head2.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-13T23:02:12"
+  },
+  "samples": 4,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a shirtless man's head and neck in black and white, seen from the side and above: his head bowed far forward and tilted, a thin paintbrush held in his teeth. A flat grey shape covers the head and the brush. Close frame.",
+   "from": ".cache/loop_prompts/pin6head2_route.txt",
+   "sha256": "cc419517be1287effb1e1c414d6ef24817a691a9e6494f7094931b4f3c526bb3",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin6head2.json",
+   "sha256": "77d8b9f7007a4c73c17d28d9dd91f2c16d1bf41602d322e354660338b5200ff1",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin6_head2/pin6head2_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin6_head2/pin6head2_send.jpg",
+    "written": "2026-10-14, pin 6 head v2 (FAILURE_LOG F48). pin6head_send@v1 (the head redrawn over its own pixels, the pencil kept by a zero-weight band) came back re-posed: the pasted v2_0r failed the whole-picture pose gate (head position 0.048, bow +0.76 against +0.61, size x1.10, neck direction 22 degrees off, roll 50.5 against the pin's 38.8), carried two pencils (the pin's kept one and one drawn in the mouth), a pale wall patch and a seam on the shoulder at the crop edge. Gemini keeps what is drawn (F33, F37, F39, F44) and normalises a steeply bowed, rolled head when it redraws it, so v2 takes away every line it could follow, as the grey-out of pin 14's janeu3 did: in the crop (box 240-800 x 0-500 of the stage 1 v1_0r, run 20261013_193206, 922x1152; sent at 2x, 1120x1000) the whole head is flat grey 128 (hair, forehead, closed eye, nose, cheek, mouth, beard, throat, the side of the neck) and so is the pin's paintbrush, from the cheek to its far end over the wall (a 14 px band along its traced path), so that ONE paintbrush is drawn and the paste carries it. The pin's ear (traced at 7x, plus 5 px around it) is NOT grey: it stays real pixels, is not pasted, and pins the skull's place and roll. The grey shape's outline against the wall is the pin's silhouette (the person mask grown 2 px, with dark curls within 14 px of it on the right), so his hair, nose and chin end where the pin's do (size, bow and turn). Paste weights (tools/region_edit.py, soft mask): a 5 px ramp at the outline and at the ear, a 24 px ramp where the shape's edge lies on skin (the neck's left edge at x 262-296, the throat's lower edge at y 418), nothing grown into the wall (v1's pale wall patch), no cut through the shoulder (v1's seam at x 290: the left edge is now in the skin behind the neck, faded over 24 px, and above the ear it follows the hair). His references are the same two black-and-white photos as v1 (IMG_6858 front, IMG_6861 three-quarter right: the pin's head is turned toward picture-right) and a 4x crop of the pin's own paintbrush below the chin (over the wall: no face in it) for its look. The 10-01 v1 head is still not a reference (approval withdrawn). Feature positions as fractions of the 560x500 crop: closed eye 62 / 47, nose tip 45 / 74, the paintbrush from its upper end on the cheek at 18 / 60 across the lips at 36 / 80 to its far end at 47.5 / 92, ear 16-29 / 16-37. Pose measured on the pin (headpose.py, SCRFD): yaw -18.9, pitch -37.1, roll 38.8, face box 310 x 283 px in the 922x1152 frame; stage 1 -20.6 / -36.2 / 42.4.",
+    "refs": [
+     {
+      "key": "front",
+      "path": ".cache/region_edits/pin6_head/his_front_IMG_6858_bw.jpg",
+      "label": "HIS FRONT: a photo of the same man's own head today, here in black and white, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip), his dense, tight black curls with the short tapered sides, his full dark beard; nothing of his turn, his expression, the light or the room"
+     },
+     {
+      "key": "right",
+      "path": ".cache/region_edits/pin6_head/his_34right_IMG_6861_bw.jpg",
+      "label": "HIS THREE-QUARTER: a photo of the same man's own head today, here in black and white, turned toward picture-right like the head in the PHOTO TO EDIT: take from it his hair (dense, tight black curls standing up on top, the side above his ear tapered short and close to the scalp, the curls longer toward the nape), his full dark beard along the jaw and the shape of his nose and lips; nothing of his turn, his expression, the light or the room"
+     },
+     {
+      "key": "brush",
+      "path": ".cache/region_edits/pin6_head2/pin6_paintbrush_lower.jpg",
+      "label": "THE PAINTBRUSH: a close crop of the lower half of the very paintbrush that was in the PHOTO TO EDIT before it was greyed out, over the wall: a long thin brush with a pale shaft and a dark metal ferrule. Take from it only the brush's look, its thickness and its angle (running down and to picture-right); nothing else"
+     }
+    ],
+    "change": [
+     {
+      "item": "the grey hair",
+      "goal": "a flat grey shape that hides the hair: on top of the head, at the back, and in front of and above the ear",
+      "his": "his own hair, drawn inside the grey and filling it right out to its edge: dense, tight black curls of his current cut as in HIS FRONT and HIS THREE-QUARTER, standing up with volume on top and falling a little onto his forehead, the side above and in front of his ear tapered short and close to the scalp so that the skin shows there, and the curls longer at the back toward his nape; the hair stays black, and no grey is left",
+      "ref": "right"
+     },
+     {
+      "item": "the grey face",
+      "goal": "a flat grey shape that hides the face (forehead, closed eye, brow, nose, cheek, mouth and chin), the beard, the throat and the side of the neck",
+      "his": "his own face, drawn inside the grey and filling it right out to its edge, as in HIS FRONT and HIS THREE-QUARTER: his thick, dark, fairly straight eyebrows, his eyes cast down at the floor with the heavy upper lids lowered, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, a lean face with no puffiness in the cheeks, and his own full, dense, short dark beard and moustache along the whole jaw from in front of the ear to the chin and down onto the throat, a little lighter high on the cheek; the closed eye at about 62 percent from the left and 47 percent from the top of this picture, the nose tip at about 45 percent from the left and 74 percent from the top, and the chin where the grey's edge is; the face fills the grey shape at the size the shape gives it, no bigger and no smaller",
+      "ref": "front"
+     },
+     {
+      "item": "the grey band",
+      "goal": "a narrow flat grey band running from the cheek down and to picture-right across the mouth and out over the wall to its far end below and to the right of the chin, where a paintbrush was",
+      "his": "ONE thin paintbrush, as in THE PAINTBRUSH: held crosswise in his teeth with his lips closed around it at the corner of his mouth, running from its upper end on his cheek at about 18 percent from the left and 60 percent from the top, across his lips at about 36 percent from the left and 80 percent from the top, down and to picture-right at the same angle as the grey band, to its far end over the wall at about 47 percent from the left and 92 percent from the top, where the grey band ends; no second brush anywhere, and the wall beside it is the plain, smooth, pale-grey wall",
+      "ref": "brush"
+     },
+     {
+      "item": "the skin of the face and neck",
+      "goal": "the man's skin, a mid-dark grey in deep shade, with the grey shape over it",
+      "his": "his own warm medium-brown skin, drawn in this same black-and-white grade as a grey of about the same lightness as the man's skin in the PHOTO TO EDIT around the grey, never lightened and never given any colour, with real skin texture and visible pores, blending evenly into the grey skin of his shoulder and neck at the grey's edge"
+     }
+    ],
+    "keep": [
+     "his ear exactly as it is, every pixel (it is not grey): at about 16 to 29 percent from the left and 16 to 37 percent from the top; it anchors the head, so his hair, his face and his beard are drawn around it and join it naturally",
+     "the head's pose is the PHOTO TO EDIT's, measured on it (about 37 degrees of bow, about 39 degrees of tilt, turned only about 19 degrees toward picture-right) and in words: bowed forward and down, his chin toward his chest, his face looking at the floor, the head tilted over sideways at the same angle, with his ear high at the upper left of the head and his chin low toward the right; nothing grows, shrinks, lifts, straightens or turns toward the camera, and the head ends exactly at the outline of the grey shape",
+     "his fine silver neck chain at the left edge, his shoulder, his arm and his chest below the throat exactly as they are",
+     "the window, the wall and the marble skirting around his head exactly as they are; no other person and no text anywhere",
+     "the black-and-white photograph exactly: the same grey tones, deep contrast, soft film grain and slight softness; no colour anywhere, not even a tint, and no flat grey left anywhere in the picture",
+     "the dim, moody light from behind and above, his face in the same soft shade as the PHOTO TO EDIT's neck and shoulder, never brighter than them",
+     "the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "text",
+   "evidence": "YuNet found no face in the goal; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": false
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_front_IMG_6858_bw.jpg",
+    "sha256": "d691bb996e0e1085eb69ed2a4b19bf212f460688c1e4df4ce7d29ac4fb8dffd6",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head/his_front_IMG_6858_bw.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FRONT: a photo of the same man's own head today, here in black and white, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip), his dense, tight black curls with the short tapered sides, his full dark beard; nothing of his turn, his expression, the light or the room",
+    "key": "front"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_34right_IMG_6861_bw.jpg",
+    "sha256": "f4d77986d911bcf44be945a0045aa5fa9dc9b672386fcde79dc2e593ee8095c4",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head/his_34right_IMG_6861_bw.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS THREE-QUARTER: a photo of the same man's own head today, here in black and white, turned toward picture-right like the head in the PHOTO TO EDIT: take from it his hair (dense, tight black curls standing up on top, the side above his ear tapered short and close to the scalp, the curls longer toward the nape), his full dark beard along the jaw and the shape of his nose and lips; nothing of his turn, his expression, the light or the room",
+    "key": "right"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "pin6_paintbrush_lower.jpg",
+    "sha256": "90e52646ff3795546d4e358bd062ce5a96a53c3b2c90729318cb6c285e9f5bb6",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head2/pin6_paintbrush_lower.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "THE PAINTBRUSH: a close crop of the lower half of the very paintbrush that was in the PHOTO TO EDIT before it was greyed out, over the wall: a long thin brush with a pale shaft and a dark metal ferrule. Take from it only the brush's look, its thickness and its angle (running down and to picture-right); nothing else",
+    "key": "brush"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "pin6head2_send.jpg",
+    "sha256": "68f2b8a07a9d63d4e2a770462ab09ce6d33db1848fd63db0057c8858a1cddac3",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin6_head2/pin6head2_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS FRONT: a photo of the same man's own head today, here in black and white, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip), his dense, tight black curls with the short tapered sides, his full dark beard; nothing of his turn, his expression, the light or the room\nImage 2 is HIS THREE-QUARTER: a photo of the same man's own head today, here in black and white, turned toward picture-right like the head in the PHOTO TO EDIT: take from it his hair (dense, tight black curls standing up on top, the side above his ear tapered short and close to the scalp, the curls longer toward the nape), his full dark beard along the jaw and the shape of his nose and lips; nothing of his turn, his expression, the light or the room\nImage 3 is THE PAINTBRUSH: a close crop of the lower half of the very paintbrush that was in the PHOTO TO EDIT before it was greyed out, over the wall: a long thin brush with a pale shaft and a dark metal ferrule. Take from it only the brush's look, its thickness and its angle (running down and to picture-right); nothing else\nImage 4 is the PHOTO TO EDIT.\n\nEdit image 4, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the grey hair: the PHOTO TO EDIT shows a flat grey shape that hides the hair: on top of the head, at the back, and in front of and above the ear; make it his own hair, drawn inside the grey and filling it right out to its edge: dense, tight black curls of his current cut as in HIS FRONT and HIS THREE-QUARTER, standing up with volume on top and falling a little onto his forehead, the side above and in front of his ear tapered short and close to the scalp so that the skin shows there, and the curls longer at the back toward his nape; the hair stays black, and no grey is left (image 2).\n- the grey face: the PHOTO TO EDIT shows a flat grey shape that hides the face (forehead, closed eye, brow, nose, cheek, mouth and chin), the beard, the throat and the side of the neck; make it his own face, drawn inside the grey and filling it right out to its edge, as in HIS FRONT and HIS THREE-QUARTER: his thick, dark, fairly straight eyebrows, his eyes cast down at the floor with the heavy upper lids lowered, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, a lean face with no puffiness in the cheeks, and his own full, dense, short dark beard and moustache along the whole jaw from in front of the ear to the chin and down onto the throat, a little lighter high on the cheek; the closed eye at about 62 percent from the left and 47 percent from the top of this picture, the nose tip at about 45 percent from the left and 74 percent from the top, and the chin where the grey's edge is; the face fills the grey shape at the size the shape gives it, no bigger and no smaller (image 1).\n- the grey band: the PHOTO TO EDIT shows a narrow flat grey band running from the cheek down and to picture-right across the mouth and out over the wall to its far end below and to the right of the chin, where a paintbrush was; make it ONE thin paintbrush, as in THE PAINTBRUSH: held crosswise in his teeth with his lips closed around it at the corner of his mouth, running from its upper end on his cheek at about 18 percent from the left and 60 percent from the top, across his lips at about 36 percent from the left and 80 percent from the top, down and to picture-right at the same angle as the grey band, to its far end over the wall at about 47 percent from the left and 92 percent from the top, where the grey band ends; no second brush anywhere, and the wall beside it is the plain, smooth, pale-grey wall (image 3).\n- the skin of the face and neck: the PHOTO TO EDIT shows the man's skin, a mid-dark grey in deep shade, with the grey shape over it; make it his own warm medium-brown skin, drawn in this same black-and-white grade as a grey of about the same lightness as the man's skin in the PHOTO TO EDIT around the grey, never lightened and never given any colour, with real skin texture and visible pores, blending evenly into the grey skin of his shoulder and neck at the grey's edge.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- his ear exactly as it is, every pixel (it is not grey): at about 16 to 29 percent from the left and 16 to 37 percent from the top; it anchors the head, so his hair, his face and his beard are drawn around it and join it naturally.\n- the head's pose is the PHOTO TO EDIT's, measured on it (about 37 degrees of bow, about 39 degrees of tilt, turned only about 19 degrees toward picture-right) and in words: bowed forward and down, his chin toward his chest, his face looking at the floor, the head tilted over sideways at the same angle, with his ear high at the upper left of the head and his chin low toward the right; nothing grows, shrinks, lifts, straightens or turns toward the camera, and the head ends exactly at the outline of the grey shape.\n- his fine silver neck chain at the left edge, his shoulder, his arm and his chest below the throat exactly as they are.\n- the window, the wall and the marble skirting around his head exactly as they are; no other person and no text anywhere.\n- the black-and-white photograph exactly: the same grey tones, deep contrast, soft film grain and slight softness; no colour anywhere, not even a tint, and no flat grey left anywhere in the picture.\n- the dim, moody light from behind and above, his face in the same soft shade as the PHOTO TO EDIT's neck and shoulder, never brighter than them.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "0faa20b2edbc1315617bbd90854e94afce9b3a845826cac9fa1d1b2f15fbaaa6",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "d691bb996e0e1085eb69ed2a4b19bf212f460688c1e4df4ce7d29ac4fb8dffd6",
+    "upload_name": "his_front_IMG_6858_bw.jpg",
+    "bytes": 185406,
+    "px": [
+     862,
+     862
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "f4d77986d911bcf44be945a0045aa5fa9dc9b672386fcde79dc2e593ee8095c4",
+    "upload_name": "his_34right_IMG_6861_bw.jpg",
+    "bytes": 214540,
+    "px": [
+     940,
+     940
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "90e52646ff3795546d4e358bd062ce5a96a53c3b2c90729318cb6c285e9f5bb6",
+    "upload_name": "pin6_paintbrush_lower.jpg",
+    "bytes": 11454,
+    "px": [
+     376,
+     352
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "68f2b8a07a9d63d4e2a770462ab09ce6d33db1848fd63db0057c8858a1cddac3",
+    "upload_name": "pin6head2_send.jpg",
+    "bytes": 72809,
+    "px": [
+     1120,
+     1000
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "f09a288c1f72f3e32f433fb9a0704f95ab302fac493f0f992cc83fef4ae1e2d8"
+ }
+}
