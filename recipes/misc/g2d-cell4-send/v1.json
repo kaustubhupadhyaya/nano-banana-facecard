@@ -1,0 +1,291 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "g2d_cell4_send",
+ "version": 1,
+ "created": "2026-10-14T11:30:51",
+ "because": "G2 head-angle cell (d), yaw -45 / pitch 0 neutral (backlog 7, needed by pin 7; gap between his real IMG_6861 -30 and IMG_6864 -72). Method copied from cell (a) (g2a_cell1_send@v2): Route G objects-mode head edit of a 3x head-and-shoulders crop of pin 7 (headpose -39.5 / -2.3 / roll 11.4 on the crop, 5.5 and 2.3 degrees from the cell), the approved front E2 as the one generated face plus his real IMG_6861 and IMG_6864 bracketing the turn, neutral closed lips, the phone and hand removed, natural colour. Pose from the pin's pixels, never from turn-N-degrees words.",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "g2d_cell4_send",
+  "path": ".cache/region_edits/g2_cell_d/g2d_cell4_send.jpg",
+  "sha256": "612de7ef33b4ab00ff39a67988d4cf28ab62d46d869223b1f4ec0ea7742c69cd",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/g2_cell_d/g2d_cell4_send.jpg",
+   "prompt": ".cache/loop_prompts/g2d_cell4_route.txt",
+   "inventory": ".cache/inventories/g2d_cell4.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-14T11:17:23"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a man's head and shoulders in a loose grey T-shirt, his head turned well toward picture-right and level, looking down, in dim warm indoor light. Close frame.",
+   "from": ".cache/loop_prompts/g2d_cell4_route.txt",
+   "sha256": "b3606987698dbc48d352731253b6457a1b00247761f133d32568c15e374e9f6c",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/g2d_cell4.json",
+   "sha256": "8da63f295f80de68aa38f719b4062a856d9c268efa35f1d55e630643c36cc30f",
+   "data": {
+    "mode": "objects",
+    "goal": ".cache/region_edits/g2_cell_d/g2d_cell4_send.jpg",
+    "photo_to_edit": ".cache/region_edits/g2_cell_d/g2d_cell4_send.jpg",
+    "written": "2026-10-14, G2 head-angle cell (d), yaw -45 / pitch 0, neutral expression (backlog 7; the library has a gap between his real IMG_6861 at -30 and his real profile IMG_6864 at -72; needed by pin 7). The pose is taken from real pixels, never from the words 'turn N degrees'. SOURCE: pin 7 (the cat mirror selfie, Pinterest 783485666539777115, kept as .cache/pin_783485666539777115.jpg), the only cached pin inside the cell on both axes: headpose.py (SCRFD) reads yaw -38.8 / pitch -2.0 / roll 11.6 on the whole pin and yaw -39.5 / pitch -2.3 / roll 11.4 on the 3x head-and-shoulders crop that is sent (x 195-545, y 235-490 of the 674x1200 pin, 1050x765); that is 5.5 and 2.3 degrees from the cell (limit 8) and the roll is low (11, as pin 5's 12 that Gemini kept for cell (a); pin 6's 38.8 was normalised three times, FAILURE_LOG F48/F55/F56). The other pins: pin 14 reads -42.4 / -20.4 (20 degrees too bowed), pin 2 +30.7 and pin 16 +31.0 turn the other way, the pin at 141726 reads -75.4 / +5.5 with roll -34.7. His real photos near the cell are outside 8 degrees on yaw (IMG_6861 -30.2 / +6.0; IMG_6862 mirrored -54.2 / +6.5, which would also be a mirrored copy of him; IMG_6864 -72.1 / +7.6), so a real photo cannot be the pose source; they bracket the cell and are the references. REFERENCES: the approved front E2 (his_smile_E2_open_front_v1.png, user-approved 2026-10-10) is the ONE generated face in this request (its smile is not taken); his real IMG_6861 (3/4 toward picture-right, -30) and his real IMG_6864 (profile toward picture-right, -72) bracket the cell's turn from both sides, cut to head and shoulders at 768 px with SCRFD (side 3.0 x the face-box height, as cell (a)'s references). Character me@v2 is recorded for the description. WHAT CHANGES: the pin man's straight fringe, smooth face, ear and skin become his curls, face, full beard, ear and warm medium-brown skin; the phone and the hand holding it (at picture-right, right beside the face) are removed so the cell is a clean head, and the dark wall continues behind. WHAT STAYS: the head's pose, size and place (the pixel source is the PHOTO TO EDIT itself), the charcoal T-shirt, the shoulders and the dim warm room. The keep line asks for a turn at least as far as the photo's because the cell (-45) is 5 degrees further round than the source (-40) and the one measured head edit so far (cell (a)) came back 8.5 degrees shallower on its bow than its source, so a turn is expected to come back short, not long (one data point, a hypothesis).",
+    "refs": [
+     {
+      "key": "front",
+      "path": ".cache/region_edits/g2_cell_d/his_smile_E2_head.jpg",
+      "label": "HIS FRONT: a photo of the same man's own head today, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his dark brown eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, his lean cheeks with no puffiness), his dense, tight black curls, his full dark beard and moustache, and his warm medium-brown skin; nothing of its smile or teeth, its turn, its light, its clothes or the room"
+     },
+     {
+      "key": "quarter",
+      "path": ".cache/region_edits/g2_cell_d/his_turn_IMG_6861.jpg",
+      "label": "HIS FACE IN THREE-QUARTER VIEW: a photo of the same man's own head today, turned about a quarter turn toward picture-right and level: take from it his face seen from that side (his thick dark eyebrow, his eye with its heavy upper lid, the long straight nose with its rounded tip, the lean cheek with the cheekbone visible), his full dark beard along the jaw and chin and his moustache, his ear, his tapered hair above the ear, his dense tight curls and his warm medium-brown skin; nothing of its expression, its exact turn, its light, its clothes or the room"
+     },
+     {
+      "key": "profile",
+      "path": ".cache/region_edits/g2_cell_d/his_profile_IMG_6864.jpg",
+      "label": "HIS PROFILE: a photo of the same man's own head today, seen from the side facing picture-right: take from it only his profile lines (the forehead, the long straight nose with its rounded tip, the lips, the chin), how his full dark beard sits along the jaw and chin, his ear, and how his tapered sides and his tight curls end at the back; nothing of its exact turn, its expression, its light, its clothes or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the hair",
+      "goal": "thick, straight, glossy black hair with a side-swept fringe over the forehead and short sides, the ear showing",
+      "his": "his own hair as in HIS FRONT and HIS FACE IN THREE-QUARTER VIEW: dense, tight black curls of his current cut, standing up with volume on top and falling a little onto his forehead, the sides above and in front of his ear tapered short and close to the scalp so that the skin of his temple and his ear show, and the curls longer at the back; the hair stays black; the top of his curls may stand a little higher than the man's hair, but the back and sides of the head keep the size and place they have in the PHOTO TO EDIT",
+      "ref": "quarter"
+     },
+     {
+      "item": "the face",
+      "goal": "the man's smooth, young face turned toward picture-right, his eyes lowered, a straight nose and a calm closed mouth",
+      "his": "his own face as in HIS FRONT, HIS FACE IN THREE-QUARTER VIEW and HIS PROFILE: his thick, dark, fairly straight eyebrow, his dark brown eye with the heavy upper lid, lowered and looking down and toward picture-right as the man's eyes do, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, a lean cheek with the cheekbone visible and no puffiness; a calm, relaxed, neutral expression: the lips closed and soft, no smile, no frown, nothing tense; the face fills the place of the man's face at the size the PHOTO TO EDIT gives it, no bigger and no smaller",
+      "ref": "front"
+     },
+     {
+      "item": "the beard",
+      "goal": "no beard: smooth skin on the cheek, the jaw and the chin",
+      "his": "his own full, dense, short dark beard as it sits along the cheek, the jaw and the chin seen from this side, as in HIS FACE IN THREE-QUARTER VIEW and HIS PROFILE, a little lighter high on the cheek, with a full dark moustache joining the beard at the corner of the mouth and a small patch under the lower lip",
+      "ref": "quarter"
+     },
+     {
+      "item": "the ear",
+      "goal": "the man's ear at picture-left, close to his head under the edge of his hair",
+      "his": "his own ear as in his photos: medium, standing slightly out from his head, in the same place and at the same size as the man's ear",
+      "ref": "quarter"
+     },
+     {
+      "item": "the phone",
+      "goal": "a black smartphone held up at picture-right right beside his face, in a hand whose fingers curl around its edge",
+      "his": "no phone and no hand anywhere in the picture: the dark brown wall continues behind where they were, in the same dim light and the same soft grain, and the shoulder and the T-shirt below are as the PHOTO TO EDIT shows them"
+     },
+     {
+      "item": "the skin",
+      "goal": "the man's pale golden skin in dim warm light",
+      "his": "his own warm medium-brown skin, never lightened, with real skin texture and visible pores, the same on his face, ear and neck, drawn in the same dim warm light and in the same soft shade as the neck and the T-shirt beside it"
+     }
+    ],
+    "keep": [
+     "the head's pose exactly as the PHOTO TO EDIT shows it: turned a good way toward picture-right so that the nose points toward the right edge and the far side of the face is mostly hidden, level, the chin neither lowered nor lifted; the turn is at least as far as in the PHOTO TO EDIT and the head is never turned toward the camera, straightened, bowed or lifted, and it keeps its size and its place in the frame",
+     "his neck, his shoulders and the loose charcoal-grey crew-neck T-shirt exactly as they are: the same shape, folds, colour and fit",
+     "the setting exactly as it is: the dark brown wall behind him in the dim warm light; no other person, no cat and no text anywhere",
+     "the framing exactly: nothing is zoomed, shifted or re-centred",
+     "the dim, warm indoor light and the quick handheld look of the PHOTO TO EDIT, its softness and grain, not a studio portrait: his face in the same soft shade as his neck, never brighter than it"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -39.5,
+    "pitch": -2.3,
+    "roll": 11.4,
+    "side": "picture-right",
+    "score": 0.71,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_4861_fav_right.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_smile_E2_head.jpg",
+    "sha256": "509c95ed62a6d4f0f63ee2e47132a813f2b49b09a6f5dc59ed3081e1a3ac2a98",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_d/his_smile_E2_head.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FRONT: a photo of the same man's own head today, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his dark brown eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, his lean cheeks with no puffiness), his dense, tight black curls, his full dark beard and moustache, and his warm medium-brown skin; nothing of its smile or teeth, its turn, its light, its clothes or the room",
+    "key": "front"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_turn_IMG_6861.jpg",
+    "sha256": "bc51217b1e75014756443616239e98424e6bd054fb3be4ad202eeaf9013b4e09",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_d/his_turn_IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FACE IN THREE-QUARTER VIEW: a photo of the same man's own head today, turned about a quarter turn toward picture-right and level: take from it his face seen from that side (his thick dark eyebrow, his eye with its heavy upper lid, the long straight nose with its rounded tip, the lean cheek with the cheekbone visible), his full dark beard along the jaw and chin and his moustache, his ear, his tapered hair above the ear, his dense tight curls and his warm medium-brown skin; nothing of its expression, its exact turn, its light, its clothes or the room",
+    "key": "quarter"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "his_profile_IMG_6864.jpg",
+    "sha256": "a226849d09450bf4c728ae2846f25a944a150597dea50ac48b74e4f655ffa280",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_d/his_profile_IMG_6864.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS PROFILE: a photo of the same man's own head today, seen from the side facing picture-right: take from it only his profile lines (the forehead, the long straight nose with its rounded tip, the lips, the chin), how his full dark beard sits along the jaw and chin, his ear, and how his tapered sides and his tight curls end at the back; nothing of its exact turn, its expression, its light, its clothes or the room",
+    "key": "profile"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "g2d_cell4_send.jpg",
+    "sha256": "981903a80f3467011ae2918011af42051c251e54439393058eb5f29daf0979e6",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_d/g2d_cell4_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS FRONT: a photo of the same man's own head today, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his dark brown eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, his lean cheeks with no puffiness), his dense, tight black curls, his full dark beard and moustache, and his warm medium-brown skin; nothing of its smile or teeth, its turn, its light, its clothes or the room\nImage 2 is HIS FACE IN THREE-QUARTER VIEW: a photo of the same man's own head today, turned about a quarter turn toward picture-right and level: take from it his face seen from that side (his thick dark eyebrow, his eye with its heavy upper lid, the long straight nose with its rounded tip, the lean cheek with the cheekbone visible), his full dark beard along the jaw and chin and his moustache, his ear, his tapered hair above the ear, his dense tight curls and his warm medium-brown skin; nothing of its expression, its exact turn, its light, its clothes or the room\nImage 3 is HIS PROFILE: a photo of the same man's own head today, seen from the side facing picture-right: take from it only his profile lines (the forehead, the long straight nose with its rounded tip, the lips, the chin), how his full dark beard sits along the jaw and chin, his ear, and how his tapered sides and his tight curls end at the back; nothing of its exact turn, its expression, its light, its clothes or the room\nImage 4 is the PHOTO TO EDIT.\n\nEdit image 4, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the hair: the PHOTO TO EDIT shows thick, straight, glossy black hair with a side-swept fringe over the forehead and short sides, the ear showing; make it his own hair as in HIS FRONT and HIS FACE IN THREE-QUARTER VIEW: dense, tight black curls of his current cut, standing up with volume on top and falling a little onto his forehead, the sides above and in front of his ear tapered short and close to the scalp so that the skin of his temple and his ear show, and the curls longer at the back; the hair stays black; the top of his curls may stand a little higher than the man's hair, but the back and sides of the head keep the size and place they have in the PHOTO TO EDIT (image 2).\n- the face: the PHOTO TO EDIT shows the man's smooth, young face turned toward picture-right, his eyes lowered, a straight nose and a calm closed mouth; make it his own face as in HIS FRONT, HIS FACE IN THREE-QUARTER VIEW and HIS PROFILE: his thick, dark, fairly straight eyebrow, his dark brown eye with the heavy upper lid, lowered and looking down and toward picture-right as the man's eyes do, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, a lean cheek with the cheekbone visible and no puffiness; a calm, relaxed, neutral expression: the lips closed and soft, no smile, no frown, nothing tense; the face fills the place of the man's face at the size the PHOTO TO EDIT gives it, no bigger and no smaller (image 1).\n- the beard: the PHOTO TO EDIT shows no beard: smooth skin on the cheek, the jaw and the chin; make it his own full, dense, short dark beard as it sits along the cheek, the jaw and the chin seen from this side, as in HIS FACE IN THREE-QUARTER VIEW and HIS PROFILE, a little lighter high on the cheek, with a full dark moustache joining the beard at the corner of the mouth and a small patch under the lower lip (image 2).\n- the ear: the PHOTO TO EDIT shows the man's ear at picture-left, close to his head under the edge of his hair; make it his own ear as in his photos: medium, standing slightly out from his head, in the same place and at the same size as the man's ear (image 2).\n- the phone: the PHOTO TO EDIT shows a black smartphone held up at picture-right right beside his face, in a hand whose fingers curl around its edge; make it no phone and no hand anywhere in the picture: the dark brown wall continues behind where they were, in the same dim light and the same soft grain, and the shoulder and the T-shirt below are as the PHOTO TO EDIT shows them.\n- the skin: the PHOTO TO EDIT shows the man's pale golden skin in dim warm light; make it his own warm medium-brown skin, never lightened, with real skin texture and visible pores, the same on his face, ear and neck, drawn in the same dim warm light and in the same soft shade as the neck and the T-shirt beside it.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the head's pose exactly as the PHOTO TO EDIT shows it: turned a good way toward picture-right so that the nose points toward the right edge and the far side of the face is mostly hidden, level, the chin neither lowered nor lifted; the turn is at least as far as in the PHOTO TO EDIT and the head is never turned toward the camera, straightened, bowed or lifted, and it keeps its size and its place in the frame.\n- his neck, his shoulders and the loose charcoal-grey crew-neck T-shirt exactly as they are: the same shape, folds, colour and fit.\n- the setting exactly as it is: the dark brown wall behind him in the dim warm light; no other person, no cat and no text anywhere.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n- the dim, warm indoor light and the quick handheld look of the PHOTO TO EDIT, its softness and grain, not a studio portrait: his face in the same soft shade as his neck, never brighter than it.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "583333b1ba6c91ee6dc46c0a977953d78ad04e412f3a56e5e95aa8dcaf10af4e",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "509c95ed62a6d4f0f63ee2e47132a813f2b49b09a6f5dc59ed3081e1a3ac2a98",
+    "upload_name": "his_smile_E2_head.jpg",
+    "bytes": 130477,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "bc51217b1e75014756443616239e98424e6bd054fb3be4ad202eeaf9013b4e09",
+    "upload_name": "his_turn_IMG_6861.jpg",
+    "bytes": 139258,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "a226849d09450bf4c728ae2846f25a944a150597dea50ac48b74e4f655ffa280",
+    "upload_name": "his_profile_IMG_6864.jpg",
+    "bytes": 149307,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "981903a80f3467011ae2918011af42051c251e54439393058eb5f29daf0979e6",
+    "upload_name": "g2d_cell4_send.jpg",
+    "bytes": 99516,
+    "px": [
+     1050,
+     765
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "83e0882b17da6d7ec968da137f437f23327d25f0b2687e0bb780943fe5de5fad"
+ }
+}
