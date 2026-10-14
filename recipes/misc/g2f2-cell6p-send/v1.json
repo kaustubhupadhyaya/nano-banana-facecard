@@ -1,0 +1,265 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "g2f2_cell6p_send",
+ "version": 1,
+ "created": "2026-10-14T17:43:46",
+ "because": "G2 head-angle cell (f), the +30 side: yaw +30 / pitch 0 WITH his open smile E2 (the user's table +-30 / 0 E2, needed by the kayak smile). The -30 side is g2f_cell6_send@v1 (wave g2f2, run 20261014_155947: -29.8/+2.2 and -29.2/+0.5, the method works: only the expression changed, pose, size and crop kept). Same method on the other side: Route G objects-mode head edit of a head-and-shoulders crop, the crop's own pose is the cell, nothing pasted back. SOURCE: his own real photo IMG_6868 (D:/Downloads, current look, same session as his real smile IMG_6875, the character's three-quarter-left photo): headpose.py reads +30.7 / +1.2 / roll -3.5 on the whole photo and +30.8 / +1.6 / roll -3.0 on the 1024 px head-and-shoulders crop that is sent (2.8 x the SCRFD face box height, centred on it, as the -30 crop): 0.8 and 1.6 degrees from the cell. Only the expression changes: E2 (the one generated face), his real smile IMG_6875 and a real +30-side neighbour as references, the smile spelled out part by part as in the -30 inventory. NEIGHBOUR: the only other real photo of him on the +30 side in his current look is IMG_6862 (same session, reads +54.1 / +4.9 on its crop, further turned and nearly in profile, lips closed); it is used instead of a mirror of IMG_6861 (-30.4) because a mirrored copy is allowed only when no real +30-side photo exists; the label says nothing of its turn is taken and the keep list pins the photo's own turn. Risk: a near-profile reference may pull the turn (cell e turned into a profile in F69); fallback v2 = no neighbour or the IMG_6861 mirror. After the run: headpose.py on each picture, tools/smile_match.py <IMG_6875> <pictures> --ai (retry when the text service answers).",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "g2f2_cell6p_send",
+  "path": ".cache/region_edits/g2_cell_f2/g2f2_cell6p_send.jpg",
+  "sha256": "180d96ee525b82939830a69b0a36537c190b92397075ecc15651db923fe18ea8",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/g2_cell_f2/g2f2_cell6p_send.jpg",
+   "prompt": ".cache/loop_prompts/g2f2_cell6p_route.txt",
+   "inventory": ".cache/inventories/g2f2_cell6p.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-14T16:00:11"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a man's head and shoulders in a black tank top, his head turned about a third toward picture-left and level, smiling, in soft daylight in a pale peach room. Close frame.",
+   "from": ".cache/loop_prompts/g2f2_cell6p_route.txt",
+   "sha256": "f7183a77e4612bbb72eb6f97f9b040fa29fe1ef13286511c787d5b24ed3b042e",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/g2f2_cell6p.json",
+   "sha256": "23e154b9048316324657a7e1451123b986a970108ee76e164e7d6cf89c7c2295",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/g2_cell_f2/g2f2_cell6p_send.jpg",
+    "photo_to_edit": ".cache/region_edits/g2_cell_f2/g2f2_cell6p_send.jpg",
+    "written": "2026-10-14 16:3x, G2 head-angle cell (f), the +30 side: yaw +30 / pitch 0 WITH his open smile E2 (backlog 9; the user's table '+-30 / 0 E2', needed by the kayak smile). The -30 side is g2f_cell6_send@v1 (wave g2f2, from IMG_6869); this is its mirror from his real IMG_6868. The pose is taken from real pixels, never from the words 'turn N degrees'. SOURCE: his own real photo IMG_6868 (D:/Downloads, 3024x4032, current look, 2026-09 session, black tank top, the character's three-quarter-left photo): headpose.py (SCRFD) reads yaw +30.7 / pitch +1.2 / roll -3.5 on the whole photo (score 0.87) and yaw +30.8 / pitch +1.6 / roll -3.0 on the head-and-shoulders crop that is sent (x 278-2580, y 636-2938 of the original, 1024x1024; SCRFD face box 609x822 = 35.7 percent of the crop's height, 2.8 x the box height, centred on the box, as the -30 crop); that is 0.8 and 1.6 degrees from the cell and 0.1 / 0.4 from the whole photo. The crop's own pose is the cell; nothing is pasted back. His lips in IMG_6868 are closed with a faint one-sided smirk; the edit gives them his open smile. REFERENCES: HIS OPEN SMILE = the approved front E2 (his_smile_E2_open_front_v1.png, the ONE generated face; same file as the -30 side); HIS FACE FROM THE SAME SIDE = the real photo IMG_6862 (same session, same side, picture-left, reads +54.1 / +4.9 on its head crop: further turned than the cell, nearly in profile; it is the only other real photo of him on the +30 side in his current look, so the mirror of IMG_6861 (-30.4) is NOT used: the user allowed a mirrored copy only when no real +30-side photo exists); HIS REAL SMILE = IMG_6875 cut to head and shoulders (same file as the -30 side; the user's target for his smile). After the run: tools/smile_match.py <IMG_6875> <picture> --ai must read every part 'same' (a three-quarter smile against a front one, so a part that cannot be seen at this turn is read as such and the user's eye decides). WHAT CHANGES: only the expression (mouth, teeth, cheeks, smile lines, eyes' lids). WHAT STAYS: the turn, the gaze toward picture-left, the face's size and outline, the hair, ear, beard, nose, the chain, the black tank top, the wall, the door at the left edge and the doorway at the right, the light. The earlier lesson (AGENTS.md, G1): adding a big smile to a neutral photo makes Gemini draw the face 5-16 percent larger, so the keep list pins the face's size, the jaw and the chin in place. The -30 run of the same method (20261014_155947) kept the pose and the size and changed only the expression.",
+    "refs": [
+     {
+      "key": "smile",
+      "path": ".cache/region_edits/g2_cell_f2/his_smile_E2_head.jpg",
+      "label": "HIS OPEN SMILE: a photo of the same man's own head today, facing the camera and smiling his natural open smile: take from it how his smile looks (his lips parted, his own upper teeth showing exactly as they are in this photo: their own shape, size and colour, never whitened or evened; his cheeks lifted and rounded; the smile lines from his nose to the corners of his mouth; his eyes narrowed a little with small creases at their outer corners; his brows); nothing of its turn, its light, its clothes or the room"
+     },
+     {
+      "key": "side",
+      "path": ".cache/region_edits/g2_cell_f2/his_turn_IMG_6862.jpg",
+      "label": "HIS FACE FROM THE SAME SIDE: a photo of the same man's own head today, turned about two thirds of the way round toward picture-left (nearly in profile) and level, with his lips closed: take from it his face seen from that side (his thick dark eyebrow, his eye with its heavy upper lid, the long straight nose with its rounded tip, the lean cheek, his lips and his chin, his ear with the tapered short hair above it, and his full dark beard along the jaw); nothing of its expression, nothing of its turn (the PHOTO TO EDIT is turned much less than this and keeps its own turn), its light, its clothes or the room"
+     },
+     {
+      "key": "real",
+      "path": ".cache/region_edits/g2_cell_f2/his_smile_IMG_6875.jpg",
+      "label": "HIS REAL SMILE: a photo of the same man's own head today smiling a natural candid smile with his upper teeth showing, from this same photo session: take from it only how his smile looks: the cheeks lifted and rounded, the smile lines from the nose to the corners of his mouth, the corners of his mouth lifted, his own teeth, the creases at the outer corners of his eyes, at that strength and never stronger; nothing of its turn, its light, its framing or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the expression",
+      "goal": "his calm face turned about a third toward picture-left with his lips closed and together and only a faint one-sided smirk",
+      "his": "his own natural open smile as in HIS OPEN SMILE and HIS REAL SMILE, drawn on this turned face part by part: the lips parted in the same open shape, his upper teeth showing exactly as there (their own shape, size and colour, and the small gap between his front teeth), never whitened or evened; the cheek on the near side lifted and rounded as much as there and the far cheek lifted with it; the smile line from the side of the nose to the corner of the mouth deepened as there; the corners of the mouth lifted as there; his eyes only a little narrowed by the smile, the lower lids barely raised, with the small creases at the outer corners as there; his brows as in the PHOTO TO EDIT lifted only a little; the same strength as HIS REAL SMILE, never stronger, never a laugh, never a smirk; his gaze stays exactly as in the PHOTO TO EDIT, toward picture-left",
+      "ref": "real"
+     }
+    ],
+    "keep": [
+     "the head's pose exactly as the PHOTO TO EDIT shows it: turned about a third of the way round toward picture-left so that his nose points a little to the left of the camera and the far cheek is partly hidden, level, the chin neither lowered nor lifted, his ear in the same place; the head is never turned toward the camera, turned further away toward a profile, straightened, bowed or lifted, and it keeps its size and its place in the frame",
+     "his face's size and outline exactly as in the PHOTO TO EDIT: the same width from his ear to his nose, the same height from his brows to his chin, his jaw and his chin in the same place (the open mouth does not enlarge the face or lengthen it), his nose, his eyebrows, his ear, his full dark beard's outline, and the same hair: the curls, the tapered side above the ear and the fringe, exactly as they are",
+     "his neck, his silver chain with its pendant, his shoulders and the black ribbed tank top exactly as they are: the same shape, folds and fit",
+     "the setting exactly as it is: the plain pale peach wall behind him, the brown wooden door with its handles at the left edge and the dark doorway at the right; no other person and no text anywhere",
+     "the framing exactly: nothing is zoomed, shifted or re-centred",
+     "the soft natural daylight and the colours of the PHOTO TO EDIT, its skin tone, grain and sharpness: a natural colour photograph, his face in the same light as his neck, never brighter than it"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": 30.8,
+    "pitch": 1.6,
+    "roll": -3.0,
+    "side": "picture-left",
+    "score": 0.89,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6862.jpg",
+    "IMG_6863.jpg",
+    "IMG_5850_fav_34left.jpg",
+    "IMG_6868.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_smile_E2_head.jpg",
+    "sha256": "509c95ed62a6d4f0f63ee2e47132a813f2b49b09a6f5dc59ed3081e1a3ac2a98",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_f2/his_smile_E2_head.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS OPEN SMILE: a photo of the same man's own head today, facing the camera and smiling his natural open smile: take from it how his smile looks (his lips parted, his own upper teeth showing exactly as they are in this photo: their own shape, size and colour, never whitened or evened; his cheeks lifted and rounded; the smile lines from his nose to the corners of his mouth; his eyes narrowed a little with small creases at their outer corners; his brows); nothing of its turn, its light, its clothes or the room",
+    "key": "smile"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_turn_IMG_6862.jpg",
+    "sha256": "4b8f3c67dd3fac88d958d9ff3dc359a7a07304a9146a43f66a66a4145a889765",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_f2/his_turn_IMG_6862.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FACE FROM THE SAME SIDE: a photo of the same man's own head today, turned about two thirds of the way round toward picture-left (nearly in profile) and level, with his lips closed: take from it his face seen from that side (his thick dark eyebrow, his eye with its heavy upper lid, the long straight nose with its rounded tip, the lean cheek, his lips and his chin, his ear with the tapered short hair above it, and his full dark beard along the jaw); nothing of its expression, nothing of its turn (the PHOTO TO EDIT is turned much less than this and keeps its own turn), its light, its clothes or the room",
+    "key": "side"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "his_smile_IMG_6875.jpg",
+    "sha256": "2d7788823a4af20baeb3469fb08a89240e3e7404cac33d50a525863c1b0afd42",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_f2/his_smile_IMG_6875.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS REAL SMILE: a photo of the same man's own head today smiling a natural candid smile with his upper teeth showing, from this same photo session: take from it only how his smile looks: the cheeks lifted and rounded, the smile lines from the nose to the corners of his mouth, the corners of his mouth lifted, his own teeth, the creases at the outer corners of his eyes, at that strength and never stronger; nothing of its turn, its light, its framing or the room",
+    "key": "real"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "g2f2_cell6p_send.jpg",
+    "sha256": "e1ec9d8d40ec1854b0d4e56c85062f4c0df7ef94605ced301bf7f7b9f0988dd0",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_f2/g2f2_cell6p_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS OPEN SMILE: a photo of the same man's own head today, facing the camera and smiling his natural open smile: take from it how his smile looks (his lips parted, his own upper teeth showing exactly as they are in this photo: their own shape, size and colour, never whitened or evened; his cheeks lifted and rounded; the smile lines from his nose to the corners of his mouth; his eyes narrowed a little with small creases at their outer corners; his brows); nothing of its turn, its light, its clothes or the room\nImage 2 is HIS FACE FROM THE SAME SIDE: a photo of the same man's own head today, turned about two thirds of the way round toward picture-left (nearly in profile) and level, with his lips closed: take from it his face seen from that side (his thick dark eyebrow, his eye with its heavy upper lid, the long straight nose with its rounded tip, the lean cheek, his lips and his chin, his ear with the tapered short hair above it, and his full dark beard along the jaw); nothing of its expression, nothing of its turn (the PHOTO TO EDIT is turned much less than this and keeps its own turn), its light, its clothes or the room\nImage 3 is HIS REAL SMILE: a photo of the same man's own head today smiling a natural candid smile with his upper teeth showing, from this same photo session: take from it only how his smile looks: the cheeks lifted and rounded, the smile lines from the nose to the corners of his mouth, the corners of his mouth lifted, his own teeth, the creases at the outer corners of his eyes, at that strength and never stronger; nothing of its turn, its light, its framing or the room\nImage 4 is the PHOTO TO EDIT.\n\nEdit image 4, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the expression: the PHOTO TO EDIT shows his calm face turned about a third toward picture-left with his lips closed and together and only a faint one-sided smirk; make it his own natural open smile as in HIS OPEN SMILE and HIS REAL SMILE, drawn on this turned face part by part: the lips parted in the same open shape, his upper teeth showing exactly as there (their own shape, size and colour, and the small gap between his front teeth), never whitened or evened; the cheek on the near side lifted and rounded as much as there and the far cheek lifted with it; the smile line from the side of the nose to the corner of the mouth deepened as there; the corners of the mouth lifted as there; his eyes only a little narrowed by the smile, the lower lids barely raised, with the small creases at the outer corners as there; his brows as in the PHOTO TO EDIT lifted only a little; the same strength as HIS REAL SMILE, never stronger, never a laugh, never a smirk; his gaze stays exactly as in the PHOTO TO EDIT, toward picture-left (image 3).\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the head's pose exactly as the PHOTO TO EDIT shows it: turned about a third of the way round toward picture-left so that his nose points a little to the left of the camera and the far cheek is partly hidden, level, the chin neither lowered nor lifted, his ear in the same place; the head is never turned toward the camera, turned further away toward a profile, straightened, bowed or lifted, and it keeps its size and its place in the frame.\n- his face's size and outline exactly as in the PHOTO TO EDIT: the same width from his ear to his nose, the same height from his brows to his chin, his jaw and his chin in the same place (the open mouth does not enlarge the face or lengthen it), his nose, his eyebrows, his ear, his full dark beard's outline, and the same hair: the curls, the tapered side above the ear and the fringe, exactly as they are.\n- his neck, his silver chain with its pendant, his shoulders and the black ribbed tank top exactly as they are: the same shape, folds and fit.\n- the setting exactly as it is: the plain pale peach wall behind him, the brown wooden door with its handles at the left edge and the dark doorway at the right; no other person and no text anywhere.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n- the soft natural daylight and the colours of the PHOTO TO EDIT, its skin tone, grain and sharpness: a natural colour photograph, his face in the same light as his neck, never brighter than it.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "632ed2ce524a913092c6c29b166333eed660417fbbedec78b4a06229556d2589",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "509c95ed62a6d4f0f63ee2e47132a813f2b49b09a6f5dc59ed3081e1a3ac2a98",
+    "upload_name": "his_smile_E2_head.jpg",
+    "bytes": 130477,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "4b8f3c67dd3fac88d958d9ff3dc359a7a07304a9146a43f66a66a4145a889765",
+    "upload_name": "his_turn_IMG_6862.jpg",
+    "bytes": 146549,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "2d7788823a4af20baeb3469fb08a89240e3e7404cac33d50a525863c1b0afd42",
+    "upload_name": "his_smile_IMG_6875.jpg",
+    "bytes": 218583,
+    "px": [
+     938,
+     938
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "e1ec9d8d40ec1854b0d4e56c85062f4c0df7ef94605ced301bf7f7b9f0988dd0",
+    "upload_name": "g2f2_cell6p_send.jpg",
+    "bytes": 243097,
+    "px": [
+     1024,
+     1024
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "e9ff5e5f006d6c53ba31d64925f18600074dc9968d3327deab8f4b9e4dcb81e6"
+ }
+}
