@@ -1,0 +1,301 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "g2a_cell1_send",
+ "version": 2,
+ "created": "2026-10-14T08:30:28",
+ "because": "v1 asked for a colour photograph while the template's last line says to keep the PHOTO TO EDIT's colour; v2's colour item says it overrides that, and the crop now ends above the pin man's tattooed forearm (y 586)",
+ "parent": "v1",
+ "origin": {
+  "kind": "bump",
+  "notices": []
+ },
+ "goal": {
+  "key": "g2a_cell1_send",
+  "path": ".cache/region_edits/g2_cell_a/g2a_cell1_send.jpg",
+  "sha256": "d0fe2d8d110c0151f18511b52ca4abb046d0f336e1c2ae7c87c87dea073c140c",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/g2_cell_a/g2a_cell1_send.jpg",
+   "prompt": ".cache/loop_prompts/g2a_cell1_route.txt",
+   "inventory": ".cache/inventories/g2a_cell1.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-14T08:02:15"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A close crop of a man's head and shoulders in a loose pale T-shirt, his head bowed steeply forward and down, turned a little toward picture-right, in soft daylight beside a pool. Close frame.",
+   "from": ".cache/loop_prompts/g2a_cell1_route.txt",
+   "sha256": "ec382c6b01230ea4904dbc6f02a0eb5ea06c4d87c48cb98f3235dfb9b2dbd396",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/g2a_cell1.json",
+   "sha256": "7dbd4608b88971391aee8c38724c13c4926d1583b8e226863ef66de024586920",
+   "data": {
+    "mode": "objects",
+    "goal": ".cache/region_edits/g2_cell_a/g2a_cell1_send.jpg",
+    "photo_to_edit": ".cache/region_edits/g2_cell_a/g2a_cell1_send.jpg",
+    "written": "2026-10-14, G2 head-angle cell (a), yaw -20 / pitch -40, neutral expression (backlog 6; the user's order after G3 and G1: the pose is taken from real pixels, never from the words 'turn N degrees'). SOURCE: pin 5 (poolside reading, Pinterest 783485666539777054), the only cached pin whose head sits inside the cell: headpose.py (SCRFD) reads its head yaw -17.6 / pitch -46.9 / roll 16.1 on the whole pin and yaw -17.4 / pitch -41.0 / roll 12.4 on the 2.5x head-and-shoulders crop that is sent (pin 6 reads -18.9 / -37.1 but with roll 38.8 and a paintbrush across the mouth: Gemini normalised that head three times, FAILURE_LOG F48, F55, F56; pin 9 reads -11.6 / -22.2 with roll -37.8, which is not cell (b)). The crop is x 140-560, y 262-586 of the 736x918 pin, enlarged 2.5x (1050x810), so the man's head fills the frame and his forearms (the pin man's tattoos) stay out of it. REFERENCES (the brief: the approved front smile plus the 2 nearest real photos of him): HIS FRONT is the approved ideal front E2 (his_smile_E2_open_front_v1.png, user-approved 2026-10-10, the ONE generated face in this request; its smile is not taken); the two nearest REAL photos in pose are his own current-look photos from 2026-10-10 with his head bowed, IMG_7009 (headpose yaw -8.8 / pitch -36.9) and IMG_7002 (-7.0 / -40.9), cut to head and shoulders at 768 px with SCRFD (the real photos nearest the cell are 11.6 and 13.0 degrees from it; a real photo cannot be turned, so they are references for how his curls fall over his forehead and how his beard sits on the lowered jaw, not the pose source). Character me@v2 is recorded for the description: its face, hair, beard and skin sentences are written into the items below. WHAT CHANGES: the pin man's hair, face, stubble, ear, neck cord and skin become his, the cigarette is removed (neutral closed lips), and the black-and-white grade becomes natural colour (a cell is a colour reference for colour pins; his skin tone cannot be judged in grey). WHAT STAYS: the head's size, place and pose (pixel source: the PHOTO TO EDIT itself), the T-shirt, the shoulders and the pool setting. The lint asks for a keep line about a deeper bow than the goal's: pin 5's own bow is already deeper than the cell (-46.9 whole pin against -40) and renders land short of the goal's bow (pin 9), so the keep line says 'at least as deep as in the PHOTO TO EDIT'. The template's last line says 'the same light, colour, grain and sharpness as the PHOTO TO EDIT', so the colour item says that it overrides the grade; if Gemini keeps black and white the pose and the face are still judged the same way (identity is then harder to read: B&W bowed faces scored 0.13-0.73 on pin 5).",
+    "refs": [
+     {
+      "key": "front",
+      "path": ".cache/region_edits/g2_cell_a/his_smile_E2_head.jpg",
+      "label": "HIS FRONT: a photo of the same man's own head today, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his dark brown eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, his lean cheeks with no puffiness), his dense, tight black curls, his full dark beard and moustache, and his warm medium-brown skin; nothing of its smile or teeth, its turn, its light, its clothes or the room"
+     },
+     {
+      "key": "bowed1",
+      "path": ".cache/region_edits/g2_cell_a/his_bowed_IMG_7009.jpg",
+      "label": "HIS HEAD BOWED: a photo of the same man's own head today, bowed forward and down with his chin toward his chest: take from it only how his dense tight black curls fall forward over his forehead when he looks down, how his full dark beard sits on the lowered jaw and chin, his nose and the warm medium-brown colour of his skin; nothing of its exact turn, its body, its light or the room"
+     },
+     {
+      "key": "bowed2",
+      "path": ".cache/region_edits/g2_cell_a/his_bowed_IMG_7002.jpg",
+      "label": "HIS HEAD BOWED, A SECOND PHOTO: another photo of the same man's own head today, bowed forward and down: take from it only how his curls stand up with volume on top and fall forward, how his beard and moustache sit on the lowered face, and his skin colour; nothing of its exact turn, its body, its light or the room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the hair",
+      "goal": "dark, loose, wavy curls on top of the lowered head, falling forward over the forehead and the temples, longer and untidier than his",
+      "his": "his own hair as in HIS FRONT and HIS HEAD BOWED: dense, tight black curls of his current cut, standing up with volume on top and falling forward over his forehead as they do in his bowed photos, the sides above and in front of his ear tapered short and close to the scalp so that the skin at his temple shows, and the curls longer at the back; the hair stays black, and the head's outline (the top of the curls, the back of the head) keeps the size and place it has in the PHOTO TO EDIT",
+      "ref": "bowed1"
+     },
+     {
+      "item": "the face",
+      "goal": "the man's lowered face: eyes cast down under the curls, a straight nose, a closed mouth with a cigarette in it",
+      "his": "his own face as in HIS FRONT and HIS HEAD BOWED: his thick, dark, fairly straight eyebrows, his eyes cast down with the heavy upper lids lowered, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, a lean face with no puffiness in the cheeks and the cheekbones visible; a calm, relaxed, neutral expression: the lips closed and soft, no smile, no frown, nothing tense; the face fills the place of the man's face at the size the PHOTO TO EDIT gives it, no bigger and no smaller",
+      "ref": "front"
+     },
+     {
+      "item": "the stubble",
+      "goal": "light stubble on the cheeks, the jaw and the chin",
+      "his": "his own full, dense, short dark beard along the whole jaw and chin as in HIS FRONT and HIS HEAD BOWED, a little lighter high on the cheeks, with a full dark moustache joining the beard at the corners of the mouth and a small patch under the lower lip",
+      "ref": "front"
+     },
+     {
+      "item": "the cigarette",
+      "goal": "a white cigarette held in the corner of the lips, pointing down across the chin onto the T-shirt",
+      "his": "no cigarette at all and nothing in or in front of his mouth: his lips are closed and relaxed, his moustache and beard sit where they would sit on a calm lowered face, and the skin and the T-shirt below his chin are as the PHOTO TO EDIT shows them"
+     },
+     {
+      "item": "the ear",
+      "goal": "the man's ear at picture-left, standing out from the head under his hair",
+      "his": "his own ear as in his photos: medium, standing slightly out from his head, in the same place and at the same size as the man's ear",
+      "ref": "front"
+     },
+     {
+      "item": "the neck cord",
+      "goal": "a thin dark cord around the neck, running down into the collar of the T-shirt",
+      "his": "his own fine silver neck chain, as in HIS FRONT, lying at the neckline of the T-shirt in the same place as the cord"
+     },
+     {
+      "item": "the skin",
+      "goal": "the man's skin, in grey tones",
+      "his": "his own warm medium-brown skin in natural colour, never lightened, with real skin texture and visible pores, the same on his face, ear and neck, in the same soft shade as the T-shirt beside it"
+     },
+     {
+      "item": "the colour",
+      "goal": "a black-and-white photograph in grey tones",
+      "his": "a colour photograph (this one change to the photograph's grade overrides the instruction to keep its colour) with the natural colours of the scene: the loose T-shirt stays pale grey-white, the parasol and the cushions white, the plants green, the sky pale and overcast, the light soft and neutral; the same grain and softness as the PHOTO TO EDIT"
+     }
+    ],
+    "keep": [
+     "the head's pose exactly as the PHOTO TO EDIT shows it: bowed forward and steeply down with his chin toward his chest and his face looking down, turned only a little toward picture-right; the bow is at least as deep as in the PHOTO TO EDIT and is never lifted, straightened or turned toward the camera, and the head keeps its size and its place in the frame",
+     "his shoulders, his chest and the loose pale crew-neck T-shirt with its rolled sleeve edge at picture-right exactly as they are: the same shape, folds and fit",
+     "the setting exactly as it is: the white parasol with its pole, the palm fronds, the bushes, the white railing and the pool at picture-right, the overcast sky; no other person and no text anywhere",
+     "the framing exactly: nothing is zoomed, shifted or re-centred",
+     "the soft overcast daylight from above: his face in the same soft shade as his T-shirt, never brighter than it; the quick handheld look of the PHOTO TO EDIT, its slight softness and grain, not a studio portrait"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -17.4,
+    "pitch": -41.0,
+    "roll": 12.4,
+    "side": "picture-right",
+    "score": 0.61,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "name": "his_smile_E2_head.jpg",
+    "sha256": "509c95ed62a6d4f0f63ee2e47132a813f2b49b09a6f5dc59ed3081e1a3ac2a98",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_a/his_smile_E2_head.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS FRONT: a photo of the same man's own head today, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his dark brown eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, his lean cheeks with no puffiness), his dense, tight black curls, his full dark beard and moustache, and his warm medium-brown skin; nothing of its smile or teeth, its turn, its light, its clothes or the room",
+    "key": "front"
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "name": "his_bowed_IMG_7009.jpg",
+    "sha256": "6d0ef50ac2957f240949dc628aa5726b158ce9b55925f0a3a74702b91295e630",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_a/his_bowed_IMG_7009.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS HEAD BOWED: a photo of the same man's own head today, bowed forward and down with his chin toward his chest: take from it only how his dense tight black curls fall forward over his forehead when he looks down, how his full dark beard sits on the lowered jaw and chin, his nose and the warm medium-brown colour of his skin; nothing of its exact turn, its body, its light or the room",
+    "key": "bowed1"
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "name": "his_bowed_IMG_7002.jpg",
+    "sha256": "a952aee4644edd93550fcf8b2429c50f2f031c9cca8bb00dfa337f5775a6f09d",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_a/his_bowed_IMG_7002.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS HEAD BOWED, A SECOND PHOTO: another photo of the same man's own head today, bowed forward and down: take from it only how his curls stand up with volume on top and fall forward, how his beard and moustache sit on the lowered face, and his skin colour; nothing of its exact turn, its body, its light or the room",
+    "key": "bowed2"
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "name": "g2a_cell1_send.jpg",
+    "sha256": "84194c117130be8f406307ee226ad65aea89fc1aecbc811308fbf1e2e10f65d9",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/g2_cell_a/g2a_cell1_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is HIS FRONT: a photo of the same man's own head today, facing the camera: take from it his face (his thick, dark, fairly straight eyebrows, his dark brown eyes with slightly heavy upper lids, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, his lean cheeks with no puffiness), his dense, tight black curls, his full dark beard and moustache, and his warm medium-brown skin; nothing of its smile or teeth, its turn, its light, its clothes or the room\nImage 2 is HIS HEAD BOWED: a photo of the same man's own head today, bowed forward and down with his chin toward his chest: take from it only how his dense tight black curls fall forward over his forehead when he looks down, how his full dark beard sits on the lowered jaw and chin, his nose and the warm medium-brown colour of his skin; nothing of its exact turn, its body, its light or the room\nImage 3 is HIS HEAD BOWED, A SECOND PHOTO: another photo of the same man's own head today, bowed forward and down: take from it only how his curls stand up with volume on top and fall forward, how his beard and moustache sit on the lowered face, and his skin colour; nothing of its exact turn, its body, its light or the room\nImage 4 is the PHOTO TO EDIT.\n\nEdit image 4, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the hair: the PHOTO TO EDIT shows dark, loose, wavy curls on top of the lowered head, falling forward over the forehead and the temples, longer and untidier than his; make it his own hair as in HIS FRONT and HIS HEAD BOWED: dense, tight black curls of his current cut, standing up with volume on top and falling forward over his forehead as they do in his bowed photos, the sides above and in front of his ear tapered short and close to the scalp so that the skin at his temple shows, and the curls longer at the back; the hair stays black, and the head's outline (the top of the curls, the back of the head) keeps the size and place it has in the PHOTO TO EDIT (image 2).\n- the face: the PHOTO TO EDIT shows the man's lowered face: eyes cast down under the curls, a straight nose, a closed mouth with a cigarette in it; make it his own face as in HIS FRONT and HIS HEAD BOWED: his thick, dark, fairly straight eyebrows, his eyes cast down with the heavy upper lids lowered, his long straight nose with its rounded tip, his medium-full lips with the fuller lower lip, a lean face with no puffiness in the cheeks and the cheekbones visible; a calm, relaxed, neutral expression: the lips closed and soft, no smile, no frown, nothing tense; the face fills the place of the man's face at the size the PHOTO TO EDIT gives it, no bigger and no smaller (image 1).\n- the stubble: the PHOTO TO EDIT shows light stubble on the cheeks, the jaw and the chin; make it his own full, dense, short dark beard along the whole jaw and chin as in HIS FRONT and HIS HEAD BOWED, a little lighter high on the cheeks, with a full dark moustache joining the beard at the corners of the mouth and a small patch under the lower lip (image 1).\n- the cigarette: the PHOTO TO EDIT shows a white cigarette held in the corner of the lips, pointing down across the chin onto the T-shirt; make it no cigarette at all and nothing in or in front of his mouth: his lips are closed and relaxed, his moustache and beard sit where they would sit on a calm lowered face, and the skin and the T-shirt below his chin are as the PHOTO TO EDIT shows them.\n- the ear: the PHOTO TO EDIT shows the man's ear at picture-left, standing out from the head under his hair; make it his own ear as in his photos: medium, standing slightly out from his head, in the same place and at the same size as the man's ear (image 1).\n- the neck cord: the PHOTO TO EDIT shows a thin dark cord around the neck, running down into the collar of the T-shirt; make it his own fine silver neck chain, as in HIS FRONT, lying at the neckline of the T-shirt in the same place as the cord.\n- the skin: the PHOTO TO EDIT shows the man's skin, in grey tones; make it his own warm medium-brown skin in natural colour, never lightened, with real skin texture and visible pores, the same on his face, ear and neck, in the same soft shade as the T-shirt beside it.\n- the colour: the PHOTO TO EDIT shows a black-and-white photograph in grey tones; make it a colour photograph (this one change to the photograph's grade overrides the instruction to keep its colour) with the natural colours of the scene: the loose T-shirt stays pale grey-white, the parasol and the cushions white, the plants green, the sky pale and overcast, the light soft and neutral; the same grain and softness as the PHOTO TO EDIT.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the head's pose exactly as the PHOTO TO EDIT shows it: bowed forward and steeply down with his chin toward his chest and his face looking down, turned only a little toward picture-right; the bow is at least as deep as in the PHOTO TO EDIT and is never lifted, straightened or turned toward the camera, and the head keeps its size and its place in the frame.\n- his shoulders, his chest and the loose pale crew-neck T-shirt with its rolled sleeve edge at picture-right exactly as they are: the same shape, folds and fit.\n- the setting exactly as it is: the white parasol with its pole, the palm fronds, the bushes, the white railing and the pool at picture-right, the overcast sky; no other person and no text anywhere.\n- the framing exactly: nothing is zoomed, shifted or re-centred.\n- the soft overcast daylight from above: his face in the same soft shade as his T-shirt, never brighter than it; the quick handheld look of the PHOTO TO EDIT, its slight softness and grain, not a studio portrait.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "401ffcc5610843429683a5dacc0bfdf2889a5e9f36ac23ee9b87262206d5a34f",
+  "files": [
+   {
+    "n": 1,
+    "role": "inv_ref",
+    "sha256": "509c95ed62a6d4f0f63ee2e47132a813f2b49b09a6f5dc59ed3081e1a3ac2a98",
+    "upload_name": "his_smile_E2_head.jpg",
+    "bytes": 130477,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 2,
+    "role": "inv_ref",
+    "sha256": "6d0ef50ac2957f240949dc628aa5726b158ce9b55925f0a3a74702b91295e630",
+    "upload_name": "his_bowed_IMG_7009.jpg",
+    "bytes": 97264,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 3,
+    "role": "inv_ref",
+    "sha256": "a952aee4644edd93550fcf8b2429c50f2f031c9cca8bb00dfa337f5775a6f09d",
+    "upload_name": "his_bowed_IMG_7002.jpg",
+    "bytes": 98624,
+    "px": [
+     768,
+     768
+    ]
+   },
+   {
+    "n": 4,
+    "role": "photo_to_edit",
+    "sha256": "84194c117130be8f406307ee226ad65aea89fc1aecbc811308fbf1e2e10f65d9",
+    "upload_name": "g2a_cell1_send.jpg",
+    "bytes": 238061,
+    "px": [
+     1050,
+     810
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "648e51aad7b3b3e206251bd4948e87ebcb1fa345b0d26aaed58c142e38826e21"
+ }
+}

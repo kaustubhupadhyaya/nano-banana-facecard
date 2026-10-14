@@ -1,0 +1,168 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin12d_send",
+ "version": 1,
+ "created": "2026-10-14T08:44:37",
+ "because": "TODO 98, pin 12 second grey-out pass (FAILURE_LOG F58): the best candidate pin12b v1_0r (outputs/20261014_065449_goal-pin12fix-send) still shows a faint red-brown vertical figure at about x 750 y 480-600 and a dark head-shaped blob above the right shoulder at x 675 y 520, because the first grey bands did not cover them. New region edit on v1_0r: the whole background strip right of the shoulder (x 616-848, y 380-700) minus his tee and arm (person mask, 2 px clear) is grey and repainted as plain empty bokeh; a second small region on his free hand and watch asks only a slight horizontal motion blur (item 35); only the grey strip and the hand are pasted back; face, tee, print with its straight apostrophes, tote untouched",
+ "parent": null,
+ "origin": {
+  "kind": "new",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin12d_send",
+  "path": ".cache/region_edits/pin12_d/pin12d_send.jpg",
+  "sha256": "3e62851bc62ee97cd431a86ac844e46f01e49976e9040801c1aa1246c49ac1d0",
+  "pose": null,
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/region_edits/pin12_d/pin12d_send.jpg",
+   "prompt": ".cache/loop_prompts/pin12d_route.txt",
+   "inventory": ".cache/inventories/pin12d.json",
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-14T08:02:15"
+  },
+  "samples": 3,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "A candid phone snapshot of a young man in a cream t-shirt with a red print, walking toward the camera in a mall corridor with a blurred background. Portrait frame.",
+   "from": ".cache/loop_prompts/pin12d_route.txt",
+   "sha256": "a5722034b0a96c7b91691095c8c2c9d7de88f07a4e0edf5bde53d88d1b049918",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache/inventories/pin12d.json",
+   "sha256": "9dbcff9418fbb14408af4d6f9ef2e1e3f798318856d74a80b5c72796273dca9e",
+   "data": {
+    "mode": "objects",
+    "region_edit": true,
+    "goal": ".cache/region_edits/pin12_d/pin12d_send.jpg",
+    "photo_to_edit": ".cache/region_edits/pin12_d/pin12d_send.jpg",
+    "written": "2026-10-14 08:4x, pin 12, the second grey-out pass (TODO 98; FAILURE_LOG F58). The base is outputs/20261014_065449_goal-pin12fix-send/v1_0r.jpg (pin12b's best: the left background spot is gone, the print is exact with its straight apostrophes, the pose gate passes), which still fails item 33 faintly: a faint red-brown vertical figure behind his right shoulder at about x 735-765, y 480-620 (blurred shopper: red top, dark body) and a dark head-shaped blob just above the shoulder at about x 645-690, y 505-527, plus a dark soft rim along the shoulder's edge below it. pin12b's three grey patches were too narrow: they did not cover those shapes, so Gemini kept them as lines already drawn. METHOD (the grey-out of F39-F47, wider this time): the whole background strip right of his shoulder (x 616-848, y 380-700 of 848x1264, that is 73-100 percent from the left and 30-55 percent from the top) is painted flat grey 128, EXCEPT his tee and arm (the YOLO11m-seg person mask united with the bright shirt edge, grown 2 px), so his shoulder's outline is never part of the grey; Gemini must repaint all of it from what surrounds it. Only the grey strip and the hand below are pasted back (tools/region_edit.py paste-run, objects mode, --affine if refused): the paste is clipped 2 px away from his shirt. A second, small region (no grey): his free hand and black watch at the bottom right (about x 535-700, y 1000-1180) get only a slight horizontal motion blur (checklist item 35; the base's hand and bag are sharp; pin12c's blur on the hand worked but its re-drawn print had curly apostrophes), keeping their shape, any ring, skin and watch colours. What surrounds the strip: the cream-beige ceiling with its round white lights above (y < 380), the sleeve and shoulder of his cream tee to its lower left, the warm pale floor below (y > 650 at the right), a warm brown wood pillar with soft vertical streaks along the right edge, soft pale-blue and white sign glows high up (no sign, no letters). DO NOT RETRY (FAILURE_LOG F51, F61): a full re-render of the mall (v1-v5 and pin12c re-rolled it and each time brought new blurred shoppers or signs), narrow patches, describing the mall's shops or people as glow in a scene paragraph, tipping the camera up. Gemini's sparkle at the floor (about x 727, y 1143) is the base's own and is replaced with the picture's own floor pixels only on an export.",
+    "refs": [],
+    "change": [
+     {
+      "item": "the big flat grey area right of his shoulder",
+      "goal": "a big flat grey area at picture-right, a rectangle with a straight left edge, running from about 73 percent from the left to the right edge of the picture and from about 30 to 55 percent from the top; the sloping top of the shoulder and sleeve of his cream t-shirt cuts into its lower left, and nothing of him is grey",
+      "his": "plain, empty, out-of-focus mall corridor exactly as it is around the grey: the same soft warm cream-beige walls and pale ceiling with its soft white light glows continuing down from above, a few soft pale blue-white blurred glows high up, a warm brown wooden pillar with soft vertical streaks along the right edge, and the warm pale floor light at the bottom right, all blurred like the rest of the background, with the same grain; one smooth, even background with no person, no head, no body and nothing person-shaped, no red or coloured vertical object, no dark vertical figure, no sign or text, and no dark rim, dark smudge or dark halo along the edge of his shoulder, which meets the soft light background directly with its outline exactly as it is; the colours stay those of the surroundings: cream, beige and warm brown, in soft light"
+     },
+     {
+      "item": "his free hand and watch",
+      "goal": "his free hand hanging at the bottom right of the picture, below the t-shirt's hem line, with the black round smartwatch on its wrist (about 63 to 83 percent from the left and 79 to 94 percent from the top)",
+      "his": "the same hand and the same black watch with only a slight horizontal motion blur, as if his arm is swinging while he walks: a soft horizontal smear of a few pixels along the fingers, the back of the hand and the watch's outline, the fingers and the watch face still readable; exactly the same shape, position, finger positions, skin colour, any ring on a finger, and watch face and band colours as now; nothing else is blurred and nothing near the hand changes"
+     }
+    ],
+    "keep": [
+     "every pixel that is not flat grey and not the hand exactly as it is: him, his face, his full dark beard, his curls, his necklace, his cream t-shirt with the red print in the same wide round capital letters (I DON'T CARE / IF SHE GOT / RED FLAGS in bold, I'M A BULL below in the thinner weight, with the same straight upright apostrophes in DON'T and I'M, letter for letter), his white tote bag and strap, his shoulder outline, sleeve and arm",
+     "the left half of the background, the glass balustrade with its steel rail, the white ring-shaped lights and the lit signs at the left as soft unreadable glow, the ceiling lights above the grey area, and the floor, exactly as they are; no sign, label, logo or text is added anywhere",
+     "no person and nothing that looks like a person in the background: the grey area becomes empty blurred background only",
+     "the soft shallow depth of field, grain, warm light and slight tilt of the phone snapshot, and the framing exactly: nothing is zoomed, shifted or re-centred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": "frontal",
+   "decided_by": "yunet+text",
+   "evidence": "YuNet found the goal's face: Frontal, yaw ratio 0.93; the text says: \"no head-turn phrase in the text\"",
+   "measured": {
+    "detected": true,
+    "yaw": 8.8,
+    "pitch": -2.4,
+    "roll": -9.0,
+    "side": "frontal",
+    "score": 0.83,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "count": 4,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "name": "pin12d_send.jpg",
+    "sha256": "f769ed40c48a29ed81867c06aa3a7897004ea5e89377cc82534592b67d50bf6c",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin12_d/pin12d_send.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ]
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImage 1 is the PHOTO TO EDIT.\n\nEdit image 1, the PHOTO TO EDIT: make exactly the changes in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\nCHANGE LIST:\n- the big flat grey area right of his shoulder: the PHOTO TO EDIT shows a big flat grey area at picture-right, a rectangle with a straight left edge, running from about 73 percent from the left to the right edge of the picture and from about 30 to 55 percent from the top; the sloping top of the shoulder and sleeve of his cream t-shirt cuts into its lower left, and nothing of him is grey; make it plain, empty, out-of-focus mall corridor exactly as it is around the grey: the same soft warm cream-beige walls and pale ceiling with its soft white light glows continuing down from above, a few soft pale blue-white blurred glows high up, a warm brown wooden pillar with soft vertical streaks along the right edge, and the warm pale floor light at the bottom right, all blurred like the rest of the background, with the same grain; one smooth, even background with no person, no head, no body and nothing person-shaped, no red or coloured vertical object, no dark vertical figure, no sign or text, and no dark rim, dark smudge or dark halo along the edge of his shoulder, which meets the soft light background directly with its outline exactly as it is; the colours stay those of the surroundings: cream, beige and warm brown, in soft light.\n- his free hand and watch: the PHOTO TO EDIT shows his free hand hanging at the bottom right of the picture, below the t-shirt's hem line, with the black round smartwatch on its wrist (about 63 to 83 percent from the left and 79 to 94 percent from the top); make it the same hand and the same black watch with only a slight horizontal motion blur, as if his arm is swinging while he walks: a soft horizontal smear of a few pixels along the fingers, the back of the hand and the watch's outline, the fingers and the watch face still readable; exactly the same shape, position, finger positions, skin colour, any ring on a finger, and watch face and band colours as now; nothing else is blurred and nothing near the hand changes.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- every pixel that is not flat grey and not the hand exactly as it is: him, his face, his full dark beard, his curls, his necklace, his cream t-shirt with the red print in the same wide round capital letters (I DON'T CARE / IF SHE GOT / RED FLAGS in bold, I'M A BULL below in the thinner weight, with the same straight upright apostrophes in DON'T and I'M, letter for letter), his white tote bag and strap, his shoulder outline, sleeve and arm.\n- the left half of the background, the glass balustrade with its steel rail, the white ring-shaped lights and the lit signs at the left as soft unreadable glow, the ceiling lights above the grey area, and the floor, exactly as they are; no sign, label, logo or text is added anywhere.\n- no person and nothing that looks like a person in the background: the grey area becomes empty blurred background only.\n- the soft shallow depth of field, grain, warm light and slight tilt of the phone snapshot, and the framing exactly: nothing is zoomed, shifted or re-centred.\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.",
+  "prompt_sha256": "b15ec02ae2d0bd81ca0a206f777127769a7b5238ec950df1419593c3163d45e9",
+  "files": [
+   {
+    "n": 1,
+    "role": "photo_to_edit",
+    "sha256": "f769ed40c48a29ed81867c06aa3a7897004ea5e89377cc82534592b67d50bf6c",
+    "upload_name": "pin12d_send.jpg",
+    "bytes": 169313,
+    "px": [
+     848,
+     1264
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "ae1ec5a8d19bae55a879b6a9924a7acad23a2e74df06a63359bfd8d98c4e1caf"
+ }
+}
