@@ -25,6 +25,7 @@ from typing import Optional
 from PIL import Image, ImageOps
 
 from gemini_webapi.exceptions import GeminiError, ImageGenerationError, UsageLimitExceededError
+from recipe import layout_text, pose_points_text  # noqa: F401  (moved to recipe.py 2026-10-07; re-exported for tools/goal_layout.py)
 from session import AuthError, authenticated_client, credits_left
 
 ROOT = Path(__file__).parent
@@ -32,16 +33,6 @@ CONFIG_PATH = ROOT / "facecard.json"
 IDENTITY_LOCK_PATH = ROOT / "prompts" / "identity_lock.txt"
 ROLE_TEMPLATE_PATH = ROOT / "prompts" / "role_template.txt"
 LAYOUTS_DIR = ROOT / ".cache" / "layouts"
-
-
-def layout_text(lay: dict) -> str:
-    """The goal's frame layout in Gemini's own box format (normalized 0-1000, [ymin, xmin, ymax, xmax]), read by tools/goal_layout.py. The user
-    asked (2026-09-26) for something Gemini understands better than a 3x3 grid to hold the camera distance and the subject's boundary."""
-    fmt = lambda b: f"[{b[0]}, {b[1]}, {b[2]}, {b[3]}]"
-    parts = [f"his whole body {fmt(lay['person'])}", f"his head {fmt(lay['head'])}"]
-    parts += [f"the {o['name']} {fmt(o['box'])}" for o in lay.get("objects", [])]
-    return ("LAYOUT: Frame positions as bounding boxes normalized to 0-1000, [ymin, xmin, ymax, xmax]: " + "; ".join(parts) + ". Place him, "
-            "his head and these things exactly inside these boxes: the same size in the frame and so the same camera distance.")
 SCENE_REF_NOTE = "\n\nThe last attached image is a scene/posture reference with the head/neck region neutralized — strictly match its camera perspective, elevation, body posture, limb positioning, ground contact, clothing, and background setting. Do NOT copy any facial or skull geometry from it; the subject's face, skull shape, profile contour, hairline, and facial features must come exclusively from the attached identity reference photos."
 
 
@@ -58,8 +49,34 @@ def get_refs_dir(config: dict) -> Path:
     return refs_dir
 
 
+PREP_INDEX = "_prep_index.json"
+RENDER_STEM = re.compile(r"^(v\d+_\d+|best|cand\d+|not_passing_closest)$", re.I)
+
+
+def _prep_index(cache_dir: Path) -> dict:
+    try:
+        return json.loads((cache_dir / PREP_INDEX).read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def _note_prep(cache_dir: Path, cached: Path, src: Path) -> None:
+    """Remember which source file each cached copy was made from (the cache is keyed by file stem, so two runs' v1_0.jpg share one name)."""
+    idx = _prep_index(cache_dir)
+    key = str(src.resolve())
+    if (idx.get(cached.name) or {}).get("source") != key:
+        idx[cached.name] = {"source": key, "noted": datetime.now().isoformat(timespec="seconds")}
+        import provenance
+        provenance.atomic_write_json(cache_dir / PREP_INDEX, idx)
+
+
 def prepare_ref(src: Path, cache_dir: Path, max_dim: int = 2048) -> Path:
-    """EXIF-transpose + downscale a reference image, cached by source mtime."""
+    """EXIF-transpose + downscale a reference image, cached by source mtime.
+
+    Collision guard (2026-10-07): the cache is keyed by file stem, so an earlier run's v1_0.jpg (a stage-2 photo to edit) could be sent in place
+    of another run's v1_0.jpg whenever the cached copy was newer. .cache/refs/_prep_index.json now records each copy's source; a copy made from a
+    different source, or a render-named copy with no record, is made again. Reference photos with no record are trusted as before (unchanged
+    bytes, unchanged upload names)."""
     if not src.exists():
         fallback = cache_dir / src.name
         if fallback.exists():
@@ -68,7 +85,12 @@ def prepare_ref(src: Path, cache_dir: Path, max_dim: int = 2048) -> Path:
             raise FileNotFoundError(f"Reference image not found: {src}")
     cache_dir.mkdir(parents=True, exist_ok=True)
     cached = cache_dir / (src.stem + ".jpg")
-    if cached.is_file() and cached.stat().st_mtime >= src.stat().st_mtime:
+    same_file = cached.is_file() and cached.resolve() == src.resolve()
+    entry = _prep_index(cache_dir).get(cached.name)
+    foreign = not same_file and ((entry is not None and entry.get("source") != str(src.resolve())) or (entry is None and RENDER_STEM.match(src.stem)))
+    if cached.is_file() and not foreign and (same_file or cached.stat().st_mtime >= src.stat().st_mtime):
+        if not same_file:
+            _note_prep(cache_dir, cached, src)
         # An up-to-date cache file used to be returned unchecked: the cache held full 12 MP copies, uploaded as-is (credit plan, 2026-09-27).
         with Image.open(cached) as c:
             if max(c.size) <= max_dim:
@@ -83,6 +105,8 @@ def prepare_ref(src: Path, cache_dir: Path, max_dim: int = 2048) -> Path:
         img = img.convert("RGB")
         img.thumbnail((max_dim, max_dim), Image.LANCZOS)
         img.save(cached, "JPEG", quality=95)
+    if not same_file:
+        _note_prep(cache_dir, cached, src)
     return cached
 
 
@@ -103,6 +127,25 @@ def slugify(text: str, max_len: int = 40) -> str:
 HEAD_TURN_RE = re.compile(r"(?:face|head)[^.]*?(\d{1,2})\s*degrees?\s+toward\s+(?:the\s+)?picture-(left|right)")
 
 
+def head_bin_from_text_ev(prompt_text: str) -> tuple[str, str]:
+    """(bin, the words that decided it). See head_bin_from_text."""
+    low = prompt_text.lower()
+    m = HEAD_TURN_RE.search(low)
+    if m:
+        deg, side = int(m.group(1)), m.group(2)
+        if deg >= 55:
+            return f"profile_{side}", m.group(0)
+        if deg >= 25:
+            return f"three_quarter_{side}", m.group(0)
+        return "frontal", m.group(0)
+    for sentence in re.split(r"(?<=[.!?])\s+", low):
+        if "profile" in sentence or "60 degree" in sentence or "70 degree" in sentence or "75 degree" in sentence:
+            return ("profile_left" if "left" in sentence else "profile_right"), sentence[:160]
+        if "three-quarter" in sentence or "3/4" in sentence or "40 degree" in sentence or "45 degree" in sentence:
+            return ("three_quarter_left" if "left" in sentence else "three_quarter_right"), sentence[:160]
+    return "frontal", "no head-turn phrase in the text"
+
+
 def head_bin_from_text(prompt_text: str) -> str:
     """Pose bin from the head phrase only, so a limb on picture-left does not pull left-facing references.
 
@@ -110,21 +153,40 @@ def head_bin_from_text(prompt_text: str) -> str:
     convention as scorer.analyze_face (a nose left of the eye centre is a *_left bin). Older prompt files without that phrase
     fall back to the keyword read, limited to the sentence that names the turn.
     """
-    low = prompt_text.lower()
-    m = HEAD_TURN_RE.search(low)
-    if m:
-        deg, side = int(m.group(1)), m.group(2)
-        if deg >= 55:
-            return f"profile_{side}"
-        if deg >= 25:
-            return f"three_quarter_{side}"
-        return "frontal"
-    for sentence in re.split(r"(?<=[.!?])\s+", low):
-        if "profile" in sentence or "60 degree" in sentence or "70 degree" in sentence or "75 degree" in sentence:
-            return "profile_left" if "left" in sentence else "profile_right"
-        if "three-quarter" in sentence or "3/4" in sentence or "40 degree" in sentence or "45 degree" in sentence:
-            return "three_quarter_left" if "left" in sentence else "three_quarter_right"
-    return "frontal"
+    return head_bin_from_text_ev(prompt_text)[0]
+
+
+def face_choice_of(config: dict, scene_image_path, prompt_text: str, info: dict | None = None) -> str:
+    """The head-pose bin that picks the FACE references: YuNet on the goal first, then the head phrase of the text. `info` (if given) receives
+    {'bin', 'decided_by', 'evidence'} so the choice is visible in the recipe (2026-10-07: pin 5's face set was decided by one sentence,
+    "about 25 degrees", exactly on the cut-off, because YuNet found no face in the bowed goal)."""
+    from scorer import analyze_face
+    target_bin, decided, evidence = "frontal", "default", "no goal picture and no text"
+    if scene_image_path and Path(scene_image_path).exists():
+        fi = analyze_face(scene_image_path)
+        if fi.get("detected"):
+            target_bin, decided = fi.get("pose_bin", "frontal"), "yunet"
+            evidence = f"YuNet found the goal's face: {fi.get('direction')}, yaw ratio {fi.get('yaw_ratio')}"
+        else:
+            evidence = "YuNet found no face in the goal"
+    if target_bin == "frontal" and prompt_text:
+        tb, words = head_bin_from_text_ev(prompt_text)
+        target_bin = tb
+        decided = "text" if decided != "yunet" else "yunet+text"
+        evidence = f"{evidence}; the text says: \"{words}\""
+    if info is not None:
+        info.update({"bin": target_bin, "decided_by": decided, "evidence": evidence})
+        # Record-only (2026-10-07): the measured head turn of the goal (headpose.py). It never changes the bin; a contradiction is shown, because
+        # pin 5's text said "toward picture-left" while its measured turn is 18 degrees toward picture-right.
+        if scene_image_path and Path(scene_image_path).exists():
+            import headpose
+            hp = headpose.measure(scene_image_path)
+            info["measured"] = hp
+            bin_side = "picture-left" if target_bin.endswith("_left") else ("picture-right" if target_bin.endswith("_right") else "frontal")
+            if hp.get("detected") and hp.get("side") and hp["side"] != bin_side and hp["side"] != "frontal":
+                info["warning"] = (f"the face references were chosen for a head turned {bin_side} ({decided}), but the goal's measured head turn is "
+                                   f"{abs(hp['yaw']):.0f} degrees toward {hp['side']} (yaw {hp['yaw']:+.0f}, pitch {hp['pitch']:+.0f})")
+    return target_bin
 
 
 SUBJECT_KEYS = ("refs_dir", "refs", "pose_bins", "anchors", "restore_refs")
@@ -151,27 +213,19 @@ def get_generation_refs(
     cache_dir: Path,
     scene_image_path: Optional[str | Path] = None,
     prompt_text: str = "",
+    info: Optional[dict] = None,
 ) -> list[Path]:
     """Select angle-targeted identity references for Gemini generation.
-    
+
     If scene reference or prompt specifies a profile or 3/4 angle, concentrates Gemini's
     attention on angle-matched photos (plus 1-2 frontal anchors) to avoid diluting
     cross-attention with conflicting frontal faces.
     """
-    from scorer import analyze_face
-
     pose_bins = config.get("pose_bins", {})
     all_refs = config.get("refs", [])
 
-    target_bin = "frontal"
-    # Detect target angle from scene image or prompt
-    if scene_image_path and Path(scene_image_path).exists():
-        info = analyze_face(scene_image_path)
-        if info.get("detected"):
-            target_bin = info.get("pose_bin", "frontal")
-
-    if target_bin == "frontal" and prompt_text:
-        target_bin = head_bin_from_text(prompt_text)
+    # Detect target angle from scene image or prompt (the decision and its evidence go into `info`)
+    target_bin = face_choice_of(config, scene_image_path, prompt_text, info)
 
     anchors = config.get("anchors", ["IMG_6873.jpg", "IMG_6858.jpg"])
     selected_names = []
@@ -243,11 +297,13 @@ def layout_sketch(goal: Path, lay: dict, cache_dir: Path) -> tuple[Path, str]:
 
 
 POSES_DIR = ROOT / ".cache" / "poses"
-POSE_PYTHON = Path(r"D:\VisionModels\yolo\.venv\Scripts\python.exe")
-_KP_WORDS = [("nose", "his nose"), ("r_shoulder", "his right shoulder"), ("l_shoulder", "his left shoulder"), ("r_elbow", "his right elbow"),
-             ("r_wrist", "his right hand"), ("l_elbow", "his left elbow"), ("l_wrist", "his left hand"), ("r_hip", "his right hip"),
-             ("l_hip", "his left hip"), ("r_knee", "his right knee"), ("l_knee", "his left knee"), ("r_ankle", "his right foot"),
-             ("l_ankle", "his left foot")]
+
+
+def pose_python() -> Path:
+    import paths
+    return paths.yolo_python()
+
+
 _LIMBS = [("l_shoulder", "r_shoulder"), ("l_shoulder", "l_elbow"), ("l_elbow", "l_wrist"), ("r_shoulder", "r_elbow"), ("r_elbow", "r_wrist"),
           ("l_shoulder", "l_hip"), ("r_shoulder", "r_hip"), ("l_hip", "r_hip"), ("l_hip", "l_knee"), ("l_knee", "l_ankle"), ("r_hip", "r_knee"),
           ("r_knee", "r_ankle")]
@@ -258,50 +314,6 @@ def goal_pose(goal: Path) -> dict | None:
     f = POSES_DIR / f"{goal.stem}.json"
     d = json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
     return d if d and d.get("person") else None
-
-
-def pose_points_text(pose: dict) -> str:
-    """POSE POINTS: the goal's measured joints in Gemini's own point format ([y, x], 0-1000), plus plain facts computed from them by code
-    (stance, legs straight or bent, torso lean, hand heights). The user, 2026-09-27: the checklist has to be built into the request; a posture
-    written from my reading of the goal left the legs out entirely (table tennis v7 drew a stride where the goal stands with feet together)."""
-    import math
-    kp, (W, H) = pose["person"]["kp"], pose["wh"]
-    ok = {k: v for k, v in kp.items() if v[2] >= 0.5}
-    pt = lambda k: f"[{round(ok[k][1] * 1000)}, {round(ok[k][0] * 1000)}]"
-    parts = [f"{w} {pt(k)}" for k, w in _KP_WORDS if k in ok]
-    facts = []
-    mid = lambda a, b: ((ok[a][0] + ok[b][0]) / 2, (ok[a][1] + ok[b][1]) / 2) if a in ok and b in ok else None
-    sh, hip = mid("l_shoulder", "r_shoulder"), mid("l_hip", "r_hip")
-    if sh and hip:
-        lean = math.degrees(math.atan2((sh[0] - hip[0]) * W, (hip[1] - sh[1]) * H))
-        facts.append(f"his torso is {'upright' if abs(lean) < 6 else 'leaning'} ({abs(lean):.0f} degrees from vertical"
-                     + ("" if abs(lean) < 6 else f", toward picture-{'right' if lean > 0 else 'left'}") + ")")
-        torso = math.hypot((hip[0] - sh[0]) * W, (hip[1] - sh[1]) * H)
-        if "l_ankle" in ok and "r_ankle" in ok:
-            apart = math.hypot((ok["l_ankle"][0] - ok["r_ankle"][0]) * W, (ok["l_ankle"][1] - ok["r_ankle"][1]) * H) / torso
-            words = "both feet close together under his hips" if apart < 0.35 else ("feet about hip-width apart" if apart < 0.6 else "feet wide apart")
-            facts.append(f"{words} (ankles {apart:.2f} of his torso length apart)")
-        for s_, k_, a_ in (("his right", "r_knee", ("r_hip", "r_ankle")), ("his left", "l_knee", ("l_hip", "l_ankle"))):
-            if k_ in ok and a_[0] in ok and a_[1] in ok:
-                v1 = ((ok[a_[0]][0] - ok[k_][0]) * W, (ok[a_[0]][1] - ok[k_][1]) * H)
-                v2 = ((ok[a_[1]][0] - ok[k_][0]) * W, (ok[a_[1]][1] - ok[k_][1]) * H)
-                ang = math.degrees(math.acos(max(-1, min(1, (v1[0] * v2[0] + v1[1] * v2[1]) / (math.hypot(*v1) * math.hypot(*v2) + 1e-9)))))
-                facts.append(f"{s_} leg {'straight' if ang > 165 else ('slightly bent' if ang > 145 else 'bent')} ({ang:.0f} degrees at the knee)")
-    if sh:
-        span = hip[1] - sh[1] if hip else None
-        for w, name in (("r_wrist", "his right hand"), ("l_wrist", "his left hand")):
-            if w in ok:
-                if span:
-                    f = (ok[w][1] - sh[1]) / span
-                    h = ("at shoulder height" if f < 0.2 else "at chest height" if f < 0.6 else "at waist height" if f < 1.05 else "below his waist")
-                else:
-                    h = "above his shoulders" if ok[w][1] < sh[1] else "below his shoulders"
-                dx = ok[w][0] - sh[0]
-                where = (f"{abs(dx):.2f} of the frame width out to picture-{'left' if dx < 0 else 'right'} of the middle of his chest"
-                         if abs(dx) >= 0.03 else "in front of the middle of his chest")
-                facts.append(f"{name} is {h}, {where}")
-    return ("POSE POINTS, measured from the goal (normalized 0-1000 as [y, x]; his own right and left): " + "; ".join(parts) + ". Put each of "
-            "his joints exactly at these points: the same posture and the same place in the frame. In words: " + "; ".join(facts) + ".")
 
 
 def draw_pose(im, pose: dict) -> None:
@@ -317,13 +329,23 @@ def draw_pose(im, pose: dict) -> None:
         d.ellipse([v[0] * w - 8, v[1] * h - 8, v[0] * w + 8, v[1] * h + 8], fill=(0, 0, 0))
 
 
-def run_pose_gate(goal: Path, renders: list[Path]) -> list[dict]:
-    """tools/pose_compare.py on every render (the YOLO environment); returns one result per render. Fixed limits live in that tool."""
+def run_pose_gate(goal: Path, renders: list[Path], strict: bool = False, record: dict | None = None) -> list[dict]:
+    """tools/pose_compare.py on every render (the YOLO environment); returns one result per render. Fixed limits live in that tool.
+    It used to return nothing, silently, when the YOLO environment was missing (no render gated, none rejected). Now that is printed, and with
+    strict=True (the staged runner) it is an error; `record` receives the tool's exit code and stderr."""
     import subprocess
-    if not POSE_PYTHON.exists() or not renders:
+    if not renders:
         return []
-    cmd = [str(POSE_PYTHON), str(ROOT / "tools" / "pose_compare.py"), str(goal), *map(str, renders), "--json"]
+    py = pose_python()
+    if not py.exists():
+        if strict:
+            raise RuntimeError(f"the pose gate cannot run: {py} not found")
+        print(f"  [Pose gate] SKIPPED: {py} not found, no render was gated")
+        return []
+    cmd = [str(py), str(ROOT / "tools" / "pose_compare.py"), str(goal), *map(str, renders), "--json"]
     out = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=1800)
+    if record is not None:
+        record.update({"returncode": out.returncode, "stderr": (out.stderr or "")[-6000:]})
     res = []
     for line in out.stdout.splitlines():
         if line.startswith("{"):
@@ -331,16 +353,18 @@ def run_pose_gate(goal: Path, renders: list[Path]) -> list[dict]:
                 res.append(json.loads(line))
             except Exception:
                 pass
+    if strict and len(res) != len(renders):
+        raise RuntimeError(f"the pose gate returned {len(res)} result(s) for {len(renders)} render(s) (exit {out.returncode}): {(out.stderr or '')[-400:]}")
     return res
 
 
-def build_goal_request(config: dict, refs_dir: Path, cache_dir: Path, args) -> tuple[str, list[Path], list[Path], dict]:
-    """Route G (2026-09-26, the user's own prompt structure): his reference photos labelled by ROLE (face refs chosen by the goal's head pose,
-    his true-build body photo, his shoulder-and-arm photo), his fixed FACE and BUILD text from subject_profiles, and the goal written as text
-    (POSE / WARDROBE / SCENE / LIGHT / CAMERA, from scene-prompt-writer). The goal photo itself is never sent when it shows another man: sent
-    photos leak their model's skull, jaw and neck (measured 2026-09-19), and a public figure's photo is refused. When the goal is his OWN photo
-    it is sent too, labelled as the original photo to recreate. Returns (prompt, files in role order, face refs for scoring, log)."""
+def resolve_goal_inputs(config: dict, refs_dir: Path, cache_dir: Path, args) -> dict:
+    """Every FILE decision of Route G, made once (2026-10-07: build_goal_request split into resolve + compile, so a recipe can freeze the result).
+    Which reference photo goes in which role and WHY, their prepared copies, the photo to edit, props, the layout sketch, whether the goal is his
+    own photo. Returns the compiler's input (recipe.compile_route_g). Each item carries its prepared path, its upload name (the file name Gemini
+    sees), where it came from and why it was chosen; `face_choice` records the head-pose bin decision and its evidence."""
     from scorer import ArcFaceScorer
+    import recipe as R
 
     profile = config.get("subject_profiles", {}).get(args.subject or "me", {})
     roles = profile.get("roles", {})
@@ -350,32 +374,83 @@ def build_goal_request(config: dict, refs_dir: Path, cache_dir: Path, args) -> t
     inv = json.loads(Path(args.inventory).read_text(encoding="utf-8")) if getattr(args, "inventory", None) else None
     lay_p = LAYOUTS_DIR / f"{goal.stem}.json"
     layout = json.loads(lay_p.read_text(encoding="utf-8")) if lay_p.exists() else None
-    if layout and not getattr(args, "replace_subject", False):
-        # (replace-subject: the photo to edit carries the layout itself; the box text made tt-W v3_0 draw black boxes, 2026-09-27)
-        scene_text = scene_text + "\n\n" + layout_text(layout)
     pose = goal_pose(goal) if (getattr(args, "pose_points", False) or getattr(args, "pose_image", False)) else None
-    if pose and getattr(args, "pose_points", False):
-        scene_text = scene_text + "\n\n" + pose_points_text(pose)
+    flags = {"replace_subject": bool(getattr(args, "replace_subject", False)), "goal_as_image": getattr(args, "goal_as_image", "auto"),
+             "body_only": bool(getattr(args, "body_only", False)), "edit_photo": getattr(args, "edit_photo", None),
+             "layout_image": bool(getattr(args, "layout_image", False)), "pose_points": bool(getattr(args, "pose_points", False)),
+             "pose_image": bool(getattr(args, "pose_image", False))}
+    for opt in ("identity_bible", "build_sheet", "head_swap"):        # research options of 2026-10-07; absent = off, so older recipes compile unchanged
+        if getattr(args, opt, False):
+            flags[opt] = True
+    res = {"goal": str(goal), "scene_text_base": scene_text, "scene_from": str(args.prompt).replace("\\", "/") if prompt_arg.is_file() else "inline text",
+           "layout": layout, "pose": pose, "inventory": inv, "inventory_path": getattr(args, "inventory", None), "flags": flags}
+    choice_text = R.scene_text_of(res)      # the text the face choice has always read: --prompt + layout + POSE POINTS
 
-    def refs_of(names):
+    def item(role, path, why, src=None, prep="fit2048_q95", **kw):
+        p = Path(path)
+        return {"role": role, "path": p, "name": p.name, "from": str(src if src is not None else p).replace("\\", "/"), "prep": prep, "why": why, **kw}
+
+    def refs_of(names, role, why):
         out = []
         for n in names:
             if (refs_dir / n).exists() or (cache_dir / n).exists():
-                out.append(prepare_ref(refs_dir / n, cache_dir))
+                out.append(item(role, prepare_ref(refs_dir / n, cache_dir), why, refs_dir / n))
         return out
 
-    body, arms = refs_of(roles.get("body", [])), refs_of(roles.get("arms", []))
+    ch = None
+    if getattr(args, "character", None):
+        # a character (2026-10-08): the same face photos and the same body photo for every goal, and the character's description as the text
+        import characters
+        ch, _ = characters.load(args.character)
+        problems = characters.check(ch)
+        if problems:
+            raise SystemExit("; ".join(problems))
+        if getattr(args, "face_refs", None):
+            raise SystemExit("--character and --face-refs both name the face photos: use one")
+        res["character"] = {"ref": characters.ref_of(ch), "sha256": ch["sha256"], "description": ch.get("description")}
+        roles = {**roles, "body": [r["name"] for r in characters.body(ch)], "arms": []}
+    body = refs_of(roles.get("body", []), "body", f"character {characters.ref_of(ch)}: his true build" if ch else "subject_profiles.roles.body: his true build")
+    phys_name = getattr(args, "physique", None)
+    if phys_name:
+        # --physique (the user's yardstick, 2026-10-10: "any shirtless picture will get the fully pumped version of mine, and casual outdoor
+        # dressed versions will get the casual in-between version of my body"): the standard's approved photo is the BODY reference, with its
+        # own build text, in place of the character's body photo. Absent = unchanged.
+        stds = profile.get("physique") or {}
+        std = stds.get(phys_name) if not phys_name.startswith("_") else None
+        if not std:
+            raise SystemExit(f"--physique {phys_name}: no such standard in facecard.json subject_profiles.{args.subject or 'me'}.physique "
+                             f"({', '.join(k for k in stds if not k.startswith('_'))})")
+        body = [item("body", prepare_ref(Path(f), cache_dir), f"physique {phys_name}: the user's yardstick of 2026-10-10", Path(f)) for f in std["files"]]
+        res["physique"] = {"name": phys_name, "files": [Path(f).name for f in std["files"]], "label": std["label"], "build": std["build"]}
+    arms = refs_of(roles.get("arms", []), "arms", "subject_profiles.roles.arms: his shoulders and arms")
     skip = {Path(n).stem for n in roles.get("body", []) + roles.get("arms", [])}
-    angle_routed = get_generation_refs(config, refs_dir, cache_dir, scene_image_path=goal, prompt_text=scene_text)
-    faces = [r for r in angle_routed if r.stem not in skip][: int(getattr(args, "face_count", None) or roles.get("face_count", 4))]
+    choice: dict = {}
+    angle_routed = get_generation_refs(config, refs_dir, cache_dir, scene_image_path=goal, prompt_text=choice_text, info=choice)
+    face_paths = [r for r in angle_routed if r.stem not in skip][: int(getattr(args, "face_count", None) or roles.get("face_count", 4))]
+    why_bin = f"head-pose bin {choice.get('bin')} ({choice.get('decided_by')}: {choice.get('evidence')})"
     # Whole-scene photos from his favourites ("_fav" in the name) go as head-and-shoulders crops: sent whole as a FACE reference, one was
     # edited instead of the PHOTO TO EDIT (slimming edit 2026-09-27: IMG_4861_fav_right returned his rocky boulder-and-dog photo).
     import replicate as _R
-    faces = [(_R.head_ref_crop(r, None) if "_fav" in r.stem else r) for r in faces]
+    faces = [(item("face", _R.head_ref_crop(r, None), why_bin + "; a _fav photo, sent as its head-and-shoulders crop", r, "head768_q95")
+              if "_fav" in r.stem else item("face", r, why_bin, r)) for r in face_paths]
+    if ch:
+        faces = [item("face", prepare_ref(refs_dir / r["name"], cache_dir), f"character {characters.ref_of(ch)}: {r['slot'].replace('_', ' ')}",
+                      refs_dir / r["name"]) for r in characters.faces_for(ch, "G")]
+        choice = {"bin": None, "decided_by": f"character {characters.ref_of(ch)}", "evidence": "the same face photos for every goal",
+                  "measured": choice.get("measured"), "angle_routed_would_have_been": [p.name for p in face_paths]}
     if getattr(args, "face_refs", None):
         # The user, 2026-10-02 (think-again): the angle-routed set always includes a _fav photo (IMG_5850_fav: glasses, short neat hair, a purple/yellow double exposure;
         # IMG_4861_fav_right: glasses, short hair) that contradicts his clean curly references; 139 renders never varied it. Name the exact photos instead.
-        faces = [prepare_ref(refs_dir / n.strip(), cache_dir) for n in args.face_refs.split(",") if n.strip()]
+        names, decided = args.face_refs, "names"
+        if names.startswith("@"):
+            preset = (config.get("face_ref_presets") or {}).get(names[1:])
+            if not preset:
+                raise SystemExit(f"--face-refs {names}: no such preset in facecard.json face_ref_presets ({', '.join(k for k in (config.get('face_ref_presets') or {}) if not k.startswith('_'))})")
+            names, decided = ",".join(preset), f"preset {names}"
+        faces = [item("face", prepare_ref(refs_dir / n.strip(), cache_dir), f"--face-refs {args.face_refs}", refs_dir / n.strip())
+                 for n in names.split(",") if n.strip()]
+        choice = {"bin": None, "decided_by": decided, "evidence": f"--face-refs {args.face_refs}", "measured": choice.get("measured")}
+    res["face_choice"] = {**choice, "count": len(faces), "names": [f["name"] for f in faces]}
 
     # his own photo as the goal: included as the original photo to recreate (auto = his face scores as him against the face refs)
     own = args.goal_as_image == "yes"
@@ -384,151 +459,341 @@ def build_goal_request(config: dict, refs_dir: Path, cache_dir: Path, args) -> t
         try:
             sc = ArcFaceScorer()
             g = sc.embed(prepare_ref(goal, cache_dir))
-            own_score = max(sc.similarity(g, sc.embed(r)) for r in faces)
-            own = own_score >= float(config.get("thresholds", {}).get("own_min", 0.40))
+            own_score = max(sc.similarity(g, sc.embed(f["path"])) for f in faces)
+            # (identity_thresholds.own_min: the code read a 'thresholds' key that facecard.json never had; the value is 0.40 either way)
+            own = own_score >= float(config.get("identity_thresholds", {}).get("own_min", 0.40))
         except Exception:
             own = False
-    files: list[Path] = []
-    lines: list[str] = []
-
-    def add(paths: list[Path], one: str, many: str) -> tuple[int, int]:
-        if not paths:
-            return 0, 0
-        a = len(files) + 1
-        files.extend(paths)
-        b = len(files)
-        lines.append(f"Image {a} is {one}" if a == b else f"Images {a}-{b} are {many}")
-        return a, b
-
-    body_only = getattr(args, "body_only", False)
-    edit_photo = getattr(args, "edit_photo", None)
+    res.update({"own": own, "own_score": own_score})
+    items: dict = {"faces": faces, "body": body, "arms": arms, "inv_refs": [], "props": []}
+    res["items"] = items
+    if flags.get("identity_bible"):
+        res["identity_bible"] = (ROOT / "prompts" / "identity_bible.txt").read_text(encoding="utf-8").strip()
+    if flags.get("build_sheet") and (body or arms):
+        items["build_sheet"] = item("build_sheet", build_sheet_of([b["path"] for b in body + arms], cache_dir),
+                                    "--build-sheet: his body and arm photos side by side as one reference (at most 4 images of him)",
+                                    " + ".join(b["from"] for b in body + arms), "build_sheet")
+    # --teeth (the user, 2026-10-18): his own teeth from his two REAL smile photos (subject_profiles.teeth_refs), sent after the inventory's own
+    # references. Only for a goal whose man smiles or when the user asks (WHY); never the generated E2, never "whiter"; the words must say how
+    # his mouth is, with his teeth showing (the teeth diagnosis of 2026-10-17: nothing had ever asked for them).
+    teeth_items: list = []
+    teeth_why = getattr(args, "teeth", None)
+    if teeth_why:
+        tr = (profile.get("teeth_refs") or {}).get("refs") or []
+        if not tr:
+            raise SystemExit(f"--teeth: no teeth_refs in facecard.json subject_profiles.{args.subject or 'me'}")
+        # the words that are sent and ask for something: with an inventory its CHANGE ("make it ...") and KEEP lists and labels (the route text
+        # then only picks the face photos), never what the goal shows now (a CHANGE item's "goal" side); without one, the route text
+        words = (json.dumps({**inv, "change": [{k: v for k, v in c.items() if k != "goal"} for c in inv.get("change", [])]}, ensure_ascii=False)
+                 if inv else scene_text)
+        bad = re.search(r"(?<!never )(?<!not )\bwhit(?:er|en|ened)\b|closed[- ]lip\w*|lips (?:closed|together|pressed)|no teeth|teeth (?:hidden|not show\w*)",
+                        words, re.I)
+        if bad:
+            raise SystemExit(f"--teeth: the route text or the inventory still says '{bad.group(0)}'. With --teeth his lips part and his own teeth show "
+                             "as in his teeth photos, never whiter (the user, 2026-10-10: 'There is no need to change the color of the teeth')")
+        if not re.search(r"\bteeth\b", words, re.I):
+            raise SystemExit("--teeth: say how his mouth is in the CHANGE list (or the route text), e.g. 'his lips parted in his natural open smile, "
+                             "his own upper teeth showing as in HIS TEETH, FRONT'")
+        teeth_items = [item("inv_ref", prepare_ref(Path(r["path"]), cache_dir), f"--teeth ({teeth_why})", Path(r["path"]), label=r["label"],
+                            key=r["key"]) for r in tr]
+        res["teeth"] = {"because": teeth_why, "refs": [{"key": r["key"], "file": Path(r["path"]).name} for r in tr]}
     if inv and inv.get("mode") == "objects":
-        ref_n = {}
-        for r in inv.get("refs", []):
-            ref_n[r["key"]], _ = add([prepare_ref(ROOT / r["path"], cache_dir)], r["label"], "")
-        edit_n, _ = add([prepare_ref(ROOT / inv["photo_to_edit"], cache_dir)], "the PHOTO TO EDIT.", "")
-        change = [f"- {c['item']}: the PHOTO TO EDIT shows {c['goal']}; make it {c['his']}"
-                  + (f" (image {ref_n[c['ref']]})" if c.get("ref") in ref_n else "") + "." for c in inv.get("change", [])]
-        keep = [f"- {k}." for k in inv.get("keep", [])]
-        prompt = ("REFERENCE IMAGES BY ROLE:\n" + "\n".join(lines) + f"\n\nEdit image {edit_n}, the PHOTO TO EDIT: make exactly the changes "
-                  "in the CHANGE LIST and nothing else. Its framing and everything not in the CHANGE LIST stay exactly as they are.\n\n"
-                  "CHANGE LIST:\n" + "\n".join(change) + "\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n" + "\n".join(keep)
-                  + "\n\nPhotorealistic photograph with the same light, colour, grain and sharpness as the PHOTO TO EDIT.")
-        log = {"route": "G", "mode": "objects", "goal": str(goal), "goal_sent": False, "layout": None, "goal_own_score": None,
-               "roles": {"face": [], "body": [], "arms": []}, "props": [], "layout_sketch": None, "scene_text": "\n".join(change),
-               "goal_role": "photo to edit", "pose_points": False, "body_only": False, "edit_photo": None, "inventory": args.inventory}
-        return prompt, files, faces, log
-    if edit_photo:   # his own photo is the photo to edit, so it also carries his build: no separate body/arm references
-        body, arms = [], []
-    if not body_only:   # body-only edits keep the head's pixels: no face photos to redraw it from (faces still score identity)
-        add(faces, "the FACE reference of this man.", "FACE references of this man.")
-    body_n, _ = add(body, "the BODY reference — his true build and proportion.", "BODY references — his true build and proportion.")
-    add(arms, "the SHOULDER AND ARM reference.", "SHOULDER AND ARM references.")
-    ref_n = {}
-    for r in (inv or {}).get("refs", []):
-        ref_n[r["key"]], _ = add([prepare_ref(ROOT / r["path"], cache_dir)], r["label"], "")
+        items["inv_refs"] = [item("inv_ref", prepare_ref(ROOT / r["path"], cache_dir), "inventory reference", ROOT / r["path"], label=r["label"], key=r["key"])
+                             for r in inv.get("refs", [])] + teeth_items
+        items["photo_to_edit"] = item("photo_to_edit", prepare_ref(ROOT / inv["photo_to_edit"], cache_dir), "the inventory's photo_to_edit", ROOT / inv["photo_to_edit"])
+        return res
+    items["inv_refs"] = [item("inv_ref", prepare_ref(ROOT / r["path"], cache_dir), "inventory reference", ROOT / r["path"], label=r["label"], key=r["key"])
+                         for r in (inv or {}).get("refs", [])] + teeth_items
     # Objects of his own, by role (the user, 2026-09-27: his Honda CB350 found in his photos, as the pin's motorcycle). PATH::LABEL.
-    props = []
     for spec in getattr(args, "prop", None) or []:
         path, _, label = spec.partition("::")
-        add([prepare_ref(Path(path), cache_dir)], label.strip(), "")
-        props.append({"path": path, "label": label.strip()})
-    sketch = None
-    if layout and getattr(args, "layout_image", False):
+        items["props"].append(item("prop", prepare_ref(Path(path), cache_dir), "--prop", Path(path), label=label.strip(), arg=path))
+    if layout and flags["layout_image"]:
         sketch, colour_key = layout_sketch(goal, layout, cache_dir)
-        stick = ""
-        if pose and getattr(args, "pose_image", False):
+        stick = False
+        if pose and flags["pose_image"]:
             from PIL import Image as _Image
             with _Image.open(sketch) as im:
                 im = im.convert("RGB")
                 draw_pose(im, pose)
                 sketch = cache_dir / f"layout_pose_sketch_{goal.stem}.png"
                 im.save(sketch)
-            stick = " The black stick figure is his exact posture: every limb, both hands and both feet where the stick figure has them."
-        add([sketch], f"a LAYOUT SKETCH, not a photograph: flat coloured boxes marking where things sit in the frame ({colour_key}).{stick} The "
-            "photograph has exactly this frame: he, his head and these things fill exactly these boxes, the same size and the same camera "
-            "distance. Draw nothing of the sketch itself: the photograph shows no coloured rectangles, box outlines or lines.", "")
-        # ^ named only after it happened: pin v9 v3_0 drew the sketch's boxes into the photo (2026-09-27)
-    replace = getattr(args, "replace_subject", False)
-    goal_role = getattr(args, "goal_as_image", "auto") == "goal" and not replace
-    if edit_photo:
-        ep_n, _ = add([prepare_ref(Path(edit_photo), cache_dir)], "the PHOTO TO EDIT: his own full-length photo. His body in it — his "
-                      "shoulders, arms, chest, waist and height — is his true build.", "")
-    if goal_role and edit_photo:
-        add([prepare_ref(goal, cache_dir)], "the GOAL IMAGE, a reference for the scene, pose, clothes, framing and light only. The man in the GOAL "
-            "IMAGE is NOT the subject: nothing of his face, hair, beard, head shape, neck, skin or body build is carried over.", "")
-    elif goal_role:
-        # The user, 2026-09-27: send the goal itself, labelled as the goal, with the subject taken only from the references.
-        add([prepare_ref(goal, cache_dir)], "the GOAL IMAGE. Recreate this photograph exactly: the same composition and framing, the same "
-            "camera distance and angle, his exact posture (torso, both arms, both hands, both legs and feet) and exactly where he stands in the "
-            "frame and against every object, the same scene, clothes and light. The man in the GOAL IMAGE is NOT the subject and must not "
-            "appear: nothing of his face, hair, beard, head shape, jaw, neck, skin, body build or height is carried over. The subject is only "
-            f"the man of images 1-{len(faces) + len(body) + len(arms)}.", "")
+            stick = True
+        items["sketch"] = item("layout_sketch", sketch, "--layout-image: the goal's layout boxes" + (" with its skeleton" if stick else ""), sketch,
+                               "layout_sketch", colour_key=colour_key, stick=stick)
+    replace = flags["replace_subject"]
+    goal_role = flags["goal_as_image"] == "goal" and not replace
+    if flags["edit_photo"]:
+        items["edit_photo"] = item("edit_photo", prepare_ref(Path(flags["edit_photo"]), cache_dir), "--edit-photo: his own photo to edit", flags["edit_photo"])
+    if goal_role:
+        items["goal_image"] = item("goal_image", prepare_ref(goal, cache_dir), "--goal-as-image goal", goal)
     if replace:
-        # The user, 2026-09-27: "replace the newer me (the reference images: body, face, hair, beard, everything) in place of the goal image's
-        # subject". The goal is the photo to edit, so posture, position and framing come from its own pixels.
         edit_src = (ROOT / inv["photo_to_edit"]) if inv and inv.get("photo_to_edit") else goal
-        edit_n, _ = add([prepare_ref(edit_src, cache_dir)], "the PHOTO TO EDIT.", "")
+        items["photo_to_edit"] = item("photo_to_edit", prepare_ref(edit_src, cache_dir),
+                                      "the inventory's photo_to_edit" if inv and inv.get("photo_to_edit") else "the goal (--replace-subject)", edit_src)
     if own and not replace and not goal_role:
-        add([prepare_ref(goal, cache_dir)], "the ORIGINAL PHOTO of this moment: recreate exactly its pose, framing, camera distance, "
-            "clothes, background and light; his face, hair, beard and moustache come only from the FACE references, never from this photo.", "")
-    face_text = str(profile.get("face_text", ""))
-    if body_only:
-        face_text = ("Do not redraw his head. His head stays exactly as it is in the PHOTO TO EDIT, pixel for pixel: the same face, hair, beard, "
-                     "eyewear, head tilt and bow, and the same gaze direction.")
-    elif own or replace or goal_role:
-        # The user, 2026-09-26: even when the goal is his own photo, his face, hair, beard and moustache come from the FACE references, never
-        # from the goal's face (table tennis v5: a bigger beard and moustache than his references). The original gives the scene only.
-        role_word = "photo to edit" if replace else ("goal image" if goal_role else "original photo")
-        face_text += (f" His face, hair, beard and moustache come only from the FACE references (images 1-{len(faces)}), never from the "
-                      f"{role_word}: his hair is the full tight curly black hair of the references even where the {role_word} shows it "
-                      "cut shorter.")   # table tennis v6 copied the photo's short cut; item 28 fail confirmed by the user 2026-09-27
-    template = ROLE_TEMPLATE_PATH.read_text(encoding="utf-8").strip()
-    build = str(profile.get("build_text", "")).replace("{BODY}", str(body_n or 5))
-    if (replace or goal_role) and not own:
-        # The user, 2026-09-27: every Pinterest version kept the goal man's heavy build (broad thick shoulders, big arms), not his.
-        # Named only now that it has happened (the image-prompt rule).
-        arms_n = f" and {body_n + 1}" if arms else ""
-        build += (f" His whole body is his own, from images {body_n or 5}{arms_n}: never the build of the man in the "
-                  f"{'photo to edit' if replace else 'goal image'}, who is broader and far more muscular, with thicker arms and a bigger "
-                  "chest. His shoulders, arms, chest and waist are the slimmer ones of his references.")
-    if edit_photo:
-        build = (f"His body stays exactly his own, as in image {ep_n}: the same slim shoulders, slim arms, flat chest and narrow waist, "
-                 "the same proportions and height. Never the broader, more muscular build of the man in the GOAL IMAGE.")
-        template = template.replace("Generate a new photograph of THIS EXACT MAN — not a lookalike.",
-            f"Edit image {ep_n}, the PHOTO TO EDIT, which shows THIS EXACT MAN: keep him, his own face and his own slim body, and change "
-            "everything else so that the photograph recreates the GOAL IMAGE: move him into the goal's scene, in the goal's exact pose, "
-            "wearing the goal's clothes, holding what the goal's man holds, at the goal's framing, camera distance and light.")
-    elif replace and body_only:
-        template = template.replace("Generate a new photograph of THIS EXACT MAN — not a lookalike.",
-            f"Edit image {edit_n}, the PHOTO TO EDIT: change ONLY his body below the neck (shoulders, arms, chest, waist) to his own build from "
-            "the BODY references. Everything else in the PHOTO TO EDIT stays exactly as it is: his whole head, his exact posture, both hands, "
-            "the clothes (refitted to his build), every object, the background, the framing and the light.")
-    elif replace:
-        template = template.replace("Generate a new photograph of THIS EXACT MAN — not a lookalike.",
-            f"Edit image {edit_n}, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT "
-            "MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. "
-            "Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), "
-            "where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only "
-            "who he is changes.")
-    if inv:
-        change = [f"- {c['item']}: the PHOTO TO EDIT shows {c['goal']}; make it {c['his']}"
-                  + (f" (image {ref_n[c['ref']]})" if c.get("ref") in ref_n else "") + "." for c in inv.get("change", [])]
-        keep = [f"- {k}." for k in inv.get("keep", [])]
-        scene_text = ("CHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n" + "\n".join(change)
-                      + "\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n" + "\n".join(keep))
-        if replace and not body_only:
-            template = template.replace("Only who he is changes.", "Only who he is and the items in the CHANGE LIST change; nothing else.")
-    if len(files) > 10:
-        raise SystemExit(f"{len(files)} reference files: the Gemini app takes at most 10 per prompt")
-    prompt = (template.replace("{ROLES}", "\n".join(lines)).replace("{FACE}", face_text)
-              .replace("{BUILD}", build).replace("{SCENE}", scene_text))
-    log = {"route": "G", "goal": str(goal), "goal_sent": own, "layout": layout, "goal_own_score": None if own_score is None else round(own_score, 3),
-           "roles": {"face": [r.name for r in faces], "body": [r.name for r in body], "arms": [r.name for r in arms]}, "props": props,
-           "layout_sketch": str(sketch) if sketch else None, "scene_text": scene_text,
-           "goal_role": "photo to edit" if replace else ("goal image" if goal_role else ("original photo" if own else None)),
-           "pose_points": bool(pose and getattr(args, "pose_points", False)), "body_only": body_only, "edit_photo": edit_photo, "inventory": getattr(args, "inventory", None)}
-    return prompt, files, faces, log
+        items["original"] = item("original", prepare_ref(goal, cache_dir), "his own photo: the original to recreate", goal)
+    return res
+
+
+def build_sheet_of(paths: list[Path], cache_dir: Path, height: int = 1536, gap: int = 24) -> Path:
+    """His body and arm photos side by side as ONE image (his real photos only, nothing generated), at one height with a white gap. Same inputs ->
+    same bytes; the recipe freezes it by sha256 anyway."""
+    ims = []
+    for p in paths:
+        with Image.open(p) as im:
+            im = ImageOps.exif_transpose(im).convert("RGB")
+            ims.append(im.resize((round(im.width * height / im.height), height), Image.LANCZOS))
+    sheet = Image.new("RGB", (sum(i.width for i in ims) + gap * (len(ims) - 1), height), (255, 255, 255))
+    x = 0
+    for i in ims:
+        sheet.paste(i, (x, 0))
+        x += i.width + gap
+    out = cache_dir / ("build_sheet_" + "_".join(Path(p).stem.replace(" ", "-") for p in paths) + ".jpg")
+    sheet.save(out, "JPEG", quality=95)
+    return out
+
+
+def build_goal_request(config: dict, refs_dir: Path, cache_dir: Path, args) -> tuple[str, list[Path], list[Path], dict]:
+    """Route G request: resolve_goal_inputs (files and decisions) + recipe.compile_route_g (the prompt; moved there unchanged on 2026-10-07).
+    Returns (prompt, files in role order, face refs for scoring, log), exactly as before the split."""
+    import recipe as R
+    res = resolve_goal_inputs(config, refs_dir, cache_dir, args)
+    profile = config.get("subject_profiles", {}).get(args.subject or "me", {})
+    prompt, ordered, log, notices = R.compile_route_g(res, profile, ROLE_TEMPLATE_PATH.read_text(encoding="utf-8"))
+    for level, msg in notices:
+        if level == "drop":
+            print(f"NOTE: {msg}")
+    return prompt, [it["path"] for it in ordered], [f["path"] for f in res["items"]["faces"]], log
+
+
+GEN_ROUTE_ARGS = ["goal", "prompt", "inventory", "goal_as_image", "replace_subject", "body_only", "edit_photo", "layout_image", "pose_points",
+                  "pose_image", "prop", "face_refs", "face_count", "subject", "identity_bible", "build_sheet", "head_swap", "character",
+                  "restore_background", "physique", "teeth"]
+REPLICATE_ARGS = ["zone", "source", "glasses", "look", "expression", "current_hair", "from_picture", "current_look", "expression_ref", "rank",
+                  "loose_crop", "expression_ref_intro", "head_region"]
+
+
+def cmd_character(args) -> int:
+    """character new | show: the fixed reference photos and description of one man (characters.py, 2026-10-08)."""
+    import characters
+    if args.character_cmd == "show":
+        return characters.show(args.ref)
+    if not args.because:
+        raise SystemExit("--because is required: say why this version exists")
+    slots = {}
+    for spec in args.face:
+        slot, _, name = spec.partition("=")
+        if slot not in characters.FACE_ORDER or not name:
+            raise SystemExit(f"--face {spec!r}: use SLOT=NAME with SLOT one of {', '.join(characters.FACE_ORDER)}")
+        slots[slot] = name
+    desc = json.loads(Path(args.description).read_text(encoding="utf-8"))
+    excluded = []
+    for spec in args.exclude or []:
+        name, _, why = spec.partition("::")
+        excluded.append({"name": name.strip(), "why": why.strip()})
+    ch = characters.new(args.name, slots, args.body, desc, excluded, args.because,
+                        band_names=[n.strip() for n in args.band_from.split(",")] if args.band_from else None)
+    path = characters.save_new(ch)
+    print(f"character {characters.ref_of(ch)} written: {path}  sha {ch['sha256'][:12]}")
+    return characters.show(str(path))
+
+
+def cmd_recipe(args) -> int:
+    """recipe new | bump | import-run | show: a recipe is the frozen method of one goal (recipe.py)."""
+    import recipe as R
+    if args.recipe_cmd == "show":
+        return R.show(args.ref)
+    if args.recipe_cmd == "new" and getattr(args, "method", "G") == "replicate":
+        # replicate/1 (2026-10-08): his own photo, edited as a crop and pasted back, frozen like Route G
+        import replicate_recipe
+        if not args.because:
+            raise SystemExit("--because is required: say why this version exists (the user's words, or the failed checklist item)")
+        if not args.goal:
+            raise SystemExit("recipe new --method replicate needs --goal (his own photo, full resolution)")
+        rec = asyncio.run(replicate_recipe.freeze(args, because=args.because))
+        path = R.save_new(rec)
+        inp = rec["inputs"]
+        print(f"recipe {rec['id']} v{rec['version']} written: {path}\n  method replicate/1, character {inp['character']['ref']}, {inp['source_kind']} photo "
+              f"(pool {inp['own_score']}), zone {inp['zone']}, crop {inp['crop']}, expression {inp['expression']}\n  request {rec['lock']['request_sha256']}"
+              f"  files {len(rec['lock']['files'])}  model {rec['method']['model']['label']} x{rec['method']['samples']} (max {rec['method']['max_attempts']} attempts)")
+        if inp.get("place_from"):
+            print(f"  placement pass: the head of {inp['place_from']['path']} (made by {inp['place_from'].get('recipe')}), a generated image: run only with the user's yes")
+        return 0
+    for opt in ("place_from", "eye_gate", "head_region"):
+        if getattr(args, opt, None) and (args.recipe_cmd == "new" or R.load(args.ref)[0]["method"].get("route") != "replicate"):
+            raise SystemExit(f"--{opt.replace('_', '-')} is a replicate/1 option (recipe new --method replicate, or recipe bump of a replicate/1 version)")
+    if args.recipe_cmd == "import-run":
+        bad = 0
+        for rd in args.runs:
+            out = R.import_run(Path(rd), because=args.because or "", check_only=args.check_only, samples=args.samples,
+                               stop_after_fails=args.stop_after_fails, prompt_path=args.prompt)
+            if args.check_only:
+                bad += not (out and out.get("prompt_equal") and not out.get("problems"))
+                continue
+            if out is None:
+                return 1
+            if not args.because:
+                raise SystemExit("--because is required: say why this version exists (the user's words, or the failed checklist item)")
+            path = R.save_new(out)
+            print(f"recipe {out['id']} v{out['version']} written: {path}\n  request {out['lock']['request_sha256']}  prompt {out['lock']['prompt_sha256'][:16]}"
+                  f"  files {len(out['lock']['files'])}  model {out['method']['model']['label']}")
+        if args.check_only:
+            print(f"{len(args.runs) - bad}/{len(args.runs)} run(s) reproduce exactly from today's code and provable files")
+        return 0 if not bad else 1
+    if not args.because:
+        raise SystemExit("--because is required: say why this version exists (the user's words, or the failed checklist item)")
+    if args.recipe_cmd == "new":
+        if not (args.goal and args.prompt):
+            raise SystemExit("recipe new needs --goal and --prompt")
+        args.count = args.samples or 2                                    # explicit in the recipe, never an implicit default at run time
+        args.stop_after_fails = 2 if args.stop_after_fails is None else args.stop_after_fails
+        rec = R.from_gen_args(args, because=args.because)
+        path = R.save_new(rec)
+        fc = rec["inputs"].get("face_choice") or {}
+        print(f"recipe {rec['id']} v{rec['version']} written: {path}\n  request {rec['lock']['request_sha256']}  files {len(rec['lock']['files'])}"
+              f"  face choice: bin {fc.get('bin')} decided by {fc.get('decided_by')}: {fc.get('evidence')}")
+        if fc.get("warning"):
+            print(f"  WARNING (face choice): {fc['warning']}")
+        for lvl, msg in rec["origin"].get("notices") or []:
+            print(f"  {lvl}: {msg}")
+        return 0
+    if args.recipe_cmd == "bump":
+        old, _ = R.load(args.ref)
+        given = {k: getattr(args, k) for k in GEN_ROUTE_ARGS if getattr(args, k, None) is not None}
+        if old["method"].get("route") == "replicate" and getattr(args, "build_prompt", None):
+            # a body pass's prompt version (2026-10-09: version 2 lets the clothes change); the frozen crop and build reading stay byte-identical
+            import copy
+            import provenance
+            import replicate_recipe as RR
+            if old["inputs"].get("zone") != "build":
+                raise SystemExit("--build-prompt applies to a body pass (a replicate/1 recipe with --zone build)")
+            rec = copy.deepcopy(old)
+            n = int(args.build_prompt)
+            rec["inputs"].update({"build_prompt": n, "body_judge": n, "expected_change": RR.expected_change(rec["inputs"].get("build_change"))})
+            if n >= 2:      # a reflection of him (a second copy of his face, found as replicate finds it) gets the same new body
+                import identity
+                import replicate as RP
+                from scorer import ArcFaceScorer
+                sc = ArcFaceScorer()
+                pool = identity.build_pool(load_config(), sc, verbose=False)
+                img = RP.load_source(provenance.blob_path(old["goal"]["sha256"]))
+                main = identity.score_image(img, pool, sc)
+                copies = ([f for f in RP.find_identity_faces(img, sc, pool, main["emb"], identity.duplicates_of(main["emb"], pool))[1:]
+                           if f.get("role") == "copy"] if main.get("detected") else [])
+                rec["inputs"]["reflection"] = bool(copies)
+            prompt = RR.compile_prompt(rec["inputs"])
+            lock = dict(rec["lock"])
+            lock.update({"prompt": prompt, "prompt_sha256": provenance.sha256_text(prompt), "compiled_with": RR.compiled_with()})
+            if args.model:
+                lock["model"] = args.model
+                rec["method"]["model"] = R.model_record(args.model, load_config())
+            lock["request_sha256"] = R.request_sha256(lock)
+            rec.update({"version": R.next_version(old["id"]), "parent": f"v{old['version']}", "because": args.because, "lock": lock,
+                        "created": datetime.now().isoformat(timespec="seconds"), "origin": {"kind": "bump", "from": f"v{old['version']}"}})
+            if args.samples:
+                rec["method"]["samples"] = args.samples
+            if getattr(args, "max_attempts", None):
+                rec["method"]["max_attempts"] = args.max_attempts
+            print(f"{old['id']}: v{old['version']} -> v{rec['version']}\n" + R.lock_diff(old, rec))
+            if args.dry_run:
+                print("(dry run: nothing written)")
+                return 0
+            path = R.save_new(rec)
+            print(f"written: {path}  request {rec['lock']['request_sha256']}")
+            return 0
+        if old["method"].get("route") == "replicate" and getattr(args, "eye_gate", None):
+            # the eye gate (2026-10-12, pin 16): this version plus the gate; the lock is untouched, so the request is the same bytes
+            import replicate_recipe as RR
+            if given or any(getattr(args, k, None) is not None for k in REPLICATE_ARGS) or getattr(args, "build_prompt", None) \
+                    or getattr(args, "place_from", None) or args.model:
+                raise SystemExit("bump --eye-gate changes only the gate (with --samples and --max-attempts)")
+            rec = RR.with_eye_gate(old, args.eye_gate, R.next_version(old["id"]), args.because)
+            if args.samples:
+                rec["method"]["samples"] = args.samples
+            if getattr(args, "max_attempts", None):
+                rec["method"]["max_attempts"] = args.max_attempts
+            print(f"{old['id']}: v{old['version']} -> v{rec['version']}\n" + R.lock_diff(old, rec)
+                  + f"\neye gate: {rec['inputs']['eye_gate']['band']}; max attempts {old['method'].get('max_attempts')} -> {rec['method'].get('max_attempts')}")
+            if args.dry_run:
+                print("(dry run: nothing written)")
+                return 0
+            path = R.save_new(rec)
+            print(f"written: {path}  request {rec['lock']['request_sha256']}")
+            return 0
+        if old["method"].get("route") == "replicate" and getattr(args, "place_from", None):
+            # the placement pass (2026-10-12, FAILURE_LOG F34): this version plus one reference, the given rendered head, before the photo to
+            # edit; the crop, the readings and every other file stay byte-identical (nothing is read again)
+            import replicate_recipe as RR
+            if given or any(getattr(args, k, None) is not None for k in REPLICATE_ARGS) or getattr(args, "build_prompt", None):
+                raise SystemExit("bump --place-from changes only the placement reference (with --model, --samples and --max-attempts)")
+            rec = RR.with_placement(old, Path(args.place_from), R.next_version(old["id"]), args.because)
+            if args.model:
+                rec["lock"]["model"] = args.model
+                rec["method"]["model"] = R.model_record(args.model, load_config())
+                rec["lock"]["request_sha256"] = R.request_sha256(rec["lock"])
+            if args.samples:
+                rec["method"]["samples"] = args.samples
+            if getattr(args, "max_attempts", None):
+                rec["method"]["max_attempts"] = args.max_attempts
+            print(f"{old['id']}: v{old['version']} -> v{rec['version']}\n" + R.lock_diff(old, rec))
+            print(f"placement pass: the head of {rec['inputs']['place_from']['path']} (made by {rec['inputs']['place_from'].get('recipe')}), "
+                  "a generated image: run only with the user's yes")
+            if args.dry_run:
+                print("(dry run: nothing written)")
+                return 0
+            path = R.save_new(rec)
+            print(f"written: {path}  request {rec['lock']['request_sha256']}")
+            return 0
+        if old["method"].get("route") == "replicate" and (given or any(getattr(args, k, None) is not None for k in REPLICATE_ARGS)):
+            raise SystemExit("a replicate/1 recipe changes its inputs only through `recipe new --method replicate` (it reads the photo again); "
+                             "bump changes only --model, --samples and --max-attempts")
+        method_only = not given
+        if method_only:
+            import copy
+            rec = copy.deepcopy(old)
+            rec.update({"version": R.next_version(old["id"]), "parent": f"v{old['version']}", "because": args.because,
+                        "created": datetime.now().isoformat(timespec="seconds"), "origin": {"kind": "bump", "from": f"v{old['version']}"}})
+            if args.model:
+                rec["method"]["model"] = R.model_record(args.model, load_config())
+                rec["lock"]["model"] = args.model
+            if args.samples:
+                rec["method"]["samples"] = args.samples
+            if getattr(args, "max_attempts", None):
+                rec["method"]["max_attempts"] = args.max_attempts
+            if args.stop_after_fails is not None:
+                rec["method"]["stop"]["after_pose_fails"] = args.stop_after_fails
+            rec["lock"]["request_sha256"] = R.request_sha256(rec["lock"])
+        else:
+            import argparse as _ap
+            merged = {**old["method"]["args"], **given}
+            if given.get("character"):           # the character names the face photos: an older version's --face-refs / --face-count give way
+                merged.update({"face_refs": None, "face_count": None})
+            ns = _ap.Namespace(**merged, model=args.model or old["method"]["model"]["id"],
+                               count=args.samples or old["method"]["samples"],
+                               stop_after_fails=old["method"]["stop"]["after_pose_fails"] if args.stop_after_fails is None else args.stop_after_fails,
+                               stop_on_pass=old["method"]["stop"].get("on_pass", False))
+            rec = R.from_gen_args(ns, because=args.because, version=R.next_version(old["id"]), parent=f"v{old['version']}")
+        print(f"{old['id']}: v{old['version']} -> v{rec['version']}\n" + R.lock_diff(old, rec))
+        if args.dry_run:
+            print("(dry run: nothing written)")
+            return 0
+        path = R.save_new(rec)
+        print(f"written: {path}  request {rec['lock']['request_sha256']}")
+        return 0
+    return 2
+
+
+async def cmd_run(args) -> int:
+    import runner
+    return await runner.run(args.ref, samples=args.samples, dry_run=args.dry_run, remeasure=args.remeasure, no_guard=args.no_guard,
+                            no_wait=args.no_wait, wait_max=args.wait_max, stop_after_fails=args.stop_after_fails, verbose=args.verbose)
+
+
+def cmd_diff(args) -> int:
+    import report
+    print(report.diff(Path(args.a), Path(args.b)))
+    return 0
 
 
 def cmd_score(args) -> int:
@@ -673,6 +938,24 @@ async def cmd_gen(args) -> int:
                                  force=False, model=args.model, verbose=args.verbose)
         return await replicate.run(ns)
 
+    if getattr(args, "goal", None):
+        # Route G goes through the staged runner (2026-10-07): the flags become an ad-hoc recipe (resolved and frozen once, kept in the run's
+        # 01_method/recipe.json and in .cache/adhoc_recipes/), so an exploratory run leaves the same 8 stages and report as a recipe run. Adopt a
+        # good one as a recipe version with `facecard.py recipe import-run <run> --because "..."`. (The loop below now serves from-text gen only.)
+        import recipe as R
+        import runner
+        rec = R.from_gen_args(args, because="ad-hoc gen (exploration): " + " ".join(sys.argv[2:]), adhoc=True)
+        for level, msg in (rec.get("origin") or {}).get("notices") or []:
+            if level == "drop":
+                print(f"NOTE: {msg}")
+        adhoc_dir = ROOT / ".cache" / "adhoc_recipes"
+        adhoc_dir.mkdir(parents=True, exist_ok=True)
+        rpath = adhoc_dir / f"{datetime.now():%Y%m%d_%H%M%S}_{rec['id']}.json"
+        rpath.write_text(json.dumps(rec, indent=1, ensure_ascii=False), encoding="utf-8")
+        return await runner.run(str(rpath), samples=args.count, dry_run=getattr(args, "dry_run", False), no_guard=getattr(args, "no_guard", False),
+                                no_wait=getattr(args, "no_wait", False), wait_max=float(getattr(args, "wait_max", 21600.0)),
+                                stop_after_fails=getattr(args, "stop_after_fails", 0), verbose=args.verbose)
+
     config = apply_subject(load_config(), args.subject)
     refs_dir = get_refs_dir(config)
     cache_dir = ROOT / config.get("cache_dir", ".cache/refs")
@@ -757,9 +1040,11 @@ async def cmd_gen(args) -> int:
             pass
 
     from restore import restore_face
+    from credit_guard import Guard, GuardRefused
 
     candidates = []
     saved_count = 0
+    guard, guard_refused = Guard(config.get("credit_guard")), False
     try:
         async with authenticated_client(verbose=args.verbose) as client:
             print(f"Authenticated. account_status={client.account_status.name}")
@@ -768,6 +1053,19 @@ async def cmd_gen(args) -> int:
             run_log["credits"] = credit_log
             last_left = [credit_log["start"]]
             print(f"[Credits] window left at start: {credit_log['start']}")
+
+            if not getattr(args, "no_guard", False):
+                # Credit guard (plan 2026-10-02): a free slot (<= 4 generations at once) and a window that can pay for this run, or wait for the reset.
+                async def _fresh_reading():
+                    try:
+                        await client._fetch_usage_info()
+                    except Exception:
+                        pass
+                    return credits_left(client)
+                await guard.acquire(is_pro=(config.get("models") or {}).get(model) == "pro", images=args.count, label=run_dir.name, refresh=_fresh_reading,
+                                    wait_max=0.0 if getattr(args, "no_wait", False) else float(getattr(args, "wait_max", 21600.0)))
+                credit_log["start"] = credits_left(client)      # after a wait the window may have reset
+                last_left[0] = credit_log["start"]
 
             def note_credits(i, outcome):
                 now = credits_left(client)
@@ -940,7 +1238,13 @@ async def cmd_gen(args) -> int:
     except AuthError as e:
         print(str(e))
         return 1
+    except GuardRefused as e:
+        guard_refused = True
+        print(f"[Guard] refused, nothing was generated: {e}")
+        run_log["status"] = "guard_refused"
+        run_log["guard"] = str(e)
     finally:
+        guard.release()
         # Pose gate (checklist items 12/14/29/30), measured, fixed limits: a render that fails it is never picked as best.jpg.
         if goal_log and candidates:
             gated = locals().get("gated") or {}
@@ -955,10 +1259,24 @@ async def cmd_gen(args) -> int:
                 if c[1].name in failed:
                     c[2]["status"] = "rejected"
                     c[2]["pose_gate"] = "fail"
+            # Light consistency (the user, 2026-10-02: pin 5 'lighting off, face seems lasso-ed in'): face light and face-vs-neck against the goal, written into run.json
+            # and used to rank the candidates (a face brighter than its own neck than in the goal reads pasted in). Never a gate: a profile or hidden face is judged by eye.
+            try:
+                import lighting
+                goal_img = lighting.read_bgr(args.goal)
+                goal_kp = lighting.goal_keypoints(Path(args.goal), ROOT)
+                for c in candidates:
+                    r_kp, r_img = lighting.render_keypoints(c[1]), lighting.read_bgr(c[1])
+                    if goal_img is None or goal_kp is None or r_kp is None or r_img is None:
+                        continue
+                    c[2]["light"] = lm = lighting.metrics(r_img, r_kp, goal_img, goal_kp)
+                    print(f"  [Light] {c[1].name}: {lighting.describe(lm)}")
+            except Exception as exc:   # never let a measurement stop a run
+                print(f"  [Light] skipped: {exc}")
         # Pick best.jpg
         if candidates:
-            # Sort by accepted status first, then by score
-            candidates.sort(key=lambda x: (1 if x[2].get("status") == "accepted" else 0, x[0]), reverse=True)
+            # Sort by accepted status, then by light consistency (measured, when the face is measurable), then by identity score
+            candidates.sort(key=lambda x: (1 if x[2].get("status") == "accepted" else 0, 1 if (x[2].get("light") or {}).get("ok") else 0, x[0]), reverse=True)
             top_score, top_path, top_eval = candidates[0]
             is_accepted = top_eval.get("status") == "accepted" or top_score >= threshold
             if is_accepted:
@@ -981,6 +1299,8 @@ async def cmd_gen(args) -> int:
         from export_results import safe_export
         safe_export(run_dir)
 
+    if guard_refused:
+        return 3
     return 0 if saved_count > 0 else 1
 
 
@@ -1032,11 +1352,138 @@ def main() -> int:
                      "(tools/goal_layout.py), labelled as the frame to match")
     gen.add_argument("--prop", action="append", default=None, help="Route G: an object of his own as a labelled reference, PATH::LABEL "
                      "(e.g. his motorcycle). Repeatable")
+    gen.add_argument("--wait-max", type=float, default=21600.0, help="credit guard: the longest to wait for a free slot or for the window to refill, in seconds (default 6 h); then exit code 3, nothing generated")
+    gen.add_argument("--no-wait", action="store_true", help="credit guard: do not wait, refuse at once (exit code 3) when no slot is free or the window cannot pay for this run")
+    gen.add_argument("--no-guard", action="store_true", help="skip the credit guard (the old behaviour: start at once, no slot or window check)")
     gen.add_argument("--face-refs", default=None, help="Route G: the exact FACE reference photos to send, comma separated names from the references folder (replaces the angle-routed set, "
                      "which always contains a _fav photo of him with glasses or different hair)")
     gen.add_argument("--face-count", type=int, default=None, help="Route G: how many FACE reference photos of him to send (default: facecard.json roles.face_count = 4). "
                      "For a turned or profile goal the cut at 4 drops the two frontal anchors (IMG_6873, IMG_6858), the clearest photos of his face shape (2026-10-01, identity regression on pins 5 and 6)")
     gen.add_argument("--subject", default=None, help="Whose photo this is: a key of facecard.json subject_profiles (reference set and traits for scene-prompt-writer). Omit for the top-level reference set")
+    gen.add_argument("--dry-run", action="store_true", help="Route G: stages 01-03 only (free): the request that would be sent, with its hash")
+    gen.add_argument("--identity-bible", action="store_true", help="Route G: add prompts/identity_bible.txt (his frozen traits), stated first and repeated last")
+    gen.add_argument("--build-sheet", action="store_true", help="Route G: send his body and arm photos as ONE side-by-side image")
+    gen.add_argument("--head-swap", action="store_true", help="Route G with --replace-subject: word the edit as a whole-head swap")
+
+    # recipes: the frozen method of one goal (recipe.py, 2026-10-07)
+    rec_p = sub.add_parser("recipe", help="Recipes, the frozen method of one goal: new | bump | import-run | show", parents=[common])
+    rsub = rec_p.add_subparsers(dest="recipe_cmd", required=True)
+
+    def route_args(p, bump: bool = False):
+        d = None if bump else argparse.SUPPRESS
+        flag = (lambda: {"action": "store_const", "const": True, "default": None}) if bump else (lambda: {"action": "store_true"})
+        p.add_argument("--goal", default=None, help="the goal picture")
+        p.add_argument("--prompt", default=None, help="the route text file (scene-prompt-writer); with an inventory it only decides the face references")
+        p.add_argument("--inventory", default=None, help="the element inventory JSON")
+        p.add_argument("--goal-as-image", choices=["auto", "yes", "no", "goal"], default=None if bump else "no")
+        p.add_argument("--replace-subject", **flag())
+        p.add_argument("--body-only", **flag())
+        p.add_argument("--edit-photo", default=None)
+        p.add_argument("--layout-image", **flag())
+        p.add_argument("--pose-points", **flag())
+        p.add_argument("--pose-image", **flag())
+        p.add_argument("--prop", action="append", default=None, help="PATH::LABEL, repeatable")
+        p.add_argument("--face-refs", default=None, help="exact FACE photo names, or @preset")
+        p.add_argument("--face-count", type=int, default=None)
+        p.add_argument("--identity-bible", **flag(), help="add prompts/identity_bible.txt (his frozen traits), stated first and repeated last")
+        p.add_argument("--build-sheet", **flag(), help="send his body and arm photos as ONE side-by-side image (with --face-count 3: 4 images of him)")
+        p.add_argument("--head-swap", **flag(), help="replace-subject worded as a whole-head swap (face, hair, beard, ears), not only the person")
+        p.add_argument("--restore-background", **flag(), help="after the run, copy the pin's own background pixels back around him (tools/background_restore.py, the user's "
+                       "decision of 2026-10-09): only the two person silhouettes come from Gemini; the raw samples stay untouched, the copies are vN_0r.jpg")
+        p.add_argument("--subject", default=None if bump else "me")
+        p.add_argument("--character", default=None, help="the character (characters/<name>/vN.json, e.g. me@v1): the same face and body photos and "
+                       "the same description for every goal")
+        p.add_argument("--physique", default=None, help="the body for this goal by the user's yardstick (facecard.json subject_profiles.me.physique): "
+                       "pumped-front | pumped-back | pumped-side for a shirtless picture, casual-front for a dressed one; replaces the character's "
+                       "body photo and build text")
+        p.add_argument("--teeth", default=None, metavar="WHY",
+                       help="his own teeth for this goal: his two REAL smile photos (facecard.json subject_profiles.me.teeth_refs: IMG_6875 front, the "
+                            "crop that made E2; IMG_3884 turned) go in as labelled references. Only for a goal whose man smiles or when the user asks: "
+                            "WHY says which (the user, 2026-10-18). The CHANGE list or route text must say how his mouth is with his teeth showing; "
+                            "closed-lip or 'whiter' wording is refused")
+        p.add_argument("--model", default=None, help="model id (facecard.json models: e6fa609c3fa255c0 = pro, 56fdd199312815e2 = flash)")
+        p.add_argument("--samples", type=int, default=None, help="pictures per run (default 2 for new); replicate: pictures that must pass")
+        p.add_argument("--max-attempts", type=int, default=None, dest="max_attempts", help="replicate: the most edit calls per run (default max(6, 3 x samples))")
+        p.add_argument("--stop-after-fails", type=int, default=None, help="stop a run after N pictures in a row fail the pose gate")
+        p.add_argument("--because", default=None, help="REQUIRED: why this version exists (the user's words, or the failed checklist item)")
+        # replicate/1 (his own photo): the method and its options
+        p.add_argument("--zone", choices=["auto", "face", "head", "build", "expression"], default=None, help="replicate: what is redrawn (auto: own photo -> face with the whole head redrawn; build: his body only, pass A of a current-look own photo; expression: his own photo with only his expression changed, from --expression text and --expression-ref crops)")
+        p.add_argument("--expression-ref", action="append", default=None, dest="expression_ref", metavar="PATH::LABEL",
+                       help="replicate: a crop of his OWN expression (his best candid smile), sent after his face photos; repeatable (the user, 2026-10-10)")
+        p.add_argument("--expression-ref-intro", default=None, dest="expression_ref_intro", metavar="TEXT",
+                       help="replicate: what the --expression-ref images are, after 'Image N shows' (default: close crops of his own best candid smiles "
+                            "from other photos); e.g. 'a photo of him smiling in this same session, the same light and camera.'")
+        p.add_argument("--loose-crop", **flag(), dest="loose_crop",
+                       help="replicate: frame the crop with his whole head at 62%% of it (replicate.expression_crop), as zone expression does; for a big "
+                            "close face, whose usual crop holds the head at about 84%% and comes back re-composed (2026-10-10, IMG_3929 0 of 6)")
+        p.add_argument("--rank", choices=["face", "smile"], default=None,
+                       help="replicate: how passing pictures are ranked pair by pair (smile: the smile question; default face: the attractiveness question)")
+        p.add_argument("--from-picture", default=None, help="replicate: edit this picture (a pass-A body picture, pinned by sha) instead of the original photo")
+        p.add_argument("--place-from", default=None, dest="place_from", metavar="PICTURE",
+                       help="replicate, opt-in: the placement pass (2026-10-12, FAILURE_LOG F34). The head of PICTURE (a vN_0.png of an earlier run: "
+                            "cut from its raw return) goes in as ONE more reference just before the photo to edit, with the old rescue wording 'keep "
+                            "the head at exactly the position, size, turn and tilt it has in the last image'. It is a generated image: only with the "
+                            "user's yes. With bump: a copy of that version plus this reference, nothing read again")
+        p.add_argument("--eye-gate", default=None, dest="eye_gate", metavar="SPEC",
+                       help="replicate, opt-in (2026-10-12, pin 16): his eyes measured on every return (eye_measure.py) against bands from his real "
+                            "photos at the same turn, e.g. 'yaw=24:34,vergence=-0.34:-0.18' (measures: yaw, vergence, ear_near, ear_far; LO:HI, "
+                            "either side may be empty). Selects among returns, never moves a pixel, not in the prompt. With bump: a copy of that "
+                            "version plus the gate (the same request)")
+        p.add_argument("--head-region", default=None, dest="head_region", metavar="X0,Y0,X1,Y1",
+                       help="replicate new, opt-in (2026-10-12, pin 14, FAILURE_LOG F43): fractions of the frame (0-1); only faces whose box "
+                            "centre lies inside count as his head (the main face, its AI head box and any copy), e.g. when the body reads as a "
+                            "larger face than a turned-away head. Recorded in the recipe; without it the largest face is the subject as before")
+        p.add_argument("--current-look", **flag(), help="replicate: his own older photo made his CURRENT look: current haircut, lean current face, head size up to 1.10 for the beard")
+        p.add_argument("--build-prompt", type=int, default=None, help="replicate body pass (bump): the prompt and judge version (2: the clothes may change, nothing else asked to stay but his head, pose and the scene)")
+        p.add_argument("--source", choices=["auto", "own", "foreign"], default=None, help="replicate: is the photo his own (auto: pool score)")
+        p.add_argument("--glasses", choices=["same", "yes", "no"], default=None, help="replicate: glasses (same = as the photo shows)")
+        p.add_argument("--look", choices=["any", "curly", "short"], default=None, help="replicate: hair when the head is replaced")
+        p.add_argument("--expression", default=None, help="replicate: same | auto | none | free text (default: auto for his own photo)")
+        p.add_argument("--current-hair", **flag(), help="replicate: his current cut from the references (tapered sides), not the photo's own cut")
+
+    rnew = rsub.add_parser("new", help="Resolve the references once, freeze every file into the blob store, compile and lock version 1 (or the next)")
+    route_args(rnew)
+    rnew.add_argument("--method", choices=["G", "replicate"], default="G", help="G: Route G (another man's photo, a pin). replicate: HIS OWN photo, "
+                      "a crop edited and pasted back into the untouched original (Route G refuses his own photo)")
+    rbump = rsub.add_parser("bump", help="A new version of a recipe with some inputs changed (prints what changed in the request)")
+    rbump.add_argument("ref", help="recipe file, folder, or <goal key>[@vN]")
+    route_args(rbump, bump=True)
+    rbump.add_argument("--dry-run", action="store_true", help="print the change, write nothing")
+    rimp = rsub.add_parser("import-run", help="Adopt a past gen run as a recipe, only if today's code reproduces its prompt from provable files")
+    rimp.add_argument("runs", nargs="+")
+    rimp.add_argument("--check-only", action="store_true", help="report whether each run reproduces; write nothing")
+    rimp.add_argument("--because", default=None)
+    rimp.add_argument("--samples", type=int, default=None)
+    rimp.add_argument("--stop-after-fails", type=int, default=None)
+    rimp.add_argument("--prompt", default=None, help="the route text the run used (default .cache/loop_prompts/<goal>_route.txt), for the face-choice record")
+    rshow = rsub.add_parser("show", help="Versions of a recipe, their request hashes and their track record")
+    rshow.add_argument("ref")
+
+    ch_p = sub.add_parser("character", help="Characters, the fixed reference photos and description of one man: new | show", parents=[common])
+    csub = ch_p.add_subparsers(dest="character_cmd", required=True)
+    cnew = csub.add_parser("new", help="Freeze a new character version (the next vN)")
+    cnew.add_argument("--name", default="me")
+    cnew.add_argument("--face", action="append", required=True, help="SLOT=NAME, SLOT one of front, three_quarter_left, three_quarter_right, profile")
+    cnew.add_argument("--body", action="append", required=True, help="his full-length body photo (repeatable)")
+    cnew.add_argument("--description", required=True, help="JSON file {face, hair, beard, skin, build}: what the photos show")
+    cnew.add_argument("--exclude", action="append", default=None, help="NAME::why, a photo used before and left out")
+    cnew.add_argument("--band-from", default=None, help="comma-separated photos of him the measure band is taken from (default: the character's own)")
+    cnew.add_argument("--because", default=None)
+    cshow = csub.add_parser("show")
+    cshow.add_argument("ref", help="<name>[@vN] or a character file")
+
+    run_p = sub.add_parser("run", help="Run a recipe through the 8 fixed stages (runner.py); a run folder re-sends that run's exact request", parents=[common])
+    run_p.add_argument("ref", help="a recipe file or folder, <goal key>[@vN] (e.g. pin_783485666539777054@v1), or a staged run folder")
+    run_p.add_argument("--samples", type=int, default=None, help="pictures this run (default: the recipe's)")
+    run_p.add_argument("--stop-after-fails", type=int, default=None, help="default: the recipe's")
+    run_p.add_argument("--dry-run", action="store_true", help="stages 01-03 only (free): proves the request is the recipe's, byte for byte")
+    run_p.add_argument("--remeasure", default=None, metavar="RUN", help="no Gemini call: measure, review and rank the pictures of RUN again")
+    run_p.add_argument("--wait-max", type=float, default=21600.0, help="credit guard: longest wait in seconds (default 6 h), then exit 3")
+    run_p.add_argument("--no-wait", action="store_true", help="credit guard: refuse at once instead of waiting")
+    run_p.add_argument("--no-guard", action="store_true", help="skip the credit guard (only when the user said so)")
+    diff_p = sub.add_parser("diff", help="What differs between two runs, stage by stage: the request, the code, the outcomes")
+    diff_p.add_argument("a")
+    diff_p.add_argument("b")
 
     rep = sub.add_parser("replicate", help="Put your identity into a source photo by editing a crop and pasting it back (nothing outside the zone changes)", parents=[common])
     rep.add_argument("--scene", required=True, help="Source photo to replicate (full resolution)")
@@ -1058,10 +1505,26 @@ def main() -> int:
         "refs-matrix": cmd_refs_matrix,
         "restore": cmd_restore,
         "pose-refs": cmd_pose_refs,
+        "recipe": cmd_recipe,
+        "character": cmd_character,
+        "diff": cmd_diff,
     }
     if args.command in sync_handlers:
         return sync_handlers[args.command](args)
-    async_handlers = {"check": cmd_check, "models": cmd_models, "gen": cmd_gen, "replicate": cmd_replicate}
+    async_handlers = {"check": cmd_check, "models": cmd_models, "gen": cmd_gen, "replicate": cmd_replicate, "run": cmd_run}
+    hold = Path(__file__).resolve().parent / ".cache" / "GENERATION_HOLD"
+    if hold.exists() and args.command in ("gen", "replicate", "run") and not getattr(args, "dry_run", False):
+        # the user, 2026-10-17: "Do not generate any more images": nothing that calls Gemini for a picture starts while the hold file exists.
+        # One exception, set per run and never in a task: FACECARD_HOLD_PASS="<recipe ref>::<the user's words>" lets exactly that one recipe run
+        # (the user, 2026-10-19: "Run pin 8 now"); the hold file stays, so everything else is still held.
+        import os
+        pass_ref, _, pass_words = os.environ.get("FACECARD_HOLD_PASS", "").partition("::")
+        if args.command == "run" and pass_ref and pass_ref == getattr(args, "ref", None) and pass_words.strip():
+            print(f"HOLD lifted by the user for this one run only: {args.ref} ({pass_words.strip()[:160]})", file=sys.stderr)
+        else:
+            print(f"HOLD: image generation is stopped by the user ({hold.read_text(encoding='utf-8', errors='replace').strip()[:200]}); "
+                  f"remove {hold} only on the user's word", file=sys.stderr)
+            return 6
     return asyncio.run(async_handlers[args.command](args))
 
 
