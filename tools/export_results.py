@@ -44,7 +44,9 @@ sys.path.insert(0, str(ROOT))
 NAMES_FILE = ROOT / "results_names.json"
 STATE_NAME = ".export_index.json"
 LOCK_NAME = ".export.lock"
-GEN_RE = re.compile(r"^v(\d+)_(\d+)\.(jpg|jpeg|png)$", re.I)
+# vN_M.jpg is Gemini's return; vN_Mr.jpg is the same sample with the pin's own background copied back (tools/background_restore.py, the user's decision of
+# 2026-10-09): both can be checked and exported, the restored one carries its own checklist file.
+GEN_RE = re.compile(r"^v(\d+)_(\d+)(r|s)?\.(jpg|jpeg|png)$", re.I)   # vN_M raw, vN_Mr background restored, vN_Ms only the sparkle replaced (2026-10-19)
 PICKED = ("best.jpg", "best.png", "not_passing_closest.jpg")     # replicate's picture of a run, and gen's copy of its top candidate
 
 
@@ -137,6 +139,10 @@ def passed(pic: Path) -> tuple[bool, str]:
     chk = read_json(pic.with_name(pic.name + ".checklist.json"), None)
     if not chk:
         return False, "no checklist recorded"
+    if chk.get("user_rejected"):
+        return False, "rejected by the user: " + str(chk["user_rejected"].get("words", ""))[:120]
+    if chk.get("superseded_by"):
+        return False, "superseded by its corrected copy " + str(chk["superseded_by"].get("file", ""))
     if chk.get("user_approved"):
         return True, "user-approved: " + str(chk["user_approved"].get("words", ""))[:120]
     if chk.get("keep_in_results"):
@@ -230,15 +236,24 @@ def pose_detail(pic: Path, run: dict) -> tuple[str, str]:
     return "", ""
 
 
+def n_items() -> int:
+    """How many items BEST_CHECKLIST.md has now (32 until 2026-10-09, 35 since): the ledger says 'all N items', never a stale number."""
+    return len(re.findall(r"^\|\s*\d+\s*\|", (ROOT / "BEST_CHECKLIST.md").read_text(encoding="utf-8"), re.M))
+
+
 def ledger_row(run_dir: Path, run: dict, pic: Path) -> dict:
     chk = read_json(pic.with_name(pic.name + ".checklist.json"), None)
     pose, pose_txt = pose_detail(pic, run)
     ident = identity_of(pic, run)
     failed = {int(n): t for n, t in ((chk or {}).get("failed") or {}).items()}
-    if chk and chk.get("user_approved"):
+    if chk and chk.get("superseded_by"):
+        result = "SUPERSEDED by " + str(chk["superseded_by"].get("file", ""))
+    elif chk and chk.get("user_rejected"):
+        result = "FAIL (rejected by the user)"
+    elif chk and chk.get("user_approved"):
         result = "PASS (accepted by the user)"
     elif chk and chk.get("verdict") == "BEST":
-        result = "PASS (all 30 items)"
+        result = f"PASS (all {n_items()} items)"
     elif chk:
         result = "FAIL (checklist)"
     elif pose == "FAIL":
@@ -254,6 +269,9 @@ def ledger_row(run_dir: Path, run: dict, pic: Path) -> dict:
         wrong.append(pose_txt)
     if chk and chk.get("user_approved"):
         wrong.append("the user accepted it anyway: " + str(chk["user_approved"].get("words", "")))
+    if chk and chk.get("user_rejected"):
+        wrong.append("the user rejected it: " + str(chk["user_rejected"].get("words", ""))
+                     + "".join(f" (earlier accepted: {h['user_approved'].get('words', '')})" for h in chk.get("history", []) if h.get("user_approved")))
     right: list[str] = []
     if chk and chk.get("right"):
         right.append(str(chk["right"]))
@@ -265,10 +283,22 @@ def ledger_row(run_dir: Path, run: dict, pic: Path) -> dict:
         right.append(f"{len(chk.get('items', {})) - len(failed) - len(chk.get('na', []))} of {len(chk.get('items', {}))} checklist items passed, {len(chk.get('na', []))} not applicable")
     return {"key": f"{run_dir.name}/{pic.name}", "goal": base_name(goal_key(run)), "run": run_dir.name, "file": pic.name,
             "time": str(run.get("timestamp") or run_dir.name[:15]), "result": result, "identity": ident, "pose_gate": pose,
-            "model": {"e6fa609c3fa255c0": "Pro", "56fdd199312815e2": "Flash"}.get(str(run.get("model")), str(run.get("model") or "")),
+            "model": model_label(run.get("model")),
             "inventory": Path(str((run.get("route_g") or {}).get("inventory") or "")).name,
+            "recipe": (f"{(run.get('recipe') or {}).get('id')}@v{(run.get('recipe') or {}).get('version')}" if run.get("recipe") else ""),
+            "request": str((run.get("recipe") or {}).get("request_sha256") or "")[:12],
             "failed_items": sorted(failed), "wrong": " | ".join(wrong), "right": " | ".join(right),
             "recorded": datetime.now().isoformat(timespec="seconds")}
+
+
+def model_label(model_id) -> str:
+    """'Pro' / 'Flash' / 'Lite' from facecard.json "models" (ids -> labels), else the id itself."""
+    try:
+        labels = json.loads((ROOT / "facecard.json").read_text(encoding="utf-8")).get("models") or {}
+    except Exception:
+        labels = {}
+    lab = labels.get(str(model_id)) if model_id else None
+    return str(lab).capitalize() if lab else str(model_id or "")
 
 
 def write_ledger_md(rows: dict) -> None:
@@ -287,7 +317,7 @@ def write_ledger_md(rows: dict) -> None:
         out += [f"## {goal}", "", f"{len(rs)} pictures, {passed_n} passed.", ""]
         for n, r in enumerate(rs, 1):
             ident = "" if r.get("identity") is None else f", identity {r['identity']:.2f}"
-            how = ", ".join(x for x in (r.get("model"), r.get("inventory")) if x)
+            how = ", ".join(x for x in (r.get("model"), r.get("recipe") or r.get("inventory"), ("request " + r["request"]) if r.get("request") else "") if x)
             out.append(f"- **attempt {n}** `{r['run']}/{r['file']}`: **{r['result']}**{ident}" + (f" ({how})" if how else ""))
             if r["wrong"]:
                 out.append(f"  - wrong: {r['wrong']}")
@@ -379,7 +409,7 @@ def import_picture(pic: Path, key: str, dest: Path | None = None, dry: bool = Fa
             data = read_json(LEDGER_JSON, {"rows": {}})
             data.setdefault("rows", {})[f"import:{pic}"] = {
                 "key": f"import:{pic}", "goal": base, "run": str(pic.parent), "file": pic.name, "time": str(chk.get("date", ""))[:16].replace("-", "").replace("T", "_").replace(":", ""),
-                "result": "PASS (accepted by the user)" if chk.get("user_approved") else "PASS (all 30 items)", "identity": None, "pose_gate": "",
+                "result": "PASS (accepted by the user)" if chk.get("user_approved") else f"PASS (all {n_items()} items)", "identity": None, "pose_gate": "",
                 "failed_items": [], "wrong": "", "right": str(chk.get("right") or chk.get("note") or ""), "recorded": datetime.now().isoformat(timespec="seconds")}
             write_json(LEDGER_JSON, data)
             write_ledger_md(data["rows"])
