@@ -620,3 +620,185 @@ DO NOT RETRY:
 15. **Overnight 2026-10-02 (credit window reset 02:31):** pin 5, face a quarter brighter than the pin's (ratio 1.12-1.23): pipeline identity 0.34-0.41, sheet ArcFace 0.18-0.23 vs the old pin 5 v1 0.733 / 0.36: moderate brightening did not recover identity; only the 1.6x brighter old picture stays closest to his references. Pin 6: none of three Pro samples passed the pose gate (one re-framed to a wide shot). The identity-gated redraw is impossible on pin 6. Sheets for the user: .cache/audit/sheet_pin5_overnight.jpg and sheet_pin6_overnight.jpg. No credits spent after this (1,926 left, resets 07:31); the decision (faithful shaded face vs recognisable lit face) is the user's.
 16. **Think-again, 2026-10-02 (pins 5 and 6, identity):** DO NOT RETRY (all measured): own hair/beard wording, face-shade line, face swap on a bowed head, six face photos, 'face exactly as in the references' wording, head redraw (copies the given face; cannot run on pin 6), face a quarter brighter, and clean-photos-only references (this test: pin 5 0.26 / 0.04 vs baseline 0.31). Findings: (1) every render of 139 was sent one of only 3 reference sets, each with a _fav photo (glasses, short hair, purple/yellow double exposure); removing it changed nothing; (2) identity does NOT correlate with head bow (0.13), turn (0.13) or face size (-0.29) across 29 pin 5 renders: it is a likeness lottery (0.01-0.73 on identical inputs); (3) the highest-scoring sample (0.733 = old pin 5 v1) is the one the user rejected as 'doesn't look like me', so ArcFace does not match the user's eye on this goal. Next: ask the user which facial features look off and which accepted picture looks most like them.
 17. **The user's own words on pins 5 and 6 (2026-10-02), after the think-again round:** pin 5: 'lighting off, face seems lasso-ed in'; pin 6: 'not me at all, body me, face structurally me but closely not me at all'; the accepted pictures (pins 2, 7, 8): 'all' look like him. So identity was the WRONG target for pin 5: the old picture's face is 27% brighter than its own neck (94 vs 74; the pin's face/neck ratio is 0.97), the pasted-in signature I never measured. tools/audit_views.py now prints FACE vs NECK (tolerance 0.12 around the goal's ratio) next to FACE LIGHT. Overnight pin 5 renders keep face and neck consistent (0.85-1.00). Pin 6: the body is right; fine facial detail is the open problem, no tool measures it, and the final pre-reset batch (4 Pro) did not pass the pose gate. Lesson: ask the user for THEIR words about what is wrong before optimising any number.
+
+## 19. Pins 10-13, the second review and three standing rules (2026-10-09)
+
+**The user, on the first samples of the four new pins:**
+- gym back: "you are removing the back definition that I actually have, increase back definition a little more, also face and body fat percent are mismatching, face looks a lot smoother compared to body, hide the face a little more";
+- pizza: "perfect already (text in the background could be given better attention), i would have liked the subject with a very light smirk instead although goal reference doesnt have it, another variation of candidly smiling";
+- "most important among all three": no added background humans, no added text in AI images (with a reference or without), and a candid look as if captured in a rush, with motion blur.
+- Decisions: his video `D:\Downloads\B9F9CBB0-...MP4` is the back reference; the pin's own background is copied back after the edit.
+
+**What was built (all free to test, measured):**
+1. Checklist items 33 (background people), 34 (text), 35 (candid capture look), item 16 allows an asked-for smirk; `best_check.py` wants an evidence line for 33-35; `inventory_lint.py` notes inventories without people or lettering keep lines (`--scene` for text-mode paragraphs); scene-prompt-writer got `capture: candid`, an empty setting and glow-only signs.
+2. `tools/background_restore.py` (code copies, never edits Gemini's person pixels): on the pin 10, 11 and 13 samples the background ECC was 0.971-0.997 (scale 0.986-1.004, shift under 0.007 of the frame); the background outside both silhouettes differed from the pin by a mean 3.6-22 grey levels (SSIM 0.77-0.97; pin 13's samples had redrawn the lanes) and is now the pin's own pixels (43-61% of the frame copied). Two defects found on the first tests and fixed: the pin man's hair bun outside the YOLO mask came back above the new head (fix: Gemini's pixels are kept where the sample differs by more than 28 grey levels within 6% of the longer side of a silhouette), and Gemini's sparkle watermark (kept whole when a silhouette reaches it, replaced by the pin's pixels when not).
+3. `tools/back_reference.py`: his back from frames 54 and 74 of the video, the thin line along his spine traced and replaced by skin: it is his janeu, not an earphone wire as I wrote (the user, 2026-10-10); since then it is kept (three automatic detectors, top-hat, local colour contrast and a Hessian ridge filter, all found the silhouette's edges instead), and record-only back measures: his four frames shoulder width / torso length 0.55-0.63, shoulder / hip width 1.44-1.47; the pin man's reading is unusable (shoulder confidence 0.42); the first gym samples read 0.42-0.47.
+4. `tools/wave.py --parallel N --stagger S --not-before HH:MM` and per-job `"restore": true`; the wave runs from the hidden one-time task `facecard-wave-pins1013d` so a session crash cannot kill it again.
+
+**Why the first samples failed him (measured):** the v3 gym line "a fifth narrower, lats slimmer and smoother, no deep carved grooves" is what removed the definition he really has (the samples' shoulder / torso ratio was 20-27% below his own frames); the visible face was a lowered 3/4 profile in 4 of 4 samples, so its softness showed against the lean body (hide it behind falling curls, ask for a hard jaw line); pin 13's samples came out bigger (torso x1.23-1.26) and further right than the pin man, so v5 is stage 1 only (replace in place, head still away) and the head turn becomes a second edit.
+
+**Recipes of the wave:** pin 10 v5 (HIS BACK ref), pin 11 v3 (very light smirk) and v4 (candid smile) with the lettering named letter for letter, pin 12 v3 (text mode, mid-stride rush, motion blur, only the asked-for print as text), pin 13 v5 (stage 1). Results and the checklist verdicts follow below once the wave has run.
+
+**Results of the 20:36 wave (2026-10-09, every picture checked on all 35 items with evidence):**
+- Pizza (pin 11): PASSED twice. v3 (very light smirk) v1_0r and v4 (candid smile caught mid-reaction) v1_0r, exported as `motorcycle-outfit-men_11_..._v1.jpg` and `_v2.jpg`. The restore made the bar sign, the L10 card, SÁNCHEZ ROMERO, the bottle and the reversed glass letters the pin's own pixels; the beard is full and dense (the beard crop fixed item 28). v3 v2_0r shows the smirk most clearly but scores 0.50 (gray zone: the user's eye); v4 v2_0 came back re-framed (aspect 0.747 vs 0.813) and the restore refused it.
+- Gym back (pin 10) v5 v1_0r passes 34 of 35: his back now has the definition of his video frames (shoulder-blade edges, spine groove, lat outline) and the curls over the brow hide the eye; only item 32 fails, both forearms carry the pin man's prominent veins where his are smooth (IMG_6923). v2_0r also turned the face toward the camera, added a neck chain and a towel, and failed the pose gate on 30.
+- Print tee (pin 12): v3 "shopping-mall viewing gallery" drew readable shop signs (SOUL..., ...Shop), mannequins and a person-like figure (33, 34); v4 "atrium dissolved into portrait-mode bokeh" fixed the signs but still drew blurred people (33) and sharp hands (35). The print itself was exact in all four. DO NOT RETRY: describing a mall's shops as glow, or relying on "he is the only person in the frame" in a mall view.
+- Bowling (pin 13) stage 1 (v5) v1_0r: the first render in the pin man's place and size (torso x1.05, every body check PASS; v1/v3 were x1.23-1.26); the head-position check missed (0.050 vs 0.04) because the head had begun to turn right. It is the base of stage 2.
+- The old wave c had survived the session crash and ran two obsolete recipes at 20:35 and 20:38 (about 590 credits; 4 pictures, recorded NOT BEST); its driver was stopped one second before its third run.
+
+**Queued for 2026-10-10 08:20** (task `facecard-wave-pins1013e`, after the Qwen overnight hard stop): pin 12 v5 (camera tipped up, only ceiling and lights behind him, an empty early-morning walkway, motion-blur smear on bag and hand), pin 10 v6 (smooth forearms, bare neck), pin 13 v6 (stage 2: an edit of the stage-1 base turning only his head and neck about 50 degrees right, smiling).
+
+## 20. The ideal smile and the pizza third picture (2026-10-10)
+
+**The user:**
+- Smiles: "smile always is turning out bad ... my smile reference image itself is bad ... when captured in candid it can look different" (13 photos); the open smile with teeth is the problem; teeth first "mine, slightly whiter", then: "There is no need to change the color of the teeth or anything."
+- Pizza third picture (`_v1` with v2_0r's eyes, region edit): "v3 is not getting the eyes from v2, and idk where it is getting from it has made it even worse and drunk looking". Then: "V2 is perfect. V2 just has a little more beard than what I would expect. Let's try to fix that ... It was a misdiagnosis from my end on the first read of V1 and V2. Hence, I want you to, in fact, push back a little on certain feedback of mine if you see that they are for sure wrong."
+- On the two smile candidates (route B IMG_3884 v2_0, the front photo with smile words v1_0): "both are bad, unnatural. you have my natural smiling in the same poses what is the problem in them?" and "The smile itself is perfect. Teeth shape, size, my lips, everything is perfect, but it's the other facial expressions that are not matching with my real smile." For the front photo: use the smiling photo of the same tank-top session (IMG_6875) and "keep improving the Gemini generation" until it matches.
+- The originals: "you can get it yourself from the Google Takeout".
+
+**Measured:**
+- Route A (front photo + smile crops): the tight crop (head 84%) zoomed out 10 of 10; on the loose crop 0 of 4 because the face comes back 5-16% larger with a big smile (face box and eye distance).
+- `tools/smile_match.py --ai` on IMG_3884 route B v2_0: "mouth same, teeth same; eyes, cheeks, smile lines, brows weaker" (the user's verdict exactly); the five landmark ratios read within 7% (they do not see a squint). Cause: the `--expression same` wording ("but natural and relaxed ... never tense or forced") and a face drawn from four neutral photos.
+- DSC07985 route B kept his glasses under `--glasses no` (the glasses check was skipped instead of asking for the change; fixed).
+- The laugh looking down (IMG_3929): 0 of 12 over two crops; Gemini lifts the bowed head.
+- Pizza beard fix (region edit below his eyes, his own beard as the reference): fix 2 cheek beard 26->20% dark, moustache 20->13%; fix 1 unchanged. Gemini's sparkle had been pasted onto the sweater (now never pasted).
+
+## 21. The next-cut physique, the yardstick and pins 14-17 (2026-10-10 evening)
+
+**The user:**
+- Round 1 of the grey-out: "the fat around the waist even got increased further ... you shrank the arm size and have reduced my vascularity. I have a visible bicep vein and good forearm veins"; "The thing that you're calling an earphone wire is not an earphone wire. It is the holy thread that Brahmins wear, called jenu."
+- Rounds 3 and 4: "round 3 actually has more improvement compared to round 4 in terms of waist tightening, but the arms look a little exaggerated, but it is acceptable"; then approved "Round 3" (with the forearm fix) and the back: "back approved, if you want to go for a 4th round - use the image that you extracted from the 6 sec video ... and yes very slightly increase shoulder breadth".
+- The yardstick: "any shirtless picture will get the fully pumped version of mine, and casual outdoor dressed versions will get the casual in-between version of my body"; casual arms: "the size of the arm shouldn't reduce from the actual photo that I had sent, but the vascularity should lie between the real photo that I shared and the pumped photo that you have generated"; the in-between: "still not as casual as I wanted it to be ... but it's fine".
+- The shoulder warp on the back: "basically increases the tricep size, and it looks very unnatural ... what I approved was slightly increasing the shoulder width and not arm size. These are still fine."
+- Four pins in parallel: 783485666540168309 (pose, set in Gokarna from the bmcindia Instagram post and the Togedr Facebook photo, pumped front), 783485666540141726 (the back pin: "Start now with the approved back"), 783485666540168242 ("create a side body pose if required or utilise the back pose itself"), 783485666540141762 ("replicate").
+- On the failures: "multiple rounds of failures seem to be happening back to back. Keep a record of why each of those is happening. Without stopping things that are going abruptly, you can also stop things once the current running wave gets completed if you think that the complete system is wired wrong" (FAILURE_LOG.md, the rework of 22:10).
+- Pin 17 v2_0r: "not exactly the same pose, but plus points for making the face visible in the right amount" (the head turn of v2_0r is kept for the next version). Pin 16 v2_0r: "face almost there but still not accurate, needs fixing".
+- 2026-10-11, pin 15 (body-only v3, janeu mirrored): "great picture, but the jenu is going in the wrong way. It should go from left shoulder to right oblique", then, after I said once that a mirror swaps the sides: "I had forgotten that this was a mirror image. The genu is perfectly positioned. Ignore my previous comments." Approved and exported. Rule: in a mirror picture the janeu is drawn mirrored (from his left shoulder at picture-right).
+- 2026-10-11, pin 14 (two-stage Gokarna, v1 and v2): "something looks off. It is not replicating the ref goal images as it is. Both V1 and V2. Also, the physique that it is giving me is not looking like mine, and the face looks off. In terms of leanness and body fat percentage, the face still looks a lot leaner than the body." Withdrawn (FAILURE_LOG F28).
+
+**Done and measured:**
+- Approved physiques copied under plain names to `D:\FacecardData\physique\standard\` (pumped_front, pumped_back, casual_front; sha256 identical) and to `D:\FacecardResults` (physique_next-cut_front_pumped.jpg, physique_next-cut_back.jpg).
+- `--physique` (recipes): me@v2 would have sent the relaxed IMG_6923 Copy with "arms of moderate size with light muscle tone ... never more muscular" on every shirtless pin; the standard's photo and build text now replace both. 48 Route G recipes recompile to their locks; pin 8 v2-v4 drift from the older character hair/beard wording.
+- Back round 4 (video frame f_08, `body_grey_send@v6`): refused by the whole-crop paste fit (ECC 0.76-0.77) although aligned on the background (scale 1.00, 3 px, ECC 0.97): `region_edit.py --affine`. Measured: waist -8.6% (v2), love handles -10.8% / -13.5% (target -4..-8), arms -33.7% (v2); by eye both shrank his upper arms and forearms, with faint ghost edges beside the arms. Not passing; the round 1 back stays the standard.
+- Gokarna: the Facebook photo needs a login (no browser connected); the Instagram post shows publicly one photo (ten trekkers in a palm grove), not sent: pin 14's background is written from the cliff path between Kudle and Om beach.
+- Pin 14's turned-away face scored 0.461 against his photo pool (own photo from 0.40), so the recipe gate called the pin his own photo; `results_names.json` `"source": "foreign"` marks it as another man's (the threshold is unchanged). Pin 17's glass-door reflections are excluded from the restore (`.cache/restore_exclude/`).
+
+## 22. Auto-continue fixed, and the questions asked at once (2026-10-11 night)
+
+**The user:**
+- "why is the decision idle and nothing is queued when you already know there are so many to-do items in the list? The auto-continue system seems faulty. Find out why this is happening and fix it." (FAILURE_LOG F31)
+- "also edit your auto-resume to immediately ask using ask-user-question tool and on top of that still not be blocked by it and just choose the recommended option to keep working on until i answer. once that system is built ask me using it, whats blocking you right now?"
+- His answers (AskUserQuestion, 2026-10-12 00:0x-01:3x):
+  - Pin 14, "ref goal images": **Both** (the pin's pose, framing and look AND the real Gokarna place, each as it is).
+  - The Gokarna photo: **"Open my Edge for it"** (I open his Edge profile once, read only the Togedr Facebook post, save the photo, close the browser).
+  - Pin 16: **"Yes, test them"** (his real outdoor photos as face references, a test character; me@v2 unchanged).
+  - Pin 10: **"Show the profile"**, then on the sparkle-fixed v7 pictures: "stop working on this image it misrepresents my height, i am taller than this as seen from full body reference image." (FAILURE_LOG F32; pin 10 is closed)
+  - Approvals: **Pin 15 back** and **Pin 11 pizza**; on the pizza: "D:\Downloads\AI me\date simulate.jpg this already is best for me. wasnt this 'best' accrording to our checks?" That file is byte-identical to `outputs/20261010_114204_goal-v2-beard-send/v2_0r.jpg`; it had never been checked (no checklist record), so it waited two days for an approval instead of being checked and shown.
+
+**Done and measured:**
+- `tools/autocontinue.py`: `work` / `STALLED` decisions with a toast, `--after`, `--default`, `ask` / `questions` / `answer`. AskUserQuestion is not available to subagents ("No matching deferred tools found"), so the session asks itself after starting every default and handing long preparations to background agents; while his answers were pending, the queue ran pin16day and pin14v3a.
+- Exported: pin 15 cleaned back (`_15_..._v2.jpg`, BEST user-approved, item 14 on record) and pin 11's beard-fixed v2 (`_11_..._v4.jpg`, BEST user-approved; item 8 on record: Gemini's sparkle on the back of his hand, missed by the base picture's check on 2026-10-10).
+- Pin 14 (2026-10-13): after the head region edit and the widened body (shoulders +6%, measured 0.74 against about 0.89 for the standard), asked "Does this look like you?": "Yes, export it". Exported as BEST (user-approved; items 21, 26, 31, 32 on record). The Gokarna background (stage C) is still open.
+- Pin 16 (2026-10-13): after the far eye was redrawn by grey-out (eye agreement -0.32, his band -0.34..-0.18; before -0.07), asked "Is the eye problem gone?": "Yes, export it". Exported as BEST (user-approved, item 21 on record).
+- Pin 16's face (2026-10-12): "space between eyes"; shown that the spacing measures as his (my "too close" reading was wrong, FAILURE_LOG E13) and that the renders' eyes are less open: "Yes, it is less open, and it is something more than just spacing ... their relative spacing to the nose in between is likely off. Or it might be that one eye is looking 75° to the left and another is likely looking 80° or 85° to the left. Hence, it looks like an eye condition, which I actually don't have ... the instinct when a human eye is wrong is very visible for me." Next: measure eye openness and whether both eyes look the same way, against his real photos at the same turn (TODO 50).
+
+## 23. The retrospective, the hold and the teeth (2026-10-17/18)
+
+- 10-17: "all the recent generations have been going downhill. Do not generate any more images. Keep the to-dos on hold ... find out why and
+  fix it." Generation is on hold (`.cache/GENERATION_HOLD`); why: `RETROSPECTIVE_2026-10-17.md`, FAILURE_LOG F71.
+- 10-17, four decisions (dialog): the body reference of a shirtless picture is **the pumped physique, always**; **shirtless pins first**; the
+  current-look items are **just pointed out** (`tools/best_check.py` NOTE; item 26's scenery sentence became item 37, which still rejects);
+  spare credits go **only to plans the user approves**.
+- 10-17: "smile is a major project item to be corrected since none of the generated images till now have good teeth showing images"
+  (diagnosis: `.cache/smile_diagnosis_2026-10-17/REPORT.md`, FAILURE_LOG F72).
+- 10-17, of two exported pictures they had approved in dialogs (pin 15 v2 on 10-12, pin 14 v3 on 10-13): "these are bad". Both withdrawn with
+  `tools/best_check.py --user-rejected`; the approvals stay on record.
+- 10-18: "do you want me to provide better photos of smile? previously when asked you said the ones you have are sufficient. dont keep blaiming
+  the photos, i can recrop thm better and send again if you want." The photos are sufficient; no new or better photos are asked for.
+- 10-18, the teeth (dialog): of the two pictures I had called exceptions, **only E2** (`outputs/20261010_125108_goal-img-6858/v1_0.png`) has
+  the right teeth; the IMG_3884 redo (`outputs/20261010_085046_goal-img-3884-original/v2_0.png`) does not, which replaces the 10-10 words about
+  it in section 20. Teeth **only for smiling goals or when the user asks** (closed lips elsewhere). The teeth references are the real
+  **IMG_6875 + IMG_3884** (never the generated E2, never "whiter"). The first teeth test, once the hold is lifted, goes **straight to a
+  shirtless pin**.
+- 10-18, the teeth pin (dialog): **Pin 8** (none of the eight shirtless pins shows its man smiling; pin 8 has the largest face). Recipe
+  `pin_783485666539777118@v8` = v7 plus his open smile with his own teeth (`--teeth`), frozen; its trial run (stages 01-03) matches the lock.
+- 10-19 (dialog, "Lift the hold for this one run?"): **"Run pin 8 now (Recommended)"**. Run with `FACECARD_HOLD_PASS` for that one recipe;
+  the hold file stays, so everything else is still held. It waited at the credit guard (need 2 x 120 + margin 150 = 390, window 307);
+  the user chose "One render now", but the window fell to 16 by 03:52 (the user's own Gemini use: "Yes, that was me"), so both runs were
+  stopped with nothing generated, and the user chose "Fresh start 05:35, 2 renders (Recommended)" (a fresh sign-in after the 05:33 reset).
+- 10-19, the first teeth test (run `20261019_053523_goal-pin-783485666539777118`, 288 credits, background restored): teeth **"The first
+  picture's do"**, overall **"Keep the first"** (`v1_0r.jpg`, exported as `motorcycle-outfit-men_08_mirror-selfie-cat-shirtless_v3.jpg`;
+  on record: its head 0.054 higher than the pin's, pose gate limit 0.04). The second (`v2_0r.jpg`): not kept (an even row of teeth, the
+  janeu starting mid-chest).
+- 10-19, of the kept pin 8 picture: "although the teeth here were perfect, the hair is not." Cause: the background restore pasted the pin man's
+  straight hair over the curls Gemini drew (FAILURE_LOG F73); Gemini's raw `v1_0.jpg` has his curls.
+- 10-19, of the two fixes shown: "I like this one [v1_0_sparkle_only.jpg], as the other one has distortion around the halo that you tried to
+  add." Kept as `v1_0s.jpg` (Gemini's render, only the sparkle replaced), exported as `motorcycle-outfit-men_08_mirror-selfie-cat-shirtless_v4.jpg`;
+  the `_v3` export (the pin man's hair) is withdrawn and `v1_0r.jpg` recorded as rejected by the user.
+- 10-19, the best pizza: "pizza best photo s under ai me actually" (`date simulate.jpg` = `_11_..._v4.jpg`; its base's head was untouched by
+  the restore bug, 1.5% of head pixels differ). The older `_v2` export (curls trimmed) is left as it is.
+- 10-19 (question box, after the links): "Next shirtless pin (Recommended)", then "Pin 4 now (Recommended)": recipe
+  `pin_783485666539777050@v2` (Pro, 2 renders) run once with `FACECARD_HOLD_PASS`, then the head-safe background restore.
+- 10-20 (box), of that run's two re-framed renders: "keep both but try again to frame it properly only after first debugging why it
+  happened" (kept as `_04_..._v4.jpg`, `_v5.jpg`; the cause: FAILURE_LOG F74). Then, of the fix (recipe v3, physique `pumped-front-chest`):
+  "Run it now (Recommended)".
+- 10-20, of `_04_..._v3.jpg` (the 10-01 render, run `20261001_063344`, old slim build): "Both the recent versions look perfect to me. In
+  fact, I prefer this version over the recent generations. Although it does break my rule of looking perfectly like the given goal Pinterest
+  image, it still shows my personality better than the rest. That doesn't allow you to keep breaking the rule, but an exception could be
+  made." And of the v3 fix renders (run `20261020_192346`, both failing the pose gate): "almost seem perfect. Could you help me understand
+  what exactly you are claiming is wrong with them?"
+- 10-21 (box), after the measured differences were explained (head upright and higher, more centered, the camera hand higher): the two fix
+  renders "Keep both" (`_04_..._v6.jpg`, `_v7.jpg`, sparkle left: re-framed); the 10-01 picture's sparkle "Remove it (Recommended)", then of
+  the fill (`tools/sparkle_fill.py`; the pin's-pixel patch showed a dark disc and was dropped) "Replace it (Recommended)": now `_v8.jpg`,
+  `_v3.jpg` withdrawn as superseded (`best_check.py --superseded-by`).
+- 10-21, the user: "dont wait until user approves just move on to next pin going forward". The pins then ran one after another, each ONE whole
+  render under `FACECARD_HOLD_PASS` (2 pictures, no edits), checklists recorded honestly (nothing `--user-approved` for the user): pin 15 v4
+  (run `20261021_031826`, Flash, back-torso photo + frame-aware words), pin 6 v4 (`20261021_032452`, Flash, whole render, pumped-side-chest),
+  pin 14 v4 (`20261021_032954`, Flash, Gokarna in words, torso crop), pin 9 v4 (`20261021_033704`, Flash, casual-front-arms, restore with heads
+  kept), then pin 13 v7 and pin 12 v6 on Pro (the model as the one new variable). Every pose gate failed again (15, 6, 14: head and shoulders
+  lower or larger than the pin's; 9: only the head bow, 0.74 against 0.87); the pictures look like the user. Candidates await the user's eye.
+  Full account: FAILURE_LOG F75 (which also corrects my first claim that Pro raised pin 13's identity: it did not).
+- 10-21 (box, the round's results; pins 13 and 12 not asked yet): **Pin 9** restored render: "Keep it" (exported `_09_..._v2.jpg`). **Pin 6**
+  render 1 (`v1_0.jpg`, exported `_06_..._v4.jpg`): "the better one out of the two renders, but it still does not match the given goal.
+  Somehow, it slightly differs. Maybe it's the clarity of the photos, maybe this requires a little blurring, or it's the angle of the face or
+  the sharpness in the face ... capturing the photo at the right angle to make sharp features of the face look exaggerated, for instance, the
+  chin and nose ... this still is a very good render regardless. Great improvement from all past renders." **Pin 14** render 1 (`v1_0.jpg`,
+  exported `_14_..._v4.jpg`): "captures the musculature perfectly, but it has softened or increased the fat percentage in my face. The face
+  is not as sharp as the body looks here. Rest is the perfect image. Both the background and everything are perfect in this: body positioning,
+  the subject, everything." **Pin 15**: "Neither is the correct answer, but ... the pose is hit in a way that the body's V shape gets exaggerated
+  (regardless of whether the muscle mass is the same or not) ... adding non pumped video links to understand how poses can make huge
+  differences" (IMG_7419, IMG_7420, IMG_7249; kept in `D:\FacecardData\body_refs\2026-10-21_videos`): memory `facecard-pose-shapes-the-body`;
+  pin 15 v5 (a mirrored raised-arm frame of IMG_7420 as the pose-matched body reference, back wording that no longer narrows it) ran next.
+  Both the pin 6 and the pin 14 notes say the same about the FACE: softer and fuller than the goal's sharp chin and nose and than the user's
+  own sharp, lean face (checklist item 31).
+- 10-21 (box, second set): **Pin 15 v5** (the video frame run): "The back musculature is still bad. It is underestimating my actual back
+  musculature and flexed." **Pin 13 v7** (Pro): "The pants are below the buttocks, hanging on the hamstring or the knee in the photo that you
+  rendered, unlike the given goal or reference, where they were actually just baggy but properly worn around the waist itself." **Pin 12 v6**
+  (Pro), both renders: "the smile is horrible, total garbage, and the smile correction still needs to come up. Previously, we did nail it on the
+  mirror selfie holding the cat. The same level of smile has to come here. Debug which exact step is failing. Moreover, the subject is too close to
+  the camera and needs to be slightly back, or the background blur has to be reduced at the subjects. Refer to the Google image once again and
+  imitate it perfectly, even when it comes to texture, background, everything, to mimic a natural photo." **What next:** "Fix both faces next
+  (Recommended)" (pins 6 and 14). Recorded as not kept (`--user-rejected`).
+  **The smile step that failed on pin 12** (found by comparing the two requests): the cat selfie's smile had his two real teeth photos as
+  references and a CHANGE line "his own natural open smile ... as in HIS TEETH, FRONT"; pin 12's text-mode request had neither and asked for "a quick
+  half-smile, one corner of the mouth lifted and the lips barely parted", so the smile was Gemini's stock smirk. Pin 12 v7 has teeth mode and the
+  open-smile line, the camera 2.5 m away from the thighs up, the atrium behind in ordinary phone focus. Also in this round: pin 15 v6 (his real flexed
+  IMG_7420 frame, unflipped, as the body), pin 6 v5 and pin 14 v5 (a sharp-face item and his real profile IMG_6863), pin 13 v8 (the jeans worn at the
+  waist). The Gemini window was empty (0 of 2,400) from before 15:49 to 17:33 (not my runs: the last one ended at 12:02 with 2,128 left), so the five
+  runs are queued for 17:35, one after another.
+- 10-21 evening (run results; the user's verdicts follow): the credit window was empty from 15:49, refilled at 17:33 and was used up again by 17:53 by a
+  consumer outside this pipeline (FAILURE_LOG F76). **Pin 12 v7** (`20261021_173953`, `--teeth`): his own teeth show (his IMG_6875 mouth is the yardstick),
+  the background is in focus, the subject is as large in the frame as in v6 (eyes 76-77 px apart; the camera did not move back), the pin's small "Untld"
+  mark is missing, v2_0 has two figure-shaped forms in a shop window; both NOT BEST. **Pin 15 v6** (`20261021_174638`): one picture, the janeu right,
+  shoulders 0.177 and head 0.243 off the pin's, the back not more massive than v5's. Pins 6 v5, 14 v5 and 13 v8 are frozen and wait for the 22:33 refill.
+- 10-21 night (the user's box answers, ~23:00): pin 12 v7 **"Render 2 (Recommended)"** (recorded user-approved, exported as `_12_..._v1.jpg`; its missing Untld mark and the
+  two shop-window figure-shaped forms stay on record); pin 15 **"New render: pumped back + real frame (Recommended)"**: pin 15 v8 ran at 23:17 (F77); the credits
+  question **"It was me"**: the drain of today's windows was the user's own Gemini use. The 22:33 chain ran pins 6 v5, 14 v5 and 13 v8 (F77): all NOT BEST by the checklist,
+  the faces are sharp now, pin 13's jeans sit at the waist; pin 15 v8's back is thicker and only item 14 of the pose gate fails. Their verdicts follow.
+- 10-22 (box, the night's results; recorded 01:10-02:40): pin 6 v5 **"Keep both"** (exported `_06_..._v5.jpg` and `_v6.jpg`); pin 14 v5 **"Keep both"** (exported `_14_..._v5.jpg` and
+  `_v6.jpg`); pin 13 v8 **"Neither, new render"** (both withdrawn); pin 15 v8: "yes, we need a new render, and I want you to understand that the person in the Google Pinterest image is
+  pushing their hips forward and leaning their back backwards towards the camera. That is, the back is relatively closer to the camera than the hips. This creates the back to look more
+  triangular, that is, shoulders wider and waist narrower. Implement that pose exactly as it is." (both withdrawn; FAILURE_LOG F78). Pin 15 v9 (the lean) and pin 13 v9 (the scoreboard
+  crops) are frozen, their dry runs pass, and they run at 03:33:25 IST after the refill.
+- 10-18, a standing rule: "if you want any decision from my end, do not just write it in the chat. Use the Ask User Question tool to prompt
+  that decision and get it from me."
