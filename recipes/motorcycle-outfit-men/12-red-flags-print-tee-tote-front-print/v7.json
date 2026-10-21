@@ -1,0 +1,295 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666540141702",
+ "version": 7,
+ "created": "2026-10-21T15:47:42",
+ "because": "the user, 2026-10-21, of both pin 12 renders: the smile is garbage (the cat selfie's smile came from his two real teeth photos and a 'his own natural open smile' line, which pin 12 never had: it asked for 'a quick half-smile, lips barely parted'), the subject is too close and the background too blurred: v7 = the teeth references and an open-smile line, the camera 2.5 m away from the thighs up, the atrium behind in ordinary phone focus with the phone-video texture",
+ "parent": "v6",
+ "origin": {
+  "kind": "bump",
+  "notices": []
+ },
+ "goal": {
+  "key": "pin_783485666540141702",
+  "path": ".cache/pin_783485666540141702.jpg",
+  "sha256": "558c0d6e167d52415910b0a29ea946d648cb57b44429d281d44e797c7e56cf22",
+  "pose": {
+   "path": ".cache/poses/pin_783485666540141702.json",
+   "sha256": "a9cac7d4986ccc823d80f2f694dfb41b2197b4f927fafbee612bed5d6804ecf7"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666540141702.jpg",
+   "prompt": ".cache\\loop_prompts\\pin_783485666540141702_route_v6.txt",
+   "inventory": null,
+   "goal_as_image": "no",
+   "replace_subject": false,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": [
+    ".cache/props/print_red_flags_pin12.jpg::THE PRINT DESIGN: a flat crop of the lettering printed on a t-shirt. Copy this lettering exactly onto the chest of his cream t-shirt: the same wide, round geometric sans-serif capital letters, the same bright crimson-red colour, the same four lines in the same order and sizes, centred, with the bottom line I'M A BULL in a regular weight, filled solid and not outlined. Take nothing from this image except the lettering: no fabric, no body, no background."
+   ],
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": false,
+   "build_sheet": false,
+   "head_swap": false,
+   "character": "me@v2",
+   "teeth": "pin 12 is a smiling front view: the user, 2026-10-21: 'the smile is horrible, total garbage ... Previously, we did nail it on the mirror selfie holding the cat. The same level of smile has to come here'"
+  },
+  "model": {
+   "id": "e6fa609c3fa255c0",
+   "label": "pro",
+   "display": "3.1 Pro",
+   "display_seen": "2026-10-21T03:46:05"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": false,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "Candid phone snapshot of him caught mid-stride, walking toward the camera along the upper walkway of a mall early in the morning, taken from about two and a half metres away at chest height with the phone held level and the frame tilted about 3 degrees as if grabbed in a hurry, so he is seen from the thighs up and his head fills only about a sixth of the frame height. He is a little off-centre toward picture-right, one shoulder ahead of the other, his weight moving forward. His head turns to the lens a moment late, his eyes just finding the camera, and he is smiling his natural open smile, exactly as in HIS TEETH, FRONT: his lips parted as far as there, his own upper teeth showing as they are in that photo (their own shape, size and colour, never whitened or evened), his cheeks lifted a little and small creases at the outer corners of his eyes, relaxed and natural rather than a pose. A white non-woven tote bag swings from his right shoulder at picture-left, its flat strap cut off by the left edge of the frame; the bag and his free hand, with a round black smartwatch on the wrist, are slightly blurred by their motion. He wears an oversized, boxy cream cotton crew-neck t-shirt with short sleeves; across the chest is the print shown in the PRINT DESIGN image, copied exactly and kept sharp and flat: four centred lines of wide, round geometric sans-serif capital letters in a bright crimson red, reading I DON'T CARE / IF SHE GOT / RED FLAGS in bold, and I'M A BULL below them in a regular, thinner weight, filled solid red like the rest and not outlined. Behind him, through the glass balustrade at his back, the open atrium of the mall is seen in ordinary phone-camera focus, slightly soft and compressed like a frame from a phone video, never a portrait-mode blur: rows of warm shop lights across the atrium as glowing points and bright unreadable glow, and the empty walkways and escalators; he is the only person anywhere in the frame. Uneven, slightly warm indoor light mixed with the cooler glow from the atrium; visible phone grain and a little noise in the shadows, the natural softness and texture of an unretouched phone photo. Vertical 2:3 frame.",
+   "from": ".cache/loop_prompts/pin_783485666540141702_route_v6.txt",
+   "sha256": "15a933330196a651ab59fe5c9cfaa158523ec056f222bdbe22d1ff7e1f6ebee1",
+   "used_for": "the SCENE section"
+  },
+  "inventory": null,
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": false
+   },
+   "angle_routed_would_have_been": [
+    "IMG_6858.jpg",
+    "IMG_6859.jpg",
+    "IMG_6873.jpg",
+    "IMG_6875.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "IMG_6923 Copy.jpg",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6923 Copy.JPG",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: his true build"
+   },
+   {
+    "n": 5,
+    "role": "inv_ref",
+    "name": "his_teeth_front_IMG_6875.jpg",
+    "sha256": "cddca687df924cb032802ae23720bcb4d5f8bb0beb6a4bc577e28af6ab58f02a",
+    "from": "D:/FacecardData/approved_refs/teeth/his_teeth_front_IMG_6875.jpg",
+    "prep": "fit2048_q95",
+    "why": "--teeth (pin 12 is a smiling front view: the user, 2026-10-21: 'the smile is horrible, total garbage ... Previously, we did nail it on the mirror selfie holding the cat. The same level of smile has to come here')",
+    "label": "HIS TEETH, FRONT: a real photo of the same man's own face today, facing the camera and smiling his natural open smile: take from it exactly how his mouth and teeth look when he smiles (his lips parted as far as here; his own upper teeth with their uneven edges, the pointed canines and the thin line between his two front teeth; their ivory colour with yellower sides; the thin line of pink gum; his lower teeth just showing), never whitened, evened or straightened; nothing of its turn, its light or its background",
+    "key": "teeth_front"
+   },
+   {
+    "n": 6,
+    "role": "inv_ref",
+    "name": "his_teeth_turned_IMG_3884.jpg",
+    "sha256": "58050b9bb7d02c96214082f90fe9ca46f790e2f4bfc946db56c2e3d40f905405",
+    "from": "D:/FacecardData/approved_refs/teeth/his_teeth_turned_IMG_3884.jpg",
+    "prep": "fit2048_q95",
+    "why": "--teeth (pin 12 is a smiling front view: the user, 2026-10-21: 'the smile is horrible, total garbage ... Previously, we did nail it on the mirror selfie holding the cat. The same level of smile has to come here')",
+    "label": "HIS TEETH, TURNED: an older candid photo of the same man smiling with his head turned a little and bowed: take from it only how his own teeth and smile look from a slight turn (the same teeth as in HIS TEETH, FRONT); nothing of its hair, beard, light, clothes or place",
+    "key": "teeth_turned"
+   },
+   {
+    "n": 7,
+    "role": "prop",
+    "name": "print_red_flags_pin12.jpg",
+    "sha256": "2fefe2c5c662dd6512f909d4ec9fd6e4fe4954810f81aa6e05662e426109c1ef",
+    "from": ".cache/props/print_red_flags_pin12.jpg",
+    "prep": "fit2048_q95",
+    "why": "--prop",
+    "label": "THE PRINT DESIGN: a flat crop of the lettering printed on a t-shirt. Copy this lettering exactly onto the chest of his cream t-shirt: the same wide, round geometric sans-serif capital letters, the same bright crimson-red colour, the same four lines in the same order and sizes, centred, with the bottom line I'M A BULL in a regular weight, filled solid and not outlined. Take nothing from this image except the lettering: no fabric, no body, no background.",
+    "arg": ".cache/props/print_red_flags_pin12.jpg"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  },
+  "teeth": {
+   "because": "pin 12 is a smiling front view: the user, 2026-10-21: 'the smile is horrible, total garbage ... Previously, we did nail it on the mirror selfie holding the cat. The same level of smile has to come here'",
+   "refs": [
+    {
+     "key": "teeth_front",
+     "file": "his_teeth_front_IMG_6875.jpg"
+    },
+    {
+     "key": "teeth_turned",
+     "file": "his_teeth_turned_IMG_3884.jpg"
+    }
+   ]
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImage 4 is the BODY reference — his true build and proportion.\nImage 5 is HIS TEETH, FRONT: a real photo of the same man's own face today, facing the camera and smiling his natural open smile: take from it exactly how his mouth and teeth look when he smiles (his lips parted as far as here; his own upper teeth with their uneven edges, the pointed canines and the thin line between his two front teeth; their ivory colour with yellower sides; the thin line of pink gum; his lower teeth just showing), never whitened, evened or straightened; nothing of its turn, its light or its background\nImage 6 is HIS TEETH, TURNED: an older candid photo of the same man smiling with his head turned a little and bowed: take from it only how his own teeth and smile look from a slight turn (the same teeth as in HIS TEETH, FRONT); nothing of its hair, beard, light, clothes or place\nImage 7 is THE PRINT DESIGN: a flat crop of the lettering printed on a t-shirt. Copy this lettering exactly onto the chest of his cream t-shirt: the same wide, round geometric sans-serif capital letters, the same bright crimson-red colour, the same four lines in the same order and sizes, centred, with the bottom line I'M A BULL in a regular weight, filled solid and not outlined. Take nothing from this image except the lettering: no fabric, no body, no background.\n\nGenerate a new photograph of THIS EXACT MAN — not a lookalike.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.\n\nBUILD: Match image 4 precisely. A lean build with low body fat, exactly as in image 4: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image 4: never more muscular, never heavier, never thinner.\n\nCandid phone snapshot of him caught mid-stride, walking toward the camera along the upper walkway of a mall early in the morning, taken from about two and a half metres away at chest height with the phone held level and the frame tilted about 3 degrees as if grabbed in a hurry, so he is seen from the thighs up and his head fills only about a sixth of the frame height. He is a little off-centre toward picture-right, one shoulder ahead of the other, his weight moving forward. His head turns to the lens a moment late, his eyes just finding the camera, and he is smiling his natural open smile, exactly as in HIS TEETH, FRONT: his lips parted as far as there, his own upper teeth showing as they are in that photo (their own shape, size and colour, never whitened or evened), his cheeks lifted a little and small creases at the outer corners of his eyes, relaxed and natural rather than a pose. A white non-woven tote bag swings from his right shoulder at picture-left, its flat strap cut off by the left edge of the frame; the bag and his free hand, with a round black smartwatch on the wrist, are slightly blurred by their motion. He wears an oversized, boxy cream cotton crew-neck t-shirt with short sleeves; across the chest is the print shown in the PRINT DESIGN image, copied exactly and kept sharp and flat: four centred lines of wide, round geometric sans-serif capital letters in a bright crimson red, reading I DON'T CARE / IF SHE GOT / RED FLAGS in bold, and I'M A BULL below them in a regular, thinner weight, filled solid red like the rest and not outlined. Behind him, through the glass balustrade at his back, the open atrium of the mall is seen in ordinary phone-camera focus, slightly soft and compressed like a frame from a phone video, never a portrait-mode blur: rows of warm shop lights across the atrium as glowing points and bright unreadable glow, and the empty walkways and escalators; he is the only person anywhere in the frame. Uneven, slightly warm indoor light mixed with the cooler glow from the atrium; visible phone grain and a little noise in the shadows, the natural softness and texture of an unretouched phone photo. Vertical 2:3 frame.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "0f1d90d05ba5fa35552ef73b45502db4c0f08da5c82694e84cde6e5d1746eea2",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "3e852873d21e499e89720d9fdb5749196e77f08727c72a91dc1700cf73e63727",
+    "upload_name": "IMG_6923 Copy.jpg",
+    "bytes": 638113,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 5,
+    "role": "inv_ref",
+    "sha256": "cddca687df924cb032802ae23720bcb4d5f8bb0beb6a4bc577e28af6ab58f02a",
+    "upload_name": "his_teeth_front_IMG_6875.jpg",
+    "bytes": 267068,
+    "px": [
+     833,
+     833
+    ]
+   },
+   {
+    "n": 6,
+    "role": "inv_ref",
+    "sha256": "58050b9bb7d02c96214082f90fe9ca46f790e2f4bfc946db56c2e3d40f905405",
+    "upload_name": "his_teeth_turned_IMG_3884.jpg",
+    "bytes": 78157,
+    "px": [
+     432,
+     524
+    ]
+   },
+   {
+    "n": 7,
+    "role": "prop",
+    "sha256": "2fefe2c5c662dd6512f909d4ec9fd6e4fe4954810f81aa6e05662e426109c1ef",
+    "upload_name": "print_red_flags_pin12.jpg",
+    "bytes": 43523,
+    "px": [
+     450,
+     312
+    ]
+   }
+  ],
+  "model": "e6fa609c3fa255c0",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "8b9146c76f4a477fd3d2761c4b7dca73b3c8bad32e0166c77e3090e1b64bf0bb"
+ }
+}

@@ -1,0 +1,414 @@
+{
+ "schema": "facecard.recipe/1",
+ "id": "pin_783485666539777055",
+ "version": 5,
+ "created": "2026-10-21T15:52:49",
+ "because": "the user, 2026-10-21, of pin 6 v4 render 1 (kept): 'it still does not match ... the angle of the face or the sharpness in the face ... the chin and nose': v5 = a sharp-face item (the old 'not more angular, not more chiselled' words removed), a crisp-edges keep line and his real profile (IMG_6863) as a reference",
+ "parent": "v4",
+ "origin": {
+  "kind": "bump",
+  "notices": [
+   [
+    "info",
+    "the --prompt (route) text is replaced by the inventory's CHANGE / KEEP lists; it only decided the face references"
+   ]
+  ]
+ },
+ "goal": {
+  "key": "pin_783485666539777055",
+  "path": ".cache/pin_783485666539777055.jpg",
+  "sha256": "75c1eeefd962046deb1676cb10b8bd9a6f29ea9965727eb82c535df585bd416d",
+  "pose": {
+   "path": ".cache/poses/pin_783485666539777055.json",
+   "sha256": "91a6a38f1e6c9972c75bd054bc530c4c933f48ecdbfc74b94a51738e27ad6bb4"
+  },
+  "layout": null,
+  "source": null
+ },
+ "method": {
+  "route": "G",
+  "subject": "me",
+  "args": {
+   "goal": ".cache/pin_783485666539777055.jpg",
+   "prompt": ".cache/loop_prompts/pin_783485666539777055_route.txt",
+   "inventory": ".cache\\inventories\\pin_783485666539777055_v15.json",
+   "goal_as_image": "no",
+   "replace_subject": true,
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false,
+   "prop": null,
+   "face_refs": null,
+   "face_count": null,
+   "subject": "me",
+   "identity_bible": null,
+   "build_sheet": null,
+   "head_swap": null,
+   "character": "me@v2",
+   "physique": "pumped-side-chest"
+  },
+  "model": {
+   "id": "56fdd199312815e2",
+   "label": "flash",
+   "display": "3.8 Flash",
+   "display_seen": "2026-10-21T11:53:04"
+  },
+  "samples": 2,
+  "stop": {
+   "after_pose_fails": 2,
+   "on_pass": false
+  }
+ },
+ "inputs": {
+  "flags": {
+   "replace_subject": true,
+   "goal_as_image": "no",
+   "body_only": false,
+   "edit_photo": null,
+   "layout_image": false,
+   "pose_points": false,
+   "pose_image": false
+  },
+  "own": false,
+  "own_score": null,
+  "scene_text": {
+   "text": "His face is turned about 85 degrees toward picture-right, in profile, bowed down.",
+   "from": ".cache/loop_prompts/pin_783485666539777055_route.txt",
+   "sha256": "2fe3edb8c221277273612479a9a8361b3419d8aa9cef4949b0cadfd0b938b623",
+   "used_for": "face choice only: the inventory's CHANGE / KEEP lists replace it in the prompt"
+  },
+  "inventory": {
+   "from": ".cache\\inventories\\pin_783485666539777055_v15.json",
+   "sha256": "114d09ff0e81dc71b7086f2e747d14cbe939d24689a322de61349b1906d2aa93",
+   "data": {
+    "goal": ".cache/pin_783485666539777055.jpg",
+    "photo_to_edit": ".cache/pin_783485666539777055.jpg",
+    "written": "2026-10-21, pin 6 v5 (the user, of v4 render 1: 'it still does not match ... the angle of the face or the sharpness in the face ... the chin and nose'): v14 with the face item cut of 'not more angular, not more chiselled' and made sharp, a keep line on crisp facial edges, and his real profile (IMG_6863) as a reference. 2026-10-21, pin 6 v4 = ONE whole render (the user, 2026-10-21: 'move on to next pin'; one whole render per attempt, FAILURE_LOG F74): v12's head items with the current look (lean face as me@v2, the pumped body) plus v13's body, janeu, chain and HIS ARM items, one keep line on the head's bow (the old whole renders bowed it lower than the pin). The body photos and their wording stop at what the frame shows (physique pumped-side-chest). v13's note: 2026-10-13 18:4x, pin 6 v3 = stage 1 of 2 (backlog 3, the yardstick redo): body only (--body-only). The approved 2026-10-01 v1 ('pencil in mouth pass v1 - sufficient', run 20260930_235140; withdrawn the next day: 'the pencil is not in my mouth at all ... my head seems weirdly placed on top of the body ... the physique is of a different person') predates the user's yardstick of 2026-10-10 ('any shirtless picture will get the fully pumped version of mine'), item 36 (his janeu and silver chain on every bare torso) and character me@v2. The one-step recipes of this pin (v1 10-07, v2 10-09; FEEDBACK_LEDGER attempts 53-56, and 52 earlier ones) all failed the pose gate: the camera moved back or he was re-centred (grey diff to the pin 27-42), his head was drawn x1.11-1.23 and bowed lower than the pin's (+0.71-0.83 against +0.61), the pencil came out held by the chin, and 'exactly as in the PHOTO TO EDIT' / FRAMING lines handed the pin's man back (diff 5-7). FAILURE_LOG F12/F25/F26/F33: a whole-frame edit re-rolls the pose and the framing; a body-only edit that keeps the pin's own head pixel for pixel pins the frame (pins 15 v3 and 16 v3 held; the head is large in this frame as there, 0.4 of its width). So v3 keeps the pin's whole head (the bow, the size, the turn, the brush clamped across the teeth) and changes only the body below it to his pumped build, his janeu and his silver chain (item 36) and his skin tone in the black-and-white grade; no face photo is sent and no face word is used ('no_face_words'). BODY references: --physique pumped-side-torso (pumped_front_torso.jpg + pumped_back_torso.jpg, cut at the chin and the waistband), because this pin is seen from his right side and behind, its visible body is the back, the shoulder and a bent arm, and the standards' hanging forearms and hands must not set his pose (FAILURE_LOG F19/F22; pin 16 v3 side view held its frame with the same set); both crops already carry his janeu and his silver chain, so no chest crop is sent; one crop of his own right arm (IMG_7005: biceps vein and forearm veins) is, because the near arm is his right arm. Stage 2 (his head) is NOT frozen: replicate's YuNet finds no face on this bowed profile (checked 2026-10-13: [] at min 20 px; SCRFD finds it: yaw -18.9, pitch -37.1), so the head needs a Route G region edit of the head crop or a SCRFD fallback in replicate.detect_faces; decided after the pictures exist. THE PIN (1200x1500, black and white, read by eye with a grid 2026-10-13): he sits on a white marble floor leaning far forward and faces picture-RIGHT with his head bowed, so the camera sees his RIGHT side: his right shoulder, back and arm are the near ones; his left shoulder is the far one, hidden behind his neck and head at upper picture-right. His janeu runs from his left shoulder to his right hip (his own photos IMG_7002/7006/7008 and both standards), so here from where his neck meets his back at upper picture-right down his back to picture-left and out by the left edge toward his right hip (the mirror image of the back standard, as in pin 15's mirror), while the part across his chest is hidden by his bowed head and arm. Geometry (fractions of width / height): ear at 40 / 12, nose tip at 53 / 31, neck meets back at about 31 / 17, near shoulder cap at about 38 / 33, hanging upper arm x 33-50 from y 33 to the elbow on the knee at about 42 / 63, forearm angled down to picture-left to the hand at 12-30 / 70-92, the other arm along the left edge from y 38 down to the paper with the steel cuff at about 8 / 90, brush from the mouth corner at 37 / 27 to its end at 55 / 40, trousers' top edge at the left edge at about 53, plate with brushes at 60-90 / 72-82, jar at the right edge, painting knife at 68-97 / 90-95. The steel cuff on the far wrist stays (the user approved the pin with it kept, 10-01; it is the pin's jewellery, not a mark; checklist item 26). Sizes: the near upper arm is about 205 px wide (17 percent of the width) mid-length; as on pins 8 and 15 the arm item says 'about a quarter narrower' (never 'a third thinner', withdrawn on pin 15) and the back item asks for less mass and a flatter trapezius; his outline stays inside the pin man's, so the restore's paste mask holds it and the wall behind is Gemini's own where the pin man's bulk was. Keep lines name the people (none, item 33) and the lettering (none, item 34); the pin's own background is copied back after the run (--restore-background).",
+    "refs": [
+     {
+      "key": "arm",
+      "path": ".cache/region_edits/pin14_v3/torso_IMG_7005.jpg",
+      "label": "HIS ARM: a crop of the same man's own photo today, in side window light, in colour: his right arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin, drawn in the black-and-white grade of the PHOTO TO EDIT; never his pose, the room or the light."
+     },
+     {
+      "key": "profile",
+      "path": "D:/Downloads/FaceCard_Originals/IMG_6863.jpg",
+      "label": "HIS PROFILE: a real photo of the same man's own head today seen exactly from the side, calm: take from it the exact shape and the sharpness of his profile: the straight nose with its rounded tip, the lips, the chin and the jaw line under his beard, the ear and the tight curls, all hard-edged, lean, with low facial fat; nothing of its clothes, light or room"
+     }
+    ],
+    "change": [
+     {
+      "item": "the man",
+      "goal": "a muscular shirtless man with dark curly hair and a beard, in black and white",
+      "his": "him: the man of the references, a different person, with his own face, hair, beard, skin and body"
+     },
+     {
+      "item": "face",
+      "goal": "the other man's narrow angular face",
+      "his": "his face exactly as in the FACE reference photos and HIS PROFILE: the same face shape, the same eyes, brows, nose and mouth, as lean and as sharp as there: a defined jaw line and chin, a straight nose with a clean bridge and rounded tip, a hollow under the cheekbone, low facial fat; never softer, rounder or fuller than in HIS PROFILE"
+     },
+     {
+      "item": "hair",
+      "goal": "dark curly hair",
+      "his": "his own haircut exactly as in the FACE reference photos (copy it from them, never from the man in the PHOTO TO EDIT): tight curls on top, the sides short, the curls longer at the back; his hair is his, whatever the PHOTO TO EDIT's man has"
+     },
+     {
+      "item": "beard",
+      "goal": "a short dark beard",
+      "his": "his own beard exactly as in the FACE reference photos, copied from them and never from the man in the PHOTO TO EDIT: the same length, density and shape"
+     },
+     {
+      "item": "skin tone",
+      "goal": "the man's skin on his back, shoulder and arms, a mid-dark grey in this dim black-and-white light",
+      "his": "his own warm medium-brown skin tone as in the BODY references and HIS ARM, rendered in this same black-and-white grade as a grey of about the same lightness as that man's skin in this dim light, never lightened and never given any colour, on his back, shoulder, arms and hands, with real skin texture; at the neck it blends evenly into the skin of the head above it"
+     },
+     {
+      "item": "build",
+      "goal": "a very muscular, heavy bodybuilder's build: a thick, high trapezius, a huge round shoulder, a broad heavy back and a massive arm",
+      "his": "his own build from the BODY references: clearly less massive than in the PHOTO TO EDIT and a little narrower across the shoulders, with a tight narrow waist and flat love handles"
+     },
+     {
+      "item": "back and shoulder",
+      "goal": "a broad, thick back with a high, heavy trapezius rising into the neck, a big rounded shoulder and thick muscle over the shoulder blade",
+      "his": "his own back and shoulder exactly as in the back BODY reference: clearly less massive than in the PHOTO TO EDIT, his trapezius low and flat, sloping gently from his neck to his shoulder, the round shoulder cap a little narrower across, the edge of his shoulder blade and the outline of his lat defined, with real skin texture and never smooth or soft; his shoulder line and back stay inside the outline of the man who sat here"
+     },
+     {
+      "item": "arms",
+      "goal": "a huge muscular arm: the upper arm hanging from the shoulder to the elbow on his knee, thick and streaked with veins, a thick forearm and a big hand, and the other arm reaching down along the picture-left edge to the paper",
+      "his": "his own full arms at their real size, exactly as in the BODY references and HIS ARM: the hanging upper arm about a quarter narrower than in the PHOTO TO EDIT but never thinner than in the BODY references, round and firm with the vein running along the biceps, and his forearms leaner than that man's with the clear veins on them as in HIS ARM, in this dim light; the elbow, forearm and hand stay exactly where they are in the PHOTO TO EDIT"
+     },
+     {
+      "item": "head, neck and body",
+      "goal": "the other man's head, neck, shoulders, chest and arms",
+      "his": "his own head, neck, shoulders, chest and arms drawn together as one continuous body, the head sitting naturally on his own neck and shoulders"
+     },
+     {
+      "item": "janeu",
+      "goal": "a bare back and shoulder with no thread on them",
+      "his": "his janeu, the thin off-white sacred thread he always wears, unbroken and lying flat on his skin, as thin as in the BODY references, drawn as a thin light-grey line in this black-and-white grade. In this photo he sits leaning far forward and faces picture-right, so the camera sees his right side: his right shoulder and back are the near ones and his left shoulder is the far one, hidden behind his neck and head. The thread comes over the top of his far left shoulder where his neck meets his back, at about 31 percent from the left and 17 percent from the top, and runs down across his back in one thin diagonal line toward picture-left, over his shoulder blade at about 15 percent from the left and 27 percent from the top, and leaves the picture by the left edge at about 36 percent from the top, just above where his other arm begins, on its way to his right hip: it runs from upper picture-right to lower picture-left, the mirror image of the way it runs on the back BODY reference. It never hangs straight down from his neck, it is never drawn on his arm, and the part of it that lies across his chest is hidden by his bowed head and his arm, so nothing is drawn there"
+     },
+     {
+      "item": "neck chain",
+      "goal": "a bare neck and a bare upper chest with no chain",
+      "his": "his own fine silver neck chain with its small pendant, as in the front BODY reference, drawn as a thin bright line: it lies round the side of his neck below his ear and hangs forward from under his jaw to the top of his chest, where only a short stretch of it shows between his jaw and his shoulder at about 38 to 44 percent from the left and 30 to 35 percent from the top, and its small pendant rests on his upper chest in the shadow under his chin; as fine and small as in his photos, never a heavy chain, never on his back or his arm"
+     }
+    ],
+    "keep": [
+     "the FRAMING exactly: a vertical close shot of him seated and leaning far forward, his head in the top 35 percent of the frame, his back cut off by the left edge, the other arm and the paper cut by the bottom edge; the same crop, scale and camera distance as the PHOTO TO EDIT, with him not re-centred and the picture not zoomed in or out",
+     "the paintbrush: a long thin brush clamped crosswise between his teeth, his lips closed around it at the corner of his mouth, its handle running down toward picture-right; it is held in his mouth, never resting against his chin",
+     "his head bowed exactly as far as the PHOTO TO EDIT's man bows his, and no deeper: the line from his ear to the tip of his nose pointing down toward the paper at the same angle, his chin not tucked lower than there, his eyes cast down at the paper (the earlier renders bowed it lower than the pin, which pulled his head and shoulders out of place)",
+     "his face is softly shaded by his curls like the face of the man in the PHOTO TO EDIT, but its features stay clearly readable, and it is not brighter than his white tee",
+     "his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered",
+     "his outline inside the outline of the man in the PHOTO TO EDIT: the same posture, position and size, with his shoulder, back and arms where that man's are and no larger, so the wall and the floor around him stay as they are",
+     "his exact posture: sitting on the floor leaning far forward with his back rounded; the near arm hanging straight down from the shoulder, its elbow resting on his knee at about 42 percent from the left and 63 percent from the top, the forearm angled down toward picture-left to the hand at about 12 to 30 percent from the left and 70 to 92 percent from the top, its fingers pointing down toward the paper; the other arm reaching down along the picture-left edge to the paper on the floor",
+     "the steel cuff bracelet on the wrist of the arm along the picture-left edge, at about 8 percent from the left and 90 percent from the top, exactly as it is",
+     "he stays shirtless: bare back, shoulder and arms, with nothing on his torso but his own chain and his janeu",
+     "the dark, loose, softly creased trousers on his lap and knee with their gathered waist at the picture-left edge, exactly as in the PHOTO TO EDIT",
+     "the objects on the floor exactly where they are: the round palette plate holding brushes at about 60 to 90 percent from the left and 72 to 82 percent from the top, the stone jar of brushes and painting knives at the picture-right edge, the long painting knife with its dark handle at the bottom right, and the sheet of paper with a pencil sketch at the bottom",
+     "the whole scene: the white marble floor with grey veining, the marble skirting along the wall at about 45 percent from the top, the pale wall with its soft shadow at picture-right, and the window with its dark frame and the leaves at the top",
+     "no other person anywhere in the frame: he is the only person in the picture",
+     "no text, letters, sign or logo anywhere in the picture",
+     "the black-and-white photograph exactly: the same grey tones, deep contrast, soft film grain and slight softness of a quick candid capture; no colour anywhere, not even a tint",
+     "the dim moody light from behind and above, his body shaded and lit exactly as in the PHOTO TO EDIT, his size and position in the frame and the camera distance",
+     "his face is as crisp as the rest of the photograph and as the man's in the PHOTO TO EDIT: the edge of his jaw, his chin and the bridge of his nose cleanly defined in this light, with real skin pores and beard grain; never smoothed, softened, rounded or blurred"
+    ]
+   }
+  },
+  "layout": null,
+  "pose": null,
+  "face_choice": {
+   "bin": null,
+   "decided_by": "character me@v2",
+   "evidence": "the same face photos for every goal",
+   "measured": {
+    "detected": true,
+    "yaw": -18.9,
+    "pitch": -37.1,
+    "roll": 38.8,
+    "side": "picture-right",
+    "score": 0.55,
+    "by": "SCRFD + HeadPoseONNX (yakhyo/head-pose-estimation)"
+   },
+   "angle_routed_would_have_been": [
+    "IMG_4861_fav_right.jpg",
+    "IMG_6864.jpg",
+    "IMG_6861.jpg",
+    "IMG_6869.jpg"
+   ],
+   "count": 3,
+   "names": [
+    "IMG_6858.jpg",
+    "IMG_6868.jpg",
+    "IMG_6861.jpg"
+   ]
+  },
+  "references": [
+   {
+    "n": 1,
+    "role": "face",
+    "name": "IMG_6858.jpg",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6858.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: front"
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "name": "IMG_6868.jpg",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6868.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter left"
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "name": "IMG_6861.jpg",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6861.jpg",
+    "prep": "fit2048_q95",
+    "why": "character me@v2: three quarter right"
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "name": "pumped_front_torso.jpg",
+    "sha256": "9ffb4b15044e50a0ce4f017f8ee3f6617ad355e0128201c7c727457d016b2b92",
+    "from": "D:/FacecardData/physique/standard/pumped_front_torso.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique pumped-side-chest: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "name": "pumped_back_torso.jpg",
+    "sha256": "4844e5986e9f7719ad9ac94c3ea0e99159f05bf88482c1439dabbbc9465b811f",
+    "from": "D:/FacecardData/physique/standard/pumped_back_torso.jpg",
+    "prep": "fit2048_q95",
+    "why": "physique pumped-side-chest: the user's yardstick of 2026-10-10"
+   },
+   {
+    "n": 6,
+    "role": "inv_ref",
+    "name": "torso_IMG_7005.jpg",
+    "sha256": "e9ca5543422c7d2aa80db9528f6153fa89d5234bed76882aeeb975b13623dec2",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/region_edits/pin14_v3/torso_IMG_7005.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS ARM: a crop of the same man's own photo today, in side window light, in colour: his right arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin, drawn in the black-and-white grade of the PHOTO TO EDIT; never his pose, the room or the light.",
+    "key": "arm"
+   },
+   {
+    "n": 7,
+    "role": "inv_ref",
+    "name": "IMG_6863.jpg",
+    "sha256": "133314862cd770ca8d52156010e93127849ba7779132d5841944f4a8ee259d90",
+    "from": "D:/Downloads/FaceCard_Originals/IMG_6863.jpg",
+    "prep": "fit2048_q95",
+    "why": "inventory reference",
+    "label": "HIS PROFILE: a real photo of the same man's own head today seen exactly from the side, calm: take from it the exact shape and the sharpness of his profile: the straight nose with its rounded tip, the lips, the chin and the jaw line under his beard, the ear and the tight curls, all hard-edged, lean, with low facial fat; nothing of its clothes, light or room",
+    "key": "profile"
+   },
+   {
+    "n": 8,
+    "role": "photo_to_edit",
+    "name": "pin_783485666539777055.jpg",
+    "sha256": "27daee45ad7b57593b5a0386992ec2c28c6415334afb5a4e5c487f4df555af0e",
+    "from": "C:/Users/Admin/GitHub/nano-banana-facecard/.cache/pin_783485666539777055.jpg",
+    "prep": "fit2048_q95",
+    "why": "the inventory's photo_to_edit"
+   }
+  ],
+  "character": {
+   "ref": "me@v2",
+   "sha256": "6da3b3c4f60a148ba84452071fb9600b9c880b58ca8dd4220393577b0a38649e",
+   "description": {
+    "face": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.",
+    "hair": "His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.",
+    "beard": "His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.",
+    "skin": "Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores.",
+    "build": "A lean build with low body fat, exactly as in image {BODY}: moderately broad shoulders, a defined chest, a flat stomach, a narrow waist and slim hips, and arms of moderate size with light muscle tone. His body is exactly as lean as in image {BODY}: never more muscular, never heavier, never thinner."
+   }
+  },
+  "physique": {
+   "name": "pumped-side-chest",
+   "files": [
+    "pumped_front_torso.jpg",
+    "pumped_back_torso.jpg"
+   ],
+   "label": "BODY references — his torso today from the front and from behind, right after a workout: his true build and proportion for a shirtless picture. They show only his body; how he sits or stands, how he holds his arms and how much of him the picture shows all come from the PHOTO TO EDIT.",
+   "build": "His body exactly as in images {BODY}, right after a workout, here seen from the side and only as much of it as the PHOTO TO EDIT shows: from behind his defined back, the edge of his shoulder blade and the outline of his lat; from the front the firm chest; in both the round shoulder caps and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in images {BODY}, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut."
+  }
+ },
+ "lock": {
+  "compiled_with": {
+   "code": "42296f23c78e+dirty",
+   "compiler": "route_g/1",
+   "template_sha256": "2e45a60d837d01fce354c4108b116055338b043d6a4a1f53a9b9f097ea160ad2",
+   "face_text_sha256": "06e323204c7b15ce334bfe9b48d84353e5220cfb297129e4cea73383f29dc219",
+   "build_text_sha256": "17dbfca6e8c35719f4463701f6c23e79ad91e5d32f48db60a256e7d48c6597b3",
+   "pillow": "12.3.0",
+   "opencv": "5.0.0.93"
+  },
+  "prompt": "REFERENCE IMAGES BY ROLE:\nImages 1-3 are FACE references of this man.\nImages 4-5 are BODY references — his torso today from the front and from behind, right after a workout: his true build and proportion for a shirtless picture. They show only his body; how he sits or stands, how he holds his arms and how much of him the picture shows all come from the PHOTO TO EDIT.\nImage 6 is HIS ARM: a crop of the same man's own photo today, in side window light, in colour: his right arm from the shoulder to the wrist at its real size, with the vein along his biceps and the veins on his forearm, and his real skin. Take from it only his arm's size, its veins and his skin, drawn in the black-and-white grade of the PHOTO TO EDIT; never his pose, the room or the light.\nImage 7 is HIS PROFILE: a real photo of the same man's own head today seen exactly from the side, calm: take from it the exact shape and the sharpness of his profile: the straight nose with its rounded tip, the lips, the chin and the jaw line under his beard, the ear and the tight curls, all hard-edged, lean, with low facial fat; nothing of its clothes, light or room\nImage 8 is the PHOTO TO EDIT.\n\nEdit image 8, the PHOTO TO EDIT: replace the man in it — his whole body and head, not only his face — with THIS EXACT MAN of the references, not a lookalike. His face, hair, beard, moustache, skin tone and build come only from the references. Keep everything else in the PHOTO TO EDIT exactly as it is: his exact posture (torso, both arms, both hands, both legs and feet), where he stands, his size in the frame, the camera and framing, the clothes, every object, the background and the light. Only who he is and the items in the CHANGE LIST change; nothing else.\n\nFACE: Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body. His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape. His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip. Warm medium-brown South Asian skin tone matching the references, never lightened; real skin texture with visible pores. His face, hair, beard and moustache come only from the FACE references (images 1-3), never from the photo to edit: his hair is the full tight curly black hair of the references even where the photo to edit shows it cut shorter.\n\nBUILD: His body exactly as in images 4-5, right after a workout, here seen from the side and only as much of it as the PHOTO TO EDIT shows: from behind his defined back, the edge of his shoulder blade and the outline of his lat; from the front the firm chest; in both the round shoulder caps and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in images 4-5, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut. His whole body is his own, from images 4-5: his shoulders, arms, chest and waist, and how lean or full his face and body are, exactly as in his references, never as the man in the photo to edit.\n\nCHANGE LIST (every item here changes from what the PHOTO TO EDIT shows to his own):\n- the man: the PHOTO TO EDIT shows a muscular shirtless man with dark curly hair and a beard, in black and white; make it him: the man of the references, a different person, with his own face, hair, beard, skin and body.\n- face: the PHOTO TO EDIT shows the other man's narrow angular face; make it his own face exactly as in the FACE references (images 1-3): Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. An oval face of medium length with a high forehead; thick, dark, fairly straight eyebrows; dark brown eyes with slightly heavy upper lids; a long straight nose with a rounded tip; medium-full lips with a fuller lower lip; medium ears that stand slightly out from his head. A lean face with no puffiness in the cheeks, as in the face references and his full-length body photo: low facial fat, the cheekbones visible; his full dense beard widens the outline of his jaw and chin. His face is never fuller than in the references, and at its true size in proportion to his head and body.\n- hair: the PHOTO TO EDIT shows dark curly hair; make it his own hair exactly as in the FACE references (images 1-3): His own CURRENT haircut exactly as in the face references: dense, tight black curls about 6 to 8 cm long on top, standing up with volume and falling a little onto his forehead; the sides above and in front of his ears tapered short and close to the scalp, so his ears and temples show; the curls continue longer at the back toward the nape.\n- beard: the PHOTO TO EDIT shows a short dark beard; make it his own beard exactly as in the FACE references (images 1-3): His beard and moustache exactly as in the face references: a full, dense, short dark beard along the whole jaw and chin, a little lighter high on the cheeks, a full dark moustache joining the beard at the corners of the mouth, and a small patch under the lower lip.\n- skin tone: the PHOTO TO EDIT shows the man's skin on his back, shoulder and arms, a mid-dark grey in this dim black-and-white light; make it his own warm medium-brown skin tone as in the BODY references and HIS ARM, rendered in this same black-and-white grade as a grey of about the same lightness as that man's skin in this dim light, never lightened and never given any colour, on his back, shoulder, arms and hands, with real skin texture; at the neck it blends evenly into the skin of the head above it.\n- build: the PHOTO TO EDIT shows a very muscular, heavy bodybuilder's build: a thick, high trapezius, a huge round shoulder, a broad heavy back and a massive arm; make it his own build exactly as in the BODY references (images 4-5): His body exactly as in images 4-5, right after a workout, here seen from the side and only as much of it as the PHOTO TO EDIT shows: from behind his defined back, the edge of his shoulder blade and the outline of his lat; from the front the firm chest; in both the round shoulder caps and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in images 4-5, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut.\n- back and shoulder: the PHOTO TO EDIT shows a broad, thick back with a high, heavy trapezius rising into the neck, a big rounded shoulder and thick muscle over the shoulder blade; make it his own back and shoulder exactly as in the back BODY reference: clearly less massive than in the PHOTO TO EDIT, his trapezius low and flat, sloping gently from his neck to his shoulder, the round shoulder cap a little narrower across, the edge of his shoulder blade and the outline of his lat defined, with real skin texture and never smooth or soft; his shoulder line and back stay inside the outline of the man who sat here.\n- arms: the PHOTO TO EDIT shows a huge muscular arm: the upper arm hanging from the shoulder to the elbow on his knee, thick and streaked with veins, a thick forearm and a big hand, and the other arm reaching down along the picture-left edge to the paper; make it his own full arms at their real size, exactly as in the BODY references and HIS ARM: the hanging upper arm about a quarter narrower than in the PHOTO TO EDIT but never thinner than in the BODY references, round and firm with the vein running along the biceps, and his forearms leaner than that man's with the clear veins on them as in HIS ARM, in this dim light; the elbow, forearm and hand stay exactly where they are in the PHOTO TO EDIT.\n- head, neck and body: the PHOTO TO EDIT shows the other man's head, neck, shoulders, chest and arms; make it his own head, neck, shoulders, chest and arms drawn together as one continuous body, the head sitting naturally on his own neck and shoulders.\n- janeu: the PHOTO TO EDIT shows a bare back and shoulder with no thread on them; make it his janeu, the thin off-white sacred thread he always wears, unbroken and lying flat on his skin, as thin as in the BODY references, drawn as a thin light-grey line in this black-and-white grade. In this photo he sits leaning far forward and faces picture-right, so the camera sees his right side: his right shoulder and back are the near ones and his left shoulder is the far one, hidden behind his neck and head. The thread comes over the top of his far left shoulder where his neck meets his back, at about 31 percent from the left and 17 percent from the top, and runs down across his back in one thin diagonal line toward picture-left, over his shoulder blade at about 15 percent from the left and 27 percent from the top, and leaves the picture by the left edge at about 36 percent from the top, just above where his other arm begins, on its way to his right hip: it runs from upper picture-right to lower picture-left, the mirror image of the way it runs on the back BODY reference. It never hangs straight down from his neck, it is never drawn on his arm, and the part of it that lies across his chest is hidden by his bowed head and his arm, so nothing is drawn there.\n- neck chain: the PHOTO TO EDIT shows a bare neck and a bare upper chest with no chain; make it his own fine silver neck chain with its small pendant, as in the front BODY reference, drawn as a thin bright line: it lies round the side of his neck below his ear and hangs forward from under his jaw to the top of his chest, where only a short stretch of it shows between his jaw and his shoulder at about 38 to 44 percent from the left and 30 to 35 percent from the top, and its small pendant rests on his upper chest in the shadow under his chin; as fine and small as in his photos, never a heavy chain, never on his back or his arm.\n\nKEEP LIST (exactly as in the PHOTO TO EDIT):\n- the FRAMING exactly: a vertical close shot of him seated and leaning far forward, his head in the top 35 percent of the frame, his back cut off by the left edge, the other arm and the paper cut by the bottom edge; the same crop, scale and camera distance as the PHOTO TO EDIT, with him not re-centred and the picture not zoomed in or out.\n- the paintbrush: a long thin brush clamped crosswise between his teeth, his lips closed around it at the corner of his mouth, its handle running down toward picture-right; it is held in his mouth, never resting against his chin.\n- his head bowed exactly as far as the PHOTO TO EDIT's man bows his, and no deeper: the line from his ear to the tip of his nose pointing down toward the paper at the same angle, his chin not tucked lower than there, his eyes cast down at the paper (the earlier renders bowed it lower than the pin, which pulled his head and shoulders out of place).\n- his face is softly shaded by his curls like the face of the man in the PHOTO TO EDIT, but its features stay clearly readable, and it is not brighter than his white tee.\n- his face is as sharp and detailed as the photo around it: real skin texture with pores, individual beard and moustache hairs, natural detail around the eyes; never smoothed, airbrushed or beauty-filtered.\n- his outline inside the outline of the man in the PHOTO TO EDIT: the same posture, position and size, with his shoulder, back and arms where that man's are and no larger, so the wall and the floor around him stay as they are.\n- his exact posture: sitting on the floor leaning far forward with his back rounded; the near arm hanging straight down from the shoulder, its elbow resting on his knee at about 42 percent from the left and 63 percent from the top, the forearm angled down toward picture-left to the hand at about 12 to 30 percent from the left and 70 to 92 percent from the top, its fingers pointing down toward the paper; the other arm reaching down along the picture-left edge to the paper on the floor.\n- the steel cuff bracelet on the wrist of the arm along the picture-left edge, at about 8 percent from the left and 90 percent from the top, exactly as it is.\n- he stays shirtless: bare back, shoulder and arms, with nothing on his torso but his own chain and his janeu.\n- the dark, loose, softly creased trousers on his lap and knee with their gathered waist at the picture-left edge, exactly as in the PHOTO TO EDIT.\n- the objects on the floor exactly where they are: the round palette plate holding brushes at about 60 to 90 percent from the left and 72 to 82 percent from the top, the stone jar of brushes and painting knives at the picture-right edge, the long painting knife with its dark handle at the bottom right, and the sheet of paper with a pencil sketch at the bottom.\n- the whole scene: the white marble floor with grey veining, the marble skirting along the wall at about 45 percent from the top, the pale wall with its soft shadow at picture-right, and the window with its dark frame and the leaves at the top.\n- no other person anywhere in the frame: he is the only person in the picture.\n- no text, letters, sign or logo anywhere in the picture.\n- the black-and-white photograph exactly: the same grey tones, deep contrast, soft film grain and slight softness of a quick candid capture; no colour anywhere, not even a tint.\n- the dim moody light from behind and above, his body shaded and lit exactly as in the PHOTO TO EDIT, his size and position in the frame and the camera distance.\n- his face is as crisp as the rest of the photograph and as the man's in the PHOTO TO EDIT: the edge of his jaw, his chin and the bridge of his nose cleanly defined in this light, with real skin pores and beard grain; never smoothed, softened, rounded or blurred.\n\nPhotorealistic candid photograph. Natural colour, no HDR glow, no airbrushing.",
+  "prompt_sha256": "42eac4f72e60cceeaeac0b2e355e48aa6750e05383ac2480eb8ada5d1ae130a1",
+  "files": [
+   {
+    "n": 1,
+    "role": "face",
+    "sha256": "015567ab4575a9d5f40526d74d9b24158031dd70a4b16c7c925681a1807c3bdd",
+    "upload_name": "IMG_6858.jpg",
+    "bytes": 663719,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 2,
+    "role": "face",
+    "sha256": "4acd2c54a4692d2a355b364a408ec7876c6a2d4d2f8da75e27089f4152318192",
+    "upload_name": "IMG_6868.jpg",
+    "bytes": 623499,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 3,
+    "role": "face",
+    "sha256": "58661cbd57905da30972323ff6d98b1e3b273930a2b10beeef11574d55b28587",
+    "upload_name": "IMG_6861.jpg",
+    "bytes": 660377,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 4,
+    "role": "body",
+    "sha256": "9ffb4b15044e50a0ce4f017f8ee3f6617ad355e0128201c7c727457d016b2b92",
+    "upload_name": "pumped_front_torso.jpg",
+    "bytes": 268731,
+    "px": [
+     1512,
+     1129
+    ]
+   },
+   {
+    "n": 5,
+    "role": "body",
+    "sha256": "4844e5986e9f7719ad9ac94c3ea0e99159f05bf88482c1439dabbbc9465b811f",
+    "upload_name": "pumped_back_torso.jpg",
+    "bytes": 237367,
+    "px": [
+     1482,
+     1209
+    ]
+   },
+   {
+    "n": 6,
+    "role": "inv_ref",
+    "sha256": "e9ca5543422c7d2aa80db9528f6153fa89d5234bed76882aeeb975b13623dec2",
+    "upload_name": "torso_IMG_7005.jpg",
+    "bytes": 73035,
+    "px": [
+     456,
+     780
+    ]
+   },
+   {
+    "n": 7,
+    "role": "inv_ref",
+    "sha256": "133314862cd770ca8d52156010e93127849ba7779132d5841944f4a8ee259d90",
+    "upload_name": "IMG_6863.jpg",
+    "bytes": 698748,
+    "px": [
+     1536,
+     2048
+    ]
+   },
+   {
+    "n": 8,
+    "role": "photo_to_edit",
+    "sha256": "27daee45ad7b57593b5a0386992ec2c28c6415334afb5a4e5c487f4df555af0e",
+    "upload_name": "pin_783485666539777055.jpg",
+    "bytes": 149562,
+    "px": [
+     1200,
+     1500
+    ]
+   }
+  ],
+  "model": "56fdd199312815e2",
+  "options": {
+   "temporary": true
+  },
+  "request_sha256": "faf352753ef8b658f03fce40fd3587d12bb4f2034a8983a48d5332d288b8278f"
+ }
+}
