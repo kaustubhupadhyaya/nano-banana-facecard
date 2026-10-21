@@ -24,6 +24,21 @@
     "IMG_6875.jpg",
     "IMG_6923 Copy.JPG"
   ],
+  "face_ref_presets": {
+    "_note": "Named FACE reference sets for `facecard.py gen --face-refs @name` (2026-10-02). Opt-in per goal; the default angle-routed set and the ArcFace pool (refs) are unchanged. clean_studio / clean_profile_right avoid the _fav photos (glasses, short hair, colour cast); on pin 5 a clean-only set did NOT raise identity (0.26, 0.04 vs baseline 0.31), so judge a preset by the user's eye, never assume it helps.",
+    "clean_studio": [
+      "IMG_6868.jpg",
+      "IMG_6858.jpg",
+      "IMG_6873.jpg",
+      "IMG_6862.jpg"
+    ],
+    "clean_profile_right": [
+      "IMG_6864.jpg",
+      "IMG_6861.jpg",
+      "IMG_6869.jpg",
+      "IMG_6858.jpg"
+    ]
+  },
   "pose_bins": {
     "frontal": [
       "IMG_6858.jpg",
@@ -62,6 +77,12 @@
   "out_dir": "outputs",
   "cache_dir": ".cache/refs",
   "model": "56fdd199312815e2",
+  "models": {
+    "_note": "Gemini app model ids -> label. The runner decides Pro vs Flash for the credit guard from this, not from 'is it the default model'.",
+    "e6fa609c3fa255c0": "pro",
+    "56fdd199312815e2": "flash",
+    "8c46e95b1a07cecc": "lite"
+  },
   "identity_threshold": 0.6,
   "vision_model": "56fdd199312815e2",
   "attractiveness_note": "Render him at his best, as he looks in the reference photos: calm confident eyes, a defined jawline, and a relaxed closed-lip smile or a slight smile with soft eyes, or a calm focused expression. Natural and unforced: never tense, awkward, smirking or caught mid-motion.",
@@ -509,7 +530,7 @@
         "facial_hair": "full dark beard",
         "hair": "dark curly hair",
         "marks": "none",
-        "always_worn": "none"
+        "always_worn": "his janeu, a thin white sacred thread worn from his left shoulder diagonally across his chest (and back) to his right hip, seen whenever his torso is bare; a silver neck chain with a small pendant (the user, 2026-10-10: 'It is the holy thread that Brahmins wear, called jenu'; in every bare-torso picture)"
       },
       "roles": {
         "_note": "Route G (2026-09-26, the user's role-based single prompt): face refs are chosen per job by the goal's head pose from the pose bins, never the body or arm photos; body and arm refs checked by eye.",
@@ -524,7 +545,85 @@
       "face_text": "Preserve his bone structure, nose shape, eye shape and spacing, eyebrow shape and lip shape. His hair exactly as in the face references: his own tight curly black hair. His beard and moustache exactly as in the face references: the same length, density and shape. Lean face with low facial fat: defined cheekbones with a visible hollow beneath them, and a clear jawline meeting at a defined angle below the ear. His face at its true size in proportion to his head and body, as in the references. Warm medium-brown South Asian skin tone matching the references, never lightened. Real skin texture with visible pores.",
       "build_text": "Match image {BODY} precisely: his true build and proportion. A slim, lean build: moderate shoulder width, slim arms with little muscle bulk, a flat chest and stomach, a narrow waist and slim hips. Tall and lean, never bulky or heavily muscled.",
       "face_text_note": "2026-09-26, the user: face, hair, beard and moustache always from the face references, never from the goal's face, even when the goal is his own photo (table tennis v5 got a bigger beard and moustache than his references; Instagram v4 a face slightly smaller than his real one). The 'full, dense beard' line of the first sample was replaced by the references.",
-      "build_text_before_2026_09_27": "Match image {BODY} precisely: his true build and proportion. Lean athletic V-taper. Broad shoulders, wide clavicle span. Visible deltoid caps, defined biceps and triceps. Flat, tight midsection. Narrow waist, slim hips. Tall and lean."
+      "build_text_before_2026_09_27": "Match image {BODY} precisely: his true build and proportion. Lean athletic V-taper. Broad shoulders, wide clavicle span. Visible deltoid caps, defined biceps and triceps. Flat, tight midsection. Narrow waist, slim hips. Tall and lean.",
+      "teeth_refs": {
+        "_why": "recipe --teeth WHY sends these two REAL photos of his smile as labelled references, after the inventory's own (facecard.resolve_goal_inputs). The user, 2026-10-18: the teeth references are the real IMG_6875 + IMG_3884; of the pictures made so far only E2 has the right teeth (E2 came from this IMG_6875 crop); teeth only for a goal whose man smiles or when the user asks (WHY says which); never the generated E2, never 'whiter'. Byte-identical copies, manifest: D:/FacecardData/approved_refs/teeth/manifest.json.",
+        "refs": [
+          {"key": "teeth_front", "path": "D:/FacecardData/approved_refs/teeth/his_teeth_front_IMG_6875.jpg", "label": "HIS TEETH, FRONT: a real photo of the same man's own face today, facing the camera and smiling his natural open smile: take from it exactly how his mouth and teeth look when he smiles (his lips parted as far as here; his own upper teeth with their uneven edges, the pointed canines and the thin line between his two front teeth; their ivory colour with yellower sides; the thin line of pink gum; his lower teeth just showing), never whitened, evened or straightened; nothing of its turn, its light or its background"},
+          {"key": "teeth_turned", "path": "D:/FacecardData/approved_refs/teeth/his_teeth_turned_IMG_3884.jpg", "label": "HIS TEETH, TURNED: an older candid photo of the same man smiling with his head turned a little and bowed: take from it only how his own teeth and smile look from a slight turn (the same teeth as in HIS TEETH, FRONT); nothing of its hair, beard, light, clothes or place"}
+        ]
+      },
+      "physique": {
+        "_why": "recipe --physique NAME sends this standard's approved photo as the BODY reference, with its own build text, in place of the character's body photo. The user, 2026-10-10 evening: 'any shirtless picture will get the fully pumped version of mine, and casual outdoor dressed versions will get the casual in-between version of my body'; casual arms: 'the size of the arm shouldn't reduce from the actual photo that I had sent, but the vascularity should lie between the real photo that I shared and the pumped photo'. The files are byte-identical copies of the approved physiques in D:/FacecardData/physique/2026-10-10 (manifest.json there).",
+        "pumped-front": {
+          "files": ["D:/FacecardData/physique/standard/pumped_front.jpg"],
+          "label": "the BODY reference — his body today from the front, right after a workout: his true build and proportion for a shirtless picture.",
+          "build": "His body exactly as in image {BODY}, right after a workout: the lean torso with his upper abs and obliques showing, the tight narrow waist with flat love handles, the firm chest, the round shoulder caps, and his full arms with the vein along each biceps and the clear veins on his forearms. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+        },
+        "pumped-back": {
+          "files": ["D:/FacecardData/physique/standard/pumped_back.jpg"],
+          "label": "the BODY reference — his body today from behind, right after a workout: his true build and proportion for a shirtless picture.",
+          "build": "His body exactly as in image {BODY}, right after a workout: his defined back with the edges of his shoulder blades, the groove down his spine and the outline of his lats tapering to a tight waist with flat love handles, his rear shoulders, and his full arms with the veins on his forearms. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+        },
+        "pumped-side": {
+          "files": ["D:/FacecardData/physique/standard/pumped_front.jpg", "D:/FacecardData/physique/standard/pumped_back.jpg"],
+          "label": "BODY references — his body today from the front and from behind, right after a workout: his true build and proportion for a shirtless picture.",
+          "build": "His body exactly as in images {BODY}, right after a workout, here seen from the side: from the front his lean torso with the upper abs and obliques, the firm chest and the round shoulder caps; from behind his defined back and lats; in both the tight narrow waist with flat love handles and his full arms with the vein along each biceps and the clear veins on his forearms. Never broader, bulkier or heavier than in images {BODY}, never thinner or softer."
+        },
+        "pumped-side-torso": {
+          "_why": "2026-10-11 (FAILURE_LOG F19): with pumped-side, pin 16 held its arm in 1 of 6 pictures, the arm hanging like the references'; these crops of the same two photos (neck to waist, cut above the hanging forearms and hands; the back also without the earbud) carry the body without the pose",
+          "files": ["D:/FacecardData/physique/standard/pumped_front_torso.jpg", "D:/FacecardData/physique/standard/pumped_back_torso.jpg"],
+          "label": "BODY references — his torso today from the front and from behind, right after a workout, cropped at the neck and the waist: his true build and proportion for a shirtless picture. They show only his body; how he stands and holds his arms comes from the PHOTO TO EDIT.",
+          "build": "His body exactly as in images {BODY}, right after a workout, here seen from the side: from the front his lean torso with the upper abs and obliques, the firm chest and the round shoulder caps; from behind his defined back and lats; in both the tight narrow waist with flat love handles and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in images {BODY}, never thinner or softer."
+        },
+        "pumped-front-torso": {
+          "_why": "2026-10-13 (pin 8 redo, FAILURE_LOG F19/F22): the front-only form of pumped-side-torso: the same approved crop of pumped_front.jpg (chin to waistband, cut above the hanging forearms and hands), for a front picture whose arms are bent (a phone hand, a held cat) so the reference's hanging arms cannot set his pose",
+          "files": ["D:/FacecardData/physique/standard/pumped_front_torso.jpg"],
+          "label": "the BODY reference — his torso today from the front, right after a workout, cropped at the chin and the waistband: his true build and proportion for a shirtless picture. It shows only his body; how he stands and holds his arms comes from the PHOTO TO EDIT.",
+          "build": "His body exactly as in image {BODY}, right after a workout: the lean torso with his upper abs and obliques showing, the tight narrow waist with flat love handles, the firm chest, the round shoulder caps, and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+        },
+        "real-back-flexed": {
+          "_why": "2026-10-21 (pin 15, the user: 'The back musculature is still bad. It is underestimating my actual back musculature and flexed'; his videos IMG_7419/7420): a frame of his real, not pumped, raised-arm back (IMG_7420 t=2.0 s, unflipped) as the body reference, in place of the generated pumped torso whose 'never broader than this' capped the back. The pose spreads his lats into the V (memory facecard-pose-shapes-the-body)",
+          "files": ["D:/FacecardData/body_refs/2026-10-21_videos/his_back_flexed_IMG_7420_t2.0.jpg"],
+          "label": "the BODY reference — a frame of a real video of him today, not pumped, seen from behind with one arm raised overhead and his head bowed, flexed: his true back, shoulders and lats and the V they make in a pose like the one in the PHOTO TO EDIT. It shows only his body; how he stands, how he holds his arms and how much of him the picture shows come from the PHOTO TO EDIT; the cloth round his waist and the room are not his.",
+          "build": "His back exactly as in image {BODY}: flexed with one arm raised, the lats spread into a wide V narrowing to the waist, the shoulder blade standing out and the edge of the lat hard, and his full upper arm with its triceps defined: his true muscularity when he flexes, never smaller, narrower, smoother or less defined than there. The picture stays cut where the PHOTO TO EDIT is cut."
+        },
+        "pumped-back-flexed": {
+          "_why": "2026-10-21 (pin 15 v7, the user's box answer 'New render: pumped back + real frame (Recommended)'): v4 and v5 sent the pumped back torso with a never-broader cap and v6 his real flexed frame alone; v6's back was not more massive than v5's. v7 sends both together with no size cap: the approved pumped back crop (his mass and definition), mirrored so its janeu runs upper picture-right to lower picture-left like the real frame and the mirror pin, and the real unflipped raised-arm frame (his V in this pose)",
+          "files": ["D:/FacecardData/physique/standard/pumped_back_torso_mirrored.jpg", "D:/FacecardData/body_refs/2026-10-21_videos/his_back_flexed_IMG_7420_t2.0.jpg"],
+          "label": "the BODY references — two photos of his back today. The first is the approved crop of his back right after a workout, neck to waistband: his true muscle mass and definition. The second is a frame of a real video of him with one arm raised overhead and his head bowed, flexed: the wide V his lats make in a pose like the one in the PHOTO TO EDIT. They show only his body; how he stands, how he holds his arms and how much of him the picture shows come from the PHOTO TO EDIT; the cloth round his waist and the room in the second are not his.",
+          "build": "His back exactly as in images {BODY}: the mass and definition of the first (the edges of the shoulder blades, the groove down the spine, thick lats, rear shoulders and full arms with the veins on his forearms) shown in the flexed pose of the second, with the lats spread into a wide V narrowing to the waist, the shoulder blade standing out and the edge of the lat hard: his true muscularity when he flexes, never smaller, narrower, smoother or less defined than in those two images. The picture stays cut where the PHOTO TO EDIT is cut."
+        },
+        "casual-front-arms": {
+          "_why": "2026-10-21 (pin 9, FAILURE_LOG F74): casual-front's wording cut to what a dressed, bent-over frame shows. The user's yardstick of 2026-10-10 for a dressed picture ('the size of the arm shouldn't reduce from the actual photo that I had sent, but the vascularity should lie between the real photo and the pumped photo'); the old words named a torso and a narrow waist that a polo and a bent posture hide. Same photo as casual-front",
+          "files": ["D:/FacecardData/physique/standard/casual_front.jpg"],
+          "label": "the BODY reference — his body today from the front on an ordinary day, relaxed: his true build and proportion for a dressed picture. It shows only his body; how he stands or bends, how he holds his arms and how much of him the picture shows all come from the PHOTO TO EDIT.",
+          "build": "His body exactly as in image {BODY}, relaxed as on an ordinary day, but only as much of it as the PHOTO TO EDIT shows: his arms at their full real size, never thinner, relaxed rather than pumped, with the veins on his biceps and forearms only faintly visible, and his chest and shoulders as the clothes show them. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut."
+        },
+        "pumped-side-chest": {
+          "_why": "2026-10-21 (pin 6, FAILURE_LOG F74): pumped-side-torso's wording, cut to what a close side-on frame shows. Pin 6 shows his near shoulder, upper back, arm and part of the chest, never the waist; the old words ('upper abs and obliques ... the tight narrow waist with flat love handles') named parts the frame does not show, which in pin 4 made Gemini stand him up and re-compose. Same two photos as pumped-side-torso",
+          "files": ["D:/FacecardData/physique/standard/pumped_front_torso.jpg", "D:/FacecardData/physique/standard/pumped_back_torso.jpg"],
+          "label": "BODY references — his torso today from the front and from behind, right after a workout: his true build and proportion for a shirtless picture. They show only his body; how he sits or stands, how he holds his arms and how much of him the picture shows all come from the PHOTO TO EDIT.",
+          "build": "His body exactly as in images {BODY}, right after a workout, here seen from the side and only as much of it as the PHOTO TO EDIT shows: from behind his defined back, the edge of his shoulder blade and the outline of his lat; from the front the firm chest; in both the round shoulder caps and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in images {BODY}, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut."
+        },
+        "pumped-back-torso": {
+          "_why": "2026-10-21 (pin 15, FAILURE_LOG F12/F17/F74): the back-only form of pumped-side-torso: the approved crop of pumped_back.jpg (neck to waistband), for a back picture cut from above the head to the hips. Pin 15's five whole renders drew him smaller and lower (neck base at 30% where the pin's is at 18%, the pin man's massive back filling the frame); F74 found the body wording naming parts the frame does not show makes Gemini re-compose. Words and photo both stop at what the frame shows",
+          "files": ["D:/FacecardData/physique/standard/pumped_back_torso.jpg"],
+          "label": "the BODY reference — his torso today from behind, right after a workout, cropped at the neck and the waistband: his true build and proportion for a shirtless picture. It shows only his body; how he stands, how he holds his arms and how much of him the picture shows all come from the PHOTO TO EDIT.",
+          "build": "His body exactly as in image {BODY}, right after a workout, but only as much of it as the PHOTO TO EDIT shows: his defined back with the edges of his shoulder blades, the groove down his spine and the outline of his lats tapering to a tight waist with flat love handles, and his rear shoulders and upper arms. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut."
+        },
+        "pumped-front-chest": {
+          "_why": "2026-10-20 (pin 4, FAILURE_LOG F74): the same approved photo as pumped-front-torso, worded for a picture cut just below the chest. Its 'upper abs and obliques showing, the tight narrow waist' asked for parts pin 4 does not show, and 10 of 10 renders since 10-13 raised him and stood him upright to show them (every one failed the pose gate); the 10-01 render that passed had no such words",
+          "files": ["D:/FacecardData/physique/standard/pumped_front_torso.jpg"],
+          "label": "the BODY reference — his torso today from the front, right after a workout: his true build and proportion for a shirtless picture. It shows only his body; how he stands, how he holds his arms and how much of him the picture shows all come from the PHOTO TO EDIT.",
+          "build": "His body exactly as in image {BODY}, right after a workout, but only as much of it as the PHOTO TO EDIT shows: the firm chest, the round shoulder caps and his full upper arms with the vein along each biceps. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer. The picture stays cut where the PHOTO TO EDIT is cut."
+        },
+        "casual-front": {
+          "files": ["D:/FacecardData/physique/standard/casual_front.jpg"],
+          "label": "the BODY reference — his body today from the front on an ordinary day, relaxed: his true build and proportion for a dressed picture.",
+          "build": "His body exactly as in image {BODY}, relaxed as on an ordinary day outdoors: the same lean torso and narrow waist, his arms at their full real size, never thinner, relaxed rather than pumped, with the veins on his biceps and forearms only faintly visible. Never broader, bulkier or heavier than in image {BODY}, never thinner or softer."
+        }
+      }
     }
   },
   "model_before_flash": "e6fa609c3fa255c0"
