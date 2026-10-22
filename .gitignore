@@ -5,3 +5,7 @@ outputs/
 __pycache__/
 *.pyc
 models/
+pose_refs/
+.playwright-mcp/
+*.log
+
