@@ -1,0 +1,11 @@
+.venv/
+.env
+outputs/
+.cache/
+__pycache__/
+*.pyc
+models/
+pose_refs/
+.playwright-mcp/
+*.log
+
